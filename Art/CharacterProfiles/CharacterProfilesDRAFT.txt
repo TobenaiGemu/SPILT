@@ -1,31 +1,30 @@
-planet game
 
-players:
+: P L A Y E R S :
 
-Panda: TAN
-name:pan
-GLOVES: RED
-HAIR: CHOCOLATE
-AGE: YOUNGIN
-F
+Panda (BLACK AND WHITE)
+name: Pan 
+skin: tan
+hair: chocolate
+age: youngin
+sex: F
 
-Lizard(ORANGE): PALE (PINK HUE)
-name: liz
-GLOVES: BLUE
-HAIR: GREY
-AGE: OLDIE
-M
+Lizard (ORANGE)
+name: Liz 
+skin: fair (pink)
+hair: grey
+age: oldie
+sex: M
 
-Elephant(BLUE): PALE (YELLOW HUE)
-name: eli
-GLOVES: ORANGE
-HAIR: SATURATED BLUE
-AGE: YOUNGIN
-F
+Elephant (BLUE)
+name: Eli
+skin: fair (yellow)
+hair: saturated blue
+age: youngin
+sex: F
 
-Pig(PINK):TAN
-name: ham
-GLOVES: LIME
-HAIR: BLONDE
-AGE: MID 20
-M
+Pig (PINK)
+name: Ham
+skin: tan
+hair: blonde
+age: mid 20
+sex: M
