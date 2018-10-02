@@ -14,15 +14,13 @@ public class GravitySim : MonoBehaviour
 
     public static float gravConstant = 1;
 
-	// Use this for initialization
 	void Start ()
     {
         _bodies = GameObject.FindGameObjectsWithTag("GravityForce");
         _rb = GetComponent<Rigidbody>();
 	}
 	
-	// Update is called once per frame
-	void Update ()
+	void FixedUpdate ()
     {
 	    foreach (GameObject obj in _bodies)
         {
