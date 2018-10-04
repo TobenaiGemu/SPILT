@@ -5,10 +5,12 @@ using UnityEngine;
 public class UserState
 {
     protected Joystick _joystick;
+    protected User _user;
 
     public UserState(User user)
     {
         _joystick = user.Joystick;
+        _user = user;
     }
 
     public virtual void Initialize()

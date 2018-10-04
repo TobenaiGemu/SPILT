@@ -25,7 +25,7 @@ public class GravitySim : MonoBehaviour
 	    foreach (GameObject obj in _bodies)
         {
             Rigidbody rb = obj.GetComponent<Rigidbody>();
-            if (obj != this.transform.gameObject)
+            if (obj.name != transform.gameObject.name)
             {
                 _direction = rb.position - _rb.position;
                 float distance = _direction.magnitude;

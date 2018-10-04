@@ -11,6 +11,11 @@ public class Joystick
         _controllerId = id;
     }
 
+    public int GetId()
+    {
+        return _controllerId;
+    }
+
     public float GetAnalogue1Axis(string axis)
     {
         switch (axis)
@@ -41,6 +46,12 @@ public class Joystick
         {
             case "Button1":
                 return Input.GetButtonDown("Joy" + _controllerId + "Button1");
+            case "Button2":
+                return Input.GetButton("Joy" + _controllerId + "Button2");
+            case "Button3":
+                return Input.GetButton("Joy" + _controllerId + "Button3");
+            case "Button0":
+                return Input.GetButton("Joy" + _controllerId + "Button0");
         }
         return false;
     }

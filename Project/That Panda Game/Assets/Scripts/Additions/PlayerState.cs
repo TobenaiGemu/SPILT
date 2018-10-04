@@ -14,18 +14,21 @@ public class PlayerState : UserState
     private Vector3 _strafeVelocity;
     private float _moveSpeed;
 
+    private Character _character;
+
     //Is this player currently playing
     private bool _isPlaying;
 
-    public PlayerState(GameScene scene, User user)
+    public PlayerState(GameScene scene, User user, bool isPlaying)
         :base(user)
     {
         _scene = scene;
+        _isPlaying = isPlaying;
     }
 
     public override void Initialize()
     {
-        _playerObj = _scene.Player;
+        _playerObj = GameObject.Find("Players").transform.Find("Player" + _joystick.GetId()).gameObject;
         _planetObj = _scene.Planet;
         _moveSpeed = 20;
     }
@@ -33,10 +36,53 @@ public class PlayerState : UserState
     // Update is called once per frame
     public override void Update ()
     {
+
+
         if (!_isPlaying)
         {
-            //TODO: Check if joystick presses the join button
+            //TODO: MAKE THIS MUCH SMALLER BY MAPPING CHARACTER TYPES TO BUTTONS
+            if (_joystick.WasButtonPressed("Button1"))
+            {
+                if (_scene.AttemptCharacterAssign(CharacterType.Panda, _user))
+                {
+                    _isPlaying = true;
+                    _playerObj.transform.position = new Vector3(4, 0, -30);
+                    _playerObj.SetActive(true);
+                }
+            }
+
+            else if (_joystick.WasButtonPressed("Button2"))
+            {
+                if (_scene.AttemptCharacterAssign(CharacterType.Lizard, _user))
+                {
+                    _isPlaying = true;
+                    _playerObj.transform.position = new Vector3(2, 0, -30);
+                    _playerObj.SetActive(true);
+                }
+            }
+
+            else if (_joystick.WasButtonPressed("Button3"))
+            {
+                if (_scene.AttemptCharacterAssign(CharacterType.Elephant, _user))
+                {
+                    _isPlaying = true;
+                    _playerObj.transform.position = new Vector3(-2, 0, -30);
+                    _playerObj.SetActive(true);
+                }
+            }
+
+            else if (_joystick.WasButtonPressed("Button0"))
+            {
+                if (_scene.AttemptCharacterAssign(CharacterType.Pig, _user))
+                {
+                    _isPlaying = true;
+                    _playerObj.transform.position = new Vector3(-4, 0, -30);
+                    _playerObj.SetActive(true);
+                }
+            }
+            return;
         }
+
         //Set the velocity vectors to the correct direction and magnitude (based on input and speed)
         _forwardVelocity = _playerObj.transform.forward * _joystick.GetAnalogue1Axis("Vertical") * _moveSpeed;
         _strafeVelocity = _playerObj.transform.right * _joystick.GetAnalogue1Axis("Horizontal") * _moveSpeed;
