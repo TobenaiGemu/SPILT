@@ -15,7 +15,7 @@ public class SceneManager : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        MaxUsers = 2;
+        MaxUsers = 4;
         _scenes.Add("GameScene", new GameScene(this));
         _scenes.Add("MenuScene", new MenuScene(this));
 
