@@ -31,7 +31,7 @@ public class GameScene : Scene
         Planet = GameObject.Find("Planet");
         _canvas = GameObject.Find("PressToJoin").GetComponent<Canvas>();
         foreach (User user in SceneManager.Users)
-            user.ChangeState("PlayerState");
+            user.ChangeState("JoinState");
     }
 
     public override void Update()
