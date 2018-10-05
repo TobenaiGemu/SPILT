@@ -35,9 +35,8 @@ public class Character
         {
             _assignedUser = user;
             _isAssigned = true;
-            _characterObj.transform.parent = GameObject.Find("Players").transform.Find("Player" + _assignedUser.UserId);
+            _characterObj.transform.SetParent(GameObject.Find("Players").transform.Find("Player" + _assignedUser.UserId), false);
             _characterObj.SetActive(true);
-            _characterObj.transform.localPosition = new Vector3(0, 0, 0);
             return true;
         }
         return false;

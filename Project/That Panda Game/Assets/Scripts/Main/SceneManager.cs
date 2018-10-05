@@ -8,6 +8,8 @@ public class SceneManager : MonoBehaviour
     public static User[] Users { get; private set; }
 
     private Dictionary<string, Scene> _scenes = new Dictionary<string, Scene>();
+
+    private Scene _nextScene;
     private Scene _currentScene;
 
     // Use this for initialization
@@ -15,6 +17,7 @@ public class SceneManager : MonoBehaviour
     {
         MaxUsers = 2;
         _scenes.Add("GameScene", new GameScene(this));
+        _scenes.Add("MenuScene", new MenuScene(this));
 
         Users = new User[MaxUsers];
 
@@ -23,15 +26,13 @@ public class SceneManager : MonoBehaviour
             Users[i] = new User(this, i + 1);
         }
         
-        ChangeScene("GameScene");
+        ChangeScene("MenuScene");
     }
 
     public void ChangeScene(string sceneName)
     {
-        if (_currentScene != null)
-            _currentScene.Cleanup();
-        _currentScene = _scenes[sceneName];
-        _currentScene.Initialize();
+        _nextScene = _scenes[sceneName];
+        _nextScene.Initialize();
     }
 
     public User GetUser(int num)
@@ -52,11 +53,26 @@ public class SceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _currentScene.Update();
+        if (_currentScene != null)
+            _currentScene.Update();
+        if (_nextScene != null)
+        {
+            if (_currentScene == null || _currentScene.OutroTransition())
+            {
+                if (_currentScene != null)
+                    _currentScene.Cleanup();
+                if (_nextScene.IntroTransition())
+                {
+                    _currentScene = _nextScene;
+                    _nextScene = null;
+                }
+            }
+        }
     }
 
     void FixedUpdate()
     {
-        _currentScene.FixedUpdate();
+        if (_currentScene != null)
+            _currentScene.FixedUpdate();
     }
 }
