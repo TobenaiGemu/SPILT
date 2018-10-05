@@ -52,6 +52,8 @@ public class Joystick
                 return Input.GetButton("Joy" + _controllerId + "Button3");
             case "Button0":
                 return Input.GetButton("Joy" + _controllerId + "Button0");
+            case "Pause":
+                return Input.GetButton("Joy" + _controllerId + "Pause");
         }
         return false;
     }

@@ -35,6 +35,12 @@ public class GameState : UserState
     // Update is called once per frame
     public override void Update ()
     {
+        if (_joystick.WasButtonPressed("Pause"))
+        {
+            _scene.PauseGame(_user);
+            return;
+        }
+
         //Set the velocity vectors to the correct direction and magnitude (based on input and speed)
         _forwardVelocity = _playerObj.transform.forward * _joystick.GetAnalogue1Axis("Vertical") * _moveSpeed;
         _strafeVelocity = _playerObj.transform.right * _joystick.GetAnalogue1Axis("Horizontal") * _moveSpeed;

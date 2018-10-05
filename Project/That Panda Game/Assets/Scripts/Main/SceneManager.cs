@@ -12,6 +12,8 @@ public class SceneManager : MonoBehaviour
     private Scene _nextScene;
     private Scene _currentScene;
 
+    private bool _paused;
+
     // Use this for initialization
     void Awake()
     {
@@ -27,6 +29,7 @@ public class SceneManager : MonoBehaviour
         }
         
         ChangeScene("MenuScene");
+        _paused = false;
     }
 
     public void ChangeScene(string sceneName)
@@ -50,9 +53,22 @@ public class SceneManager : MonoBehaviour
         return _scenes[sceneName] as T;
     }
 
+    public void PauseScene()
+    {
+        _paused = true;
+    }
+
+    public void ResumeScene()
+    {
+        _paused = false;
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (_paused)
+            return;
+
         if (_currentScene != null)
             _currentScene.Update();
         if (_nextScene != null)
@@ -72,6 +88,9 @@ public class SceneManager : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (_paused)
+            return;
+
         if (_currentScene != null)
             _currentScene.FixedUpdate();
     }

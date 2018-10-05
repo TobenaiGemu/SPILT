@@ -8,27 +8,36 @@ public class UiManager : MonoBehaviour
     private SceneManager _sceneManager;
 
     [SerializeField]
-    private Canvas _mainMenu;
+    private GameObject _mainMenu;
     [SerializeField]
-    private Canvas _game;
+    private GameObject _game;
+    [SerializeField]
+    private GameObject _gamePause;
 
     public void Start()
     {
         _sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
 
-        _mainMenu.gameObject.SetActive(true);
-        _game.gameObject.SetActive(false);
+        _mainMenu.SetActive(true);
+        _game.SetActive(false);
     }
 
     public void StartGame()
     {
-        _mainMenu.gameObject.SetActive(false);
+        _mainMenu.SetActive(false);
         _sceneManager.ChangeScene("GameScene");
     }
 
-    public void ExitGame()
+    public void QuitGame()
     {
-        _game.gameObject.SetActive(false);
+        _game.SetActive(false);
         _sceneManager.ChangeScene("MenuScene");
+    }
+
+    public void ResumeGame()
+    {
+        _gamePause.SetActive(false);
+        _game.SetActive(true);
+        _sceneManager.ResumeScene();
     }
 }
