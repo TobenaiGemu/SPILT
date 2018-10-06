@@ -107,7 +107,10 @@ public class GameScene : Scene
     {
         _gamePanel.gameObject.SetActive(false);
         _pausePanel.gameObject.SetActive(true);
+        _uiManager.ChangeEventSystem(user.UserId);
+        EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.firstSelectedGameObject = _pausePanel.transform.Find("Resume").gameObject;
+        EventSystem.current.SetSelectedGameObject(EventSystem.current.firstSelectedGameObject);
         _sceneManager.PauseScene();
     }
 }

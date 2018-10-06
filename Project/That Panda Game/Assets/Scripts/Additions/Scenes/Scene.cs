@@ -5,10 +5,12 @@ using UnityEngine;
 public class Scene
 {
     protected SceneManager _sceneManager;
+    protected UiManager _uiManager;
 
     public Scene(SceneManager sceneManager)
     {
         _sceneManager = sceneManager;
+        _uiManager = GameObject.Find("UiManager").GetComponent<UiManager>();
     }
 
     public virtual void Initialize() { }
