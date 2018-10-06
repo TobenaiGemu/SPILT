@@ -18,6 +18,11 @@ public class UserState
 
     }
 
+    public virtual void Cleanup()
+    {
+
+    }
+
     public virtual void Update()
     {
 

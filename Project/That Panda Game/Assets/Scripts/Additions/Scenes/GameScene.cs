@@ -10,14 +10,13 @@ public class GameScene : Scene
 {
     private Dictionary<CharacterType, Character> _characters = new Dictionary<CharacterType, Character>();
 
-    private SceneManager _sceneManager;
 
     public GameObject Planet { get; private set; }
-    private Vector3 _initialPlanetScale;
-    private Vector3 _targetPlanetScale;
-    private float _timeToExpand;
-    private bool _startedTransition;
-    private float _timeStartedTransition;
+    private Vector3 _smallPlanetScale;
+    private Vector3 _bigPlanetScale;
+    private float _timeToLerpPlanet;
+    private float _timeStartedLerpPlanet;
+    private bool _startedLerpPlanet;
 
     private GameObject _gamePanel;
     private GameObject _pausePanel;
@@ -26,49 +25,88 @@ public class GameScene : Scene
     public GameScene(SceneManager sceneManager)
         :base(sceneManager)
     {
+        //Add characters to dictionary
         _characters.Add(CharacterType.Panda, new Character(CharacterType.Panda));
         _characters.Add(CharacterType.Lizard, new Character(CharacterType.Lizard));
         _characters.Add(CharacterType.Elephant, new Character(CharacterType.Elephant));
         _characters.Add(CharacterType.Pig, new Character(CharacterType.Pig));
-        _targetPlanetScale = new Vector3(50, 50, 50);
-        _sceneManager = sceneManager;
+
+        Planet = GameObject.Find("Planet");
+        //For lerping the planet scale
+        _bigPlanetScale = new Vector3(50, 50, 50);
+        _smallPlanetScale = Planet.transform.localScale;
+        _startedLerpPlanet = false;
+        _timeToLerpPlanet = 1;
+
         _gamePanel = GameObject.Find("Canvas").transform.Find("GamePanel").gameObject;
         _pausePanel = GameObject.Find("Canvas").transform.Find("GamePausePanel").gameObject;
+
     }
 
     public override bool IntroTransition()
     {
-        if (!_startedTransition)
+        //Lerp the planet scale to the large size before the game starts.
+        if (!_startedLerpPlanet)
         {
-            _timeStartedTransition = Time.time;
-            _startedTransition = true;
+            _timeStartedLerpPlanet = Time.time;
+            _startedLerpPlanet = true;
         }
 
-        float transitionTime = Time.time - _timeStartedTransition;
-        float lerpPercentage = transitionTime / _timeToExpand;
+        //Get the percentage that the lerp should be up to.
+        float transitionTime = Time.time - _timeStartedLerpPlanet;
+        float lerpPercentage = transitionTime / _timeToLerpPlanet;
 
-        Planet.transform.localScale = Vector3.Lerp(_initialPlanetScale, _targetPlanetScale, lerpPercentage);
-        if (Planet.transform.localScale != _targetPlanetScale)
+        Planet.transform.localScale = Vector3.Lerp(_smallPlanetScale, _bigPlanetScale, lerpPercentage);
+        if (Planet.transform.localScale != _bigPlanetScale)
         {
             return false;
         }
 
+        //Activate the game panel
         _gamePanel.gameObject.SetActive(true);
+        _startedLerpPlanet = false;
+
+        //Change user states to JoinState
         foreach (User user in SceneManager.Users)
             user.ChangeState("JoinState");
         return true;
     }
 
+    public override bool OutroTransition()
+    {
+        //Unasign the players
+        foreach (User user in SceneManager.Users)
+            CharacterUnassign(user);
+
+        //Lerp the planet scale to the large size before the main menu shows
+        if (!_startedLerpPlanet)
+        {
+            _timeStartedLerpPlanet = Time.time;
+            _startedLerpPlanet = true;
+        }
+
+        //Get the percentage that the lerp should be up to.
+        float transitionTime = Time.time - _timeStartedLerpPlanet;
+        float lerpPercentage = transitionTime / _timeToLerpPlanet;
+
+        Planet.transform.localScale = Vector3.Lerp(_bigPlanetScale, _smallPlanetScale, lerpPercentage);
+        if (Planet.transform.localScale != _smallPlanetScale)
+        {
+            return false;
+        }
+        _startedLerpPlanet = false;
+        
+        return true;
+    }
+
     public override void Initialize()
     {
-        Planet = GameObject.Find("Planet");
-        _initialPlanetScale = Planet.transform.localScale;
-        _startedTransition = false;
-        _timeToExpand = 1;
+
     }
 
     public override void Update()
     {
+        //Base updates the users
         base.Update();
     }
 
@@ -79,9 +117,11 @@ public class GameScene : Scene
 
     public bool AttemptCharacterAssign(CharacterType type, User user)
     {
-        bool isOK = _characters[type].AssignToUser(user);
+        //Check if the character is already assigned to a user
+        bool isOk = user.AttemptAssignCharacter(_characters[type]);
 
-        if (isOK)
+        //Change text fields if successfully assigned
+        if (isOk)
         {
             switch (type)
             {
@@ -100,11 +140,17 @@ public class GameScene : Scene
             }
         }
 
-        return isOK;
+        return isOk;
+    }
+
+    public void CharacterUnassign(User user)
+    {
+        user.UnassignCharacter();
     }
 
     public void PauseGame(User user)
     {
+        //Stop updating and show pause menu panel
         _gamePanel.gameObject.SetActive(false);
         _pausePanel.gameObject.SetActive(true);
         _uiManager.ChangeEventSystem(user.UserId);

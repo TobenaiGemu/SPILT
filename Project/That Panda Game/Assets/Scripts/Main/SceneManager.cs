@@ -13,6 +13,7 @@ public class SceneManager : MonoBehaviour
     private Scene _currentScene;
 
     private bool _paused;
+    private bool _cleanedScene;
 
     // Use this for initialization
     void Awake()
@@ -34,8 +35,8 @@ public class SceneManager : MonoBehaviour
 
     public void ChangeScene(string sceneName)
     {
+        _paused = false;
         _nextScene = _scenes[sceneName];
-        _nextScene.Initialize();
     }
 
     public User GetUser(int num)
@@ -71,16 +72,24 @@ public class SceneManager : MonoBehaviour
 
         if (_currentScene != null)
             _currentScene.Update();
+
+        //Completes the outro transition of the current scene before cleaning it and the intro transition of the next scene after initializing it
         if (_nextScene != null)
         {
             if (_currentScene == null || _currentScene.OutroTransition())
             {
-                if (_currentScene != null)
-                    _currentScene.Cleanup();
+                if ((!_cleanedScene && _currentScene != null) || _currentScene == null)
+                {
+                    if (_currentScene != null)
+                        _currentScene.Cleanup();
+                    _nextScene.Initialize();
+                    _cleanedScene = true;
+                }
                 if (_nextScene.IntroTransition())
                 {
                     _currentScene = _nextScene;
                     _nextScene = null;
+                    _cleanedScene = false;
                 }
             }
         }

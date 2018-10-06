@@ -11,15 +11,16 @@ public class JoinState : UserState
         :base(user)
     {
         _scene = scene;
+        _characterButtons.Add(CharacterType.Panda, "Button1");
+        _characterButtons.Add(CharacterType.Lizard, "Button2");
+        _characterButtons.Add(CharacterType.Elephant, "Button3");
+        _characterButtons.Add(CharacterType.Pig, "Button0");
     }
 
     public override void Initialize()
     {
         Debug.Log("JoinState");
-        _characterButtons.Add(CharacterType.Panda, "Button1");
-        _characterButtons.Add(CharacterType.Lizard, "Button2");
-        _characterButtons.Add(CharacterType.Elephant, "Button3");
-        _characterButtons.Add(CharacterType.Pig, "Button0");
+
     }
 
     public override void Update()

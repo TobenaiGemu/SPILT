@@ -18,11 +18,11 @@ public class GravitySim : MonoBehaviour
     {
         _bodies = GameObject.FindGameObjectsWithTag("GravityForce");
         _rb = GetComponent<Rigidbody>();
-	}
-	
-	void FixedUpdate ()
+    }
+
+    void FixedUpdate ()
     {
-	    foreach (GameObject obj in _bodies)
+        foreach (GameObject obj in _bodies)
         {
             Rigidbody rb = obj.GetComponent<Rigidbody>();
             if (obj.name != transform.gameObject.name)
@@ -33,5 +33,5 @@ public class GravitySim : MonoBehaviour
                 _rb.AddForce(_direction.normalized * force, ForceMode.Impulse);
             }
         }
-	}
+    }
 }

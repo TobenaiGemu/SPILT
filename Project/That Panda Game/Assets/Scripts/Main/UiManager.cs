@@ -33,6 +33,12 @@ public class UiManager : MonoBehaviour
         _game.SetActive(false);
     }
 
+    public void Update()
+    {
+        if (EventSystem.current.currentSelectedGameObject == null)
+            EventSystem.current.SetSelectedGameObject(EventSystem.current.firstSelectedGameObject);
+    }
+
     public void ChangeEventSystem(int i)
     {
         foreach (GameObject es in _eventSystems.Values)
@@ -52,6 +58,7 @@ public class UiManager : MonoBehaviour
     public void QuitGame()
     {
         _game.SetActive(false);
+        _gamePause.SetActive(false);
         _sceneManager.ChangeScene("MenuScene");
     }
 

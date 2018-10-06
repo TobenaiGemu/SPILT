@@ -9,6 +9,7 @@ public class User
 
     public Joystick Joystick {get; private set;}
     public int UserId { get; private set; }
+    public Character AssignedCharacter { get; private set; }
 
     public User(SceneManager sceneManager, int userId)
     {
@@ -33,7 +34,26 @@ public class User
 
     public void ChangeState(string state)
     {
+        if (_currentState != null)
+            _currentState.Cleanup();
         _currentState = _states[state];
         _currentState.Initialize();
+    }
+
+    public bool AttemptAssignCharacter(Character character)
+    {
+        bool isOk = character.AttemptAssignToUser(this);
+        if (isOk)
+        {
+            AssignedCharacter = character;
+            return true;
+        }
+        return false;
+    }
+
+    public void UnassignCharacter()
+    {
+        if (AssignedCharacter != null)
+            AssignedCharacter.Unassign();
     }
 }

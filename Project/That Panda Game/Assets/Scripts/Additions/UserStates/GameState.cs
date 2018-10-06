@@ -30,6 +30,14 @@ public class GameState : UserState
         _planetObj = _scene.Planet;
         _moveSpeed = 20;
         _playerObj.SetActive(true);
+        
+    }
+
+    public override void Cleanup()
+    {
+        _playerObj.SetActive(false);
+        _playerObj.transform.position = GameObject.Find("PlayerSpawns").transform.Find("Player" + _joystick.GetId()).position;
+        _playerObj.transform.rotation = Quaternion.identity;
     }
 
     // Update is called once per frame
