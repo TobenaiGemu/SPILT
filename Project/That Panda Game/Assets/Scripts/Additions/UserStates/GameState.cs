@@ -10,8 +10,9 @@ public class GameState : UserState
     private GameObject _planetObj;
 
     //Velocity for forward/side movements
-    private Vector3 _forwardVelocity;
-    private Vector3 _strafeVelocity;
+    private Vector3 _velocity;
+    private Vector2 _lookDir;
+    private float _rotation;
     private float _moveSpeed;
 
     private Character _character;
@@ -22,6 +23,7 @@ public class GameState : UserState
         :base(user)
     {
         _scene = scene;
+        _lookDir = Vector2.zero;
     }
 
     public override void Initialize()
@@ -41,7 +43,7 @@ public class GameState : UserState
     }
 
     // Update is called once per frame
-    public override void Update ()
+    public override void FixedUpdate ()
     {
         if (_joystick.WasButtonPressed("Pause"))
         {
@@ -49,14 +51,28 @@ public class GameState : UserState
             return;
         }
 
-        //Set the velocity vectors to the correct direction and magnitude (based on input and speed)
-        _forwardVelocity = _playerObj.transform.forward * _joystick.GetAnalogue1Axis("Vertical") * _moveSpeed;
-        _strafeVelocity = _playerObj.transform.right * _joystick.GetAnalogue1Axis("Horizontal") * _moveSpeed;
-
-        //add the velocities to the position
-        _playerObj.transform.position += (_forwardVelocity + _strafeVelocity)  * Time.deltaTime;
-
         //Rotate towards the centre of the planet
-        _playerObj.transform.up = _playerObj.transform.position - _planetObj.transform.position;
+        _playerObj.transform.LookAt(_planetObj.transform.position);
+        _playerObj.transform.Rotate(new Vector3(1, 0, 0), -90);
+
+        //Rotate the gameobject based on input
+        _lookDir.x = _joystick.GetAnalogue1Axis("Horizontal");
+        _lookDir.y = _joystick.GetAnalogue1Axis("Vertical");
+
+        //Check for dead zone (so it doesnt snap back to 0 when joystick is let go)
+        if (_lookDir.sqrMagnitude > 0.2f)
+            _rotation = Mathf.Atan2(_lookDir.y, -_lookDir.x);
+
+        _playerObj.transform.Rotate(0, _rotation * Mathf.Rad2Deg - 90, 0, Space.Self);
+
+        if (_lookDir.sqrMagnitude > 0.2f)
+            _velocity = _playerObj.transform.forward * _moveSpeed;
+        else
+            _velocity = Vector3.zero;
+
+        if ((_playerObj.gameObject.transform.position + _velocity * Time.deltaTime).z > -10)
+            return;
+        _playerObj.transform.position += _velocity * Time.deltaTime;
+
     }
 }
