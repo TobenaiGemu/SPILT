@@ -49,6 +49,11 @@ public class UiManager : MonoBehaviour
         EventSystem.current = _eventSystems[i].GetComponent<EventSystem>();
     }
 
+    public bool IsHovering(string btnName)
+    {
+        return (EventSystem.current.currentSelectedGameObject.name == btnName);
+    }
+
     public void StartGame()
     {
         _mainMenu.SetActive(false);

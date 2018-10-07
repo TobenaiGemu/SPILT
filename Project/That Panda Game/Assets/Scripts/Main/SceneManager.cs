@@ -84,6 +84,7 @@ public class SceneManager : MonoBehaviour
                         _currentScene.Cleanup();
                     _nextScene.Initialize();
                     _cleanedScene = true;
+                    _currentScene = null;
                 }
                 if (_nextScene.IntroTransition())
                 {
