@@ -14,20 +14,18 @@ public class GravitySim : MonoBehaviour
 
     public static float gravConstant = 1;
 
-	// Use this for initialization
 	void Start ()
     {
         _bodies = GameObject.FindGameObjectsWithTag("GravityForce");
         _rb = GetComponent<Rigidbody>();
-	}
-	
-	// Update is called once per frame
-	void Update ()
+    }
+
+    void FixedUpdate ()
     {
-	    foreach (GameObject obj in _bodies)
+        foreach (GameObject obj in _bodies)
         {
             Rigidbody rb = obj.GetComponent<Rigidbody>();
-            if (obj != this.transform.gameObject)
+            if (obj.name != transform.gameObject.name)
             {
                 _direction = rb.position - _rb.position;
                 float distance = _direction.magnitude;
@@ -35,5 +33,5 @@ public class GravitySim : MonoBehaviour
                 _rb.AddForce(_direction.normalized * force, ForceMode.Impulse);
             }
         }
-	}
+    }
 }
