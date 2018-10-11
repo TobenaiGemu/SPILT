@@ -14,7 +14,7 @@ public class MenuState : UserState
 
     public override void Initialize()
     {
-        Debug.Log("MenuState");
+
     }
 
     public override void Update()

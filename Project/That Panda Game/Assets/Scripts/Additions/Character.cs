@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class Character
 {
+    public Vector3 Position
+    {
+        get
+        {
+            return _characterObj.transform.position;
+        }
+        private set { }
+    }
+
     private GameObject _characterObj;
     private GameObject _characterPool;
     private User _assignedUser;

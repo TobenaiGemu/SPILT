@@ -22,6 +22,11 @@ public class MenuScene : Scene
         _settingsPanel = GameObject.Find("Canvas").transform.Find("SettingsPanel").gameObject;
     }
 
+    public override bool IntroTransition()
+    {
+        return base.IntroTransition();
+    }
+
     public override void Initialize()
     {
         foreach (User user in SceneManager.Users)

@@ -43,6 +43,16 @@ public class GameScene : Scene
 
     }
 
+    public override void Initialize()
+    {
+
+    }
+
+    public override void Cleanup()
+    {
+
+    }
+
     public override bool IntroTransition()
     {
         //Lerp the planet scale to the large size before the game starts.
@@ -99,11 +109,6 @@ public class GameScene : Scene
         return true;
     }
 
-    public override void Initialize()
-    {
-
-    }
-
     public override void Update()
     {
         //Base updates the users
@@ -112,6 +117,7 @@ public class GameScene : Scene
 
     public override void FixedUpdate()
     {
+        //Planet.transform.Rotate(Vector3.up, 20 * Time.deltaTime);
         base.FixedUpdate();
     }
 

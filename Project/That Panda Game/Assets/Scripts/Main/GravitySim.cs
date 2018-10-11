@@ -12,12 +12,17 @@ public class GravitySim : MonoBehaviour
 
     private Rigidbody _rb;
 
-    public static float gravConstant = 1;
+    public static float gravConstant = 30;
 
 	void Start ()
     {
         _bodies = GameObject.FindGameObjectsWithTag("GravityForce");
+    }
+
+    private void OnEnable()
+    {
         _rb = GetComponent<Rigidbody>();
+        _rb.velocity = Vector3.zero;
     }
 
     void FixedUpdate ()

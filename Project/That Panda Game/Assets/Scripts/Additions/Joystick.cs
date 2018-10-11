@@ -1,14 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Joystick
 {
     private int _controllerId;
+    private string _controllerName;
 
     public Joystick(int id)
     {
         _controllerId = id;
+        Debug.Log(id);
+        if (id <= Input.GetJoystickNames().Length)
+            _controllerName = Input.GetJoystickNames()[id - 1];
+
+        if (_controllerName != "Wireless Controller")
+        {
+            StandaloneInputModule module = GameObject.Find("EventSystem" + _controllerId).GetComponent<StandaloneInputModule>();
+            module.horizontalAxis = "xJoy" + _controllerId + "Horizontal1";
+            module.verticalAxis = "xJoy" + _controllerId + "Vertical1";
+            module.submitButton = "xJoy" + _controllerId + "Button1";
+            module.cancelButton = "xJoy" + _controllerId + "Button2";
+        }
     }
 
     public int GetId()
@@ -21,9 +36,9 @@ public class Joystick
         switch (axis)
         {
             case "Horizontal":
-                return Input.GetAxis("Joy" + _controllerId + "Horizontal1");
+                return Input.GetAxis(((_controllerName == "Wireless Controller")?"":"x") + "Joy" + _controllerId + "Horizontal1");
             case "Vertical":
-                return Input.GetAxis("Joy" + _controllerId + "Vertical1");
+                return Input.GetAxis(((_controllerName == "Wireless Controller") ? "" : "x") + "Joy" + _controllerId + "Vertical1");
         }
         return 0;
     }
@@ -33,9 +48,9 @@ public class Joystick
         switch (axis)
         {
             case "Horizontal":
-                return Input.GetAxis("Joy" + _controllerId + "Horizontal2");
+                return Input.GetAxis(((_controllerName == "Wireless Controller") ? "" : "x") + "Joy" + _controllerId + "Horizontal2");
             case "Vertical":
-                return Input.GetAxis("Joy" + _controllerId + "Vertical2");
+                return Input.GetAxis(((_controllerName == "Wireless Controller") ? "" : "x") + "Joy" + _controllerId + "Vertical2");
         }
         return 0;
     }
@@ -45,15 +60,15 @@ public class Joystick
         switch (button)
         {
             case "Button1":
-                return Input.GetButtonDown("Joy" + _controllerId + "Button1");
+                return Input.GetButtonDown(((_controllerName == "Wireless Controller") ? "" : "x") + "Joy" + _controllerId + "Button1");
             case "Button2":
-                return Input.GetButton("Joy" + _controllerId + "Button2");
+                return Input.GetButtonDown(((_controllerName == "Wireless Controller") ? "" : "x") + "Joy" + _controllerId + "Button2");
             case "Button3":
-                return Input.GetButton("Joy" + _controllerId + "Button3");
+                return Input.GetButtonDown(((_controllerName == "Wireless Controller") ? "" : "x") + "Joy" + _controllerId + "Button3");
             case "Button0":
-                return Input.GetButton("Joy" + _controllerId + "Button0");
+                return Input.GetButtonDown(((_controllerName == "Wireless Controller") ? "" : "x") + "Joy" + _controllerId + "Button0");
             case "Pause":
-                return Input.GetButton("Joy" + _controllerId + "Pause");
+                return Input.GetButtonDown(((_controllerName == "Wireless Controller") ? "" : "x") + "Joy" + _controllerId + "Pause");
         }
         return false;
     }

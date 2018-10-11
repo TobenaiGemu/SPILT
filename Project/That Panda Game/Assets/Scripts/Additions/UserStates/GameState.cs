@@ -23,27 +23,29 @@ public class GameState : UserState
         :base(user)
     {
         _scene = scene;
-        _lookDir = Vector2.zero;
+        
+        _playerObj = GameObject.Find("Players").transform.Find("Player" + _joystick.GetId()).gameObject;
+        _moveSpeed = 20;
+        _planetObj = _scene.Planet;
     }
 
     public override void Initialize()
     {
-        _playerObj = GameObject.Find("Players").transform.Find("Player" + _joystick.GetId()).gameObject;
-        _planetObj = _scene.Planet;
-        _moveSpeed = 20;
         _playerObj.SetActive(true);
-        
+        _lookDir = Vector2.zero;
+        _velocity = Vector3.zero;
+        _playerObj.transform.position = GameObject.Find("PlayerSpawns").transform.Find("Player" + _joystick.GetId()).position;
+        _playerObj.transform.rotation = Quaternion.identity;
+        _rotation = 0;
     }
 
     public override void Cleanup()
     {
         _playerObj.SetActive(false);
         _playerObj.transform.position = GameObject.Find("PlayerSpawns").transform.Find("Player" + _joystick.GetId()).position;
-        _playerObj.transform.rotation = Quaternion.identity;
     }
 
-    // Update is called once per frame
-    public override void FixedUpdate ()
+    public override void Update()
     {
         if (_joystick.WasButtonPressed("Pause"))
         {
@@ -51,13 +53,35 @@ public class GameState : UserState
             return;
         }
 
-        //Rotate towards the centre of the planet
-        _playerObj.transform.LookAt(_planetObj.transform.position);
-        _playerObj.transform.Rotate(new Vector3(1, 0, 0), -90);
+        Debug.DrawRay(_playerObj.transform.position, _playerObj.transform.forward);
+        if (_joystick.WasButtonPressed("Button0"))
+        {
+            Debug.Log("Punch");
+            RaycastHit hit;
+            if (Physics.Raycast(_playerObj.transform.position, _playerObj.transform.forward, out hit, 10))
+            {
+                hit.rigidbody.AddForce((_playerObj.transform.forward + hit.rigidbody.gameObject.transform.up) * 30, ForceMode.Impulse);
+                Debug.Log(hit.transform.name);
+            }
+        }
 
         //Rotate the gameobject based on input
-        _lookDir.x = _joystick.GetAnalogue1Axis("Horizontal");
-        _lookDir.y = _joystick.GetAnalogue1Axis("Vertical");
+        _lookDir.x = _joystick.GetAnalogue2Axis("Horizontal");
+        _lookDir.y = _joystick.GetAnalogue2Axis("Vertical");
+    }
+
+    // Update is called once per frame
+    public override void FixedUpdate()
+    {
+        //Rotate towards the centre of the planet
+        _playerObj.transform.rotation = Quaternion.identity;
+        _playerObj.transform.LookAt(_planetObj.transform.position);
+
+
+        _velocity = _playerObj.transform.up * _moveSpeed * _joystick.GetAnalogue1Axis("Vertical") * ((_joystick.GetAnalogue1Axis("Vertical") < 0) ? 1f : 1);
+        _velocity += _playerObj.transform.right * _moveSpeed * _joystick.GetAnalogue1Axis("Horizontal") * 1f;
+
+        _playerObj.transform.Rotate(new Vector3(1, 0, 0), -90);
 
         //Check for dead zone (so it doesnt snap back to 0 when joystick is let go)
         if (_lookDir.sqrMagnitude > 0.2f)
@@ -65,14 +89,11 @@ public class GameState : UserState
 
         _playerObj.transform.Rotate(0, _rotation * Mathf.Rad2Deg - 90, 0, Space.Self);
 
-        if (_lookDir.sqrMagnitude > 0.2f)
-            _velocity = _playerObj.transform.forward * _moveSpeed;
-        else
-            _velocity = Vector3.zero;
+        _velocity = Vector3.Lerp(_velocity * 0.5f, _velocity, Mathf.InverseLerp(-1, 1, Vector3.Dot(_velocity.normalized, _playerObj.transform.forward)));
 
-        if ((_playerObj.gameObject.transform.position + _velocity * Time.deltaTime).z > -10)
+        if ((_playerObj.transform.position + _velocity * Time.deltaTime).z > -10)
             return;
-        _playerObj.transform.position += _velocity * Time.deltaTime;
 
+        _playerObj.transform.position += _velocity * Time.deltaTime;
     }
 }

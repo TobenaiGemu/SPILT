@@ -19,7 +19,6 @@ public class JoinState : UserState
 
     public override void Initialize()
     {
-        Debug.Log("JoinState");
 
     }
 
@@ -33,6 +32,7 @@ public class JoinState : UserState
                 if (_scene.AttemptCharacterAssign(type, _user))
                 {
                     _user.ChangeState("GameState");
+                    return;
                 }
             }
         } 
