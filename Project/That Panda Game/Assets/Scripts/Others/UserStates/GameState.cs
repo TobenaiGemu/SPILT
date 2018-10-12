@@ -13,7 +13,6 @@ public class GameState : UserState
     private Vector3 _velocity;
     private Vector2 _lookDir;
     private float _rotation;
-    private float _moveSpeed;
 
     private Character _character;
 
@@ -25,7 +24,6 @@ public class GameState : UserState
         _scene = scene;
         
         _playerObj = GameObject.Find("Players").transform.Find("Player" + _joystick.GetId()).gameObject;
-        _moveSpeed = 20;
         _planetObj = _scene.Planet;
     }
 
@@ -37,6 +35,7 @@ public class GameState : UserState
         _playerObj.transform.position = GameObject.Find("PlayerSpawns").transform.Find("Player" + _joystick.GetId()).position;
         _playerObj.transform.rotation = Quaternion.identity;
         _rotation = 0;
+        _character = _user.AssignedCharacter;
     }
 
     public override void Cleanup()
@@ -58,9 +57,10 @@ public class GameState : UserState
         {
             Debug.Log("Punch");
             RaycastHit hit;
-            if (Physics.Raycast(_playerObj.transform.position, _playerObj.transform.forward, out hit, 10))
+            if (Physics.Raycast(_playerObj.transform.position, _playerObj.transform.forward, out hit, 3))
             {
-                hit.rigidbody.AddForce((_playerObj.transform.forward + hit.rigidbody.gameObject.transform.up) * 30, ForceMode.Impulse);
+                Debug.Log(_character.KnockBack);
+                hit.rigidbody.AddForce((_playerObj.transform.forward + hit.rigidbody.gameObject.transform.up * _character.KnockJump) * _character.KnockBack, ForceMode.Impulse);
                 Debug.Log(hit.transform.name);
             }
         }
@@ -77,9 +77,9 @@ public class GameState : UserState
         _playerObj.transform.rotation = Quaternion.identity;
         _playerObj.transform.LookAt(_planetObj.transform.position);
 
+        _velocity = _playerObj.transform.up * _character.ForwardSpeed * _joystick.GetAnalogue1Axis("Vertical") * ((_joystick.GetAnalogue1Axis("Vertical") < 0) ? 1f : 1);
+        _velocity += _playerObj.transform.right * _character.ForwardSpeed * _joystick.GetAnalogue1Axis("Horizontal") * 1f;
 
-        _velocity = _playerObj.transform.up * _moveSpeed * _joystick.GetAnalogue1Axis("Vertical") * ((_joystick.GetAnalogue1Axis("Vertical") < 0) ? 1f : 1);
-        _velocity += _playerObj.transform.right * _moveSpeed * _joystick.GetAnalogue1Axis("Horizontal") * 1f;
 
         _playerObj.transform.Rotate(new Vector3(1, 0, 0), -90);
 
@@ -89,7 +89,7 @@ public class GameState : UserState
 
         _playerObj.transform.Rotate(0, _rotation * Mathf.Rad2Deg - 90, 0, Space.Self);
 
-        _velocity = Vector3.Lerp(_velocity * 0.5f, _velocity, Mathf.InverseLerp(-1, 1, Vector3.Dot(_velocity.normalized, _playerObj.transform.forward)));
+        _velocity = Vector3.Lerp(_velocity * _character.BackwardSpeedMultiplier, _velocity, Mathf.InverseLerp(-1, 1, Vector3.Dot(_velocity.normalized, _playerObj.transform.forward)));
 
         if ((_playerObj.transform.position + _velocity * Time.deltaTime).z > -10)
             return;

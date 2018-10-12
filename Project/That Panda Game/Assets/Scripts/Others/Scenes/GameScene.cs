@@ -25,11 +25,20 @@ public class GameScene : Scene
     public GameScene(SceneManager sceneManager)
         :base(sceneManager)
     {
+        GameObject chars = GameObject.Find("AvailableCharacters");
+
         //Add characters to dictionary
-        _characters.Add(CharacterType.Panda, new Character(CharacterType.Panda));
-        _characters.Add(CharacterType.Lizard, new Character(CharacterType.Lizard));
-        _characters.Add(CharacterType.Elephant, new Character(CharacterType.Elephant));
-        _characters.Add(CharacterType.Pig, new Character(CharacterType.Pig));
+        GameObject panda = chars.transform.Find("Panda").gameObject;
+        _characters.Add(CharacterType.Panda, panda.GetComponent<Character>().Init(panda));
+
+        GameObject lizard = chars.transform.Find("Lizard").gameObject;
+        _characters.Add(CharacterType.Lizard, lizard.GetComponent<Character>().Init(lizard));
+
+        GameObject elephant = chars.transform.Find("Elephant").gameObject;
+        _characters.Add(CharacterType.Elephant, elephant.GetComponent<Character>().Init(elephant));
+
+        GameObject pig = chars.transform.Find("Pig").gameObject;
+        _characters.Add(CharacterType.Pig, pig.GetComponent<Character>().Init(pig));
 
         Planet = GameObject.Find("Planet");
         //For lerping the planet scale
