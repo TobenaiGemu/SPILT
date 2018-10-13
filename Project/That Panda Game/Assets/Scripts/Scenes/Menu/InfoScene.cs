@@ -1,0 +1,62 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
+
+public class InfoScene : Scene
+{
+    private GameObject _infoPanel;
+    private CanvasGroup _infoCanvas;
+    private GameObject _controlsButton;
+
+    private TimeLerper _lerper;
+    private float _infoAlpha;
+
+    public void Awake()
+    {
+        _lerper = new TimeLerper();
+        _infoPanel = GameObject.Find("Canvas").transform.Find("InfoPanel").gameObject;
+        _controlsButton = _infoPanel.transform.Find("Controls").gameObject;
+        _infoCanvas = _infoPanel.GetComponent<CanvasGroup>();
+
+        _infoPanel.SetActive(false);
+    }
+
+    public override void Initialize()
+    {
+        _infoPanel.SetActive(true);
+        EventSystem.current.firstSelectedGameObject = _controlsButton;
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(_controlsButton);
+        _lerper.Reset();
+    }
+
+    public override void Cleanup()
+    {
+        _infoPanel.SetActive(false);
+    }
+
+    public override bool IntroTransition()
+    {
+        _infoCanvas.alpha = _infoAlpha;
+        if (_infoAlpha < 1)
+        {
+            _infoAlpha = _lerper.Lerp(0, 1, 0.5f);
+            return false;
+        }
+        _lerper.Reset();
+        return true;
+    }
+
+    public override bool OutroTransition()
+    {
+        _infoCanvas.alpha = _infoAlpha;
+        if (_infoAlpha > 0)
+        {
+            _infoAlpha = _lerper.Lerp(1, 0, 0.5f);
+            return false;
+        }
+        _lerper.Reset();
+        return true;
+    }
+}

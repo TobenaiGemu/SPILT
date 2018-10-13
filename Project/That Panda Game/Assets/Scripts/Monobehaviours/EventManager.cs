@@ -39,15 +39,15 @@ public class EventManager : MonoBehaviour
         }
         _coinTime = Time.time + _coinSpawnRate;
 
-        _applePoolObj = GameObject.Find("ApplePool");
-        for (int i = 0; i < _applePoolAmmount; i++)
-        {
-            GameObject apple = Instantiate(_apple);
-            apple.SetActive(false);
-            apple.transform.SetParent(_applePoolObj.transform, false);
-            _applePool.Add(apple);
-        }
-        _appleTime = Time.time + _appleSpawnRate;
+        //_applePoolObj = GameObject.Find("ApplePool");
+        //for (int i = 0; i < _applePoolAmmount; i++)
+        //{
+        //    GameObject apple = Instantiate(_apple);
+        //    apple.SetActive(false);
+        //    apple.transform.SetParent(_applePoolObj.transform, false);
+        //    _applePool.Add(apple);
+        //}
+        //_appleTime = Time.time + _appleSpawnRate;
 	}
 
     // Update is called once per frame
