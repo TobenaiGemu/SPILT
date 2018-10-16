@@ -12,12 +12,18 @@ public class GamemodeScene : Scene
 
     private GameObject _practiceButton;
 
+    private MenuPage _menuPage;
+
     public void Awake()
     {
         _lerper = new TimeLerper();
         _gamemodePanel = GameObject.Find("Canvas").transform.Find("GamemodePanel").gameObject;
         _practiceButton = _gamemodePanel.transform.Find("Practice").gameObject;
         _gamemodeCanvas = _gamemodePanel.GetComponent<CanvasGroup>();
+
+        _menuPage = new MenuPage(_gamemodePanel);
+        _menuPage.SetRightPanel("PracticePanel", 0);
+        _menuPage.SetRightPanel("GameMode1Panel", 1);
     }
 
     public override void Initialize()
@@ -47,10 +53,17 @@ public class GamemodeScene : Scene
         if (_gamemodeAlpha > 0)
         {
             _gamemodeAlpha = _lerper.Lerp(1, 0, 0.5f);
+            _menuPage.OutroCurrentPanel(0.5f);
             return false;
         }
+
         _lerper.Reset();
         _gamemodePanel.SetActive(false);
         return true;
+    }
+
+    public override void SceneUpdate()
+    {
+        _menuPage.Update();
     }
 }

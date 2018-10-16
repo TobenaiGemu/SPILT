@@ -12,12 +12,20 @@ public class InfoScene : Scene
     private TimeLerper _lerper;
     private float _infoAlpha;
 
+    private MenuPage _menuPage;
+
     public void Awake()
     {
         _lerper = new TimeLerper();
         _infoPanel = GameObject.Find("Canvas").transform.Find("InfoPanel").gameObject;
         _controlsButton = _infoPanel.transform.Find("Controls").gameObject;
         _infoCanvas = _infoPanel.GetComponent<CanvasGroup>();
+
+        _menuPage = new MenuPage(_infoPanel);
+        _menuPage.SetRightPanel("ControlsPanel", 0);
+        _menuPage.SetRightPanel("PowerupsPanel", 1);
+        _menuPage.SetRightPanel("EventsPanel", 2);
+        _menuPage.SetRightPanel("CreditsPanel", 3);
 
         _infoPanel.SetActive(false);
     }
@@ -58,5 +66,10 @@ public class InfoScene : Scene
         }
         _lerper.Reset();
         return true;
+    }
+
+    public override void SceneUpdate()
+    {
+        _menuPage.Update();
     }
 }

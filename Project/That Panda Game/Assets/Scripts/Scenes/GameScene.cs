@@ -77,6 +77,7 @@ public class GameScene : Scene
         foreach (User user in SceneManager.Users)
             user.ChangeState("JoinState");
         _lerper.Reset();
+        GameObject.Find("EventManager").GetComponent<EventManager>().StartEvents();
         return true;
     }
 

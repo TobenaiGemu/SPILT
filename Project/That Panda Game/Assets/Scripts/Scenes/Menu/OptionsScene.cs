@@ -11,12 +11,24 @@ public class OptionsScene : Scene
     private TimeLerper _lerper;
     private float _optionsAlpha;
 
+    private GameObject _resolutionPanel;
+    private GameObject _volumePanel;
+
+    private MenuPage _menuPage;
+
     public void Awake()
     {
-        _optionsPanel = GameObject.Find("Canvas").transform.Find("OptionsPanel").gameObject;
+        GameObject canvas = GameObject.Find("Canvas");
+        _optionsPanel = canvas.transform.Find("OptionsPanel").gameObject;
         _resolutionButton = _optionsPanel.transform.Find("Resolution").gameObject;
+        _resolutionPanel = canvas.transform.Find("ResolutionPanel").gameObject;
+        _volumePanel = canvas.transform.Find("VolumePanel").gameObject;
         _optionsCanvas = _optionsPanel.GetComponent<CanvasGroup>();
         _lerper = new TimeLerper();
+
+        _menuPage = new MenuPage(_optionsPanel);
+        _menuPage.SetRightPanel("ResolutionPanel", 0);
+        _menuPage.SetRightPanel("VolumePanel", 1);
 
         _optionsPanel.SetActive(false);
     }
@@ -27,6 +39,7 @@ public class OptionsScene : Scene
         EventSystem.current.firstSelectedGameObject = _resolutionButton;
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(_resolutionButton);
+
         _lerper.Reset();
     }
 
@@ -57,5 +70,10 @@ public class OptionsScene : Scene
         }
         _lerper.Reset();
         return base.OutroTransition();
+    }
+
+    public override void SceneUpdate()
+    {
+        _menuPage.Update();
     }
 }

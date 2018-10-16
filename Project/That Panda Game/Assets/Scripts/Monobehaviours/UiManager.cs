@@ -10,6 +10,7 @@ public class UiManager : MonoBehaviour
 
     private Dictionary<int, GameObject> _eventSystems = new Dictionary<int, GameObject>();
     private GameObject _currentEventSystem;
+    private GameObject _selectedGameObject;
 
     public void Start()
     {
@@ -26,8 +27,11 @@ public class UiManager : MonoBehaviour
 
     public void Update()
     {
+        if (EventSystem.current.currentSelectedGameObject != null)
+            _selectedGameObject = EventSystem.current.currentSelectedGameObject;
+
         if (EventSystem.current.currentSelectedGameObject == null)
-            EventSystem.current.SetSelectedGameObject(EventSystem.current.firstSelectedGameObject);
+            EventSystem.current.SetSelectedGameObject(_selectedGameObject);
     }
 
     public void ChangeEventSystem(int i)

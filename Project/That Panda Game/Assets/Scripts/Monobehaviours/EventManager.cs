@@ -6,6 +6,8 @@ public class EventManager : MonoBehaviour
 {
     GameObject _planet;
 
+    private bool _doEvents;
+
     [SerializeField]
     private GameObject _coin;
     private GameObject _coinPoolObj;
@@ -35,6 +37,7 @@ public class EventManager : MonoBehaviour
             GameObject coin = Instantiate(_coin);
             coin.SetActive(false);
             coin.transform.SetParent(_coinPoolObj.transform, false);
+            coin.AddComponent<Coin>();
             _coinPool.Add(coin);
         }
         _coinTime = Time.time + _coinSpawnRate;
@@ -50,9 +53,17 @@ public class EventManager : MonoBehaviour
         //_appleTime = Time.time + _appleSpawnRate;
 	}
 
+    public void StartEvents()
+    {
+        _doEvents = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (!_doEvents)
+            return;
+
         if (Time.time > _coinTime)
         {
             _coinTime += _coinSpawnRate;
