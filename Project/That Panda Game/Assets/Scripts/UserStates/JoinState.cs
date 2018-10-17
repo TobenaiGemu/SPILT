@@ -7,10 +7,10 @@ public class JoinState : UserState
     private GameScene _scene;
     private Dictionary<CharacterType, string> _characterButtons = new Dictionary<CharacterType, string>();
 
-    public JoinState(User user, GameScene scene)
+    public JoinState(User user, SceneManager sceneManager)
         :base(user)
     {
-        _scene = scene;
+        _scene = sceneManager.GetScene<GameScene>();
         _characterButtons.Add(CharacterType.Panda, "Button1");
         _characterButtons.Add(CharacterType.Lizard, "Button2");
         _characterButtons.Add(CharacterType.Elephant, "Button3");

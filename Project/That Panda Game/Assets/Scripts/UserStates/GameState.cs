@@ -18,10 +18,10 @@ public class GameState : UserState
 
     //Is this player currently playing
 
-    public GameState(User user, GameScene scene)
+    public GameState(User user, SceneManager sceneManager)
         :base(user)
     {
-        _scene = scene;
+        _scene = sceneManager.GetScene<GameScene>();
         
         _playerObj = GameObject.Find("Players").transform.Find("Player" + _joystick.GetId()).gameObject;
         _planetObj = _scene.Planet;

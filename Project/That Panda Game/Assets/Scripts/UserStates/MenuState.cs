@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class MenuState : UserState
 {
-    private MenuScene _scene;
+    private MainMenuScene _scene;
 
-    public MenuState(User user, MenuScene menuScene)
+    public MenuState(User user, SceneManager sceneManager)
         :base(user)
     {
-        _scene = menuScene;
+        _scene = sceneManager.GetScene<MainMenuScene>();
     }
 
     public override void Initialize()

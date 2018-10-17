@@ -2,16 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Scene
+public class Scene : MonoBehaviour
 {
-    protected SceneManager _sceneManager;
-    protected UiManager _uiManager;
-
-    public Scene(SceneManager sceneManager)
-    {
-        _sceneManager = sceneManager;
-        _uiManager = GameObject.Find("UiManager").GetComponent<UiManager>();
-    }
+    protected static SceneManager _sceneManager;
+    protected static UiManager _uiManager;
 
     public virtual void Initialize() { }
     public virtual void Cleanup() { }
@@ -20,7 +14,13 @@ public class Scene
 
     public virtual bool OutroTransition() { return true; }
 
-    public virtual void Update()
+    public void Setup()
+    {
+        _sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
+        _uiManager = GameObject.Find("UiManager").GetComponent<UiManager>();
+    }
+
+    public virtual void SceneUpdate()
     {
         foreach (User user in SceneManager.Users)
         {
@@ -28,7 +28,7 @@ public class Scene
                 user.Update();
         }
     }
-    public virtual void FixedUpdate()
+    public virtual void SceneFixedUpdate()
     {
         foreach (User user in SceneManager.Users)
         {

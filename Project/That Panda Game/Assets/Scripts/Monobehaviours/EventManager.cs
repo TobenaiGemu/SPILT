@@ -6,6 +6,8 @@ public class EventManager : MonoBehaviour
 {
     GameObject _planet;
 
+    private bool _doEvents;
+
     [SerializeField]
     private GameObject _coin;
     private GameObject _coinPoolObj;
@@ -35,24 +37,33 @@ public class EventManager : MonoBehaviour
             GameObject coin = Instantiate(_coin);
             coin.SetActive(false);
             coin.transform.SetParent(_coinPoolObj.transform, false);
+            coin.AddComponent<Coin>();
             _coinPool.Add(coin);
         }
         _coinTime = Time.time + _coinSpawnRate;
 
-        _applePoolObj = GameObject.Find("ApplePool");
-        for (int i = 0; i < _applePoolAmmount; i++)
-        {
-            GameObject apple = Instantiate(_apple);
-            apple.SetActive(false);
-            apple.transform.SetParent(_applePoolObj.transform, false);
-            _applePool.Add(apple);
-        }
-        _appleTime = Time.time + _appleSpawnRate;
+        //_applePoolObj = GameObject.Find("ApplePool");
+        //for (int i = 0; i < _applePoolAmmount; i++)
+        //{
+        //    GameObject apple = Instantiate(_apple);
+        //    apple.SetActive(false);
+        //    apple.transform.SetParent(_applePoolObj.transform, false);
+        //    _applePool.Add(apple);
+        //}
+        //_appleTime = Time.time + _appleSpawnRate;
 	}
+
+    public void StartEvents()
+    {
+        _doEvents = true;
+    }
 
     // Update is called once per frame
     void Update()
     {
+        if (!_doEvents)
+            return;
+
         if (Time.time > _coinTime)
         {
             _coinTime += _coinSpawnRate;

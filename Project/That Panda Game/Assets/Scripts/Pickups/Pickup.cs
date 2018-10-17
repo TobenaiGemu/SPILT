@@ -8,7 +8,7 @@ public class Pickup
 
     public Pickup()
     {
-        _gameScene = GameObject.Find("SceneManager").GetComponent<SceneManager>().GetScene<GameScene>("GameScene");
+        _gameScene = GameObject.Find("SceneManager").GetComponent<SceneManager>().GetScene<GameScene>();
     }
 
     public virtual void ExecutePickup(Character character)

@@ -8,15 +8,9 @@ public class UiManager : MonoBehaviour
 
     private SceneManager _sceneManager;
 
-    [SerializeField]
-    private GameObject _mainMenu;
-    [SerializeField]
-    private GameObject _game;
-    [SerializeField]
-    private GameObject _gamePause;
-
     private Dictionary<int, GameObject> _eventSystems = new Dictionary<int, GameObject>();
     private GameObject _currentEventSystem;
+    private GameObject _selectedGameObject;
 
     public void Start()
     {
@@ -29,14 +23,15 @@ public class UiManager : MonoBehaviour
 
         ChangeEventSystem(1);
 
-        _mainMenu.SetActive(true);
-        _game.SetActive(false);
     }
 
     public void Update()
     {
+        if (EventSystem.current.currentSelectedGameObject != null)
+            _selectedGameObject = EventSystem.current.currentSelectedGameObject;
+
         if (EventSystem.current.currentSelectedGameObject == null)
-            EventSystem.current.SetSelectedGameObject(EventSystem.current.firstSelectedGameObject);
+            EventSystem.current.SetSelectedGameObject(_selectedGameObject);
     }
 
     public void ChangeEventSystem(int i)
@@ -56,21 +51,31 @@ public class UiManager : MonoBehaviour
 
     public void StartGame()
     {
-        _mainMenu.SetActive(false);
-        _sceneManager.ChangeScene("GameScene");
+        _sceneManager.ChangeScene<GameScene>();
     }
 
-    public void QuitGame()
+    public void GotoGamemode()
     {
-        _game.SetActive(false);
-        _gamePause.SetActive(false);
-        _sceneManager.ChangeScene("MenuScene");
+        _sceneManager.ChangeScene<GamemodeScene>();
+    }
+
+    public void GotoMainMenu()
+    {
+        _sceneManager.ChangeScene<MainMenuScene>();
+    }
+
+    public void GotoInfo()
+    {
+        _sceneManager.ChangeScene<InfoScene>();
+    }
+
+    public void GotoOptions()
+    {
+        _sceneManager.ChangeScene<OptionsScene>();
     }
 
     public void ResumeGame()
     {
-        _gamePause.SetActive(false);
-        _game.SetActive(true);
         _sceneManager.ResumeScene();
     }
 }

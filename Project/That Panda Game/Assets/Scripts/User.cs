@@ -17,9 +17,9 @@ public class User
         Joystick = new Joystick(UserId);
         _states = new Dictionary<string, UserState>();
 
-        _states.Add("GameState", new GameState(this, sceneManager.GetScene<GameScene>("GameScene")));
-        _states.Add("JoinState", new JoinState(this, sceneManager.GetScene<GameScene>("GameScene")));
-        _states.Add("MenuState", new MenuState(this, sceneManager.GetScene<MenuScene>("MenuScene")));
+        _states.Add("GameState", new GameState(this, sceneManager));
+        _states.Add("JoinState", new JoinState(this, sceneManager));
+        _states.Add("MenuState", new MenuState(this, sceneManager));
     }
 
     public void Update()

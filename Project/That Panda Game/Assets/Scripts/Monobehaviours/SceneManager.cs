@@ -7,7 +7,9 @@ public class SceneManager : MonoBehaviour
     public static int MaxUsers { get; private set; }
     public static User[] Users { get; private set; }
 
-    private Dictionary<string, Scene> _scenes = new Dictionary<string, Scene>();
+    private List<Scene> _scenes = new List<Scene>();
+
+    private GameObject _scenesPool;
 
     private Scene _nextScene;
     private Scene _currentScene;
@@ -15,12 +17,22 @@ public class SceneManager : MonoBehaviour
     private bool _paused;
     private bool _cleanedScene;
 
+    private bool _initNextScene;
+
     // Use this for initialization
     void Awake()
     {
+        _scenesPool = GameObject.Find("Scenes");
+
         MaxUsers = 4;
-        _scenes.Add("GameScene", new GameScene(this));
-        _scenes.Add("MenuScene", new MenuScene(this));
+        _scenes.Add(_scenesPool.transform.Find("GameScene").GetComponent<GameScene>());
+        _scenes.Add(_scenesPool.transform.Find("MainMenuScene").GetComponent<MainMenuScene>());
+        _scenes.Add(_scenesPool.transform.Find("GamemodeScene").GetComponent<GamemodeScene>());
+        _scenes.Add(_scenesPool.transform.Find("InfoScene").GetComponent<InfoScene>());
+        _scenes.Add(_scenesPool.transform.Find("OptionsScene").GetComponent<OptionsScene>());
+
+        foreach (Scene scene in _scenes)
+            scene.Setup();
 
         Users = new User[MaxUsers];
 
@@ -29,14 +41,25 @@ public class SceneManager : MonoBehaviour
             Users[i] = new User(this, i + 1);
         }
         
-        ChangeScene("MenuScene");
+        ChangeScene<MainMenuScene>();
         _paused = false;
+        _initNextScene = true;
     }
 
-    public void ChangeScene(string sceneName)
+    public void ChangeScene<T>()
     {
+        if (_nextScene != null)
+            return;
         _paused = false;
-        _nextScene = _scenes[sceneName];
+
+        foreach (Scene scene in _scenes)
+        {
+            if (scene.GetType() == typeof(T))
+            {
+                _nextScene = scene;
+                break;
+            }
+        };
     }
 
     public User GetUser(int num)
@@ -48,10 +71,17 @@ public class SceneManager : MonoBehaviour
         return Users[num - 1];
     }
 
-    public T GetScene<T>(string sceneName)
+    public T GetScene<T>()
         where T : Scene
     {
-        return _scenes[sceneName] as T;
+        foreach (Scene scene in _scenes)
+        {
+            if (scene.GetType() == typeof(T))
+            {
+                return scene as T;
+            }
+        };
+        throw new System.Exception("WTF YOU DOIN M8");
     }
 
     public void PauseScene()
@@ -71,7 +101,7 @@ public class SceneManager : MonoBehaviour
             return;
 
         if (_currentScene != null)
-            _currentScene.Update();
+            _currentScene.SceneUpdate();
 
         //Completes the outro transition of the current scene before cleaning it and the intro transition of the next scene after initializing it
         if (_nextScene != null)
@@ -82,7 +112,12 @@ public class SceneManager : MonoBehaviour
                 {
                     if (_currentScene != null)
                         _currentScene.Cleanup();
-                    _nextScene.Initialize();
+                    if (_initNextScene)
+                    {
+                        _nextScene.Initialize();
+                        _initNextScene = false;
+                    }
+                    
                     _cleanedScene = true;
                     _currentScene = null;
                 }
@@ -91,6 +126,7 @@ public class SceneManager : MonoBehaviour
                     _currentScene = _nextScene;
                     _nextScene = null;
                     _cleanedScene = false;
+                    _initNextScene = true;
                 }
             }
         }
@@ -102,6 +138,6 @@ public class SceneManager : MonoBehaviour
             return;
 
         if (_currentScene != null)
-            _currentScene.FixedUpdate();
+            _currentScene.SceneFixedUpdate();
     }
 }

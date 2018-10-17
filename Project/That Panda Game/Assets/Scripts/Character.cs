@@ -70,7 +70,7 @@ public class Character : MonoBehaviour
 
     public void Start()
     {
-
+        _characterPool = GameObject.Find("AvailableCharacters");
     }
 
     public Character Init(GameObject charObj)

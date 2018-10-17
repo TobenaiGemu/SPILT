@@ -14,16 +14,13 @@ public class GameScene : Scene
     public GameObject Planet { get; private set; }
     private Vector3 _smallPlanetScale;
     private Vector3 _bigPlanetScale;
-    private float _timeToLerpPlanet;
-    private float _timeStartedLerpPlanet;
-    private bool _startedLerpPlanet;
 
     private GameObject _gamePanel;
     private GameObject _pausePanel;
+    private TimeLerper _lerper;
 
 
-    public GameScene(SceneManager sceneManager)
-        :base(sceneManager)
+    public void Awake()
     {
         GameObject chars = GameObject.Find("AvailableCharacters");
 
@@ -42,10 +39,9 @@ public class GameScene : Scene
 
         Planet = GameObject.Find("Planet");
         //For lerping the planet scale
+        _lerper = new TimeLerper();
         _bigPlanetScale = new Vector3(50, 50, 50);
-        _smallPlanetScale = Planet.transform.localScale;
-        _startedLerpPlanet = false;
-        _timeToLerpPlanet = 1;
+        
 
         _gamePanel = GameObject.Find("Canvas").transform.Find("GamePanel").gameObject;
         _pausePanel = GameObject.Find("Canvas").transform.Find("GamePausePanel").gameObject;
@@ -54,40 +50,34 @@ public class GameScene : Scene
 
     public override void Initialize()
     {
-
+        _lerper.Reset();
+        _smallPlanetScale = Planet.transform.localScale;
     }
 
     public override void Cleanup()
     {
-
+        _gamePanel.transform.Find("Panda").GetComponent<Text>().text = "Panda: Button1 to join";
+        _gamePanel.transform.Find("Lizard").GetComponent<Text>().text = "Lizard: Button2 to join";
+        _gamePanel.transform.Find("Elephant").GetComponent<Text>().text = "Elephant: Button3 to join";
+        _gamePanel.transform.Find("Pig").GetComponent<Text>().text = "Pig: Button0 to join";
     }
 
     public override bool IntroTransition()
-    {
-        //Lerp the planet scale to the large size before the game starts.
-        if (!_startedLerpPlanet)
-        {
-            _timeStartedLerpPlanet = Time.time;
-            _startedLerpPlanet = true;
-        }
-
-        //Get the percentage that the lerp should be up to.
-        float transitionTime = Time.time - _timeStartedLerpPlanet;
-        float lerpPercentage = transitionTime / _timeToLerpPlanet;
-
-        Planet.transform.localScale = Vector3.Lerp(_smallPlanetScale, _bigPlanetScale, lerpPercentage);
+    { 
         if (Planet.transform.localScale != _bigPlanetScale)
         {
+            Planet.transform.localScale = _lerper.Lerp(_smallPlanetScale, _bigPlanetScale, 1);
             return false;
         }
 
         //Activate the game panel
         _gamePanel.gameObject.SetActive(true);
-        _startedLerpPlanet = false;
 
         //Change user states to JoinState
         foreach (User user in SceneManager.Users)
             user.ChangeState("JoinState");
+        _lerper.Reset();
+        GameObject.Find("EventManager").GetComponent<EventManager>().StartEvents();
         return true;
     }
 
@@ -97,37 +87,22 @@ public class GameScene : Scene
         foreach (User user in SceneManager.Users)
             CharacterUnassign(user);
 
-        //Lerp the planet scale to the large size before the main menu shows
-        if (!_startedLerpPlanet)
-        {
-            _timeStartedLerpPlanet = Time.time;
-            _startedLerpPlanet = true;
-        }
-
-        //Get the percentage that the lerp should be up to.
-        float transitionTime = Time.time - _timeStartedLerpPlanet;
-        float lerpPercentage = transitionTime / _timeToLerpPlanet;
-
-        Planet.transform.localScale = Vector3.Lerp(_bigPlanetScale, _smallPlanetScale, lerpPercentage);
-        if (Planet.transform.localScale != _smallPlanetScale)
-        {
-            return false;
-        }
-        _startedLerpPlanet = false;
-        
+        _gamePanel.SetActive(false);
+        _pausePanel.SetActive(false);
+        _lerper.Reset();
         return true;
     }
 
-    public override void Update()
+    public override void SceneUpdate()
     {
         //Base updates the users
-        base.Update();
+        base.SceneUpdate();
     }
 
-    public override void FixedUpdate()
+    public override void SceneFixedUpdate()
     {
         //Planet.transform.Rotate(Vector3.up, 20 * Time.deltaTime);
-        base.FixedUpdate();
+        base.SceneFixedUpdate();
     }
 
     public bool AttemptCharacterAssign(CharacterType type, User user)
