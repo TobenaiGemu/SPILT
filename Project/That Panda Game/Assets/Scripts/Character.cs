@@ -6,7 +6,8 @@ using UnityEngine;
 [Serializable]
 public class Character : MonoBehaviour
 {
-    private static int _maxCoins;
+    [SerializeField]
+    private int _coinsToWin;
 
     public Vector3 Position
     {
@@ -82,7 +83,7 @@ public class Character : MonoBehaviour
     public void AddCoins(int ammount)
     {
         _coins += ammount;
-        if (_coins >= _maxCoins)
+        if (_coins >= _coinsToWin)
             WinGame();
     }
 

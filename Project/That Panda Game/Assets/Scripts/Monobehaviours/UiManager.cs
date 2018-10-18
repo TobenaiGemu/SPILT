@@ -12,6 +12,8 @@ public class UiManager : MonoBehaviour
     private GameObject _currentEventSystem;
     private GameObject _selectedGameObject;
 
+    private GameScene _gameScene;
+
     public void Start()
     {
         _sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
@@ -20,6 +22,8 @@ public class UiManager : MonoBehaviour
         _eventSystems.Add(2, GameObject.Find("EventSystem2"));
         _eventSystems.Add(3, GameObject.Find("EventSystem3"));
         _eventSystems.Add(4, GameObject.Find("EventSystem4"));
+
+        _gameScene = GameObject.Find("Scenes").transform.Find("GameScene").GetComponent<GameScene>();
 
         ChangeEventSystem(1);
 
@@ -77,5 +81,6 @@ public class UiManager : MonoBehaviour
     public void ResumeGame()
     {
         _sceneManager.ResumeScene();
+        _gameScene.PlayGame();
     }
 }

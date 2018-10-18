@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1894,8 +1894,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _coin: {fileID: 1153410568022254, guid: 76df0ab56a0d944418b8a8419a0a87cb, type: 2}
   _coinSpawnRate: 5
-  _apple: {fileID: 0}
-  _appleSpawnRate: 0
 --- !u!4 &481877097
 Transform:
   m_ObjectHideFlags: 0
@@ -3830,6 +3828,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f208fa3a5c3aadb40ad52c4bcc9c68a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _coinsToWin: 0
   _forwardSpeed: 20
   _backwardSpeedMultiplier: 0.5
   _knockBack: 30
@@ -5633,7 +5632,7 @@ CanvasGroup:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1721029107}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -5716,6 +5715,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f208fa3a5c3aadb40ad52c4bcc9c68a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _coinsToWin: 0
   _forwardSpeed: 20
   _backwardSpeedMultiplier: 0.5
   _knockBack: 30
@@ -5895,6 +5895,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f208fa3a5c3aadb40ad52c4bcc9c68a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _coinsToWin: 0
   _forwardSpeed: 20
   _backwardSpeedMultiplier: 0.5
   _knockBack: 30
@@ -5926,6 +5927,48 @@ Transform:
   m_Children: []
   m_Father: {fileID: 300340304}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1771118302
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1771118304}
+  - component: {fileID: 1771118303}
+  m_Layer: 0
+  m_Name: CoinSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1771118303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1771118302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee7430b8e3c0ce341bf56d5a256c2bd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _coinObj: {fileID: 1153410568022254, guid: 76df0ab56a0d944418b8a8419a0a87cb, type: 2}
+  _spawnRate: 0
+--- !u!4 &1771118304
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1771118302}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.8625832, y: -10.534943, z: 29.704521}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1790576773
 GameObject:
@@ -6415,6 +6458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f208fa3a5c3aadb40ad52c4bcc9c68a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _coinsToWin: 0
   _forwardSpeed: 20
   _backwardSpeedMultiplier: 0.5
   _knockBack: 30

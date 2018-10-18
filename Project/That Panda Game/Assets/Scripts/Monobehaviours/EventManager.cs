@@ -16,15 +16,6 @@ public class EventManager : MonoBehaviour
     [SerializeField]
     private float _coinSpawnRate;
     private float _coinTime;
-
-    [SerializeField]
-    private GameObject _apple;
-    private GameObject _applePoolObj;
-    private List<GameObject> _applePool = new List<GameObject>();
-    private int _applePoolAmmount = 5;
-    [SerializeField]
-    private float _appleSpawnRate;
-    private float _appleTime;
     
 	// Use this for initialization
 	void Start ()
@@ -41,16 +32,6 @@ public class EventManager : MonoBehaviour
             _coinPool.Add(coin);
         }
         _coinTime = Time.time + _coinSpawnRate;
-
-        //_applePoolObj = GameObject.Find("ApplePool");
-        //for (int i = 0; i < _applePoolAmmount; i++)
-        //{
-        //    GameObject apple = Instantiate(_apple);
-        //    apple.SetActive(false);
-        //    apple.transform.SetParent(_applePoolObj.transform, false);
-        //    _applePool.Add(apple);
-        //}
-        //_appleTime = Time.time + _appleSpawnRate;
 	}
 
     public void StartEvents()
@@ -73,16 +54,6 @@ public class EventManager : MonoBehaviour
             coin.AddComponent<GravitySim>();
             coin.transform.LookAt(_planet.transform);
         }
-
-        //if (Time.time > _appleTime)
-        //{
-        //    _appleTime += _appleSpawnRate;
-        //    GameObject apple = GetCoin();
-        //    apple.SetActive(true);
-        //    apple.transform.position = new Vector3(Random.Range(-15, 15), Random.Range(-15, 15), -40);
-        //    apple.AddComponent<GravitySim>();
-        //    apple.transform.LookAt(_planet.transform);
-        //}
     }
 
     GameObject GetCoin()
@@ -95,19 +66,6 @@ public class EventManager : MonoBehaviour
         }
         GameObject obj = _coinPool[0];
         _coinPool.RemoveAt(0);
-        return obj;
-    }
-
-    GameObject GetApple()
-    {
-        if (_applePool.Count == 0)
-        {
-            GameObject apple = Instantiate(_apple);
-            apple.transform.SetParent(_applePoolObj.transform, false);
-            _applePool.Add(apple);
-        }
-        GameObject obj = _applePool[0];
-        _applePool.RemoveAt(0);
         return obj;
     }
 }

@@ -52,7 +52,6 @@ public class GameState : UserState
             return;
         }
 
-        Debug.DrawRay(_playerObj.transform.position, _playerObj.transform.forward);
         if (_joystick.WasButtonPressed("Button0"))
         {
             Debug.Log("Punch");

@@ -36,4 +36,13 @@ public class Scene : MonoBehaviour
                 user.FixedUpdate();
         }
     }
+
+    public void PauseScene()
+    {
+
+    }
+    public void PlayScene()
+    {
+
+    }
 }
