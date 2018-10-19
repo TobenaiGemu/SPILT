@@ -15,6 +15,7 @@ public class Coin : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.transform.name);
         if (other.transform.parent.tag == "Player")
         {
             _coinAction.AddCoinToCharacter(other.gameObject.GetComponent<Character>());
