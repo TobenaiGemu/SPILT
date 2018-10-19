@@ -1,0 +1,171 @@
+fileFormatVersion: 2
+guid: b416cc0885a7636418ab482be243fb85
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: TreeBase
+    100004: TreeBlob
+    100006: TreeBlob1
+    100008: TreeBlob10
+    100010: TreeBlob11
+    100012: TreeBlob12
+    100014: TreeBlob13
+    100016: TreeBlob14
+    100018: TreeBlob2
+    100020: TreeBlob3
+    100022: TreeBlob4
+    100024: TreeBlob5
+    100026: TreeBlob6
+    100028: TreeBlob7
+    100030: TreeBlob8
+    100032: TreeBlob9
+    400000: //RootNode
+    400002: TreeBase
+    400004: TreeBlob
+    400006: TreeBlob1
+    400008: TreeBlob10
+    400010: TreeBlob11
+    400012: TreeBlob12
+    400014: TreeBlob13
+    400016: TreeBlob14
+    400018: TreeBlob2
+    400020: TreeBlob3
+    400022: TreeBlob4
+    400024: TreeBlob5
+    400026: TreeBlob6
+    400028: TreeBlob7
+    400030: TreeBlob8
+    400032: TreeBlob9
+    2100000: lambert1
+    2300000: TreeBase
+    2300002: TreeBlob
+    2300004: TreeBlob1
+    2300006: TreeBlob10
+    2300008: TreeBlob11
+    2300010: TreeBlob12
+    2300012: TreeBlob13
+    2300014: TreeBlob14
+    2300016: TreeBlob2
+    2300018: TreeBlob3
+    2300020: TreeBlob4
+    2300022: TreeBlob5
+    2300024: TreeBlob6
+    2300026: TreeBlob7
+    2300028: TreeBlob8
+    2300030: TreeBlob9
+    3300000: TreeBase
+    3300002: TreeBlob
+    3300004: TreeBlob1
+    3300006: TreeBlob10
+    3300008: TreeBlob11
+    3300010: TreeBlob12
+    3300012: TreeBlob13
+    3300014: TreeBlob14
+    3300016: TreeBlob2
+    3300018: TreeBlob3
+    3300020: TreeBlob4
+    3300022: TreeBlob5
+    3300024: TreeBlob6
+    3300026: TreeBlob7
+    3300028: TreeBlob8
+    3300030: TreeBlob9
+    4300000: TreeBase
+    4300002: TreeBlob
+    4300004: TreeBlob1
+    4300006: TreeBlob2
+    4300008: TreeBlob3
+    4300010: TreeBlob4
+    4300012: TreeBlob5
+    4300014: TreeBlob6
+    4300016: TreeBlob7
+    4300018: TreeBlob8
+    4300020: TreeBlob9
+    4300022: TreeBlob10
+    4300024: TreeBlob11
+    4300026: TreeBlob12
+    4300028: TreeBlob13
+    4300030: TreeBlob14
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
