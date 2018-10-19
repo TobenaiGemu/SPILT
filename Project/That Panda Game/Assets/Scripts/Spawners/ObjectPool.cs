@@ -5,10 +5,12 @@ using UnityEngine;
 public class ObjectPool
 {
     private List<GameObject> _objectPool;
-    private GameObject originalObj;
+    private GameObject _originalObj;
 
     public ObjectPool(GameObject obj, int initPoolAmmount)
     {
+        _originalObj = obj;
+        _objectPool = new List<GameObject>();
         for (int i = 0; i < initPoolAmmount; i++)
         {
             AddObject();
@@ -26,7 +28,7 @@ public class ObjectPool
 
     private GameObject AddObject()
     {
-        GameObject clone = GameObject.Instantiate(originalObj);
+        GameObject clone = GameObject.Instantiate(_originalObj);
         clone.SetActive(false);
         _objectPool.Add(clone);
         return clone;
@@ -34,6 +36,7 @@ public class ObjectPool
 
     public void ReturnObject(GameObject obj)
     {
+        obj.SetActive(false);
         _objectPool.Add(obj);
     }
 }
