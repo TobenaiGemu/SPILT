@@ -88,6 +88,11 @@ public class Character : MonoBehaviour
             WinGame();
     }
 
+    public void ChangeSpeed(float newSpeed)
+    {
+        ForwardSpeed = newSpeed;
+    }
+
     private void WinGame()
     {
         //This character won the game (ragdoll other characters, run dance animation, change scene to end game scene
