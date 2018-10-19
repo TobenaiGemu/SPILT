@@ -80,7 +80,6 @@ public class GameScene : Scene
         foreach (User user in SceneManager.Users)
             user.ChangeState("JoinState");
         _lerper.Reset();
-        GameObject.Find("EventManager").GetComponent<EventManager>().StartEvents();
         return true;
     }
 
@@ -89,7 +88,7 @@ public class GameScene : Scene
         //Unasign the players
         foreach (User user in SceneManager.Users)
             CharacterUnassign(user);
-
+        _coinSpawner.Cleanup();
         _gamePanel.SetActive(false);
         _pausePanel.SetActive(false);
         _lerper.Reset();

@@ -8,7 +8,7 @@ public class CoinSpawner : MonoBehaviour
     private GameObject _coinObj;
 
     [SerializeField]
-    private int _spawnRate;
+    private float _spawnRate;
 
     [SerializeField]
     private Rect _spawnArea;
@@ -24,6 +24,7 @@ public class CoinSpawner : MonoBehaviour
 
 	void Start ()
     {
+        _activeCoins = new List<GameObject>();
         _coinPool = new ObjectPool(_coinObj, _initPoolAmmount);
         _planet = GameObject.Find("Planet");
 	}
@@ -51,16 +52,17 @@ public class CoinSpawner : MonoBehaviour
     private void SpawnCoin()
     {
         GameObject coin = _coinPool.GetObject();
-
-        float x = Random.Range(_spawnArea.x, _spawnArea.width);
-        float y = Random.Range(_spawnArea.y, _spawnArea.height);
+        _activeCoins.Add(coin);
+        float x = Random.Range(_spawnArea.x, _spawnArea.x + _spawnArea.width);
+        float y = Random.Range(_spawnArea.y, _spawnArea.y + _spawnArea.height);
 
         coin.transform.position = new Vector3(x, y, -30);
 
         RaycastHit hit;
-        Physics.Raycast(coin.transform.position, Vector3.forward, out hit, Mathf.Infinity, 1<<8);
+        Physics.Raycast(coin.transform.position, Vector3.forward, out hit, Mathf.Infinity, 1 << 9);
         float z = hit.point.z;
         coin.transform.position = new Vector3(x, y, z);
+        coin.transform.LookAt(_planet.transform);
         coin.SetActive(true);
     }
 
