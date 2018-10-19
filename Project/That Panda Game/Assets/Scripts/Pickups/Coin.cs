@@ -2,23 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Coin : MonoBehaviour {
+public class Coin : MonoBehaviour
+{
+    private static CoinAction _coinAction;
+    private static CoinSpawner _coinSpawner;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-    private void OnCollisionEnter(Collision collision)
+    private void Start()
     {
-        if (collision.gameObject.tag == "Player")
+        _coinAction = GameObject.Find("Collectables").transform.Find("Coin").GetComponent<CoinAction>();
+        _coinSpawner = GameObject.Find("CoinSpawner").GetComponent<CoinSpawner>();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.parent.tag == "Player")
         {
-            Debug.Log(collision.gameObject.name);
+            _coinAction.AddCoinToCharacter(other.gameObject.GetComponent<Character>());
+            _coinSpawner.ReturnCoin(gameObject);
+
         }
     }
 }
