@@ -83,6 +83,7 @@ public class Character : MonoBehaviour
     public void AddCoins(int ammount)
     {
         _coins += ammount;
+        Debug.Log(name + " has: " + _coins + " coins");
         if (_coins >= _coinsToWin)
             WinGame();
     }

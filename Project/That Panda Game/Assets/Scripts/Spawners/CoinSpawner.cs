@@ -44,7 +44,7 @@ public class CoinSpawner : MonoBehaviour
         }
 	}
 
-    private void ReturnCoin(GameObject obj)
+    public void ReturnCoin(GameObject obj)
     {
         _coinPool.ReturnObject(obj);
     }
@@ -61,7 +61,7 @@ public class CoinSpawner : MonoBehaviour
         RaycastHit hit;
         Physics.Raycast(coin.transform.position, Vector3.forward, out hit, Mathf.Infinity, 1 << 9);
         float z = hit.point.z;
-        coin.transform.position = new Vector3(x, y, z);
+        coin.transform.position = new Vector3(x, y, z - 1);
         coin.transform.LookAt(_planet.transform);
         coin.SetActive(true);
     }
