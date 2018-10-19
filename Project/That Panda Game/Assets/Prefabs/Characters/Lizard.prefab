@@ -37,13 +37,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4101310283819322}
+  - component: {fileID: 114083837499704018}
   m_Layer: 0
   m_Name: Lizard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1884870764511846
 GameObject:
   m_ObjectHideFlags: 1
@@ -70,7 +71,7 @@ Transform:
   m_GameObject: {fileID: 1820845218287318}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 1.5, z: 2}
   m_Children:
   - {fileID: 4290691183412510}
   m_Father: {fileID: 0}
@@ -199,6 +200,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114083837499704018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1820845218287318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f208fa3a5c3aadb40ad52c4bcc9c68a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _coinsToWin: 0
+  _forwardSpeed: 20
+  _backwardSpeedMultiplier: 0.5
+  _knockBack: 30
+  _knockJump: 1
 --- !u!136 &136567713391884562
 CapsuleCollider:
   m_ObjectHideFlags: 1
