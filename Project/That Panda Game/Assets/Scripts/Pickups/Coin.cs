@@ -5,22 +5,20 @@ using UnityEngine;
 public class Coin : MonoBehaviour
 {
     private static CoinAction _coinAction;
-    private static CoinSpawner _coinSpawner;
+    private static Spawner _coinSpawner;
 
     private void Start()
     {
         _coinAction = GameObject.Find("Collectables").transform.Find("Coin").GetComponent<CoinAction>();
-        _coinSpawner = GameObject.Find("CoinSpawner").GetComponent<CoinSpawner>();
+        _coinSpawner = GameObject.Find("CoinSpawner").GetComponent<Spawner>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.transform.name);
-        if (other.transform.parent.tag == "Player")
+        if (other.transform.tag == "Character")
         {
             _coinAction.AddCoinToCharacter(other.gameObject.GetComponent<Character>());
-            _coinSpawner.ReturnCoin(gameObject);
-
+            _coinSpawner.ReturnObject(gameObject);
         }
     }
 }

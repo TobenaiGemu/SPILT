@@ -19,8 +19,9 @@ public class GameScene : Scene
     private GameObject _pausePanel;
     private TimeLerper _lerper;
 
-    private CoinSpawner _coinSpawner;
-
+    private Spawner _coinSpawner;
+    private Spawner _cookieSpawner;
+    private Spawner _appleSpawner;
 
     public void Awake()
     {
@@ -48,7 +49,9 @@ public class GameScene : Scene
         _gamePanel = GameObject.Find("Canvas").transform.Find("GamePanel").gameObject;
         _pausePanel = GameObject.Find("Canvas").transform.Find("GamePausePanel").gameObject;
 
-        _coinSpawner = GameObject.Find("CoinSpawner").GetComponent<CoinSpawner>();
+        _coinSpawner = GameObject.Find("CoinSpawner").GetComponent<Spawner>();
+        _cookieSpawner = GameObject.Find("CookieSpawner").GetComponent<Spawner>();
+        _appleSpawner = GameObject.Find("AppleSpawner").GetComponent<Spawner>();
     }
 
     public override void Initialize()
@@ -89,6 +92,7 @@ public class GameScene : Scene
         foreach (User user in SceneManager.Users)
             CharacterUnassign(user);
         _coinSpawner.Cleanup();
+        _cookieSpawner.Cleanup();
         _gamePanel.SetActive(false);
         _pausePanel.SetActive(false);
         _lerper.Reset();
@@ -98,7 +102,9 @@ public class GameScene : Scene
     public override void SceneUpdate()
     {
         //Base updates the users
-        _coinSpawner.SpawnerUpdate();
+        _coinSpawner.Tick();
+        _cookieSpawner.Tick();
+        _appleSpawner.Tick();
         base.SceneUpdate();
     }
 

@@ -13,9 +13,10 @@ public class Spawner : MonoBehaviour
     [SerializeField]
     private Rect _spawnArea;
 
+    private GameObject _planet;
+
     protected ObjectPool _objectPool;
     private List<GameObject> _activeObjects;
-    private GameObject _planet;
 
     private float _spawnTimer;
 	
@@ -26,7 +27,7 @@ public class Spawner : MonoBehaviour
         _objectPool = new ObjectPool(_object, 10);
     }
 
-    protected void MainUpdate()
+    public void Tick()
     {
         _spawnTimer += Time.deltaTime;
         if (_spawnTimer > _spawnRate)
@@ -38,19 +39,20 @@ public class Spawner : MonoBehaviour
 
     private void SpawnObject(Rect spawnArea)
     {
-        GameObject coin = _objectPool.GetObject();
-        _activeObjects.Add(coin);
+        GameObject obj = _objectPool.GetObject();
+        _activeObjects.Add(obj);
         float x = Random.Range(spawnArea.x, spawnArea.x + spawnArea.width);
         float y = Random.Range(spawnArea.y, spawnArea.y + spawnArea.height);
 
-        coin.transform.position = new Vector3(x, y, -30);
+        obj.transform.position = new Vector3(x, y, -30);
 
         RaycastHit hit;
-        Physics.Raycast(coin.transform.position, Vector3.forward, out hit, Mathf.Infinity, 1 << 9);
+        Physics.Raycast(obj.transform.position, Vector3.forward, out hit, Mathf.Infinity, 1 << 9);
         float z = hit.point.z;
-        coin.transform.position = new Vector3(x, y, z - 1);
-        coin.transform.LookAt(_planet.transform);
-        coin.SetActive(true);
+        obj.transform.position = new Vector3(x, y, z - 1);
+        obj.transform.LookAt(_planet.transform);
+        obj.transform.SetParent(_planet.transform, true);
+        obj.SetActive(true);
     }
 
     public void Cleanup()
@@ -60,7 +62,7 @@ public class Spawner : MonoBehaviour
         _activeObjects.Clear();
     }
 
-    public void ReturnCoin(GameObject obj)
+    public void ReturnObject(GameObject obj)
     {
         _objectPool.ReturnObject(obj);
     }

@@ -37,6 +37,7 @@ public class ObjectPool
     public void ReturnObject(GameObject obj)
     {
         obj.SetActive(false);
+        obj.transform.SetParent(null);
         _objectPool.Add(obj);
     }
 }

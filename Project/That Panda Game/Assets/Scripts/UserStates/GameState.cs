@@ -16,6 +16,7 @@ public class GameState : UserState
 
     private Character _character;
 
+
     //Is this player currently playing
 
     public GameState(User user, SceneManager sceneManager)
@@ -58,8 +59,7 @@ public class GameState : UserState
             RaycastHit hit;
             if (Physics.Raycast(_playerObj.transform.position, _playerObj.transform.forward, out hit, 3))
             {
-                Debug.Log(_character.KnockBack);
-                hit.rigidbody.AddForce((_playerObj.transform.forward + hit.rigidbody.gameObject.transform.up * _character.KnockJump) * _character.KnockBack, ForceMode.Impulse);
+                hit.rigidbody.AddForce((_playerObj.transform.forward * _character.KnockBack * _character.KnockbackMultiplier + hit.rigidbody.gameObject.transform.up * _character.KnockJump * _character.KnockjumpMultiplier) * _character.KnockBack, ForceMode.Impulse);
                 Debug.Log(hit.transform.name);
             }
         }
@@ -76,8 +76,8 @@ public class GameState : UserState
         _playerObj.transform.rotation = Quaternion.identity;
         _playerObj.transform.LookAt(_planetObj.transform.position);
 
-        _velocity = _playerObj.transform.up * _character.ForwardSpeed * _joystick.GetAnalogue1Axis("Vertical") * ((_joystick.GetAnalogue1Axis("Vertical") < 0) ? 1f : 1);
-        _velocity += _playerObj.transform.right * _character.ForwardSpeed * _joystick.GetAnalogue1Axis("Horizontal") * 1f;
+        _velocity = _playerObj.transform.up * _character.ForwardSpeed * _joystick.GetAnalogue1Axis("Vertical") * _character.SpeedMultiplier;
+        _velocity += _playerObj.transform.right * _character.ForwardSpeed * _joystick.GetAnalogue1Axis("Horizontal") * _character.SpeedMultiplier;
 
 
         _playerObj.transform.Rotate(new Vector3(1, 0, 0), -90);

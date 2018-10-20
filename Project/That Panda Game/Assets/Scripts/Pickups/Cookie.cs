@@ -4,10 +4,21 @@ using UnityEngine;
 
 public class Cookie : MonoBehaviour {
 
-    private GameObject _cookieSpawner;
+    private static SpeedAction _cookieAction;
+    private static Spawner _cookieSpawner;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+    private void Start()
+    {
+        _cookieAction = GameObject.Find("Collectables").transform.Find("Cookie").GetComponent<SpeedAction>();
+        _cookieSpawner = GameObject.Find("CookieSpawner").GetComponent<Spawner>();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.tag == "Character")
+        {
+            _cookieAction.MultiplyCharacterSpeed(other.gameObject.GetComponent<Character>());
+            _cookieSpawner.ReturnObject(gameObject);
+        }
+    }
 }

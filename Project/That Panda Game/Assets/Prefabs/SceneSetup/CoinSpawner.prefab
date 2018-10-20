@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4779086270320262}
-  - component: {fileID: 114567970477210370}
+  - component: {fileID: 114834841661663734}
   m_Layer: 0
   m_Name: CoinSpawner
   m_TagString: Untagged
@@ -40,7 +40,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114567970477210370
+--- !u!114 &114834841661663734
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -48,10 +48,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1113960374658354}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee7430b8e3c0ce341bf56d5a256c2bd6, type: 3}
+  m_Script: {fileID: 11500000, guid: da5f1a125f4ed914c9c59b5a2d9e9531, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coinObj: {fileID: 1153410568022254, guid: 76df0ab56a0d944418b8a8419a0a87cb, type: 2}
+  _object: {fileID: 1153410568022254, guid: 76df0ab56a0d944418b8a8419a0a87cb, type: 2}
   _spawnRate: 5
   _spawnArea:
     serializedVersion: 2
