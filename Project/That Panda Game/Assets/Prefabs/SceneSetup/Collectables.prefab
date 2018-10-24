@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4161796739248724}
   - component: {fileID: 114134617059968794}
+  - component: {fileID: 114428514036142728}
   m_Layer: 0
   m_Name: Campfire
   m_TagString: Untagged
@@ -213,3 +214,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speedMultiplier: 1.5
   _speedDuration: 5
+--- !u!114 &114428514036142728
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1232743723784910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cd38e2a132bac54ea0b6d406772e649, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _timeToRoast: 3
+  _timeToUnroast: 5
+  _knockBackMultiplier: 2
+  _knockJumpMultiplier: 2
+  _coinDropOnHit: 2

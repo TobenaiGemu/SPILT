@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 4252412525920246}
   - component: {fileID: 136257208695128762}
   - component: {fileID: 114985932202894012}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Elephant
   m_TagString: Character
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 4950683551978548}
   - component: {fileID: 136804203853488780}
   - component: {fileID: 114173510387329220}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Panda
   m_TagString: Character
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 4244549168419800}
   - component: {fileID: 136011924075387386}
   - component: {fileID: 114957736405516010}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pig
   m_TagString: Character
   m_Icon: {fileID: 0}
@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 4862765689666096}
   - component: {fileID: 136596119363141610}
   - component: {fileID: 114237993361234288}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Lizard
   m_TagString: Character
   m_Icon: {fileID: 0}

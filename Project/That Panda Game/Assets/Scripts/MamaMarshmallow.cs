@@ -30,7 +30,7 @@ public class MamaMarshmallow : MonoBehaviour
         float y = Random.Range(-15, 15);
         transform.position = new Vector3(x, y, -30);
         transform.up = -(_planet.transform.position - transform.position).normalized;
-        _targetPos = -transform.up * 25;
+        _targetPos = Vector3.zero;
         transform.position = transform.up * 500;
         _initPos = transform.position;
         gameObject.SetActive(true);

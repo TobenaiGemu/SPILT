@@ -47,6 +47,6 @@ public class MarshShadow : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        transform.localScale = _lerper.Lerp(_initScale, _targetScale, 8f);
+        transform.localScale = _lerper.Lerp(_initScale, _targetScale, 9.5f);
 	}
 }

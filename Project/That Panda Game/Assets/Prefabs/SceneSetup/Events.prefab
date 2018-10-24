@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4237732200425424}
   - component: {fileID: 33259948427320314}
   - component: {fileID: 23500644811038234}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Marshmallow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4551124224724706}
-  - component: {fileID: 114860867752850270}
   - component: {fileID: 54486780136306532}
   - component: {fileID: 65879719757270282}
   - component: {fileID: 114110420289798474}
@@ -81,14 +80,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1352768720912192}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.997675, y: -3.2794952, z: -108.38542}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: -93}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4237732200425424}
   m_Father: {fileID: 4640999503594252}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!4 &4640999503594252
 Transform:
   m_ObjectHideFlags: 1
@@ -96,7 +95,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1411883164840794}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.997675, y: 3.2794952, z: 54.085426}
+  m_LocalPosition: {x: 0, y: 0, z: -23.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4551124224724706}
@@ -181,16 +180,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ede028843cd3dd049b4f1adcc671e2fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114860867752850270
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1352768720912192}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e24137f6c984c0a45b5a447df7822f96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
