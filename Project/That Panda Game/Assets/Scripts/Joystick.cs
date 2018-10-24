@@ -12,7 +12,6 @@ public class Joystick
     public Joystick(int id)
     {
         _controllerId = id;
-        Debug.Log(id);
         if (id <= Input.GetJoystickNames().Length)
             _controllerName = Input.GetJoystickNames()[id - 1];
 

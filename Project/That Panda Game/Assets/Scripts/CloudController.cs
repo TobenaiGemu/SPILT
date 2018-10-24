@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shadow : MonoBehaviour {
+public class CloudController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

@@ -52,6 +52,5 @@ public class MamaMarshmallow : MonoBehaviour
         if (_crashed)
             return;
         transform.position = _lerper.Lerp(_initPos, _targetPos, 10);
-        Debug.Log(transform.position);
 	}
 }
