@@ -83,6 +83,7 @@ public class GameScene : Scene
         foreach (User user in SceneManager.Users)
             user.ChangeState("JoinState");
         _lerper.Reset();
+        GameObject.Find("Events").transform.Find("MamaMarshmallow").GetComponent<MamaMarshmallow>().GetVewyAngewy();
         return true;
     }
 

@@ -7,8 +7,11 @@ public class ObjectPool
     private List<GameObject> _objectPool;
     private GameObject _originalObj;
 
+    private GameObject _poolObj;
+
     public ObjectPool(GameObject obj, int initPoolAmmount)
     {
+        _poolObj = GameObject.Find("ObjectPool");
         _originalObj = obj;
         _objectPool = new List<GameObject>();
         for (int i = 0; i < initPoolAmmount; i++)
@@ -31,6 +34,7 @@ public class ObjectPool
         GameObject clone = GameObject.Instantiate(_originalObj);
         clone.SetActive(false);
         _objectPool.Add(clone);
+        clone.transform.SetParent(_poolObj.transform, true);
         return clone;
     }
 
