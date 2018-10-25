@@ -24,20 +24,19 @@ public class Character : MonoBehaviour
     {
         get
         {
-            return _forwardSpeed;
+            return _forwardSpeed * _forwardSpeedMultiplier;
         }
         private set { }
     }
 
     [SerializeField]
     private float _backwardSpeedMultiplier;
-    public float BackwardSpeedMultiplier
+    public float BackwardSpeed
     {
         get
         {
             return _backwardSpeedMultiplier;
         }
-        private set { }
     }
 
     [SerializeField]
@@ -46,7 +45,7 @@ public class Character : MonoBehaviour
     {
         get
         {
-            return _knockBack;
+            return _knockBack * _knockbackMultiplier;
         }
         private set { }
     }
@@ -57,7 +56,7 @@ public class Character : MonoBehaviour
     {
         get
         {
-            return _knockJump;
+            return _knockJump * _knockjumpMultiplier;
         }
         private set { }
     }
@@ -70,36 +69,9 @@ public class Character : MonoBehaviour
     private int _coins;
 
 
-    private float _speedMultiplier;
-    public float SpeedMultiplier
-    {
-        get
-        {
-            return _speedMultiplier;
-        }
-        private set { }
-    }
-
+    private float _forwardSpeedMultiplier;
     private float _knockbackMultiplier;
-    public float KnockbackMultiplier
-    {
-        get
-        {
-            return _knockbackMultiplier;
-        }
-        private set { }
-    }
-
     private float _knockjumpMultiplier;
-    public float KnockjumpMultiplier
-    {
-        get
-        {
-            return _knockjumpMultiplier;
-        }
-        private set { }
-    }
-
     private float _speedMultiplierTimer;
 
     private float _timeToUnroast;
@@ -108,16 +80,20 @@ public class Character : MonoBehaviour
 
     private bool _marshmallowRoasted;
 
+    private Spawner _coinSpawner;
+
     public void Start()
     {
+        AddCoins(10);
         _characterPool = GameObject.Find("AvailableCharacters");
+        _coinSpawner = GameObject.Find("CoinSpawner").GetComponent<Spawner>();
         _lerper = new TimeLerper();
     }
 
     public Character Init(GameObject charObj)
     {
         _characterObj = charObj;
-        _speedMultiplier = 1;
+        _forwardSpeedMultiplier = 1;
         return this;
     }
 
@@ -128,9 +104,31 @@ public class Character : MonoBehaviour
             WinGame();
     }
 
+    public void DropCoins(int ammount)
+    {
+        if (ammount > _coins)
+            ammount = _coins;
+        for (int i = 0; i < ammount; i++)
+        {
+            GameObject coin = _coinSpawner.GetCoin();
+            coin.transform.position = transform.position + transform.up * 10;
+            coin.transform.LookAt(GameObject.Find("Planet").transform);
+            coin.SetActive(true);
+            int angle = UnityEngine.Random.Range(0, 360);
+            Vector3 direction = Quaternion.AngleAxis(angle, transform.up) * transform.forward;
+            coin.GetComponent<Rigidbody>().AddForce(direction * UnityEngine.Random.Range(5,20) + transform.up * UnityEngine.Random.Range(5,20), ForceMode.Impulse);
+            //coin.GetComponent<Rigidbody>().AddForce(transform.forward * UnityEngine.Random.Range(5,20) + transform.up * UnityEngine.Random.Range(5, 20), ForceMode.Impulse);
+        }
+    }
+
+    public void ApplyKnockBack(Vector3 direction, float backForce, float upForce)
+    {
+        transform.parent.GetComponent<Rigidbody>().AddForce((direction.normalized * backForce + gameObject.transform.up * upForce), ForceMode.Impulse);
+    }
+
     public void MultiplySpeed(float speedMultiplier, float duration)
     {
-        _speedMultiplier = speedMultiplier;
+        _forwardSpeedMultiplier = speedMultiplier;
         _speedMultiplierTimer = duration;
         StartCoroutine(SpeedMultiplierCountdown());
     }
@@ -142,7 +140,7 @@ public class Character : MonoBehaviour
             _speedMultiplierTimer -= 1;
             yield return new WaitForSeconds(1);
         }
-        _speedMultiplier = 1;
+        _forwardSpeedMultiplier = 1;
     }
 
     private void WinGame()
@@ -169,7 +167,6 @@ public class Character : MonoBehaviour
         if (_marshmallowRoasted)
             return;
         _roastPercent = _lerper.Lerp(0, 100, durationToRoast);
-        Debug.Log("Roasting: " + _roastPercent);
         //TODO: Change opacity of roast texture over time
         if (_roastPercent >= 100)
         {

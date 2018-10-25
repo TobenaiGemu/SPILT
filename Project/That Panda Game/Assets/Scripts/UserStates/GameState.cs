@@ -59,7 +59,7 @@ public class GameState : UserState
             RaycastHit hit;
             if (Physics.Raycast(_playerObj.transform.position, _playerObj.transform.forward, out hit, 3))
             {
-                hit.rigidbody.AddForce((_playerObj.transform.forward * _character.KnockBack * _character.KnockbackMultiplier + hit.rigidbody.gameObject.transform.up * _character.KnockJump * _character.KnockjumpMultiplier) * _character.KnockBack, ForceMode.Impulse);
+                hit.transform.GetComponent<Character>().ApplyKnockBack(_character.transform.forward, _character.KnockBack, _character.KnockJump);
                 Debug.Log(hit.transform.name);
             }
         }
@@ -76,8 +76,8 @@ public class GameState : UserState
         _playerObj.transform.rotation = Quaternion.identity;
         _playerObj.transform.LookAt(_planetObj.transform.position);
 
-        _velocity = _playerObj.transform.up * _character.ForwardSpeed * _joystick.GetAnalogue1Axis("Vertical") * _character.SpeedMultiplier;
-        _velocity += _playerObj.transform.right * _character.ForwardSpeed * _joystick.GetAnalogue1Axis("Horizontal") * _character.SpeedMultiplier;
+        _velocity = _playerObj.transform.up * _character.ForwardSpeed * _joystick.GetAnalogue1Axis("Vertical");
+        _velocity += _playerObj.transform.right * _character.ForwardSpeed * _joystick.GetAnalogue1Axis("Horizontal");
 
 
         _playerObj.transform.Rotate(new Vector3(1, 0, 0), -90);
@@ -88,7 +88,7 @@ public class GameState : UserState
 
         _playerObj.transform.Rotate(0, _rotation * Mathf.Rad2Deg - 90, 0, Space.Self);
 
-        _velocity = Vector3.Lerp(_velocity * _character.BackwardSpeedMultiplier, _velocity, Mathf.InverseLerp(-1, 1, Vector3.Dot(_velocity.normalized, _playerObj.transform.forward)));
+        _velocity = Vector3.Lerp(_velocity * _character.BackwardSpeed, _velocity, Mathf.InverseLerp(-1, 1, Vector3.Dot(_velocity.normalized, _playerObj.transform.forward)));
 
         if ((_playerObj.transform.position + _velocity * Time.deltaTime).z > -10)
             return;

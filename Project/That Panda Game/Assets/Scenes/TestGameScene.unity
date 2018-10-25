@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43384302, g: 0.47075993, b: 0.50724703, a: 1}
+  m_IndirectSpecularColor: {r: 0.4338429, g: 0.47075993, b: 0.5072498, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -236,6 +236,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 20929305164568278, guid: 067cf7917c8715941ad7a58a48853aa1,
+        type: 2}
+      propertyPath: m_CullingMask.m_Bits
+      value: 5943
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 067cf7917c8715941ad7a58a48853aa1, type: 2}
   m_IsPrefabAsset: 0
@@ -404,6 +409,15 @@ Prefab:
       propertyPath: m_RootOrder
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 1017485549555616, guid: 14eafff6bbef5034d9467bf4e9823d8a, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114085669551197684, guid: 14eafff6bbef5034d9467bf4e9823d8a,
+        type: 2}
+      propertyPath: _spawnRate
+      value: 1000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14eafff6bbef5034d9467bf4e9823d8a, type: 2}
   m_IsPrefabAsset: 0
@@ -446,6 +460,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 14
       objectReference: {fileID: 0}
+    - target: {fileID: 114834841661663734, guid: a9e6ad6324d48944e9c8d2c741dc4c82,
+        type: 2}
+      propertyPath: _object
+      value: 
+      objectReference: {fileID: 1153410568022254, guid: 76df0ab56a0d944418b8a8419a0a87cb,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9e6ad6324d48944e9c8d2c741dc4c82, type: 2}
   m_IsPrefabAsset: 0
@@ -738,6 +758,15 @@ Prefab:
       propertyPath: m_RootOrder
       value: 16
       objectReference: {fileID: 0}
+    - target: {fileID: 1128584021233292, guid: 6c997326e8f8ef54c9ed2d0011cc8179, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114541727701505128, guid: 6c997326e8f8ef54c9ed2d0011cc8179,
+        type: 2}
+      propertyPath: _spawnRate
+      value: 1000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c997326e8f8ef54c9ed2d0011cc8179, type: 2}
   m_IsPrefabAsset: 0
@@ -788,6 +817,26 @@ Prefab:
     - target: {fileID: 54486780136306532, guid: 17ae047411d204847bfaf97e79ab92d3,
         type: 2}
       propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114110420289798474, guid: 17ae047411d204847bfaf97e79ab92d3,
+        type: 2}
+      propertyPath: _knockBackForce
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 114110420289798474, guid: 17ae047411d204847bfaf97e79ab92d3,
+        type: 2}
+      propertyPath: _knockJumpForce
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 114110420289798474, guid: 17ae047411d204847bfaf97e79ab92d3,
+        type: 2}
+      propertyPath: _coinsToDrop
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 65879719757270282, guid: 17ae047411d204847bfaf97e79ab92d3,
+        type: 2}
+      propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:

@@ -25,6 +25,11 @@ public class GravitySim : MonoBehaviour
         _rb.velocity = Vector3.zero;
     }
 
+    private void OnDisable()
+    {
+        _rb.velocity = Vector3.zero;
+    }
+
     void FixedUpdate ()
     {
         foreach (GameObject obj in _bodies)

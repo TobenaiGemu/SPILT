@@ -49,10 +49,22 @@ public class Spawner : MonoBehaviour
         RaycastHit hit;
         Physics.Raycast(obj.transform.position, Vector3.forward, out hit, Mathf.Infinity, 1 << 9);
         float z = hit.point.z;
+
         obj.transform.position = new Vector3(x, y, z - 1);
         obj.transform.LookAt(_planet.transform);
         obj.transform.SetParent(_planet.transform, true);
+        Coin coin = obj.GetComponent<Coin>();
+        if (coin != null)
+        {
+            coin.GetComponent<GravitySim>().enabled = true;
+            coin.CanPickup();
+        }
         obj.SetActive(true);
+    }
+
+    public GameObject GetCoin()
+    {
+        return _objectPool.GetObject();
     }
 
     public void Cleanup()

@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class MamaMarshmallow : MonoBehaviour
 {
+    [SerializeField]
+    private float _knockBackForce;
+    [SerializeField]
+    private float _knockJumpForce;
+    [SerializeField]
+    private int _coinsToDrop;
+
     private bool _isAngewy;
     private GameObject _planet;
 
@@ -37,13 +44,23 @@ public class MamaMarshmallow : MonoBehaviour
         _shadow.StartMarshShadow();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.name == "Planet")
+        if (other.gameObject.name == "Planet")
         {
             transform.SetParent(_planet.transform, true);
             _shadow.Cleanup();
             _crashed = true;
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (_crashed && other.gameObject.tag == "Character")
+        {
+            other.transform.GetComponent<Character>().ApplyKnockBack((other.transform.position - transform.position), _knockBackForce, _knockJumpForce);
+            other.transform.GetComponent<Character>().DropCoins(_coinsToDrop);
+            _crashed = false;
         }
     }
 
@@ -53,4 +70,5 @@ public class MamaMarshmallow : MonoBehaviour
             return;
         transform.position = _lerper.Lerp(_initPos, _targetPos, 10);
 	}
+
 }
