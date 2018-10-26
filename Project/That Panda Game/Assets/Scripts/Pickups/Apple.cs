@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Apple : MonoBehaviour {
 
-    private static SpeedAction _appleAction;
+    private static AppleAction _appleAction;
     private static Spawner _appleSpawner;
 
     private void Start()
     {
-        _appleAction = GameObject.Find("Collectables").transform.Find("Apple").GetComponent<SpeedAction>();
+        _appleAction = GameObject.Find("Collectables").transform.Find("Apple").GetComponent<AppleAction>();
         _appleSpawner = GameObject.Find("AppleSpawner").GetComponent<Spawner>();
     }
 
@@ -17,7 +17,7 @@ public class Apple : MonoBehaviour {
     {
         if (other.transform.tag == "Character")
         {
-            _appleAction.MultiplyCharacterSpeed(other.gameObject.GetComponent<Character>());
+            _appleAction.DropCoinFromCharacter(other.gameObject.GetComponent<Character>());
             _appleSpawner.ReturnObject(gameObject);
         }
     }

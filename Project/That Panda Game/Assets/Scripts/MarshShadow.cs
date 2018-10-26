@@ -13,6 +13,8 @@ public class MarshShadow : MonoBehaviour
     private Vector3 _initScale;
     private Vector3 _targetScale;
 
+    private Character _followCharacter;
+
     private void OnValidate()
     {
 
@@ -27,8 +29,10 @@ public class MarshShadow : MonoBehaviour
         gameObject.SetActive(false);
 	}
 	
-    public void StartMarshShadow()
+    public void StartMarshShadow(Character follow = null)
     {
+        if (follow != null)
+            _followCharacter = follow;
         _lerper.Reset();
         gameObject.SetActive(true);
         transform.position = _marshmallow.transform.up * 25;
@@ -47,6 +51,11 @@ public class MarshShadow : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        if (_followCharacter != null)
+        {
+            transform.position = (_followCharacter.transform.position - _planet.transform.position).normalized * 25;
+        }
+
         transform.localScale = _lerper.Lerp(_initScale, _targetScale, 9.5f);
 	}
 }

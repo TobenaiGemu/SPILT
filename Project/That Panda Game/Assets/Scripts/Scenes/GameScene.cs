@@ -12,8 +12,10 @@ public class GameScene : Scene
 
 
     public GameObject Planet { get; private set; }
-    private Vector3 _smallPlanetScale;
-    private Vector3 _bigPlanetScale;
+
+    private Vector3 _initPlanetScale;
+    [SerializeField]
+    private Vector3 _gamePlanetScale;
 
     private GameObject _gamePanel;
     private GameObject _pausePanel;
@@ -22,6 +24,14 @@ public class GameScene : Scene
     private Spawner _coinSpawner;
     private Spawner _cookieSpawner;
     private Spawner _appleSpawner;
+
+    private MamaMarshmallow _mamaMarshmallow;
+    [SerializeField]
+    private int _minRandomMama;
+    [SerializeField]
+    private int _maxRandomMama;
+    private float _mamaTimer;
+    private bool _mamaFalling;
 
     public void Awake()
     {
@@ -42,9 +52,7 @@ public class GameScene : Scene
 
         Planet = GameObject.Find("Planet");
         //For lerping the planet scale
-        _lerper = new TimeLerper();
-        _bigPlanetScale = new Vector3(50, 50, 50);
-        
+        _lerper = new TimeLerper();        
 
         _gamePanel = GameObject.Find("Canvas").transform.Find("GamePanel").gameObject;
         _pausePanel = GameObject.Find("Canvas").transform.Find("GamePausePanel").gameObject;
@@ -52,12 +60,15 @@ public class GameScene : Scene
         _coinSpawner = GameObject.Find("CoinSpawner").GetComponent<Spawner>();
         _cookieSpawner = GameObject.Find("CookieSpawner").GetComponent<Spawner>();
         _appleSpawner = GameObject.Find("AppleSpawner").GetComponent<Spawner>();
+
+        _mamaMarshmallow = GameObject.Find("Events").transform.Find("MamaMarshmallow").GetComponent<MamaMarshmallow>();
     }
 
     public override void Initialize()
     {
+        _initPlanetScale = Planet.transform.localScale;
+        ResetMamaTimer();
         _lerper.Reset();
-        _smallPlanetScale = Planet.transform.localScale;
     }
 
     public override void Cleanup()
@@ -70,9 +81,9 @@ public class GameScene : Scene
 
     public override bool IntroTransition()
     { 
-        if (Planet.transform.localScale != _bigPlanetScale)
+        if (Planet.transform.localScale != _gamePlanetScale)
         {
-            Planet.transform.localScale = _lerper.Lerp(_smallPlanetScale, _bigPlanetScale, 1);
+            Planet.transform.localScale = _lerper.Lerp(_initPlanetScale, _gamePlanetScale, 1);
             return false;
         }
 
@@ -83,7 +94,6 @@ public class GameScene : Scene
         foreach (User user in SceneManager.Users)
             user.ChangeState("JoinState");
         _lerper.Reset();
-        GameObject.Find("Events").transform.Find("MamaMarshmallow").GetComponent<MamaMarshmallow>().GetVewyAngewy();
         return true;
     }
 
@@ -106,6 +116,19 @@ public class GameScene : Scene
         _coinSpawner.Tick();
         _cookieSpawner.Tick();
         _appleSpawner.Tick();
+
+        _mamaTimer -= Time.deltaTime;
+        if (_mamaTimer <= 0)
+        {
+            if (!_mamaFalling)
+                _mamaMarshmallow.GetVewyAngewy();
+            _mamaFalling = true;
+            if (_mamaMarshmallow.HasCrashed())
+            {
+                ResetMamaTimer();
+            }
+        }
+
         base.SceneUpdate();
     }
 
@@ -113,6 +136,12 @@ public class GameScene : Scene
     {
         //Planet.transform.Rotate(Vector3.up, 20 * Time.deltaTime);
         base.SceneFixedUpdate();
+    }
+
+    public void ResetMamaTimer()
+    {
+        _mamaFalling = false;
+        _mamaTimer = Random.Range(_minRandomMama, _maxRandomMama);
     }
 
     public bool AttemptCharacterAssign(CharacterType type, User user)

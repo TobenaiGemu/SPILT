@@ -47,7 +47,11 @@ public class Spawner : MonoBehaviour
         obj.transform.position = new Vector3(x, y, -30);
 
         RaycastHit hit;
-        Physics.Raycast(obj.transform.position, Vector3.forward, out hit, Mathf.Infinity, 1 << 9);
+        Physics.Raycast(obj.transform.position, Vector3.forward, out hit, 30, 1 << 9);
+        while (hit.transform.name != "Planet")
+        {
+            Physics.Raycast(obj.transform.position, Vector3.forward, out hit, 30, 1 << 9);
+        }
         float z = hit.point.z;
 
         obj.transform.position = new Vector3(x, y, z - 1);

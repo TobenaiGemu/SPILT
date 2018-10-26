@@ -61,6 +61,15 @@ public class Character : MonoBehaviour
         private set { }
     }
 
+    [SerializeField]
+    private int _coinFrwdForceMin;
+    [SerializeField]
+    private int _coinFrwdForceMax;
+    [SerializeField]
+    private int _coinUpForceMin;
+    [SerializeField]
+    private int _coinUpForceMax;
+
     private GameObject _characterObj;
     private GameObject _characterPool;
     private User _assignedUser;
@@ -79,6 +88,7 @@ public class Character : MonoBehaviour
     private TimeLerper _lerper;
 
     private bool _marshmallowRoasted;
+    private MamaMarshmallow _mamaMarshmallow;
 
     private Spawner _coinSpawner;
 
@@ -88,12 +98,16 @@ public class Character : MonoBehaviour
         _characterPool = GameObject.Find("AvailableCharacters");
         _coinSpawner = GameObject.Find("CoinSpawner").GetComponent<Spawner>();
         _lerper = new TimeLerper();
+        _mamaMarshmallow = GameObject.Find("Events").transform.Find("MamaMarshmallow").GetComponent<MamaMarshmallow>();
     }
 
     public Character Init(GameObject charObj)
     {
         _characterObj = charObj;
         _forwardSpeedMultiplier = 1;
+        _knockbackMultiplier = 1;
+        _knockjumpMultiplier = 1;
+        _speedMultiplierTimer = 1;
         return this;
     }
 
@@ -111,18 +125,18 @@ public class Character : MonoBehaviour
         for (int i = 0; i < ammount; i++)
         {
             GameObject coin = _coinSpawner.GetCoin();
-            coin.transform.position = transform.position + transform.up * 10;
+            coin.transform.position = transform.position + transform.up;
             coin.transform.LookAt(GameObject.Find("Planet").transform);
             coin.SetActive(true);
             int angle = UnityEngine.Random.Range(0, 360);
             Vector3 direction = Quaternion.AngleAxis(angle, transform.up) * transform.forward;
-            coin.GetComponent<Rigidbody>().AddForce(direction * UnityEngine.Random.Range(5,20) + transform.up * UnityEngine.Random.Range(5,20), ForceMode.Impulse);
-            //coin.GetComponent<Rigidbody>().AddForce(transform.forward * UnityEngine.Random.Range(5,20) + transform.up * UnityEngine.Random.Range(5, 20), ForceMode.Impulse);
+            coin.GetComponent<Rigidbody>().AddForce(direction * UnityEngine.Random.Range(_coinFrwdForceMin, _coinFrwdForceMax) + transform.up * UnityEngine.Random.Range(_coinUpForceMin, _coinUpForceMax), ForceMode.Impulse);
         }
     }
 
     public void ApplyKnockBack(Vector3 direction, float backForce, float upForce)
     {
+        Debug.Log(direction);
         transform.parent.GetComponent<Rigidbody>().AddForce((direction.normalized * backForce + gameObject.transform.up * upForce), ForceMode.Impulse);
     }
 
@@ -188,6 +202,7 @@ public class Character : MonoBehaviour
     private void CompleteRoast(float knockbackMultiplier, float knockjumpMultiplier, float coinDrop)
     {
         Debug.Log("MARSHMALLOWS ROASTED!!!");
+        _mamaMarshmallow.GetVewyAngewy(this);
         _marshmallowRoasted = true;
         _knockbackMultiplier = knockbackMultiplier;
         _knockjumpMultiplier = knockjumpMultiplier;

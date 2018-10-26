@@ -809,38 +809,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 17
       objectReference: {fileID: 0}
-    - target: {fileID: 54486780136306532, guid: 17ae047411d204847bfaf97e79ab92d3,
-        type: 2}
-      propertyPath: m_UseGravity
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 54486780136306532, guid: 17ae047411d204847bfaf97e79ab92d3,
-        type: 2}
-      propertyPath: m_IsKinematic
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114110420289798474, guid: 17ae047411d204847bfaf97e79ab92d3,
-        type: 2}
-      propertyPath: _knockBackForce
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 114110420289798474, guid: 17ae047411d204847bfaf97e79ab92d3,
-        type: 2}
-      propertyPath: _knockJumpForce
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 114110420289798474, guid: 17ae047411d204847bfaf97e79ab92d3,
-        type: 2}
-      propertyPath: _coinsToDrop
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 65879719757270282, guid: 17ae047411d204847bfaf97e79ab92d3,
-        type: 2}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 54486780136306532, guid: 17ae047411d204847bfaf97e79ab92d3, type: 2}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17ae047411d204847bfaf97e79ab92d3, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1001 &1384072575
