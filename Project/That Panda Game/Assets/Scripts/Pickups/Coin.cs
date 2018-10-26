@@ -38,7 +38,6 @@ public class Coin : MonoBehaviour
     {
         if (_canPickup && other.transform.tag == "Character")
         {
-            Debug.Log("Pickup");
             _coinAction.AddCoinToCharacter(other.gameObject.GetComponent<Character>());
             _coinSpawner.ReturnObject(gameObject);
         }

@@ -89,6 +89,8 @@ public class MamaMarshmallow : MonoBehaviour
         if (_followShadow)
         {
             _targetPos = _shadow.transform.position;
+            transform.up = -(_planet.transform.position - transform.position).normalized;
+
         }
         transform.position = _lerper.Lerp(_initPos, _targetPos, 10);
 	}

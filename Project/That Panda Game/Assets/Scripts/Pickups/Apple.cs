@@ -15,6 +15,11 @@ public class Apple : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.transform.name == "Planet")
+        {
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+        }
+
         if (other.transform.tag == "Character")
         {
             _appleAction.DropCoinFromCharacter(other.gameObject.GetComponent<Character>());

@@ -28,17 +28,16 @@ public class MarshShadow : MonoBehaviour
         _lerper = new TimeLerper();
         gameObject.SetActive(false);
 	}
-	
+
     public void StartMarshShadow(Character follow = null)
     {
-        if (follow != null)
-            _followCharacter = follow;
+        _followCharacter = follow;
         _lerper.Reset();
         gameObject.SetActive(true);
         transform.position = _marshmallow.transform.up * 25;
         transform.LookAt(_planet.transform);
         transform.Rotate(-90, 0, 0);
-        _initScale = new Vector3(0.1f,1,0.1f);
+        _initScale = new Vector3(0.1f, 1, 0.1f);
         _targetScale = new Vector3(0.4f, 1, 0.4f);
     }
 

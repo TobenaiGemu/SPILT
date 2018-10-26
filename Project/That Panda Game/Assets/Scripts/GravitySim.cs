@@ -5,7 +5,7 @@ using UnityEngine;
 public class GravitySim : MonoBehaviour
 {
 
-    private GameObject[] _bodies;
+    private static List<GameObject> _bodies = new List<GameObject>();
 
     private Vector3 _velocity;
     private Vector3 _direction;
@@ -16,7 +16,8 @@ public class GravitySim : MonoBehaviour
 
 	void Start ()
     {
-        _bodies = GameObject.FindGameObjectsWithTag("GravityForce");
+        if (gameObject.tag == "GravityForce")
+            _bodies.Add(gameObject);
     }
 
     private void OnEnable()

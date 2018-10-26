@@ -62,6 +62,17 @@ public class Character : MonoBehaviour
     }
 
     [SerializeField]
+    private int _punchDropCoins;
+    public int PunchDropCoins
+    {
+        get
+        {
+            return _punchDropCoins;
+        }
+        private set { }
+    }
+
+    [SerializeField]
     private int _coinFrwdForceMin;
     [SerializeField]
     private int _coinFrwdForceMax;
@@ -120,8 +131,10 @@ public class Character : MonoBehaviour
 
     public void DropCoins(int ammount)
     {
+        Debug.Log(_coins);
         if (ammount > _coins)
             ammount = _coins;
+        _coins -= ammount;
         for (int i = 0; i < ammount; i++)
         {
             GameObject coin = _coinSpawner.GetCoin();

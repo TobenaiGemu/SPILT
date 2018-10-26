@@ -24,7 +24,7 @@ public class Spawner : MonoBehaviour
     {
         _planet = GameObject.Find("Planet");
         _activeObjects = new List<GameObject>();
-        _objectPool = new ObjectPool(_object, 10);
+        _objectPool = new ObjectPool(_object, 50);
     }
 
     public void Tick()

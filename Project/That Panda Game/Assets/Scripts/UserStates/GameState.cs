@@ -55,11 +55,11 @@ public class GameState : UserState
 
         if (_joystick.WasButtonPressed("Button0"))
         {
-            Debug.Log("Punch");
             RaycastHit hit;
             if (Physics.Raycast(_playerObj.transform.position, _playerObj.transform.forward, out hit, 5, 1<<8))
             {
                 hit.transform.GetChild(0).GetComponent<Character>().ApplyKnockBack(_character.transform.forward, _character.KnockBack, _character.KnockJump);
+                hit.transform.GetChild(0).GetComponent<Character>().DropCoins(_character.PunchDropCoins);
             }
         }
 
@@ -89,12 +89,12 @@ public class GameState : UserState
 
         _velocity = Vector3.Lerp(_velocity * _character.BackwardSpeed, _velocity, Mathf.InverseLerp(-1, 1, Vector3.Dot(_velocity.normalized, _playerObj.transform.forward)));
 
-        if (_playerObj.transform.position.z > -20)
+        if (_playerObj.transform.position.z > -10)
         {
             _playerObj.GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, -10), ForceMode.Impulse);
         }
 
-        if ((_playerObj.transform.position + _velocity * Time.deltaTime).z > -20)
+        if ((_playerObj.transform.position + _velocity * Time.deltaTime).z > -10)
         {
             return;
         }

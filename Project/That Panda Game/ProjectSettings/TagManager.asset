@@ -6,6 +6,7 @@ TagManager:
   tags:
   - GravityForce
   - Character
+  - MudPuddle
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - Planet
   - Marshmallow
   - Shadow
-  - Coin
+  - 
   - 
   - 
   - 
