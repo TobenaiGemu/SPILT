@@ -14,12 +14,8 @@ public class MarshShadow : MonoBehaviour
     private Vector3 _targetScale;
 
     private Character _followCharacter;
+    private float _followToDistance;
 
-    private void OnValidate()
-    {
-
-    }
-    // Use this for initialization
     void Start ()
     {
         _planet = GameObject.Find("Planet");
@@ -29,9 +25,10 @@ public class MarshShadow : MonoBehaviour
         gameObject.SetActive(false);
 	}
 
-    public void StartMarshShadow(Character follow = null)
+    //Setup the shadow at the position the mama marshmallow will hit
+    public void StartMarshShadow()
     {
-        _followCharacter = follow;
+        _followCharacter = null;
         _lerper.Reset();
         gameObject.SetActive(true);
         transform.position = _marshmallow.transform.up * 25;
@@ -41,20 +38,32 @@ public class MarshShadow : MonoBehaviour
         _targetScale = new Vector3(0.4f, 1, 0.4f);
     }
 
+    public void FollowCharacter(Character follow)
+    {
+        _followCharacter = follow;
+    }
+
+    public void StopFollowingCharacter()
+    {
+        _followCharacter = null;
+    }
+
     public void Cleanup()
     {
         _lerper.Reset();
         gameObject.SetActive(false);
     }
 
-	// Update is called once per frame
 	void Update ()
     {
+        //Follow character if not null
         if (_followCharacter != null)
         {
             transform.position = (_followCharacter.transform.position - _planet.transform.position).normalized * 25;
+            transform.LookAt(_planet.transform);
+            transform.Rotate(-90, 0, 0);
         }
-
+        //Increase scale over time
         transform.localScale = _lerper.Lerp(_initScale, _targetScale, 9.5f);
 	}
 }

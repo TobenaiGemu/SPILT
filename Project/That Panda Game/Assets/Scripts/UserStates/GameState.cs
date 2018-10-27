@@ -53,10 +53,23 @@ public class GameState : UserState
             return;
         }
 
-        if (_joystick.WasButtonPressed("Button0"))
+
+        //TODO: Make this do the stuff and make it better
+        if (_joystick.WasButtonPressed("L2"))
         {
+            Debug.Log("Left Punch");
             RaycastHit hit;
             if (Physics.Raycast(_playerObj.transform.position, _playerObj.transform.forward, out hit, 5, 1<<8))
+            {
+                hit.transform.GetChild(0).GetComponent<Character>().ApplyKnockBack(_character.transform.forward, _character.KnockBack, _character.KnockJump);
+                hit.transform.GetChild(0).GetComponent<Character>().DropCoins(_character.PunchDropCoins);
+            }
+        }
+        if (_joystick.WasButtonPressed("R2"))
+        {
+            Debug.Log("Right Punch");
+            RaycastHit hit;
+            if (Physics.Raycast(_playerObj.transform.position, _playerObj.transform.forward, out hit, 5, 1 << 8))
             {
                 hit.transform.GetChild(0).GetComponent<Character>().ApplyKnockBack(_character.transform.forward, _character.KnockBack, _character.KnockJump);
                 hit.transform.GetChild(0).GetComponent<Character>().DropCoins(_character.PunchDropCoins);

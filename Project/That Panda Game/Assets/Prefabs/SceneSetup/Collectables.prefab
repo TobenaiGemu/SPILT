@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4161796739248724}
   - component: {fileID: 114134617059968794}
-  - component: {fileID: 114428514036142728}
   m_Layer: 0
   m_Name: Campfire
   m_TagString: Untagged
@@ -83,9 +82,25 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4987228332159734}
-  - component: {fileID: 114126942603557468}
+  - component: {fileID: 114474424569847640}
   m_Layer: 0
   m_Name: Apple
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1970635254116882
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4524702559352542}
+  - component: {fileID: 114928330843702254}
+  m_Layer: 0
+  m_Name: MudPuddle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -105,6 +120,7 @@ Transform:
   - {fileID: 4852702664284952}
   - {fileID: 4161796739248724}
   - {fileID: 4987228332159734}
+  - {fileID: 4524702559352542}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -120,6 +136,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4028357132340468}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4524702559352542
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1970635254116882}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4028357132340468}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4645903023391972
 Transform:
@@ -172,19 +201,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _coinAmmount: 1
---- !u!114 &114126942603557468
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1935364623995462}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b31830915b4a7cc4da3d23946a3d2cd4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speedMultiplier: 0.5
-  _speedDuration: 5
 --- !u!114 &114134617059968794
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -214,19 +230,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speedMultiplier: 1.5
   _speedDuration: 5
---- !u!114 &114428514036142728
+--- !u!114 &114474424569847640
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1232743723784910}
+  m_GameObject: {fileID: 1935364623995462}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cd38e2a132bac54ea0b6d406772e649, type: 3}
+  m_Script: {fileID: 11500000, guid: 2035126f42305f4438438f7248b62bc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeToRoast: 3
-  _timeToUnroast: 5
-  _knockBackMultiplier: 2
-  _knockJumpMultiplier: 2
-  _coinDropOnHit: 2
+  _coinDrop: 1
+--- !u!114 &114928330843702254
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1970635254116882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fda5d7fa2670a6849a30fd7c34258cd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speedMultiplier: 0.4

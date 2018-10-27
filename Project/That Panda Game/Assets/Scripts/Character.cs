@@ -131,14 +131,13 @@ public class Character : MonoBehaviour
 
     public void DropCoins(int ammount)
     {
-        Debug.Log(_coins);
         if (ammount > _coins)
             ammount = _coins;
         _coins -= ammount;
         for (int i = 0; i < ammount; i++)
         {
             GameObject coin = _coinSpawner.GetCoin();
-            coin.transform.position = transform.position + transform.up;
+            coin.transform.position = transform.position + transform.up * 5;
             coin.transform.LookAt(GameObject.Find("Planet").transform);
             coin.SetActive(true);
             int angle = UnityEngine.Random.Range(0, 360);
@@ -149,7 +148,6 @@ public class Character : MonoBehaviour
 
     public void ApplyKnockBack(Vector3 direction, float backForce, float upForce)
     {
-        Debug.Log(direction);
         transform.parent.GetComponent<Rigidbody>().AddForce((direction.normalized * backForce + gameObject.transform.up * upForce), ForceMode.Impulse);
     }
 
@@ -157,6 +155,7 @@ public class Character : MonoBehaviour
     {
         _forwardSpeedMultiplier = speedMultiplier;
         _speedMultiplierTimer = duration;
+        StopCoroutine(SpeedMultiplierCountdown());
         StartCoroutine(SpeedMultiplierCountdown());
     }
 
@@ -164,8 +163,8 @@ public class Character : MonoBehaviour
     {
         while (_speedMultiplierTimer > 0)
         {
-            _speedMultiplierTimer -= 1;
-            yield return new WaitForSeconds(1);
+            _speedMultiplierTimer -= Time.deltaTime;
+            yield return null;
         }
         _forwardSpeedMultiplier = 1;
     }
