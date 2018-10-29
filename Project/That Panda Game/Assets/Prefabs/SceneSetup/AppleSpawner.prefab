@@ -52,10 +52,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _object: {fileID: 1049056512213182, guid: 7ee9091f7e93e474db973f460c10a821, type: 2}
-  _spawnRate: 3
+  _spawnRate: 0
   _spawnArea:
     serializedVersion: 2
     x: -10
     y: -10
     width: 20
     height: 20
+  _maxObjects: 25

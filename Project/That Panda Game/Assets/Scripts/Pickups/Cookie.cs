@@ -13,6 +13,12 @@ public class Cookie : MonoBehaviour {
         _cookieSpawner = GameObject.Find("CookieSpawner").GetComponent<Spawner>();
     }
 
+    private void Update()
+    {
+        if (transform.position.z > 0)
+            _cookieSpawner.ReturnObject(gameObject);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform.tag == "Character")

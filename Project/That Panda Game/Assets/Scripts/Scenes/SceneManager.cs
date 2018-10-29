@@ -22,8 +22,6 @@ public class SceneManager : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        foreach (string name in Input.GetJoystickNames())
-            Debug.Log(name);
         _scenesPool = GameObject.Find("Scenes");
 
         MaxUsers = 4;

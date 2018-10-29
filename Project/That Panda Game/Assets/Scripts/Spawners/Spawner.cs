@@ -13,6 +13,9 @@ public class Spawner : MonoBehaviour
     [SerializeField]
     private Rect _spawnArea;
 
+    [SerializeField]
+    private int _maxObjects;
+
     private GameObject _planet;
 
     protected ObjectPool _objectPool;
@@ -24,13 +27,13 @@ public class Spawner : MonoBehaviour
     {
         _planet = GameObject.Find("Planet");
         _activeObjects = new List<GameObject>();
-        _objectPool = new ObjectPool(_object, 50);
+        _objectPool = new ObjectPool(_object, _maxObjects);
     }
 
     public void Tick()
     {
         _spawnTimer += Time.deltaTime;
-        if (_spawnTimer > _spawnRate)
+        if (_activeObjects.Count < _maxObjects && _spawnTimer > _spawnRate)
         {
             _spawnTimer = 0;
             SpawnObject(_spawnArea);
@@ -39,24 +42,36 @@ public class Spawner : MonoBehaviour
 
     private void SpawnObject(Rect spawnArea)
     {
+        //Get an object from the object pool and position it on a random positon on a 2d plane above the planet
         GameObject obj = _objectPool.GetObject();
         _activeObjects.Add(obj);
-        float x = Random.Range(spawnArea.x, spawnArea.x + spawnArea.width);
-        float y = Random.Range(spawnArea.y, spawnArea.y + spawnArea.height);
+        Vector3 spawnPos = new Vector3(0, 0, -30);
 
-        obj.transform.position = new Vector3(x, y, -30);
-
+        //Raycast towards the planet and get the Z position of the point it hits to place the object there
         RaycastHit hit;
-        Physics.Raycast(obj.transform.position, Vector3.forward, out hit, 30, 1 << 9);
-        while (hit.transform.name != "Planet")
-        {
-            Physics.Raycast(obj.transform.position, Vector3.forward, out hit, 30, 1 << 9);
-        }
-        float z = hit.point.z;
+        Physics.Raycast(spawnPos, Vector3.forward, out hit, 30, 1 << 9);
+        bool hitPlanet = false;
 
-        obj.transform.position = new Vector3(x, y, z - 1);
+        int fallback = 0;
+
+        while (!hitPlanet)
+        {
+            spawnPos.x = Random.Range(spawnArea.x, spawnArea.x + spawnArea.width);
+            spawnPos.y = Random.Range(spawnArea.y, spawnArea.y + spawnArea.height);
+            Physics.Raycast(spawnPos, Vector3.forward, out hit, 30, 1 << 9);
+            if (hit.collider.transform.name == "Planet")
+                hitPlanet = true;
+            fallback++;
+            if (fallback > 50)
+                return;
+        }
+        spawnPos.z = hit.point.z - 1;
+
+        //Rotate the object to correctly allign it with the planet
+        obj.transform.position = spawnPos;
         obj.transform.LookAt(_planet.transform);
         obj.transform.SetParent(_planet.transform, true);
+        //If the object is a coin, add the GravitySim component to it
         Coin coin = obj.GetComponent<Coin>();
         if (coin != null)
         {
@@ -81,6 +96,7 @@ public class Spawner : MonoBehaviour
     public void ReturnObject(GameObject obj)
     {
         _objectPool.ReturnObject(obj);
+        _activeObjects.Remove(obj);
     }
 
     // Update is called once per frame

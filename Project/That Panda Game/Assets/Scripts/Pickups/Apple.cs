@@ -13,11 +13,22 @@ public class Apple : MonoBehaviour {
         _appleSpawner = GameObject.Find("AppleSpawner").GetComponent<Spawner>();
     }
 
+    private void OnEnable()
+    {
+        transform.Rotate(new Vector3(-90, 0, 0));
+    }
+
+    private void Update()
+    {
+        if (transform.position.z > 0)
+            _appleSpawner.ReturnObject(gameObject);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform.name == "Planet")
         {
-            GetComponent<Rigidbody>().velocity = Vector3.zero;
+            //GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
 
         if (other.transform.tag == "Character")

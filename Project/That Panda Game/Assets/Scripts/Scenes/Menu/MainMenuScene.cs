@@ -11,9 +11,9 @@ public class MainMenuScene : Scene
 
     private GameObject _planet;
 
-    private Vector3 _initPlanetScale;
-    [SerializeField]
-    private Vector3 _menuPlanetScale;
+    private Vector3 _initCameraPos;
+    private Vector3 _targetCameraPos;
+
     private bool _finishedScale;
     private TimeLerper _lerper;
 
@@ -22,6 +22,9 @@ public class MainMenuScene : Scene
 
     public void Awake()
     {
+        _initCameraPos = new Vector3(0, 0, -1100);
+        _targetCameraPos = new Vector3(0, 0, -100);
+
         _lerper = new TimeLerper();
         _planet = GameObject.Find("Planet");
         _alpha = 0;
@@ -33,9 +36,9 @@ public class MainMenuScene : Scene
 
     public override bool IntroTransition()
     {
-        if (_planet.transform.localScale != _menuPlanetScale)
+        if (Camera.main.transform.position != _targetCameraPos)
         {
-            _planet.transform.localScale = _lerper.Lerp(_initPlanetScale, _menuPlanetScale, 1);
+            Camera.main.transform.position = _lerper.Lerp(_initCameraPos, _targetCameraPos, 2);
             return false;
         }
         else if (!_finishedScale)
@@ -77,7 +80,6 @@ public class MainMenuScene : Scene
     {
         _lerper.Reset();
         EventSystem.current.firstSelectedGameObject = _startButton;
-        _initPlanetScale = new Vector3(0, 0, 0);
     }
 
     public override void Cleanup()

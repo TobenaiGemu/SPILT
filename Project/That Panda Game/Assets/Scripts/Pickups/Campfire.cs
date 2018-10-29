@@ -5,12 +5,10 @@ using UnityEngine;
 public class Campfire : MonoBehaviour
 {
     private static CampfireAction _campfireAction;
-    private static Spawner _campfireSpawner;
 
     private void Start()
     {
         _campfireAction = GameObject.Find("Collectables").transform.Find("Campfire").GetComponent<CampfireAction>();
-        _campfireSpawner = GameObject.Find("CookieSpawner").GetComponent<Spawner>();
     }
 
     private void Update()

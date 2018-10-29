@@ -6,6 +6,7 @@ public class Coin : MonoBehaviour
 {
     private static CoinAction _coinAction;
     private static Spawner _coinSpawner;
+    private static GameObject _planet;
 
     public bool _canPickup;
 
@@ -13,6 +14,13 @@ public class Coin : MonoBehaviour
     {
         _coinAction = GameObject.Find("Collectables").transform.Find("Coin").GetComponent<CoinAction>();
         _coinSpawner = GameObject.Find("CoinSpawner").GetComponent<Spawner>();
+        _planet = GameObject.Find("Planet");
+    }
+
+    private void Update()
+    {
+        if (transform.position.z > 0)
+            _coinSpawner.ReturnObject(gameObject);
     }
 
     private void OnEnable()
@@ -31,6 +39,7 @@ public class Coin : MonoBehaviour
         {
             _canPickup = true;
             GetComponent<Rigidbody>().velocity = Vector3.zero;
+            transform.SetParent(_planet.transform, true);
         }
     }
 

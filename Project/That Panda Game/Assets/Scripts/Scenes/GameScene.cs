@@ -13,10 +13,6 @@ public class GameScene : Scene
 
     public GameObject Planet { get; private set; }
 
-    private Vector3 _initPlanetScale;
-    [SerializeField]
-    private Vector3 _gamePlanetScale;
-
     private GameObject _gamePanel;
     private GameObject _pausePanel;
     private TimeLerper _lerper;
@@ -32,6 +28,11 @@ public class GameScene : Scene
     private int _maxRandomMama;
     private float _mamaTimer;
     private bool _mamaFalling;
+
+
+    private Vector3 _initCameraPos;
+    private Vector3 _targetCameraPos;
+
 
     public void Awake()
     {
@@ -66,7 +67,8 @@ public class GameScene : Scene
 
     public override void Initialize()
     {
-        _initPlanetScale = Planet.transform.localScale;
+        _initCameraPos = Camera.main.transform.position;
+        _targetCameraPos = new Vector3(0, 0, -54);
         ResetMamaTimer();
         _lerper.Reset();
     }
@@ -81,9 +83,9 @@ public class GameScene : Scene
 
     public override bool IntroTransition()
     { 
-        if (Planet.transform.localScale != _gamePlanetScale)
+        if (Camera.main.transform.position != _targetCameraPos)
         {
-            Planet.transform.localScale = _lerper.Lerp(_initPlanetScale, _gamePlanetScale, 1);
+            Camera.main.transform.position = _lerper.Lerp(_initCameraPos, _targetCameraPos, 0.4f);
             return false;
         }
 

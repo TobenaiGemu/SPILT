@@ -76,7 +76,6 @@ public class MamaMarshmallow : MonoBehaviour
             //If the character is directly under the marshmallow, the x and y will be 0
             if ((int)knockDirection.x == 0 && (int)knockDirection.y == 0)
                 knockDirection = other.transform.forward;
-            Debug.Log(knockDirection);
             //Apply knockback and make character drop coins
             other.transform.GetComponent<Character>().ApplyKnockBack(knockDirection, _knockBackForce, _knockJumpForce);
             other.transform.GetComponent<Character>().DropCoins(_coinsToDrop);
