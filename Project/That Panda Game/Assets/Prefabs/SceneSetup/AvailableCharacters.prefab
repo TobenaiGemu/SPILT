@@ -764,7 +764,8 @@ MonoBehaviour:
   _knockBack: 30
   _knockJump: 30
   _punchDropCoins: 2
-  _punchCooldown: 2
+  _punchCooldown: 0.2
+  _punchRadius: 20
   _coinFrwdForceMin: 30
   _coinFrwdForceMax: 60
   _coinUpForceMin: 30
@@ -786,7 +787,8 @@ MonoBehaviour:
   _knockBack: 30
   _knockJump: 30
   _punchDropCoins: 2
-  _punchCooldown: 2
+  _punchCooldown: 0.2
+  _punchRadius: 20
   _coinFrwdForceMin: 30
   _coinFrwdForceMax: 60
   _coinUpForceMin: 30
@@ -808,7 +810,8 @@ MonoBehaviour:
   _knockBack: 30
   _knockJump: 30
   _punchDropCoins: 2
-  _punchCooldown: 2
+  _punchCooldown: 0.2
+  _punchRadius: 20
   _coinFrwdForceMin: 30
   _coinFrwdForceMax: 60
   _coinUpForceMin: 30
@@ -830,7 +833,8 @@ MonoBehaviour:
   _knockBack: 30
   _knockJump: 30
   _punchDropCoins: 2
-  _punchCooldown: 2
+  _punchCooldown: 0.2
+  _punchRadius: 20
   _coinFrwdForceMin: 30
   _coinFrwdForceMax: 60
   _coinUpForceMin: 30
