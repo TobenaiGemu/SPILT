@@ -8,6 +8,9 @@ public class Spawner : MonoBehaviour
     private GameObject _object;
 
     [SerializeField]
+    private float _minSpawnRate;
+    [SerializeField]
+    private float _maxSpawnRate;
     private float _spawnRate;
 
     [SerializeField]
@@ -25,6 +28,7 @@ public class Spawner : MonoBehaviour
 	
     void Awake()
     {
+        SetSpawnRate();
         _planet = GameObject.Find("Planet");
         _activeObjects = new List<GameObject>();
         _objectPool = new ObjectPool(_object, _maxObjects);
@@ -49,7 +53,7 @@ public class Spawner : MonoBehaviour
 
         //Raycast towards the planet and get the Z position of the point it hits to place the object there
         RaycastHit hit;
-        Physics.Raycast(spawnPos, Vector3.forward, out hit, 30, 1 << 9);
+        Physics.Raycast(spawnPos, Vector3.forward, out hit, 30);
         bool hitPlanet = false;
 
         int fallback = 0;
@@ -58,7 +62,7 @@ public class Spawner : MonoBehaviour
         {
             spawnPos.x = Random.Range(spawnArea.x, spawnArea.x + spawnArea.width);
             spawnPos.y = Random.Range(spawnArea.y, spawnArea.y + spawnArea.height);
-            Physics.Raycast(spawnPos, Vector3.forward, out hit, 30, 1 << 9);
+            Physics.Raycast(spawnPos, Vector3.forward, out hit, 30);
             if (hit.collider.transform.name == "Planet")
                 hitPlanet = true;
             fallback++;
@@ -79,6 +83,12 @@ public class Spawner : MonoBehaviour
             coin.CanPickup();
         }
         obj.SetActive(true);
+        SetSpawnRate();
+    }
+
+    private void SetSpawnRate()
+    {
+        _spawnRate = Random.Range(_minSpawnRate, _maxSpawnRate);
     }
 
     public GameObject GetCoin()

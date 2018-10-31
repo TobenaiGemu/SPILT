@@ -54,6 +54,18 @@ public class Joystick
         return 0;
     }
 
+    public float GetAxis(string axis)
+    {
+        switch (axis)
+        {
+            case "L2":
+                return Input.GetAxis(((_controllerName == "Wireless Controller") ? "" : "x") + "Joy" + _controllerId + "L2");
+            case "R2":
+                return Input.GetAxis(((_controllerName == "Wireless Controller") ? "" : "x") + "Joy" + _controllerId + "R2");
+        }
+        return 0;
+    }
+
     public bool WasButtonPressed(string button)
     {
         switch (button)
@@ -68,10 +80,6 @@ public class Joystick
                 return Input.GetButtonDown(((_controllerName == "Wireless Controller") ? "" : "x") + "Joy" + _controllerId + "Button0");
             case "Pause":
                 return Input.GetButtonDown(((_controllerName == "Wireless Controller") ? "" : "x") + "Joy" + _controllerId + "Pause");
-            case "L2":
-                return Input.GetButtonDown(((_controllerName == "Wireless Controller") ? "" : "x") + "Joy" + _controllerId + "L2");
-            case "R2":
-                return Input.GetButtonDown(((_controllerName == "Wireless Controller") ? "" : "x") + "Joy" + _controllerId + "R2");
         }
         return false;
     }

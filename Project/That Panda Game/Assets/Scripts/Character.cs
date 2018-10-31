@@ -73,6 +73,28 @@ public class Character : MonoBehaviour
     }
 
     [SerializeField]
+    private float _punchCooldown;
+    public float PunchCooldown
+    {
+        get
+        {
+            return _punchCooldown;
+        }
+        private set { }
+    }
+
+    [SerializeField]
+    private float _punchRadius;
+    public float PunchRadius
+    {
+        get
+        {
+            return _punchRadius;
+        }
+        private set { }
+    }
+
+    [SerializeField]
     private int _coinFrwdForceMin;
     [SerializeField]
     private int _coinFrwdForceMax;
@@ -148,6 +170,7 @@ public class Character : MonoBehaviour
 
     public void ApplyKnockBack(Vector3 direction, float backForce, float upForce)
     {
+        transform.parent.GetComponent<Rigidbody>().velocity = Vector3.zero;
         transform.parent.GetComponent<Rigidbody>().AddForce((direction.normalized * backForce + gameObject.transform.up * upForce), ForceMode.Impulse);
     }
 
@@ -243,5 +266,4 @@ public class Character : MonoBehaviour
             _characterObj.SetActive(false);
         }
     }
-
 }
