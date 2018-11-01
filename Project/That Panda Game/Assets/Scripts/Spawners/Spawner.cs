@@ -14,7 +14,7 @@ public class Spawner : MonoBehaviour
     private float _spawnRate;
 
     [SerializeField]
-    private Rect _spawnArea;
+    private float _spawnRadius;
 
     [SerializeField]
     private int _maxObjects;
@@ -40,17 +40,16 @@ public class Spawner : MonoBehaviour
         if (_activeObjects.Count < _maxObjects && _spawnTimer > _spawnRate)
         {
             _spawnTimer = 0;
-            SpawnObject(_spawnArea);
+            SpawnObject(_spawnRadius);
         }
     }
 
-    private void SpawnObject(Rect spawnArea)
+    private void SpawnObject(float radius)
     {
         //Get an object from the object pool and position it on a random positon on a 2d plane above the planet
         GameObject obj = _objectPool.GetObject();
         _activeObjects.Add(obj);
         Vector3 spawnPos = new Vector3(0, 0, -30);
-
         //Raycast towards the planet and get the Z position of the point it hits to place the object there
         RaycastHit hit;
         Physics.Raycast(spawnPos, Vector3.forward, out hit, 30);
@@ -60,8 +59,9 @@ public class Spawner : MonoBehaviour
 
         while (!hitPlanet)
         {
-            spawnPos.x = Random.Range(spawnArea.x, spawnArea.x + spawnArea.width);
-            spawnPos.y = Random.Range(spawnArea.y, spawnArea.y + spawnArea.height);
+            spawnPos.x = Random.insideUnitCircle.x * 5;
+            spawnPos.y = Random.insideUnitCircle.y * 5;
+            Debug.Log(spawnPos);
             Physics.Raycast(spawnPos, Vector3.forward, out hit, 30);
             if (hit.collider.transform.name == "Planet")
                 hitPlanet = true;
