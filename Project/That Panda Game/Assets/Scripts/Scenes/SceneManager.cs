@@ -30,6 +30,7 @@ public class SceneManager : MonoBehaviour
         _scenes.Add(_scenesPool.transform.Find("GamemodeScene").GetComponent<GamemodeScene>());
         _scenes.Add(_scenesPool.transform.Find("InfoScene").GetComponent<InfoScene>());
         _scenes.Add(_scenesPool.transform.Find("OptionsScene").GetComponent<OptionsScene>());
+        _scenes.Add(_scenesPool.transform.Find("CharacterSelectScene").GetComponent<CharacterSelectScene>());
 
         foreach (Scene scene in _scenes)
             scene.Setup();

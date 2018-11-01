@@ -22,7 +22,7 @@ public class MainMenuScene : Scene
 
     public void Awake()
     {
-        _initCameraPos = new Vector3(0, 0, -1100);
+        Camera.main.transform.position = new Vector3(0, 0, -1100);
         _targetCameraPos = new Vector3(0, 0, -100);
 
         _lerper = new TimeLerper();
@@ -32,6 +32,13 @@ public class MainMenuScene : Scene
         _mainMenuPanel = GameObject.Find("Canvas").transform.Find("MainMenuPanel").gameObject;
         _mainMenuCanvas = _mainMenuPanel.GetComponent<CanvasGroup>();
         _startButton = _mainMenuPanel.transform.Find("Start").gameObject;
+    }
+
+    public override void Initialize()
+    {
+        _initCameraPos = Camera.main.transform.position;
+        _lerper.Reset();
+        EventSystem.current.firstSelectedGameObject = _startButton;
     }
 
     public override bool IntroTransition()
@@ -74,12 +81,6 @@ public class MainMenuScene : Scene
             return false;
         }
         return true;
-    }
-
-    public override void Initialize()
-    {
-        _lerper.Reset();
-        EventSystem.current.firstSelectedGameObject = _startButton;
     }
 
     public override void Cleanup()

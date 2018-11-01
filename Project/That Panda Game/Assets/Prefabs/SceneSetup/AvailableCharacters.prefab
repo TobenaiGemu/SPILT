@@ -758,6 +758,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f208fa3a5c3aadb40ad52c4bcc9c68a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _name: Pan
   _coinsToWin: 0
   _forwardSpeed: 10
   _backwardSpeedMultiplier: 0.5
@@ -765,7 +766,8 @@ MonoBehaviour:
   _knockJump: 30
   _punchDropCoins: 2
   _punchCooldown: 0.2
-  _punchRadius: 20
+  _punchRadius: 1
+  _punchDistance: 5
   _coinFrwdForceMin: 30
   _coinFrwdForceMax: 60
   _coinUpForceMin: 30
@@ -781,6 +783,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f208fa3a5c3aadb40ad52c4bcc9c68a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _name: Liz
   _coinsToWin: 0
   _forwardSpeed: 10
   _backwardSpeedMultiplier: 0.5
@@ -788,7 +791,8 @@ MonoBehaviour:
   _knockJump: 30
   _punchDropCoins: 2
   _punchCooldown: 0.2
-  _punchRadius: 20
+  _punchRadius: 1
+  _punchDistance: 5
   _coinFrwdForceMin: 30
   _coinFrwdForceMax: 60
   _coinUpForceMin: 30
@@ -804,6 +808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f208fa3a5c3aadb40ad52c4bcc9c68a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _name: Ham
   _coinsToWin: 0
   _forwardSpeed: 10
   _backwardSpeedMultiplier: 0.5
@@ -811,7 +816,8 @@ MonoBehaviour:
   _knockJump: 30
   _punchDropCoins: 2
   _punchCooldown: 0.2
-  _punchRadius: 20
+  _punchRadius: 1
+  _punchDistance: 5
   _coinFrwdForceMin: 30
   _coinFrwdForceMax: 60
   _coinUpForceMin: 30
@@ -827,6 +833,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f208fa3a5c3aadb40ad52c4bcc9c68a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _name: Eli
   _coinsToWin: 0
   _forwardSpeed: 10
   _backwardSpeedMultiplier: 0.5
@@ -834,7 +841,8 @@ MonoBehaviour:
   _knockJump: 30
   _punchDropCoins: 2
   _punchCooldown: 0.2
-  _punchRadius: 20
+  _punchRadius: 1
+  _punchDistance: 5
   _coinFrwdForceMin: 30
   _coinFrwdForceMax: 60
   _coinUpForceMin: 30
@@ -848,7 +856,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.05
+  m_Radius: 0.035
   m_Height: 0.135
   m_Direction: 1
   m_Center: {x: 0, y: 0.07, z: 0}
@@ -861,7 +869,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.05
+  m_Radius: 0.035
   m_Height: 0.135
   m_Direction: 1
   m_Center: {x: 0, y: 0.07, z: 0}
@@ -874,7 +882,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.05
+  m_Radius: 0.035
   m_Height: 0.135
   m_Direction: 1
   m_Center: {x: 0, y: 0.07, z: 0}
@@ -887,7 +895,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.05
+  m_Radius: 0.035
   m_Height: 0.135
   m_Direction: 1
   m_Center: {x: 0, y: 0.07, z: 0}

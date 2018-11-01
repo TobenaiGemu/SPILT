@@ -57,6 +57,8 @@ public class GamemodeScene : Scene
             return false;
         }
 
+        if (!_menuPage.OutroCurrentPanel(0.5f))
+            return false;
         _lerper.Reset();
         _gamemodePanel.SetActive(false);
         return true;

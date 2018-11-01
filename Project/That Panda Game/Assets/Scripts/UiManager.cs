@@ -83,4 +83,9 @@ public class UiManager : MonoBehaviour
         _sceneManager.ResumeScene();
         _gameScene.PlayGame();
     }
+
+    public void GotoCharacterSelect()
+    {
+        _sceneManager.ChangeScene<CharacterSelectScene>();
+    }
 }

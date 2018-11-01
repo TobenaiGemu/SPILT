@@ -2,10 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [Serializable]
 public class Character : MonoBehaviour
 {
+    [SerializeField]
+    private string _name;
+
     [SerializeField]
     private int _coinsToWin;
 
@@ -95,6 +99,17 @@ public class Character : MonoBehaviour
     }
 
     [SerializeField]
+    private float _punchDistance;
+    public float PunchDistance
+    {
+        get
+        {
+            return _punchDistance;
+        }
+        private set { }
+    }
+
+    [SerializeField]
     private int _coinFrwdForceMin;
     [SerializeField]
     private int _coinFrwdForceMax;
@@ -125,13 +140,17 @@ public class Character : MonoBehaviour
 
     private Spawner _coinSpawner;
 
-    public void Start()
+    private GameObject _scoreText;
+
+    public void Awake()
     {
-        AddCoins(10);
         _characterPool = GameObject.Find("AvailableCharacters");
         _coinSpawner = GameObject.Find("CoinSpawner").GetComponent<Spawner>();
         _lerper = new TimeLerper();
+        Debug.Log(_name);
         _mamaMarshmallow = GameObject.Find("Events").transform.Find("MamaMarshmallow").GetComponent<MamaMarshmallow>();
+        _scoreText = GameObject.Find("Canvas").transform.Find("GamePanel").Find(_name).gameObject;
+        AddCoins(10);
     }
 
     public Character Init(GameObject charObj)
@@ -147,6 +166,7 @@ public class Character : MonoBehaviour
     public void AddCoins(int ammount)
     {
         _coins += ammount;
+        UpdateCoinPanel();
         if (_coins >= _coinsToWin)
             WinGame();
     }
@@ -156,6 +176,7 @@ public class Character : MonoBehaviour
         if (ammount > _coins)
             ammount = _coins;
         _coins -= ammount;
+        UpdateCoinPanel();
         for (int i = 0; i < ammount; i++)
         {
             GameObject coin = _coinSpawner.GetCoin();
@@ -166,6 +187,11 @@ public class Character : MonoBehaviour
             Vector3 direction = Quaternion.AngleAxis(angle, transform.up) * transform.forward;
             coin.GetComponent<Rigidbody>().AddForce(direction * UnityEngine.Random.Range(_coinFrwdForceMin, _coinFrwdForceMax) + transform.up * UnityEngine.Random.Range(_coinUpForceMin, _coinUpForceMax), ForceMode.Impulse);
         }
+    }
+
+    private void UpdateCoinPanel()
+    {
+        _scoreText.GetComponent<Text>().text = _name + ": " + _coins;
     }
 
     public void ApplyKnockBack(Vector3 direction, float backForce, float upForce)
@@ -228,7 +254,6 @@ public class Character : MonoBehaviour
     {
         if (_marshmallowRoasted)
             return;
-        Debug.Log("MARSHMALLOWS UNROASTED!!!");
         _roastPercent = 0;
         _lerper.Reset();
         //TODO: Change texture back to normal;
@@ -236,7 +261,6 @@ public class Character : MonoBehaviour
 
     private void CompleteRoast(float knockbackMultiplier, float knockjumpMultiplier, float coinDrop)
     {
-        Debug.Log("MARSHMALLOWS ROASTED!!!");
         _mamaMarshmallow.GetVewyAngewy(this);
         _marshmallowRoasted = true;
         _knockbackMultiplier = knockbackMultiplier;
