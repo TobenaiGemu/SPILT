@@ -10,6 +10,7 @@ public class User
     public Joystick Joystick {get; private set;}
     public int UserId { get; private set; }
     public Character AssignedCharacter { get; private set; }
+    public bool IsPlaying { get; private set; }
 
     public User(SceneManager sceneManager, int userId)
     {
@@ -20,6 +21,7 @@ public class User
         _states.Add("GameState", new GameState(this, sceneManager));
         _states.Add("JoinState", new JoinState(this, sceneManager));
         _states.Add("MenuState", new MenuState(this, sceneManager));
+        _states.Add("JoinGameState", new JoinGameState(this, sceneManager));
     }
 
     public void Update()
@@ -55,5 +57,10 @@ public class User
     {
         if (AssignedCharacter != null)
             AssignedCharacter.Unassign();
+    }
+
+    public void SetPlaying(bool playing)
+    {
+        IsPlaying = playing;
     }
 }

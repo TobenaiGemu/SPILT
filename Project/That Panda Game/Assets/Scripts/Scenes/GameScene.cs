@@ -8,8 +8,6 @@ public enum CharacterType {Panda, Lizard, Elephant, Pig}
 
 public class GameScene : Scene
 {
-    private Dictionary<CharacterType, Character> _characters = new Dictionary<CharacterType, Character>();
-
 
     public GameObject Planet { get; private set; }
 
@@ -38,19 +36,6 @@ public class GameScene : Scene
     public void Awake()
     {
         GameObject chars = GameObject.Find("AvailableCharacters");
-
-        //Add characters to dictionary
-        GameObject panda = chars.transform.Find("Panda").gameObject;
-        _characters.Add(CharacterType.Panda, panda.GetComponent<Character>().Init(panda));
-
-        GameObject lizard = chars.transform.Find("Lizard").gameObject;
-        _characters.Add(CharacterType.Lizard, lizard.GetComponent<Character>().Init(lizard));
-
-        GameObject elephant = chars.transform.Find("Elephant").gameObject;
-        _characters.Add(CharacterType.Elephant, elephant.GetComponent<Character>().Init(elephant));
-
-        GameObject pig = chars.transform.Find("Pig").gameObject;
-        _characters.Add(CharacterType.Pig, pig.GetComponent<Character>().Init(pig));
 
         Planet = GameObject.Find("Planet");
         //For lerping the planet scale
@@ -91,7 +76,7 @@ public class GameScene : Scene
 
         //Change user states to JoinState
         foreach (User user in SceneManager.Users)
-            user.ChangeState("JoinState");
+            user.ChangeState("GameState");
         _lerper.Reset();
         return true;
     }
@@ -146,14 +131,6 @@ public class GameScene : Scene
     {
         _mamaFalling = false;
         _mamaTimer = Random.Range(_minRandomMama, _maxRandomMama);
-    }
-
-    public bool AttemptCharacterAssign(CharacterType type, User user)
-    {
-        //Check if the character is already assigned to a user
-        bool isOk = user.AttemptAssignCharacter(_characters[type]);
-
-        return isOk;
     }
 
     public void CharacterUnassign(User user)

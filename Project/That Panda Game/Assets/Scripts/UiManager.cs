@@ -88,4 +88,29 @@ public class UiManager : MonoBehaviour
     {
         _sceneManager.ChangeScene<CharacterSelectScene>();
     }
+
+    public void GotoJoinGame()
+    {
+        _sceneManager.ChangeScene<JoinGameScene>();
+    }
+
+    public void SelectPan()
+    {
+        _sceneManager.GetScene<CharacterSelectScene>().SelectCharacter(CharacterType.Panda);
+    }
+
+    public void SelectHam()
+    {
+        _sceneManager.GetScene<CharacterSelectScene>().SelectCharacter(CharacterType.Pig);
+    }
+
+    public void SelectEli()
+    {
+        _sceneManager.GetScene<CharacterSelectScene>().SelectCharacter(CharacterType.Elephant);
+    }
+
+    public void SelectLiz()
+    {
+        _sceneManager.GetScene<CharacterSelectScene>().SelectCharacter(CharacterType.Lizard);
+    }
 }

@@ -24,17 +24,6 @@ public class JoinState : UserState
 
     public override void Update()
     {
-        //Check for a button press on each button then attemp to assign the corresponding character to the user
-        foreach (CharacterType type in _characterButtons.Keys)
-        {
-            if (_joystick.WasButtonPressed(_characterButtons[type]))
-            {
-                if (_scene.AttemptCharacterAssign(type, _user))
-                {
-                    _user.ChangeState("GameState");
-                    return;
-                }
-            }
-        } 
+
     }
 }

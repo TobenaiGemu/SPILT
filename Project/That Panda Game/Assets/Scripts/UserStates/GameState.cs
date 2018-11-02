@@ -99,6 +99,8 @@ public class GameState : UserState
 
     public override void FixedUpdate()
     {
+        if (_character == null)
+            return;
         //Rotate towards the centre of the planet
         _playerObj.transform.LookAt(_planetObj.transform.position);
 
@@ -143,18 +145,18 @@ public class GameState : UserState
         _velocity = Vector3.Lerp(_velocity * _character.BackwardSpeed, _velocity, Mathf.InverseLerp(-1, 1, Vector3.Dot(_velocity.normalized, _playerObj.transform.forward)));
 
         //If the character is outside the bounds of the play area, add a force towards the play area to get them back in
-        if (_playerObj.transform.position.z > -10)
-        {
-            _playerObj.GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, -50), ForceMode.Impulse);
-            Physics.IgnoreLayerCollision(8, 12, true);
-            _outOfBounds = true;
-        }
+        //if (_playerObj.transform.position.z > -10)
+        //{
+        //    _playerObj.GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, -50), ForceMode.Impulse);
+        //    _playerObj.GetComponent<CapsuleCollider>().enabled = false;
+        //    _outOfBounds = true;
+        //}
 
-        if (_outOfBounds && _playerObj.transform.position.z < -15)
-        {
-            _outOfBounds = false;
-            Physics.IgnoreLayerCollision(8, 12, false);
-        }
+        //if (_outOfBounds && _playerObj.transform.position.z < -15)
+        //{
+        //    _outOfBounds = false;
+        //    _playerObj.GetComponent<CapsuleCollider>().enabled = true;
+        //}
 
         //Stop the character from moving if it is outside the bounds of the play area
         if ((_playerObj.transform.position + _velocity * Time.deltaTime).z > -10)
