@@ -88,6 +88,7 @@ public class GameScene : Scene
             CharacterUnassign(user);
         _coinSpawner.Cleanup();
         _cookieSpawner.Cleanup();
+        _appleSpawner.Cleanup();
         _gamePanel.SetActive(false);
         _pausePanel.SetActive(false);
         _lerper.Reset();

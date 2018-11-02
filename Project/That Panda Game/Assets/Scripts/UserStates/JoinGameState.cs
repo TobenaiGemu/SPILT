@@ -28,7 +28,7 @@ public class JoinGameState : UserState
             GameObject.Find("Canvas").transform.Find("JoinGamePanel").transform.Find("Player" + _user.UserId + "Join").transform.Find("P" + _user.UserId).gameObject.GetComponent<Text>().text = "Player " + _user.UserId + ": Joined";
         }
 
-        if (_joystick.WasButtonPressed("Button3"))
+        if (_joystick.WasButtonPressed("Button3") && _joined)
         {
             _sceneManager.ChangeScene<CharacterSelectScene>();
         }

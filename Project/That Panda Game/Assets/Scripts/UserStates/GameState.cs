@@ -44,6 +44,8 @@ public class GameState : UserState
         _rotation = 0;
         _character = _user.AssignedCharacter;
         _rotationLerper.Reset();
+        if (_character != null)
+            _character.ReInit();
     }
 
     public override void Cleanup()

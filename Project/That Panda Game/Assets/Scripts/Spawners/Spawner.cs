@@ -64,7 +64,6 @@ public class Spawner : MonoBehaviour
         {
             spawnPos.x = Random.insideUnitCircle.x * _spawnRadius;
             spawnPos.y = Random.insideUnitCircle.y * _spawnRadius;
-            Debug.Log(spawnPos);
             Physics.Raycast(spawnPos, Vector3.forward, out hit, 30);
             if (hit.collider.transform.name == "Planet")
                 hitPlanet = true;

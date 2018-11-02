@@ -142,6 +142,11 @@ public class Character : MonoBehaviour
     private Spawner _coinSpawner;
 
     private GameObject _scoreText;
+    private GameObject _winnerText;
+    private float _winnerTime;
+
+    //Get rid of this
+    private SceneManager _sceneManager;
 
     public void Awake()
     {
@@ -151,7 +156,10 @@ public class Character : MonoBehaviour
         Debug.Log(_name);
         _mamaMarshmallow = GameObject.Find("Events").transform.Find("MamaMarshmallow").GetComponent<MamaMarshmallow>();
         _scoreText = GameObject.Find("Canvas").transform.Find("GamePanel").Find(_name).gameObject;
-        AddCoins(10);
+        _winnerText = GameObject.Find("Canvas").transform.Find("GamePanel").Find("WINNER").gameObject;
+        _winnerText.SetActive(false);
+        _winnerTime = 5;
+        _sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
     }
 
     public Character Init(GameObject charObj)
@@ -161,7 +169,17 @@ public class Character : MonoBehaviour
         _knockbackMultiplier = 1;
         _knockjumpMultiplier = 1;
         _speedMultiplierTimer = 1;
+        _coins = 0;
         return this;
+    }
+
+    public void ReInit()
+    {
+        _coins = 0;
+        _forwardSpeedMultiplier = 1;
+        _knockbackMultiplier = 1;
+        _knockjumpMultiplier = 1;
+        _speedMultiplierTimer = 1;
     }
 
     public void AddCoins(int ammount)
@@ -224,7 +242,25 @@ public class Character : MonoBehaviour
 
     private void WinGame()
     {
-        //This character won the game (ragdoll other characters, run dance animation, change scene to end game scene
+        //This character won the game (ragdoll other characters, run dance animation, change scene to end game scene)
+        foreach (User user in SceneManager.Users)
+        {
+            _winnerText.GetComponent<Text>().text = _name + " WINS!!!";
+            _winnerText.SetActive(true);
+        }
+        StartCoroutine(FinishGame());
+    }
+
+    public IEnumerator FinishGame()
+    {
+        while (_winnerTime > 0)
+        {
+            _winnerTime -= Time.deltaTime;
+            Debug.Log(_winnerTime);
+            yield return null;
+        }
+        _coins = 0;
+        _sceneManager.ChangeScene<MainMenuScene>();
     }
 
     public bool AttemptAssignToUser(User user)
