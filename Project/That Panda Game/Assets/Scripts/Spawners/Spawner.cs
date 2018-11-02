@@ -19,6 +19,9 @@ public class Spawner : MonoBehaviour
     [SerializeField]
     private int _maxObjects;
 
+    [SerializeField]
+    private Vector3 _rotation;
+
     private GameObject _planet;
 
     protected ObjectPool _objectPool;
@@ -40,11 +43,11 @@ public class Spawner : MonoBehaviour
         if (_activeObjects.Count < _maxObjects && _spawnTimer > _spawnRate)
         {
             _spawnTimer = 0;
-            SpawnObject(_spawnRadius);
+            SpawnObject();
         }
     }
 
-    private void SpawnObject(float radius)
+    private void SpawnObject()
     {
         //Get an object from the object pool and position it on a random positon on a 2d plane above the planet
         GameObject obj = _objectPool.GetObject();
@@ -59,8 +62,8 @@ public class Spawner : MonoBehaviour
 
         while (!hitPlanet)
         {
-            spawnPos.x = Random.insideUnitCircle.x * radius;
-            spawnPos.y = Random.insideUnitCircle.y * radius;
+            spawnPos.x = Random.insideUnitCircle.x * _spawnRadius;
+            spawnPos.y = Random.insideUnitCircle.y * _spawnRadius;
             Debug.Log(spawnPos);
             Physics.Raycast(spawnPos, Vector3.forward, out hit, 30);
             if (hit.collider.transform.name == "Planet")
@@ -82,6 +85,7 @@ public class Spawner : MonoBehaviour
             coin.GetComponent<GravitySim>().enabled = true;
             coin.CanPickup();
         }
+        obj.transform.Rotate(_rotation);
         obj.SetActive(true);
         SetSpawnRate();
     }
