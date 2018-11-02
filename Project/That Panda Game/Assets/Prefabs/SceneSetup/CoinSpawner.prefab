@@ -52,12 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _object: {fileID: 1153410568022254, guid: 76df0ab56a0d944418b8a8419a0a87cb, type: 2}
-  _minSpawnRate: 4
-  _maxSpawnRate: 10
-  _spawnArea:
-    serializedVersion: 2
-    x: -10
-    y: -10
-    width: 20
-    height: 20
-  _maxObjects: 25
+  _minSpawnRate: 0.5
+  _maxSpawnRate: 2.5
+  _spawnRadius: 15
+  _maxObjects: 200

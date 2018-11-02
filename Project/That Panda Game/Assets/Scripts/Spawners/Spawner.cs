@@ -59,8 +59,8 @@ public class Spawner : MonoBehaviour
 
         while (!hitPlanet)
         {
-            spawnPos.x = Random.insideUnitCircle.x * 5;
-            spawnPos.y = Random.insideUnitCircle.y * 5;
+            spawnPos.x = Random.insideUnitCircle.x * radius;
+            spawnPos.y = Random.insideUnitCircle.y * radius;
             Debug.Log(spawnPos);
             Physics.Raycast(spawnPos, Vector3.forward, out hit, 30);
             if (hit.collider.transform.name == "Planet")
