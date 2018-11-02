@@ -12,6 +12,8 @@ public class MamaMarshmallow : MonoBehaviour
     private int _coinsToDrop;
     [SerializeField]
     private float _positionStopsFollowing;
+    [SerializeField]
+    private Vector3 _rotation;
 
     private bool _isAngewy;
     private GameObject _planet;
@@ -53,6 +55,7 @@ public class MamaMarshmallow : MonoBehaviour
         transform.position = transform.up * 500;
         _initPos = transform.position;
         gameObject.SetActive(true);
+        transform.Rotate(_rotation);
         //tells the shadow to start increasing in size at the point that marshmallow will hit, or at a characters position.
         _shadow.StartMarshShadow();
         if (follow != null)
