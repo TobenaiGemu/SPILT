@@ -130,6 +130,7 @@ public class Character : MonoBehaviour
     private float _knockbackMultiplier;
     private float _knockjumpMultiplier;
     private float _speedMultiplierTimer;
+    private int _coinDropModifier;
 
     private float _timeToUnroast;
     private float _roastPercent;
@@ -173,6 +174,9 @@ public class Character : MonoBehaviour
 
     public void DropCoins(int ammount)
     {
+        ammount += _coinDropModifier;
+        Debug.Log(_coinDropModifier);
+        Debug.Log(ammount);
         if (ammount > _coins)
             ammount = _coins;
         _coins -= ammount;
@@ -237,7 +241,7 @@ public class Character : MonoBehaviour
         return false;
     }
 
-    public void RoastMarshmallow(float durationToRoast, float durationToUnroast, float knockbackMultiplier, float knockjumpMultiplier, float coinDrop)
+    public void RoastMarshmallow(float durationToRoast, float durationToUnroast, float knockbackMultiplier, float knockjumpMultiplier, int coinDrop)
     {
         if (_marshmallowRoasted)
             return;
@@ -255,16 +259,20 @@ public class Character : MonoBehaviour
         if (_marshmallowRoasted)
             return;
         _roastPercent = 0;
+        _knockbackMultiplier = 1;
+        _knockjumpMultiplier = 1;
+        _coinDropModifier = 0;
         _lerper.Reset();
         //TODO: Change texture back to normal;
     }
 
-    private void CompleteRoast(float knockbackMultiplier, float knockjumpMultiplier, float coinDrop)
+    private void CompleteRoast(float knockbackMultiplier, float knockjumpMultiplier, int coinDrop)
     {
         _mamaMarshmallow.GetVewyAngewy(this);
         _marshmallowRoasted = true;
         _knockbackMultiplier = knockbackMultiplier;
         _knockjumpMultiplier = knockjumpMultiplier;
+        _coinDropModifier = coinDrop;
         StartCoroutine(UnroastMarshmallowCounter());
         //TODO: Change coin drop to that and add roasted timer
     }

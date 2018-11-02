@@ -52,7 +52,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _object: {fileID: 1178701065419690, guid: bd537699a49b2c945be47272fd2e8d14, type: 2}
-  _minSpawnRate: 100
-  _maxSpawnRate: 100
+  _minSpawnRate: 2
+  _maxSpawnRate: 10
   _spawnRadius: 15
-  _maxObjects: 25
+  _maxObjects: 4
+  _rotation: {x: -90, y: 0, z: 0}

@@ -13,11 +13,11 @@ public class CampfireAction : MonoBehaviour
     [SerializeField]
     private float _knockJumpMultiplier;
     [SerializeField]
-    private float _coinDropOnHit;
+    private int _coinDropModifier;
 
     public void StartRoasting(Character character)
     {
-        character.RoastMarshmallow(_timeToRoast, _timeToUnroast, _knockBackMultiplier, _knockJumpMultiplier, _coinDropOnHit);
+        character.RoastMarshmallow(_timeToRoast, _timeToUnroast, _knockBackMultiplier, _knockJumpMultiplier, _coinDropModifier);
     }
 
     public void StopRoasting(Character character)

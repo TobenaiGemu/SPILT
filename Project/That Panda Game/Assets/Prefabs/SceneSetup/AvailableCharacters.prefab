@@ -759,12 +759,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Pan
-  _coinsToWin: 0
-  _forwardSpeed: 10
+  _coinsToWin: 15
+  _forwardSpeed: 12
   _backwardSpeedMultiplier: 0.5
-  _knockBack: 30
+  _knockBack: 45
   _knockJump: 30
-  _punchDropCoins: 2
+  _punchDropCoins: 1
   _punchCooldown: 0.2
   _punchRadius: 1
   _punchDistance: 5
@@ -784,12 +784,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Liz
-  _coinsToWin: 0
-  _forwardSpeed: 10
+  _coinsToWin: 15
+  _forwardSpeed: 12
   _backwardSpeedMultiplier: 0.5
-  _knockBack: 30
+  _knockBack: 45
   _knockJump: 30
-  _punchDropCoins: 2
+  _punchDropCoins: 1
   _punchCooldown: 0.2
   _punchRadius: 1
   _punchDistance: 5
@@ -809,12 +809,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Ham
-  _coinsToWin: 0
-  _forwardSpeed: 10
+  _coinsToWin: 15
+  _forwardSpeed: 12
   _backwardSpeedMultiplier: 0.5
-  _knockBack: 30
+  _knockBack: 45
   _knockJump: 30
-  _punchDropCoins: 2
+  _punchDropCoins: 1
   _punchCooldown: 0.2
   _punchRadius: 1
   _punchDistance: 5
@@ -834,12 +834,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Eli
-  _coinsToWin: 0
-  _forwardSpeed: 10
+  _coinsToWin: 15
+  _forwardSpeed: 12
   _backwardSpeedMultiplier: 0.5
-  _knockBack: 30
+  _knockBack: 45
   _knockJump: 30
-  _punchDropCoins: 2
+  _punchDropCoins: 1
   _punchCooldown: 0.2
   _punchRadius: 1
   _punchDistance: 5
