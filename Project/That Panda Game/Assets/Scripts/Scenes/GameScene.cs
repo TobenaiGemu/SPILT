@@ -76,7 +76,10 @@ public class GameScene : Scene
 
         //Change user states to JoinState
         foreach (User user in SceneManager.Users)
-            user.ChangeState("GameState");
+        {
+            if (user.IsPlaying)
+                user.ChangeState("GameState");
+        }
         _lerper.Reset();
         return true;
     }
@@ -89,9 +92,12 @@ public class GameScene : Scene
         _coinSpawner.Cleanup();
         _cookieSpawner.Cleanup();
         _appleSpawner.Cleanup();
+        for (int i = 0; i < _gamePanel.transform.childCount; i++)
+            _gamePanel.transform.GetChild(i).GetComponent<Text>().text = "";
         _gamePanel.SetActive(false);
         _pausePanel.SetActive(false);
         _lerper.Reset();
+        _mamaMarshmallow.Stop();
         return true;
     }
 

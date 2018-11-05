@@ -63,6 +63,16 @@ public class MamaMarshmallow : MonoBehaviour
         _initDistance = (transform.position - _shadow.transform.position).magnitude;
     }
 
+    public void Stop()
+    {
+        _isAngewy = false;
+        _lerper.Reset();
+        _crashed = true;
+        transform.SetParent(GameObject.Find("Events").transform, true);
+        gameObject.SetActive(false);
+        _shadow.Cleanup();
+    }
+
     public bool HasCrashed()
     {
         return _crashed;

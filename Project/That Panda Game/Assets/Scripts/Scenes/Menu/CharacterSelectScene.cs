@@ -61,6 +61,7 @@ public class CharacterSelectScene : Scene
             _characterSelectCanvas.alpha = _lerper.Lerp(1, 0, 0.5f);
             return false;
         }
+        _characterSelectPanel.SetActive(false);
         return true;
     }
 
@@ -89,7 +90,6 @@ public class CharacterSelectScene : Scene
         }
         else
         {
-            Debug.Log(_userIndex + "Isn't playing");
             GetNextUser();
         }
 

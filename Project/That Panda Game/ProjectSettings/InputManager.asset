@@ -1162,17 +1162,17 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick 1 button 6
+    positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1
-    dead: 1
+    dead: 0
     sensitivity: 1
     snap: 0
     invert: 0
-    type: 0
-    axis: 0
-    joyNum: 0
+    type: 2
+    axis: 3
+    joyNum: 1
   - serializedVersion: 3
     m_Name: xJoy1L2
     descriptiveName: 
@@ -1194,17 +1194,17 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick 2 button 6
+    positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1
-    dead: 1
+    dead: 0
     sensitivity: 1
     snap: 0
     invert: 0
-    type: 0
-    axis: 0
-    joyNum: 0
+    type: 2
+    axis: 3
+    joyNum: 2
   - serializedVersion: 3
     m_Name: xJoy2L2
     descriptiveName: 
@@ -1226,17 +1226,17 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick 3 button 6
+    positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1
-    dead: 1
+    dead: 0
     sensitivity: 1
     snap: 0
     invert: 0
-    type: 0
-    axis: 0
-    joyNum: 0
+    type: 2
+    axis: 3
+    joyNum: 3
   - serializedVersion: 3
     m_Name: xJoy3L2
     descriptiveName: 
@@ -1258,17 +1258,17 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick 4 button 6
+    positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1
-    dead: 1
+    dead: 0
     sensitivity: 1
     snap: 0
     invert: 0
-    type: 0
-    axis: 0
-    joyNum: 0
+    type: 2
+    axis: 3
+    joyNum: 4
   - serializedVersion: 3
     m_Name: xJoy4L2
     descriptiveName: 
@@ -1290,17 +1290,17 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick 1 button 7
+    positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1
-    dead: 1
+    dead: 0
     sensitivity: 1
     snap: 0
     invert: 0
-    type: 0
-    axis: 0
-    joyNum: 0
+    type: 2
+    axis: 4
+    joyNum: 1
   - serializedVersion: 3
     m_Name: xJoy1R2
     descriptiveName: 
@@ -1322,17 +1322,17 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick 2 button 7
+    positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1
-    dead: 1
+    dead: 0
     sensitivity: 1
     snap: 0
     invert: 0
-    type: 0
-    axis: 0
-    joyNum: 0
+    type: 2
+    axis: 4
+    joyNum: 2
   - serializedVersion: 3
     m_Name: xJoy2R2
     descriptiveName: 
@@ -1354,17 +1354,17 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick 3 button 7
+    positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1
-    dead: 1
+    dead: 0
     sensitivity: 1
     snap: 0
     invert: 0
-    type: 0
-    axis: 0
-    joyNum: 0
+    type: 2
+    axis: 4
+    joyNum: 3
   - serializedVersion: 3
     m_Name: xJoy3R2
     descriptiveName: 
@@ -1386,17 +1386,17 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick 4 button 7
+    positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1
-    dead: 1
+    dead: 0
     sensitivity: 1
     snap: 0
     invert: 0
-    type: 0
-    axis: 0
-    joyNum: 0
+    type: 2
+    axis: 4
+    joyNum: 4
   - serializedVersion: 3
     m_Name: xJoy4R2
     descriptiveName: 

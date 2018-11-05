@@ -88,6 +88,28 @@ public class Character : MonoBehaviour
     }
 
     [SerializeField]
+    private float _leftPunchCooldown;
+    public float LeftPunchCooldown
+    {
+        get
+        {
+            return _leftPunchCooldown;
+        }
+        private set { }
+    }
+
+    [SerializeField]
+    private float _rightPunchCooldown;
+    public float RightPunchCooldown
+    {
+        get
+        {
+            return _rightPunchCooldown;
+        }
+        private set { }
+    }
+
+    [SerializeField]
     private float _punchRadius;
     public float PunchRadius
     {
@@ -105,6 +127,26 @@ public class Character : MonoBehaviour
         get
         {
             return _punchDistance;
+        }
+        private set { }
+    }
+
+    private Animator _animator;
+    public Animator Animator
+    {
+        get
+        {
+            return _animator;
+        }
+        private set { }
+    }
+
+    private int _punchCoinDropModifier;
+    public int PunchCoinDropModifier
+    {
+        get
+        {
+            return _punchCoinDropModifier;
         }
         private set { }
     }
@@ -130,7 +172,6 @@ public class Character : MonoBehaviour
     private float _knockbackMultiplier;
     private float _knockjumpMultiplier;
     private float _speedMultiplierTimer;
-    private int _coinDropModifier;
 
     private float _timeToUnroast;
     private float _roastPercent;
@@ -150,36 +191,34 @@ public class Character : MonoBehaviour
 
     public void Awake()
     {
+        //Get all the objects the character depends on
         _characterPool = GameObject.Find("AvailableCharacters");
         _coinSpawner = GameObject.Find("CoinSpawner").GetComponent<Spawner>();
         _lerper = new TimeLerper();
-        Debug.Log(_name);
         _mamaMarshmallow = GameObject.Find("Events").transform.Find("MamaMarshmallow").GetComponent<MamaMarshmallow>();
-        _scoreText = GameObject.Find("Canvas").transform.Find("GamePanel").Find(_name).gameObject;
         _winnerText = GameObject.Find("Canvas").transform.Find("GamePanel").Find("WINNER").gameObject;
         _winnerText.SetActive(false);
         _winnerTime = 5;
         _sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
+        _animator = gameObject.GetComponent<Animator>();
     }
 
     public Character Init(GameObject charObj)
     {
         _characterObj = charObj;
-        _forwardSpeedMultiplier = 1;
-        _knockbackMultiplier = 1;
-        _knockjumpMultiplier = 1;
-        _speedMultiplierTimer = 1;
-        _coins = 0;
+        _scoreText = GameObject.Find("Canvas").transform.Find("GamePanel").Find(_name).gameObject;
+        ResetValues();
         return this;
     }
 
-    public void ReInit()
+    public void ResetValues()
     {
-        _coins = 0;
         _forwardSpeedMultiplier = 1;
         _knockbackMultiplier = 1;
         _knockjumpMultiplier = 1;
         _speedMultiplierTimer = 1;
+        _winnerTime = 5;
+        _coins = 0;
     }
 
     public void AddCoins(int ammount)
@@ -192,13 +231,11 @@ public class Character : MonoBehaviour
 
     public void DropCoins(int ammount)
     {
-        ammount += _coinDropModifier;
-        Debug.Log(_coinDropModifier);
-        Debug.Log(ammount);
         if (ammount > _coins)
             ammount = _coins;
         _coins -= ammount;
         UpdateCoinPanel();
+        //For every dropped coin, get a coin from the pool and add a force to it to give the effect of the coin being dropped
         for (int i = 0; i < ammount; i++)
         {
             GameObject coin = _coinSpawner.GetCoin();
@@ -224,14 +261,17 @@ public class Character : MonoBehaviour
 
     public void MultiplySpeed(float speedMultiplier, float duration)
     {
+        //Set the speed multiplier
         _forwardSpeedMultiplier = speedMultiplier;
         _speedMultiplierTimer = duration;
+        //Stop any existing timer coroutines and start a new one
         StopCoroutine(SpeedMultiplierCountdown());
         StartCoroutine(SpeedMultiplierCountdown());
     }
 
     public IEnumerator SpeedMultiplierCountdown()
     {
+        //Set the speed multiplier back to 1 after a set time
         while (_speedMultiplierTimer > 0)
         {
             _speedMultiplierTimer -= Time.deltaTime;
@@ -253,10 +293,10 @@ public class Character : MonoBehaviour
 
     public IEnumerator FinishGame()
     {
+        //After a set time after a player wins, return to the main menu
         while (_winnerTime > 0)
         {
             _winnerTime -= Time.deltaTime;
-            Debug.Log(_winnerTime);
             yield return null;
         }
         _coins = 0;
@@ -265,6 +305,7 @@ public class Character : MonoBehaviour
 
     public bool AttemptAssignToUser(User user)
     {
+        //If a user isn't already assigned to this character, assign it to this
         if (!_isAssigned)
         {
             _assignedUser = user;
@@ -297,20 +338,19 @@ public class Character : MonoBehaviour
         _roastPercent = 0;
         _knockbackMultiplier = 1;
         _knockjumpMultiplier = 1;
-        _coinDropModifier = 0;
         _lerper.Reset();
         //TODO: Change texture back to normal;
     }
 
     private void CompleteRoast(float knockbackMultiplier, float knockjumpMultiplier, int coinDrop)
     {
+        //Set the characters knockback multiplier and start a timer coroutine
         _mamaMarshmallow.GetVewyAngewy(this);
         _marshmallowRoasted = true;
         _knockbackMultiplier = knockbackMultiplier;
         _knockjumpMultiplier = knockjumpMultiplier;
-        _coinDropModifier = coinDrop;
+        _punchCoinDropModifier = coinDrop;
         StartCoroutine(UnroastMarshmallowCounter());
-        //TODO: Change coin drop to that and add roasted timer
     }
 
     public IEnumerator UnroastMarshmallowCounter()
@@ -326,6 +366,7 @@ public class Character : MonoBehaviour
 
     public void Unassign()
     {
+        //Unassign any user that is assigned to this character
         if (_isAssigned)
         {
             _assignedUser = null;

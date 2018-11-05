@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class JoinGameScene : Scene
 {
@@ -45,6 +46,11 @@ public class JoinGameScene : Scene
             return false;
         }
         _lerper.Reset();
+        _joinGamePanel.SetActive(false);
+        for (int i = 0; i < 4; i++)
+        {
+            _joinGamePanel.transform.GetChild(i).GetChild(0).GetComponent<Text>().text = "PRESS A TO JOIN";
+        }
         return true;
     }
 }
