@@ -51,13 +51,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da5f1a125f4ed914c9c59b5a2d9e9531, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _object: {fileID: 1791310238944522, guid: f108b919841d6d14e9ee037f7ac877db, type: 2}
-  _minSpawnRate: 4
+  _object: {fileID: 1178701065419690, guid: bd537699a49b2c945be47272fd2e8d14, type: 2}
+  _minSpawnRate: 2
   _maxSpawnRate: 10
-  _spawnArea:
-    serializedVersion: 2
-    x: -10
-    y: -10
-    width: 20
-    height: 20
-  _maxObjects: 25
+  _spawnRadius: 15
+  _maxObjects: 4
+  _rotation: {x: -90, y: 0, z: 0}

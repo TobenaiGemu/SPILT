@@ -19,6 +19,8 @@ public class SceneManager : MonoBehaviour
 
     private bool _initNextScene;
 
+    private Dictionary<CharacterType, Character> _characters = new Dictionary<CharacterType, Character>();
+
     // Use this for initialization
     void Awake()
     {
@@ -30,6 +32,8 @@ public class SceneManager : MonoBehaviour
         _scenes.Add(_scenesPool.transform.Find("GamemodeScene").GetComponent<GamemodeScene>());
         _scenes.Add(_scenesPool.transform.Find("InfoScene").GetComponent<InfoScene>());
         _scenes.Add(_scenesPool.transform.Find("OptionsScene").GetComponent<OptionsScene>());
+        _scenes.Add(_scenesPool.transform.Find("CharacterSelectScene").GetComponent<CharacterSelectScene>());
+        _scenes.Add(_scenesPool.transform.Find("JoinGameScene").GetComponent<JoinGameScene>());
 
         foreach (Scene scene in _scenes)
             scene.Setup();
@@ -44,6 +48,21 @@ public class SceneManager : MonoBehaviour
         ChangeScene<MainMenuScene>();
         _paused = false;
         _initNextScene = true;
+
+        GameObject chars = GameObject.Find("AvailableCharacters");
+
+        //Add characters to dictionary
+        GameObject panda = chars.transform.Find("Panda").gameObject;
+        _characters.Add(CharacterType.Panda, panda.GetComponent<Character>().Init(panda));
+
+        GameObject lizard = chars.transform.Find("Lizard").gameObject;
+        _characters.Add(CharacterType.Lizard, lizard.GetComponent<Character>().Init(lizard));
+
+        GameObject elephant = chars.transform.Find("Elephant").gameObject;
+        _characters.Add(CharacterType.Elephant, elephant.GetComponent<Character>().Init(elephant));
+
+        GameObject pig = chars.transform.Find("Pig").gameObject;
+        _characters.Add(CharacterType.Pig, pig.GetComponent<Character>().Init(pig));
     }
 
     public void ChangeScene<T>()
@@ -139,5 +158,13 @@ public class SceneManager : MonoBehaviour
 
         if (_currentScene != null)
             _currentScene.SceneFixedUpdate();
+    }
+
+    public bool AttemptCharacterAssign(CharacterType type, User user)
+    {
+        //Check if the character is already assigned to a user
+        bool isOk = user.AttemptAssignCharacter(_characters[type]);
+
+        return isOk;
     }
 }

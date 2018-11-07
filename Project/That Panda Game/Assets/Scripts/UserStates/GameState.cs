@@ -17,8 +17,11 @@ public class GameState : UserState
     private Character _character;
 
     private float _punchTimer;
+    private float _leftPunchTimer;
+    private float _rightPunchTimer;
 
     private bool _outOfBounds;
+    private float _targetRotation;
 
     public GameState(User user, SceneManager sceneManager)
         :base(user)
@@ -26,7 +29,7 @@ public class GameState : UserState
         _scene = sceneManager.GetScene<GameScene>();
         
         _playerObj = GameObject.Find("Players").transform.Find("Player" + _joystick.GetId()).gameObject;
-        _planetObj = _scene.Planet;
+        _planetObj = GameObject.Find("Planet");
     }
 
     public override void Initialize()
@@ -39,6 +42,7 @@ public class GameState : UserState
         _playerObj.transform.rotation = Quaternion.identity;
         _rotation = 0;
         _character = _user.AssignedCharacter;
+        _character.ResetValues();
     }
 
     public override void Cleanup()
@@ -57,31 +61,40 @@ public class GameState : UserState
         }
 
         _punchTimer -= Time.deltaTime;
-        
+        _leftPunchTimer -= Time.deltaTime;
+        _rightPunchTimer -= Time.deltaTime;
+
         //Check if left/right triggers are being pressed and if cooldowns are finished
-        if (_punchTimer <= 0 && _joystick.GetAxis("L2") >= 0.5f)
+        if (_punchTimer <= 0 && _leftPunchTimer <= 0 && _joystick.GetAxis("L2") >= 0.5f)
         {
+            //Trigger punch animation
+            _character.Animator.SetTrigger("Punch_L");
+
             //reset cooldown
             _punchTimer = _character.PunchCooldown;
+            _leftPunchTimer = _character.LeftPunchCooldown;
             Debug.Log("Left Punch");
-            //Raycast in front of player
+            //SphereCast in front of player
             RaycastHit hit;
-            
-            if (Physics.Raycast(_playerObj.transform.position, _playerObj.transform.forward, out hit, 10, 1<<8))
+            if (Physics.SphereCast(_playerObj.transform.position, _character.PunchRadius, _playerObj.transform.forward, out hit, _character.PunchDistance, 1 << 8))
             {
-                //If raycast hit a player, knock that player back and make them drop coins
+                //If SphereCast hit a player, knock that player back and make them drop coins
                 hit.collider.GetComponent<Character>().ApplyKnockBack(_character.transform.forward, _character.KnockBack, _character.KnockJump);
-                hit.collider.GetComponent<Character>().DropCoins(_character.PunchDropCoins);
+                hit.collider.GetComponent<Character>().DropCoins(_character.PunchDropCoins + _character.PunchCoinDropModifier);
             }
         }
         //same as above (gonna be mergerd later)
-        if (_punchTimer <= 0 && _joystick.GetAxis("R2") >= 0.5f)
+        if (_punchTimer <= 0 && _rightPunchTimer <= 0 && _joystick.GetAxis("R2") >= 0.5f)
         {
+            _character.Animator.SetTrigger("Punch_R");
+
             _punchTimer = _character.PunchCooldown;
+            _rightPunchTimer = _character.RightPunchCooldown;
             Debug.Log("Right Punch");
             RaycastHit hit;
-            if (Physics.Raycast(_playerObj.transform.position, _playerObj.transform.forward, out hit, 10, 1 << 8))
+            if (Physics.SphereCast(_playerObj.transform.position, _character.PunchRadius, _playerObj.transform.forward, out hit, _character.PunchDistance, 1<<8))
             {
+                Debug.Log(hit.collider.name);
                 hit.collider.GetComponent<Character>().ApplyKnockBack(_character.transform.forward, _character.KnockBack, _character.KnockJump);
                 hit.collider.GetComponent<Character>().DropCoins(_character.PunchDropCoins);
             }
@@ -94,6 +107,8 @@ public class GameState : UserState
 
     public override void FixedUpdate()
     {
+        if (_character == null)
+            return;
         //Rotate towards the centre of the planet
         _playerObj.transform.LookAt(_planetObj.transform.position);
 
@@ -105,25 +120,25 @@ public class GameState : UserState
 
         //Check for dead zone (so it doesnt snap back to 0 when joystick is let go)
         if (_lookDir.sqrMagnitude > 0.2f)
-            _rotation = Mathf.Atan2(_lookDir.y, -_lookDir.x);
+            _rotation = Mathf.Atan2(_lookDir.y, -_lookDir.x) * Mathf.Rad2Deg;
 
-        _playerObj.transform.Rotate(0, _rotation * Mathf.Rad2Deg - 90, 0, Space.Self);
+        _playerObj.transform.Rotate(0, _rotation - 90, 0, Space.Self);
 
         _velocity = Vector3.Lerp(_velocity * _character.BackwardSpeed, _velocity, Mathf.InverseLerp(-1, 1, Vector3.Dot(_velocity.normalized, _playerObj.transform.forward)));
 
         //If the character is outside the bounds of the play area, add a force towards the play area to get them back in
-        if (_playerObj.transform.position.z > -10)
-        {
-            _playerObj.GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, -50), ForceMode.Impulse);
-            Physics.IgnoreLayerCollision(8, 12, true);
-            _outOfBounds = true;
-        }
+        //if (_playerObj.transform.position.z > -10)
+        //{
+        //    _playerObj.GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, -50), ForceMode.Impulse);
+        //    _playerObj.GetComponent<CapsuleCollider>().enabled = false;
+        //    _outOfBounds = true;
+        //}
 
-        if (_outOfBounds && _playerObj.transform.position.z < -15)
-        {
-            _outOfBounds = false;
-            Physics.IgnoreLayerCollision(8, 12, false);
-        }
+        //if (_outOfBounds && _playerObj.transform.position.z < -15)
+        //{
+        //    _outOfBounds = false;
+        //    _playerObj.GetComponent<CapsuleCollider>().enabled = true;
+        //}
 
         //Stop the character from moving if it is outside the bounds of the play area
         if ((_playerObj.transform.position + _velocity * Time.deltaTime).z > -10)

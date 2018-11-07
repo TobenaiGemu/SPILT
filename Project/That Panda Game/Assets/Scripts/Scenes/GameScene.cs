@@ -8,8 +8,6 @@ public enum CharacterType {Panda, Lizard, Elephant, Pig}
 
 public class GameScene : Scene
 {
-    private Dictionary<CharacterType, Character> _characters = new Dictionary<CharacterType, Character>();
-
 
     public GameObject Planet { get; private set; }
 
@@ -32,24 +30,12 @@ public class GameScene : Scene
 
     private Vector3 _initCameraPos;
     private Vector3 _targetCameraPos;
-
+    [SerializeField]
+    private float _gameTime;
 
     public void Awake()
     {
         GameObject chars = GameObject.Find("AvailableCharacters");
-
-        //Add characters to dictionary
-        GameObject panda = chars.transform.Find("Panda").gameObject;
-        _characters.Add(CharacterType.Panda, panda.GetComponent<Character>().Init(panda));
-
-        GameObject lizard = chars.transform.Find("Lizard").gameObject;
-        _characters.Add(CharacterType.Lizard, lizard.GetComponent<Character>().Init(lizard));
-
-        GameObject elephant = chars.transform.Find("Elephant").gameObject;
-        _characters.Add(CharacterType.Elephant, elephant.GetComponent<Character>().Init(elephant));
-
-        GameObject pig = chars.transform.Find("Pig").gameObject;
-        _characters.Add(CharacterType.Pig, pig.GetComponent<Character>().Init(pig));
 
         Planet = GameObject.Find("Planet");
         //For lerping the planet scale
@@ -75,10 +61,6 @@ public class GameScene : Scene
 
     public override void Cleanup()
     {
-        _gamePanel.transform.Find("Panda").GetComponent<Text>().text = "Panda: Button1 to join";
-        _gamePanel.transform.Find("Lizard").GetComponent<Text>().text = "Lizard: Button2 to join";
-        _gamePanel.transform.Find("Elephant").GetComponent<Text>().text = "Elephant: Button3 to join";
-        _gamePanel.transform.Find("Pig").GetComponent<Text>().text = "Pig: Button0 to join";
     }
 
     public override bool IntroTransition()
@@ -94,7 +76,10 @@ public class GameScene : Scene
 
         //Change user states to JoinState
         foreach (User user in SceneManager.Users)
-            user.ChangeState("JoinState");
+        {
+            if (user.IsPlaying)
+                user.ChangeState("GameState");
+        }
         _lerper.Reset();
         return true;
     }
@@ -106,9 +91,13 @@ public class GameScene : Scene
             CharacterUnassign(user);
         _coinSpawner.Cleanup();
         _cookieSpawner.Cleanup();
+        _appleSpawner.Cleanup();
+        for (int i = 0; i < _gamePanel.transform.childCount; i++)
+            _gamePanel.transform.GetChild(i).GetComponent<Text>().text = "";
         _gamePanel.SetActive(false);
         _pausePanel.SetActive(false);
         _lerper.Reset();
+        _mamaMarshmallow.Stop();
         return true;
     }
 
@@ -118,7 +107,7 @@ public class GameScene : Scene
         _coinSpawner.Tick();
         _cookieSpawner.Tick();
         _appleSpawner.Tick();
-
+        _gameTime -= Time.deltaTime;
         _mamaTimer -= Time.deltaTime;
         if (_mamaTimer <= 0)
         {
@@ -129,6 +118,11 @@ public class GameScene : Scene
             {
                 ResetMamaTimer();
             }
+        }
+
+        if (_gameTime <= 0)
+        {
+            _sceneManager.ChangeScene<MainMenuScene>();
         }
 
         base.SceneUpdate();
@@ -144,34 +138,6 @@ public class GameScene : Scene
     {
         _mamaFalling = false;
         _mamaTimer = Random.Range(_minRandomMama, _maxRandomMama);
-    }
-
-    public bool AttemptCharacterAssign(CharacterType type, User user)
-    {
-        //Check if the character is already assigned to a user
-        bool isOk = user.AttemptAssignCharacter(_characters[type]);
-
-        //Change text fields if successfully assigned
-        if (isOk)
-        {
-            switch (type)
-            {
-                case CharacterType.Panda:
-                    _gamePanel.transform.Find("Panda").GetComponent<Text>().text = "Panda: Joined";
-                    break;
-                case CharacterType.Lizard:
-                    _gamePanel.transform.Find("Lizard").GetComponent<Text>().text = "Lizard: Joined";
-                    break;
-                case CharacterType.Elephant:
-                    _gamePanel.transform.Find("Elephant").GetComponent<Text>().text = "Elephant: Joined";
-                    break;
-                case CharacterType.Pig:
-                    _gamePanel.transform.Find("Pig").GetComponent<Text>().text = "Pig: Joined";
-                    break;
-            }
-        }
-
-        return isOk;
     }
 
     public void CharacterUnassign(User user)
