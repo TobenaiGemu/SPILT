@@ -1,0 +1,30 @@
+
+: P L A Y E R S :
+
+Panda (BLACK AND WHITE)
+name: Pan 
+skin: tan
+hair: chocolate
+age: youngin
+sex: F
+
+Lizard (ORANGE)
+name: Liz 
+skin: fair (pink)
+hair: grey
+age: oldie
+sex: M
+
+Elephant (BLUE)
+name: Eli
+skin: fair (yellow)
+hair: saturated blue
+age: youngin
+sex: F
+
+Pig (PINK)
+name: Ham
+skin: tan
+hair: blonde
+age: mid 20
+sex: M
