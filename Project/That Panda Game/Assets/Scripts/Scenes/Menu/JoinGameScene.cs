@@ -50,6 +50,7 @@ public class JoinGameScene : Scene
             return false;
         }
         _lerper.Reset();
+        _joinGamePanel.SetActive(false);
         return true;
     }
 }

@@ -101,6 +101,7 @@ public class UiManager : MonoBehaviour
 
     public void SelectPan()
     {
+        Debug.Log("Select Pan");
         _sceneManager.GetScene<CharacterSelectScene>().SelectCharacter(CharacterType.Panda);
     }
 

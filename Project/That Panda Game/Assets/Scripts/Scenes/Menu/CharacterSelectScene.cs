@@ -65,6 +65,7 @@ public class CharacterSelectScene : Scene
             return false;
         }
         _lerper.Reset();
+        _characterSelectPanel.SetActive(false);
         return true;
     }
 
@@ -96,6 +97,5 @@ public class CharacterSelectScene : Scene
             Debug.Log(_userIndex + "Isn't playing");
             GetNextUser();
         }
-
     }
 }

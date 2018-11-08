@@ -14,7 +14,7 @@ public class MenuState : UserState
 
     public override void Initialize()
     {
-
+        _user.SetPlaying(false);
     }
 
     public override void Update()
