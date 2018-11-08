@@ -4,4 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/OnesieFunsie.unity
+    guid: 6092c962fd74107419eba9ab4dbebf53
+  m_configObjects: {}
