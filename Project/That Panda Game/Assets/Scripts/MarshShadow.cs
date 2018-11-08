@@ -15,6 +15,7 @@ public class MarshShadow : MonoBehaviour
 
     private Character _followCharacter;
     private float _followToDistance;
+    private bool _paused;
 
     void Start ()
     {
@@ -38,6 +39,16 @@ public class MarshShadow : MonoBehaviour
         _targetScale = new Vector3(0.4f, 1, 0.4f);
     }
 
+    public void PauseShadow()
+    {
+        _paused = true;
+    }
+
+    public void ResumeShadow()
+    {
+        _paused = false;
+    }
+
     public void FollowCharacter(Character follow)
     {
         _followCharacter = follow;
@@ -56,6 +67,8 @@ public class MarshShadow : MonoBehaviour
 
 	void Update ()
     {
+        if (_paused)
+            return;
         //Follow character if not null
         if (_followCharacter != null)
         {

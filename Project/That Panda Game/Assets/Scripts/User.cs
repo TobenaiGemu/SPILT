@@ -19,9 +19,9 @@ public class User
         _states = new Dictionary<string, UserState>();
 
         _states.Add("GameState", new GameState(this, sceneManager));
-        _states.Add("JoinState", new JoinState(this, sceneManager));
         _states.Add("MenuState", new MenuState(this, sceneManager));
         _states.Add("JoinGameState", new JoinGameState(this, sceneManager));
+        _states.Add("CharacterSelectState", new CharacterSelectState(this, sceneManager));
     }
 
     public void Update()

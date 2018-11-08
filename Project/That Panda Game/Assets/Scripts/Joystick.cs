@@ -59,9 +59,9 @@ public class Joystick
         switch (axis)
         {
             case "L2":
-                return Mathf.InverseLerp(0, 1, Input.GetAxis(((_controllerName == "Wireless Controller") ? "" : "x") + "Joy" + _controllerId + "L2"));
+                return Input.GetAxis(((_controllerName == "Wireless Controller") ? "" : "x") + "Joy" + _controllerId + "L2");
             case "R2":
-                return Mathf.InverseLerp(0, 1, Input.GetAxis(((_controllerName == "Wireless Controller") ? "" : "x") + "Joy" + _controllerId + "R2"));
+                return Input.GetAxis(((_controllerName == "Wireless Controller") ? "" : "x") + "Joy" + _controllerId + "R2");
         }
         return 0;
     }
