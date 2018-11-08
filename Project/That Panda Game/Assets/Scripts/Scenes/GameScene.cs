@@ -61,13 +61,25 @@ public class GameScene : Scene
         _targetCameraPos = new Vector3(0, 0, -54);
         ResetMamaTimer();
         _lerper.Reset();
-
         _winnerText.SetActive(false);
-
+        foreach (User user in SceneManager.Users)
+        {
+            if (user.IsPlaying)
+                user.AssignedCharacter.ReInit();
+        }
     }
 
     public override void Cleanup()
     {
+        //Unasign the players
+        foreach (User user in SceneManager.Users)
+            CharacterUnassign(user);
+        _coinSpawner.Cleanup();
+        _cookieSpawner.Cleanup();
+        _appleSpawner.Cleanup();
+        _gamePanel.SetActive(false);
+        _pausePanel.SetActive(false);
+        _lerper.Reset();
     }
 
     public void WinGame()
@@ -107,15 +119,7 @@ public class GameScene : Scene
 
     public override bool OutroTransition()
     {
-        //Unasign the players
-        foreach (User user in SceneManager.Users)
-            CharacterUnassign(user);
-        _coinSpawner.Cleanup();
-        _cookieSpawner.Cleanup();
-        _appleSpawner.Cleanup();
-        _gamePanel.SetActive(false);
-        _pausePanel.SetActive(false);
-        _lerper.Reset();
+
         return true;
     }
 

@@ -110,6 +110,17 @@ public class Character : MonoBehaviour
     }
 
     [SerializeField]
+    private float _borderDistance;
+    public float BorderDistance
+    {
+        get
+        {
+            return _borderDistance;
+        }
+        private set { }
+    }
+
+    [SerializeField]
     private int _coinFrwdForceMin;
     [SerializeField]
     private int _coinFrwdForceMax;
@@ -150,24 +161,22 @@ public class Character : MonoBehaviour
 
     public void Awake()
     {
-        _characterPool = GameObject.Find("AvailableCharacters");
-        _coinSpawner = GameObject.Find("CoinSpawner").GetComponent<Spawner>();
-        _lerper = new TimeLerper();
-        _mamaMarshmallow = GameObject.Find("Events").transform.Find("MamaMarshmallow").GetComponent<MamaMarshmallow>();
-        _scoreText = GameObject.Find("Canvas").transform.Find("GamePanel").Find(_name).gameObject;
-        _winnerTime = 5;
-        _sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
-        _gameScene = GameObject.Find("Scenes").transform.Find("GameScene").GetComponent<GameScene>();
+
     }
 
     public Character Init(GameObject charObj)
     {
+        _scoreText = GameObject.Find("Canvas").transform.Find("GamePanel").Find(_name).gameObject;
+        _characterPool = GameObject.Find("AvailableCharacters");
+        _coinSpawner = GameObject.Find("CoinSpawner").GetComponent<Spawner>();
+        _lerper = new TimeLerper();
+        _mamaMarshmallow = GameObject.Find("Events").transform.Find("MamaMarshmallow").GetComponent<MamaMarshmallow>();
+        _winnerTime = 5;
+        _sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
+        _gameScene = GameObject.Find("Scenes").transform.Find("GameScene").GetComponent<GameScene>();
+
         _characterObj = charObj;
-        _forwardSpeedMultiplier = 1;
-        _knockbackMultiplier = 1;
-        _knockjumpMultiplier = 1;
-        _speedMultiplierTimer = 1;
-        _coins = 0;
+        ReInit();
         return this;
     }
 
@@ -178,14 +187,18 @@ public class Character : MonoBehaviour
         _knockbackMultiplier = 1;
         _knockjumpMultiplier = 1;
         _speedMultiplierTimer = 1;
-        if (_assignedUser.IsPlaying)
+        if (_assignedUser != null && _assignedUser.IsPlaying)
         {
-            Debug.Log(_name);
             _scoreText.SetActive(true);
             _scoreText.GetComponent<Text>().text = _name + ": 0";
         }
         else
             _scoreText.SetActive(false);
+    }
+
+    public void Cleanup()
+    {
+        _scoreText.SetActive(false);
     }
 
     public void AddCoins(int ammount)
@@ -207,10 +220,7 @@ public class Character : MonoBehaviour
         UpdateCoinPanel();
         for (int i = 0; i < ammount; i++)
         {
-            GameObject coin = _coinSpawner.GetCoin();
-            coin.transform.position = transform.position + transform.up * 5;
-            coin.transform.LookAt(GameObject.Find("Planet").transform);
-            coin.SetActive(true);
+            GameObject coin = _coinSpawner.SpawnObject(transform.position + transform.up * 5);
             int angle = UnityEngine.Random.Range(0, 360);
             Vector3 direction = Quaternion.AngleAxis(angle, transform.up) * transform.forward;
             coin.GetComponent<Rigidbody>().AddForce(direction * UnityEngine.Random.Range(_coinFrwdForceMin, _coinFrwdForceMax) + transform.up * UnityEngine.Random.Range(_coinUpForceMin, _coinUpForceMax), ForceMode.Impulse);

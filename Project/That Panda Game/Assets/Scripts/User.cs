@@ -56,7 +56,9 @@ public class User
     public void UnassignCharacter()
     {
         if (AssignedCharacter != null)
-            AssignedCharacter.Unassign();
+        {
+            AssignedCharacter.Cleanup();
+        }
     }
 
     public void SetPlaying(bool playing)

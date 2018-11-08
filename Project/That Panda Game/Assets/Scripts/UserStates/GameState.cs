@@ -44,8 +44,6 @@ public class GameState : UserState
         _rotation = 0;
         _character = _user.AssignedCharacter;
         _rotationLerper.Reset();
-        if (_character != null)
-            _character.ReInit();
     }
 
     public override void Cleanup()
@@ -161,7 +159,7 @@ public class GameState : UserState
         //}
 
         //Stop the character from moving if it is outside the bounds of the play area
-        if ((_playerObj.transform.position + _velocity * Time.deltaTime).z > -10)
+        if ((_playerObj.transform.position + _velocity * Time.deltaTime).z > _character.BorderDistance * -1)
         {
             return;
         }

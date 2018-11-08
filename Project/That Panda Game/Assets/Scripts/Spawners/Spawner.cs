@@ -63,6 +63,17 @@ public class Spawner : MonoBehaviour
         }
     }
 
+    public GameObject SpawnObject(Vector3 pos)
+    {
+        GameObject obj = _objectPool.GetObject();
+        _activeObjects.Add(obj);
+        obj.transform.position = pos;
+        obj.transform.LookAt(_planet.transform);
+        obj.transform.Rotate(_rotation);
+        obj.SetActive(true);
+        return obj;
+    }
+
     private void SpawnObject()
     {
         //Get an object from the object pool and position it on a random positon on a 2d plane above the planet
@@ -167,10 +178,6 @@ public class Spawner : MonoBehaviour
         _spawnRate = Random.Range(_minSpawnRate, _maxSpawnRate);
     }
 
-    public GameObject GetCoin()
-    {
-        return _objectPool.GetObject();
-    }
 
     public void Cleanup()
     {
