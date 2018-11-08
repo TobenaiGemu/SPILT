@@ -23,11 +23,6 @@ public class Coin : MonoBehaviour
             _coinSpawner.ReturnObject(gameObject);
     }
 
-    private void OnEnable()
-    {
-        _canPickup = false;
-    }
-
     public void CanPickup()
     {
         _canPickup = true;
@@ -40,6 +35,10 @@ public class Coin : MonoBehaviour
             _canPickup = true;
             GetComponent<Rigidbody>().velocity = Vector3.zero;
             transform.SetParent(_planet.transform, true);
+            _coinSpawner.RotateGameObject(gameObject);
+            if (transform.position.y > 0)
+                transform.forward *= -1;
+            transform.Rotate(new Vector3(0, Random.Range(-30, 30), 0));
         }
     }
 

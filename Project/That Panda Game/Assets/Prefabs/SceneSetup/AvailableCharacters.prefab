@@ -761,7 +761,8 @@ GameObject:
   - component: {fileID: 4516290915249084}
   - component: {fileID: 136784963234790940}
   - component: {fileID: 114262566514583408}
-  m_Layer: 0
+  - component: {fileID: 95899698035554984}
+  m_Layer: 8
   m_Name: Elephant
   m_TagString: Character
   m_Icon: {fileID: 0}
@@ -1125,7 +1126,7 @@ Transform:
   m_GameObject: {fileID: 1982578819818846}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 30, y: 30, z: 30}
   m_Children:
   - {fileID: 4236945950557970}
   - {fileID: 4506375004199846}
@@ -1705,6 +1706,24 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1874678939475080}
   m_Mesh: {fileID: 4300002, guid: d73c24eacb5f0004fbb0b57df6103b1f, type: 3}
+--- !u!95 &95899698035554984
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1982578819818846}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d34dd7927ea771242b3d12042d45d144, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114173510387329220
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1717,17 +1736,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Pan
-  _coinsToWin: 15
+  _coinsToWin: 75
   _forwardSpeed: 12
   _backwardSpeedMultiplier: 0.5
   _knockBack: 45
   _knockJump: 30
   _punchDropCoins: 1
   _punchCooldown: 0.2
-  _leftPunchCooldown: 1
-  _rightPunchCooldown: 1
   _punchRadius: 1
-  _punchDistance: 5
+  _punchDistance: 3
+  _borderDistance: 0
   _coinFrwdForceMin: 30
   _coinFrwdForceMax: 60
   _coinUpForceMin: 30
@@ -1744,17 +1762,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Liz
-  _coinsToWin: 15
+  _coinsToWin: 75
   _forwardSpeed: 12
   _backwardSpeedMultiplier: 0.5
   _knockBack: 45
   _knockJump: 30
   _punchDropCoins: 1
   _punchCooldown: 0.2
-  _leftPunchCooldown: 1
-  _rightPunchCooldown: 1
   _punchRadius: 1
-  _punchDistance: 5
+  _punchDistance: 3
+  _borderDistance: 0
   _coinFrwdForceMin: 30
   _coinFrwdForceMax: 60
   _coinUpForceMin: 30
@@ -1771,17 +1788,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Eli
-  _coinsToWin: 15
+  _coinsToWin: 75
   _forwardSpeed: 12
   _backwardSpeedMultiplier: 0.5
   _knockBack: 45
   _knockJump: 30
   _punchDropCoins: 1
   _punchCooldown: 0.2
-  _leftPunchCooldown: 1
-  _rightPunchCooldown: 1
   _punchRadius: 1
-  _punchDistance: 5
+  _punchDistance: 3
+  _borderDistance: 0
   _coinFrwdForceMin: 30
   _coinFrwdForceMax: 60
   _coinUpForceMin: 30
@@ -1798,17 +1814,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Ham
-  _coinsToWin: 15
+  _coinsToWin: 75
   _forwardSpeed: 12
   _backwardSpeedMultiplier: 0.5
   _knockBack: 45
   _knockJump: 30
   _punchDropCoins: 1
   _punchCooldown: 0.2
-  _leftPunchCooldown: 1
-  _rightPunchCooldown: 1
   _punchRadius: 1
-  _punchDistance: 5
+  _punchDistance: 3
+  _borderDistance: 0
   _coinFrwdForceMin: 30
   _coinFrwdForceMax: 60
   _coinUpForceMin: 30

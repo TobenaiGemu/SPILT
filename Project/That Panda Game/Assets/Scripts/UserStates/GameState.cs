@@ -21,7 +21,6 @@ public class GameState : UserState
     private bool _outOfBounds;
 
     private TimeLerper _rotationLerper;
-    private float _rotationFrom;
 
     public GameState(User user, SceneManager sceneManager)
         :base(user)
@@ -110,37 +109,11 @@ public class GameState : UserState
 
         _playerObj.transform.Rotate(new Vector3(1, 0, 0), -90);
 
-        float prevRotation = _rotation;
-        if (prevRotation < 0)
-        {
-            prevRotation += 360;
-        }
         //Check for dead zone (so it doesnt snap back to 0 when joystick is let go)
         if (_lookDir.sqrMagnitude > 0.2f)
             _rotation = Mathf.Atan2(_lookDir.y, -_lookDir.x) * Mathf.Rad2Deg;
 
-        if (_rotation < 0)
-        {
-            _rotation += 360;
-        }
-
-        if (_rotation != prevRotation)
-        {
-            _rotationLerper.Reset();
-            _rotationFrom = prevRotation;
-        }
-
-        if (prevRotation > 180 && _rotation < 180)
-        {
-            _rotationFrom -= 360;
-        }
-
-        float rotation = _rotationLerper.Lerp(_rotationFrom, _rotation, 0.2f);
-
-        if (rotation > 180)
-            rotation -= 360;
-
-        _playerObj.transform.Rotate(0, rotation - 90, 0, Space.Self);
+        _playerObj.transform.Rotate(0, _rotation - 90, 0, Space.Self);
 
         _velocity = Vector3.Lerp(_velocity * _character.BackwardSpeed, _velocity, Mathf.InverseLerp(-1, 1, Vector3.Dot(_velocity.normalized, _playerObj.transform.forward)));
 

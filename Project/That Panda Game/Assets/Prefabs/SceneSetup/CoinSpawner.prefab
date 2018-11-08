@@ -51,9 +51,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da5f1a125f4ed914c9c59b5a2d9e9531, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _object: {fileID: 1153410568022254, guid: 76df0ab56a0d944418b8a8419a0a87cb, type: 2}
+  _object: {fileID: 1781578314437476, guid: cec9171c04eeedd44993b2cc93aabd87, type: 2}
+  _materialsList:
+  - {fileID: 2100000, guid: 22776f11df0fc58488fa2f2120fa1987, type: 2}
+  - {fileID: 2100000, guid: f6d3a6fe55c79644099810f9693067f8, type: 2}
+  - {fileID: 2100000, guid: 6e08a159889de8547920eeef48c9b9b4, type: 2}
+  - {fileID: 2100000, guid: 07e83ebd2705b0d428404c1ca7eb0a80, type: 2}
+  - {fileID: 2100000, guid: fc8b9c0d7b161384cab6b2c694e2df68, type: 2}
   _minSpawnRate: 0.5
   _maxSpawnRate: 1.5
   _spawnRadius: 15
   _maxObjects: 15
-  _rotation: {x: 0, y: 0, z: 0}
+  _rotation: {x: -90, y: 0, z: 0}
+  _distanceFromApple: 0
+  _distanceFromCoin: 0
+  _distanceFromCookie: 0

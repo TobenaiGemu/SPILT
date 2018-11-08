@@ -38,7 +38,6 @@ public class MainMenuScene : Scene
     {
         _initCameraPos = Camera.main.transform.position;
         _lerper.Reset();
-        EventSystem.current.firstSelectedGameObject = _startButton;
     }
 
     public override bool IntroTransition()
@@ -69,6 +68,8 @@ public class MainMenuScene : Scene
 
         _lerper.Reset();
         _finishedScale = false;
+        EventSystem.current.firstSelectedGameObject = _startButton;
+        _uiManager.ChangeEventSystem(1);
         return true;
     }
 

@@ -6,7 +6,8 @@ public class Spawner : MonoBehaviour
 {
     [SerializeField]
     private GameObject _object;
-
+    [SerializeField]
+    private List<Material> _materialsList;
     [SerializeField]
     private float _minSpawnRate;
     [SerializeField]
@@ -68,10 +69,17 @@ public class Spawner : MonoBehaviour
         GameObject obj = _objectPool.GetObject();
         _activeObjects.Add(obj);
         obj.transform.position = pos;
-        obj.transform.LookAt(_planet.transform);
-        obj.transform.Rotate(_rotation);
+        RotateGameObject(obj);
+        SetRandomMaterial(obj);
         obj.SetActive(true);
         return obj;
+    }
+
+    public void RotateGameObject(GameObject obj)
+    {
+        obj.transform.rotation = Quaternion.identity;
+        obj.transform.LookAt(_planet.transform);
+        obj.transform.Rotate(_rotation);
     }
 
     private void SpawnObject()
@@ -127,7 +135,7 @@ public class Spawner : MonoBehaviour
 
         //Rotate the object to correctly allign it with the planet
         obj.transform.position = spawnPos;
-        obj.transform.LookAt(_planet.transform);
+        RotateGameObject(obj);
         obj.transform.SetParent(_planet.transform, true);
         //If the object is a coin, add the GravitySim component to it
         Coin coin = obj.GetComponent<Coin>();
@@ -136,9 +144,17 @@ public class Spawner : MonoBehaviour
             coin.GetComponent<GravitySim>().enabled = true;
             coin.CanPickup();
         }
-        obj.transform.Rotate(_rotation);
+        SetRandomMaterial(obj);
         obj.SetActive(true);
         SetSpawnRate();
+    }
+
+    private void SetRandomMaterial(GameObject obj)
+    {
+        if (_materialsList.Count == 0)
+            return;
+        int matIndex = Random.Range(0, _materialsList.Count);
+        obj.GetComponent<Renderer>().sharedMaterial = _materialsList[matIndex];
     }
 
     private bool CheckDistanceFromList(List<GameObject> objects, Vector3 pos, float distance)

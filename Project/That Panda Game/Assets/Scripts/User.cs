@@ -57,6 +57,7 @@ public class User
     {
         if (AssignedCharacter != null)
         {
+            Debug.Log(AssignedCharacter.name);
             AssignedCharacter.Cleanup();
         }
     }

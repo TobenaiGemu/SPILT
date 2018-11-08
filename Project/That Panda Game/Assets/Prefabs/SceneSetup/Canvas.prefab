@@ -232,6 +232,8 @@ GameObject:
   - component: {fileID: 222585452474854966}
   - component: {fileID: 114131355176504436}
   - component: {fileID: 114275623504929012}
+  - component: {fileID: 225460806937075522}
+  - component: {fileID: 95112320683408332}
   m_Layer: 5
   m_Name: Eli
   m_TagString: Untagged
@@ -598,6 +600,8 @@ GameObject:
   - component: {fileID: 222284755230593478}
   - component: {fileID: 114068905154009676}
   - component: {fileID: 114612195207621964}
+  - component: {fileID: 225521879714281240}
+  - component: {fileID: 95233004671972008}
   m_Layer: 5
   m_Name: Liz
   m_TagString: Untagged
@@ -1481,6 +1485,42 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &95112320683408332
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1185555600943280}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2a30ff663cd6a334da5fa90742759d86, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!95 &95233004671972008
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1374463397933774}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d9f86efbb639b3f4394eca4573fa09f2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!95 &95399540370521014
 Animator:
   serializedVersion: 3
@@ -2584,7 +2624,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
+  m_Transition: 3
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -3347,7 +3387,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_MethodName: GotoGamemode
+        m_MethodName: GotoJoinGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3430,7 +3470,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
+  m_Transition: 3
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -5969,7 +6009,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -231.99994, y: 0}
+  m_AnchoredPosition: {x: -232.00006, y: 0}
   m_SizeDelta: {x: -1641, y: -400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224085338617434644
@@ -6345,7 +6385,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -897.5644, y: 0.3997146}
+  m_AnchoredPosition: {x: -1, y: 0.3997146}
   m_SizeDelta: {x: 420, y: 149}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224374063921464012
@@ -6749,7 +6789,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1348.0958, y: 0.39965358}
+  m_AnchoredPosition: {x: 0, y: 0.39965358}
   m_SizeDelta: {x: 420, y: 149}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224638052994081712
@@ -7092,7 +7132,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -619, y: 0}
+  m_AnchoredPosition: {x: -619.00006, y: 0}
   m_SizeDelta: {x: -1641, y: -400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224812721160239022
@@ -7529,6 +7569,17 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!225 &225460806937075522
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1185555600943280}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!225 &225468918706455688
 CanvasGroup:
   m_ObjectHideFlags: 1
@@ -7537,6 +7588,17 @@ CanvasGroup:
   m_GameObject: {fileID: 1806955626754564}
   m_Enabled: 1
   m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!225 &225521879714281240
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1374463397933774}
+  m_Enabled: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0

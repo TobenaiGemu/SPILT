@@ -38,10 +38,6 @@ public class CharacterSelectScene : Scene
                 break;
             }
         }
-        _uiManager.ChangeEventSystem(_userIndex);
-        EventSystem.current.firstSelectedGameObject = _firstSelectedCharacter;
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(_firstSelectedCharacter);
     }
 
     public override bool IntroTransition()
@@ -54,6 +50,10 @@ public class CharacterSelectScene : Scene
         foreach (User user in SceneManager.Users)
             user.ChangeState("CharacterSelectState");
         _lerper.Reset();
+        _uiManager.ChangeEventSystem(_userIndex);
+        EventSystem.current.firstSelectedGameObject = _firstSelectedCharacter;
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(_firstSelectedCharacter);
         return true;
     }
 

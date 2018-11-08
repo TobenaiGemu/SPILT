@@ -199,6 +199,7 @@ public class Character : MonoBehaviour
     public void Cleanup()
     {
         _scoreText.SetActive(false);
+        Unassign();
     }
 
     public void AddCoins(int ammount)
@@ -323,7 +324,7 @@ public class Character : MonoBehaviour
         StopRoastingMarshmallow();
     }
 
-    public void Unassign()
+    private void Unassign()
     {
         if (_isAssigned)
         {
