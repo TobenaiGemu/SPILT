@@ -257,22 +257,22 @@ Prefab:
     - target: {fileID: 114262566514583408, guid: ba602fee0c950754090d7d5b2034a673,
         type: 2}
       propertyPath: _punchRadius
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114957736405516010, guid: ba602fee0c950754090d7d5b2034a673,
         type: 2}
       propertyPath: _punchRadius
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114237993361234288, guid: ba602fee0c950754090d7d5b2034a673,
         type: 2}
       propertyPath: _punchRadius
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114173510387329220, guid: ba602fee0c950754090d7d5b2034a673,
         type: 2}
       propertyPath: _punchRadius
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba602fee0c950754090d7d5b2034a673, type: 2}
