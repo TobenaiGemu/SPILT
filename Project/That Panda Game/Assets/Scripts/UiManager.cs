@@ -81,7 +81,7 @@ public class UiManager : MonoBehaviour
     public void ResumeGame()
     {
         _sceneManager.ResumeScene();
-        _gameScene.PlayGame();
+        _gameScene.ResumeGame();
     }
 
     public void GotoCharacterSelect()
@@ -92,6 +92,11 @@ public class UiManager : MonoBehaviour
     public void GotoJoinGame()
     {
         _sceneManager.ChangeScene<JoinGameScene>();
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 
     public void SelectPan()

@@ -21,6 +21,10 @@ public class JoinGameScene : Scene
     public override void Initialize()
     {
         _lerper.Reset();
+        for (int i = 0; i < SceneManager.MaxUsers; i++)
+        {
+            _joinGamePanel.transform.GetChild(i).GetChild(0).GetComponent<Text>().text = "PRESS A TO JOIN!";
+        }
         _joinGamePanel.SetActive(true);
     }
 
@@ -46,11 +50,6 @@ public class JoinGameScene : Scene
             return false;
         }
         _lerper.Reset();
-        _joinGamePanel.SetActive(false);
-        for (int i = 0; i < 4; i++)
-        {
-            _joinGamePanel.transform.GetChild(i).GetChild(0).GetComponent<Text>().text = "PRESS A TO JOIN";
-        }
         return true;
     }
 }

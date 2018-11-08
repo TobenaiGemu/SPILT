@@ -24,6 +24,7 @@ public class MamaMarshmallow : MonoBehaviour
     private Vector3 _initPos;
     private Vector3 _targetPos;
     private float _initDistance;
+    private bool _paused;
 
     private void Awake()
     {
@@ -63,19 +64,18 @@ public class MamaMarshmallow : MonoBehaviour
         _initDistance = (transform.position - _shadow.transform.position).magnitude;
     }
 
-    public void Stop()
-    {
-        _isAngewy = false;
-        _lerper.Reset();
-        _crashed = true;
-        transform.SetParent(GameObject.Find("Events").transform, true);
-        gameObject.SetActive(false);
-        _shadow.Cleanup();
-    }
-
     public bool HasCrashed()
     {
         return _crashed;
+    }
+
+    public void StopMarshmallow()
+    {
+        _isAngewy = false;
+        _crashed = true;
+        _shadow.Cleanup();
+        gameObject.SetActive(false);
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -105,9 +105,21 @@ public class MamaMarshmallow : MonoBehaviour
         }
     }
 
+    public void Pause()
+    {
+        _paused = true;
+        _shadow.PauseShadow();
+    }
+
+    public void Resume()
+    {
+        _paused = false;
+        _shadow.ResumeShadow();
+    }
+
     void Update()
     {
-        if (_crashed)
+        if (_crashed || _paused)
             return;
 
         //When the marshmallow gets to a certain distance from the planet, stop the shadow from following a character (if it is)

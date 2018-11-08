@@ -24,14 +24,17 @@ public class GameScene : Scene
     private int _minRandomMama;
     [SerializeField]
     private int _maxRandomMama;
+    [SerializeField]
+    private float _winnerTime;
     private float _mamaTimer;
     private bool _mamaFalling;
-
 
     private Vector3 _initCameraPos;
     private Vector3 _targetCameraPos;
     [SerializeField]
     private float _gameTime;
+
+    private GameObject _winnerText;
 
     public void Awake()
     {
@@ -49,6 +52,7 @@ public class GameScene : Scene
         _appleSpawner = GameObject.Find("AppleSpawner").GetComponent<Spawner>();
 
         _mamaMarshmallow = GameObject.Find("Events").transform.Find("MamaMarshmallow").GetComponent<MamaMarshmallow>();
+        _winnerText = GameObject.Find("Canvas").transform.Find("GamePanel").Find("WINNER").gameObject;
     }
 
     public override void Initialize()
@@ -57,10 +61,30 @@ public class GameScene : Scene
         _targetCameraPos = new Vector3(0, 0, -54);
         ResetMamaTimer();
         _lerper.Reset();
+
+        _winnerText.SetActive(false);
+
     }
 
     public override void Cleanup()
     {
+    }
+
+    public void WinGame()
+    {
+        StartCoroutine(FinishGame());
+    }
+
+    public IEnumerator FinishGame()
+    {
+        while (_winnerTime > 0)
+        {
+            _winnerTime -= Time.deltaTime;
+            Debug.Log(_winnerTime);
+            yield return null;
+        }
+        _mamaMarshmallow.StopMarshmallow();
+        _sceneManager.ChangeScene<MainMenuScene>();
     }
 
     public override bool IntroTransition()
@@ -76,10 +100,7 @@ public class GameScene : Scene
 
         //Change user states to JoinState
         foreach (User user in SceneManager.Users)
-        {
-            if (user.IsPlaying)
-                user.ChangeState("GameState");
-        }
+            user.ChangeState("GameState");
         _lerper.Reset();
         return true;
     }
@@ -92,12 +113,9 @@ public class GameScene : Scene
         _coinSpawner.Cleanup();
         _cookieSpawner.Cleanup();
         _appleSpawner.Cleanup();
-        for (int i = 0; i < _gamePanel.transform.childCount; i++)
-            _gamePanel.transform.GetChild(i).GetComponent<Text>().text = "";
         _gamePanel.SetActive(false);
         _pausePanel.SetActive(false);
         _lerper.Reset();
-        _mamaMarshmallow.Stop();
         return true;
     }
 
@@ -145,14 +163,18 @@ public class GameScene : Scene
         user.UnassignCharacter();
     }
 
-    public void PlayGame()
+    public void ResumeGame()
     {
+        _mamaMarshmallow.Resume();
         _gamePanel.gameObject.SetActive(true);
         _pausePanel.gameObject.SetActive(false);
+        Planet.GetComponent<Planet>().Resume();
     }
 
     public void PauseGame(User user)
     {
+        Planet.GetComponent<Planet>().Pause();
+        _mamaMarshmallow.Pause();
         //Stop updating and show pause menu panel
         _gamePanel.gameObject.SetActive(false);
         _pausePanel.gameObject.SetActive(true);

@@ -22,10 +22,26 @@ public class Spawner : MonoBehaviour
     [SerializeField]
     private Vector3 _rotation;
 
+    [SerializeField]
+    private float _distanceFromApple;
+    [SerializeField]
+    private float _distanceFromCoin;
+    [SerializeField]
+    private float _distanceFromCookie;
+
     private GameObject _planet;
 
-    protected ObjectPool _objectPool;
+    private ObjectPool _objectPool;
+
     private List<GameObject> _activeObjects;
+    public List<GameObject> ActiveObjects
+    {
+        get
+        {
+            return _activeObjects;
+        }
+        private set { }
+    }
 
     private float _spawnTimer;
 	
@@ -50,8 +66,6 @@ public class Spawner : MonoBehaviour
     private void SpawnObject()
     {
         //Get an object from the object pool and position it on a random positon on a 2d plane above the planet
-        GameObject obj = _objectPool.GetObject();
-        _activeObjects.Add(obj);
         Vector3 spawnPos = new Vector3(0, 0, -30);
         //Raycast towards the planet and get the Z position of the point it hits to place the object there
         RaycastHit hit;
@@ -60,18 +74,45 @@ public class Spawner : MonoBehaviour
 
         int fallback = 0;
 
+        List<GameObject> _coins = GameObject.Find("CoinSpawner").GetComponent<Spawner>().ActiveObjects;
+        List<GameObject> _apples = GameObject.Find("AppleSpawner").GetComponent<Spawner>().ActiveObjects;
+        List<GameObject> _cookies = GameObject.Find("CookieSpawner").GetComponent<Spawner>().ActiveObjects;
+
+
+        //If the raycast doesn't hit the planet (hits an environment object, etc), try a new position
         while (!hitPlanet)
         {
+            if (fallback > 50)
+                return;
             spawnPos.x = Random.insideUnitCircle.x * _spawnRadius;
             spawnPos.y = Random.insideUnitCircle.y * _spawnRadius;
+
+            if (CheckDistanceFromList(_coins, spawnPos, _distanceFromCoin))
+            {
+                fallback++;
+                continue;
+            }
+
+            if (CheckDistanceFromList(_apples, spawnPos, _distanceFromApple))
+            {
+                fallback++;
+                continue;
+            }
+
+            if (CheckDistanceFromList(_cookies, spawnPos, _distanceFromCookie))
+            {
+                fallback++;
+                continue;
+            }
+
             Physics.Raycast(spawnPos, Vector3.forward, out hit, 30);
             if (hit.collider.transform.name == "Planet")
                 hitPlanet = true;
             fallback++;
-            if (fallback > 50)
-                return;
         }
+        GameObject obj = _objectPool.GetObject();
         spawnPos.z = hit.point.z - 1;
+        _activeObjects.Add(obj);
 
         //Rotate the object to correctly allign it with the planet
         obj.transform.position = spawnPos;
@@ -87,6 +128,38 @@ public class Spawner : MonoBehaviour
         obj.transform.Rotate(_rotation);
         obj.SetActive(true);
         SetSpawnRate();
+    }
+
+    private bool CheckDistanceFromList(List<GameObject> objects, Vector3 pos, float distance)
+    {
+        bool closeCoin = false;
+        GameObject _closestCoin = null;
+
+        if (objects.Count > 0)
+        {
+            _closestCoin = objects[0];
+        }
+
+        if (_closestCoin != null)
+        {
+            //Get the closest coin
+            foreach (GameObject c in objects)
+            {
+                if ((new Vector2(c.transform.position.x, c.transform.position.y) - new Vector2(pos.x, pos.y)).magnitude < (new Vector2(_closestCoin.transform.position.x, _closestCoin.transform.position.y) - new Vector2(pos.x, pos.y)).magnitude)
+                    _closestCoin = c;
+            }
+            //If the closest coin distance is less than the min distance allowed, try another position
+            if ((new Vector2(_closestCoin.transform.position.x, _closestCoin.transform.position.y) - new Vector2(pos.x, pos.y)).magnitude < _distanceFromCoin)
+            {
+                closeCoin = true;
+            }
+            else
+            {
+                closeCoin = false;
+            }
+        }
+
+        return closeCoin;
     }
 
     private void SetSpawnRate()

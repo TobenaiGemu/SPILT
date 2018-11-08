@@ -51,6 +51,9 @@ public class CharacterSelectScene : Scene
             _characterSelectCanvas.alpha = _lerper.Lerp(0, 1, 0.5f);
             return false;
         }
+        foreach (User user in SceneManager.Users)
+            user.ChangeState("CharacterSelectState");
+        _lerper.Reset();
         return true;
     }
 
@@ -61,7 +64,7 @@ public class CharacterSelectScene : Scene
             _characterSelectCanvas.alpha = _lerper.Lerp(1, 0, 0.5f);
             return false;
         }
-        _characterSelectPanel.SetActive(false);
+        _lerper.Reset();
         return true;
     }
 
@@ -90,6 +93,7 @@ public class CharacterSelectScene : Scene
         }
         else
         {
+            Debug.Log(_userIndex + "Isn't playing");
             GetNextUser();
         }
 

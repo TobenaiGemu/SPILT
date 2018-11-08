@@ -295,6 +295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _minRandomMama: 5
   _maxRandomMama: 10
+  _winnerTime: 0
   _gameTime: 500
 --- !u!114 &114540222999761608
 MonoBehaviour:
