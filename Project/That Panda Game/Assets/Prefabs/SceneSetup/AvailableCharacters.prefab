@@ -84,7 +84,7 @@ GameObject:
   - component: {fileID: 114625162219983864}
   m_Layer: 0
   m_Name: Liz
-  m_TagString: Untagged
+  m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1937,7 +1937,7 @@ GameObject:
   - component: {fileID: 114897068016706000}
   m_Layer: 0
   m_Name: Ham
-  m_TagString: Untagged
+  m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2272,7 +2272,7 @@ GameObject:
   - component: {fileID: 114535932941747448}
   m_Layer: 0
   m_Name: Pan
-  m_TagString: Untagged
+  m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2381,7 +2381,7 @@ GameObject:
   - component: {fileID: 114502479712944126}
   m_Layer: 0
   m_Name: Eli
-  m_TagString: Untagged
+  m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
