@@ -24,6 +24,7 @@ public class Scene : MonoBehaviour
     {
         foreach (User user in SceneManager.Users)
         {
+            Debug.Log("Updating");
             if (user != null)
                 user.Update();
         }

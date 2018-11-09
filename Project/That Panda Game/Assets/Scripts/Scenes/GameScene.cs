@@ -33,6 +33,7 @@ public class GameScene : Scene
     private Vector3 _targetCameraPos;
     [SerializeField]
     private float _gameTime;
+    private float _gameTimer;
 
     private GameObject _winnerText;
 
@@ -67,13 +68,17 @@ public class GameScene : Scene
             if (user.IsPlaying)
                 user.AssignedCharacter.ReInit();
         }
+        _gameTimer = _gameTime;
     }
 
     public override void Cleanup()
     {
         //Unasign the players
         foreach (User user in SceneManager.Users)
+        {
             CharacterUnassign(user);
+            user.SetPlaying(false);
+        }
         _coinSpawner.Cleanup();
         _cookieSpawner.Cleanup();
         _appleSpawner.Cleanup();
@@ -129,7 +134,7 @@ public class GameScene : Scene
         _coinSpawner.Tick();
         _cookieSpawner.Tick();
         _appleSpawner.Tick();
-        _gameTime -= Time.deltaTime;
+        _gameTimer -= Time.deltaTime;
         _mamaTimer -= Time.deltaTime;
         if (_mamaTimer <= 0)
         {
@@ -142,7 +147,7 @@ public class GameScene : Scene
             }
         }
 
-        if (_gameTime <= 0)
+        if (_gameTimer <= 0)
         {
             _sceneManager.ChangeScene<MainMenuScene>();
         }
