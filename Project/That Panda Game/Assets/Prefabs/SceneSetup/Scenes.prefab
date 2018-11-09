@@ -296,7 +296,7 @@ MonoBehaviour:
   _minRandomMama: 5
   _maxRandomMama: 10
   _winnerTime: 0
-  _gameTime: 500
+  _gameTime: 90
 --- !u!114 &114540222999761608
 MonoBehaviour:
   m_ObjectHideFlags: 1
