@@ -71,5 +71,6 @@ public class InfoScene : Scene
     public override void SceneUpdate()
     {
         _menuPage.Update();
+        base.SceneUpdate();
     }
 }

@@ -9,6 +9,14 @@ public class Character : MonoBehaviour
 {
     [SerializeField]
     private string _name;
+    public string Name
+    {
+        get
+        {
+            return _name;
+        }
+        private set { }
+    }
 
     [SerializeField]
     private int _coinsToWin;
