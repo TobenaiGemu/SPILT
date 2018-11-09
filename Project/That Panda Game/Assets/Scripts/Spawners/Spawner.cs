@@ -159,34 +159,34 @@ public class Spawner : MonoBehaviour
 
     private bool CheckDistanceFromList(List<GameObject> objects, Vector3 pos, float distance)
     {
-        bool closeCoin = false;
-        GameObject _closestCoin = null;
+        bool closeObj = false;
+        GameObject _closestObj = null;
 
         if (objects.Count > 0)
         {
-            _closestCoin = objects[0];
+            _closestObj = objects[0];
         }
 
-        if (_closestCoin != null)
+        if (_closestObj != null)
         {
             //Get the closest coin
             foreach (GameObject c in objects)
             {
-                if ((new Vector2(c.transform.position.x, c.transform.position.y) - new Vector2(pos.x, pos.y)).magnitude < (new Vector2(_closestCoin.transform.position.x, _closestCoin.transform.position.y) - new Vector2(pos.x, pos.y)).magnitude)
-                    _closestCoin = c;
+                if ((new Vector2(c.transform.position.x, c.transform.position.y) - new Vector2(pos.x, pos.y)).magnitude < (new Vector2(_closestObj.transform.position.x, _closestObj.transform.position.y) - new Vector2(pos.x, pos.y)).magnitude)
+                    _closestObj = c;
             }
             //If the closest coin distance is less than the min distance allowed, try another position
-            if ((new Vector2(_closestCoin.transform.position.x, _closestCoin.transform.position.y) - new Vector2(pos.x, pos.y)).magnitude < _distanceFromCoin)
+            if ((new Vector2(_closestObj.transform.position.x, _closestObj.transform.position.y) - new Vector2(pos.x, pos.y)).magnitude < distance)
             {
-                closeCoin = true;
+                closeObj = true;
             }
             else
             {
-                closeCoin = false;
+                closeObj = false;
             }
         }
 
-        return closeCoin;
+        return closeObj;
     }
 
     private void SetSpawnRate()
