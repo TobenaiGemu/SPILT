@@ -52,16 +52,16 @@ public class SceneManager : MonoBehaviour
         GameObject chars = GameObject.Find("AvailableCharacters");
 
         //Add characters to dictionary
-        GameObject panda = chars.transform.Find("Panda").gameObject;
+        GameObject panda = chars.transform.Find("Pan").gameObject;
         _characters.Add(CharacterType.Panda, panda.GetComponent<Character>().Init(panda));
 
-        GameObject lizard = chars.transform.Find("Lizard").gameObject;
+        GameObject lizard = chars.transform.Find("Liz").gameObject;
         _characters.Add(CharacterType.Lizard, lizard.GetComponent<Character>().Init(lizard));
 
-        GameObject elephant = chars.transform.Find("Elephant").gameObject;
+        GameObject elephant = chars.transform.Find("Eli").gameObject;
         _characters.Add(CharacterType.Elephant, elephant.GetComponent<Character>().Init(elephant));
 
-        GameObject pig = chars.transform.Find("Pig").gameObject;
+        GameObject pig = chars.transform.Find("Ham").gameObject;
         _characters.Add(CharacterType.Pig, pig.GetComponent<Character>().Init(pig));
     }
 

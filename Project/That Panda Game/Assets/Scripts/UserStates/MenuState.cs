@@ -20,7 +20,6 @@ public class MenuState : UserState
 
     public override void Update()
     {
-        Debug.Log("Updating");
         if (_joystick.WasButtonPressed("Button2"))
         {
             _sceneManager.ChangeScene<MainMenuScene>();

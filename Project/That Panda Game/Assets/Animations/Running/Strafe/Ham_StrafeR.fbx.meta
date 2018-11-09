@@ -1,14 +1,14 @@
 fileFormatVersion: 2
-guid: e229a37d5866a684a9aac686f4fee1ad
+guid: 20307faa7ab755549afffb86da89e5da
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: Character_Rig_Eli_v30_0002:Body_CTRL
     100002: Character_Rig_Eli_v30_0002:Body_CTRLOrient_GRP
     100004: Character_Rig_Eli_v30_0002:COG_JNT
-    100006: Character_Rig_Eli_v30_0002:eli_Eli
-    100008: Character_Rig_Eli_v30_0002:eli_eli
-    100010: Character_Rig_Eli_v30_0002:eli_headLP3
+    100006: Character_Rig_Eli_v30_0002:ham_Ham
+    100008: Character_Rig_Eli_v30_0002:ham_ham
+    100010: Character_Rig_Eli_v30_0002:ham_headLP4
     100012: Character_Rig_Eli_v30_0002:Hip_CTRL
     100014: Character_Rig_Eli_v30_0002:Hip_CTRLOrient_Grp
     100016: Character_Rig_Eli_v30_0002:Hip_JNT
@@ -45,9 +45,9 @@ ModelImporter:
     400000: Character_Rig_Eli_v30_0002:Body_CTRL
     400002: Character_Rig_Eli_v30_0002:Body_CTRLOrient_GRP
     400004: Character_Rig_Eli_v30_0002:COG_JNT
-    400006: Character_Rig_Eli_v30_0002:eli_Eli
-    400008: Character_Rig_Eli_v30_0002:eli_eli
-    400010: Character_Rig_Eli_v30_0002:eli_headLP3
+    400006: Character_Rig_Eli_v30_0002:ham_Ham
+    400008: Character_Rig_Eli_v30_0002:ham_ham
+    400010: Character_Rig_Eli_v30_0002:ham_headLP4
     400012: Character_Rig_Eli_v30_0002:Hip_CTRL
     400014: Character_Rig_Eli_v30_0002:Hip_CTRLOrient_Grp
     400016: Character_Rig_Eli_v30_0002:Hip_JNT
@@ -81,14 +81,14 @@ ModelImporter:
     400072: Character_Rig_Eli_v30_0002:Spine_CTRLOrient_GRP
     400074: Character_Rig_Eli_v30_0002:Spine_JNT
     400076: //RootNode
-    2100000: Character_Rig_Eli_v30_0002_eli_eliOnesie
-    2100002: Character_Rig_Eli_v30_0002_eli_eliHead
-    4300000: Character_Rig_Eli_v30_0002:eli_Eli
-    4300002: Character_Rig_Eli_v30_0002:eli_headLP3
-    7400000: Punch_R
+    2100000: Character_Rig_Eli_v30_0002_ham_hamOnesie
+    2100002: Character_Rig_Eli_v30_0002_ham_hamHead
+    4300000: Character_Rig_Eli_v30_0002:ham_Ham
+    4300002: Character_Rig_Eli_v30_0002:ham_headLP4
+    7400000: Take 001
     9500000: //RootNode
-    13700000: Character_Rig_Eli_v30_0002:eli_Eli
-    13700002: Character_Rig_Eli_v30_0002:eli_headLP3
+    13700000: Character_Rig_Eli_v30_0002:ham_Ham
+    13700002: Character_Rig_Eli_v30_0002:ham_headLP4
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -116,35 +116,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: Punch_R
-      takeName: Take 001
-      firstFrame: 1
-      lastFrame: 10
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -176,7 +148,7 @@ ModelImporter:
     tangentImportMode: 3
     normalCalculationMode: 4
   importAnimation: 1
-  copyAvatar: 1
+  copyAvatar: 0
   humanDescription:
     serializedVersion: 2
     human: []
@@ -193,8 +165,7 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: dbc41eac3aec05a448e080bb0106013d,
-    type: 3}
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
