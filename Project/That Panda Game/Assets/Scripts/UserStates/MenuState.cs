@@ -5,20 +5,25 @@ using UnityEngine;
 public class MenuState : UserState
 {
     private MainMenuScene _scene;
+    private SceneManager _sceneManager;
 
     public MenuState(User user, SceneManager sceneManager)
         :base(user)
     {
         _scene = sceneManager.GetScene<MainMenuScene>();
+        _sceneManager = sceneManager;
     }
 
     public override void Initialize()
     {
-        _user.SetPlaying(false);
     }
 
     public override void Update()
     {
-
+        Debug.Log("Updating");
+        if (_joystick.WasButtonPressed("Button2"))
+        {
+            _sceneManager.ChangeScene<MainMenuScene>();
+        }
     }
 }
