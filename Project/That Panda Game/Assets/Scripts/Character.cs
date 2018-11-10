@@ -96,6 +96,28 @@ public class Character : MonoBehaviour
     }
 
     [SerializeField]
+    private float _rightPunchCooldown;
+    public float RightPunchCooldown
+    {
+        get
+        {
+            return _rightPunchCooldown;
+        }
+        private set { }
+    }
+
+    [SerializeField]
+    private float _leftPunchCooldown;
+    public float LeftPunchCooldown
+    {
+        get
+        {
+            return _leftPunchCooldown;
+        }
+        private set { }
+    }
+
+    [SerializeField]
     private float _punchRadius;
     public float PunchRadius
     {

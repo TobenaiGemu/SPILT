@@ -17,6 +17,8 @@ public class GameState : UserState
     private Character _character;
 
     private float _punchTimer;
+    private float _leftPunchTimer;
+    private float _rightPunchTimer;
 
     private bool _outOfBounds;
 
@@ -64,12 +66,16 @@ public class GameState : UserState
         }
 
         _punchTimer -= Time.deltaTime;
+        _leftPunchTimer -= Time.deltaTime;
+        _rightPunchTimer -= Time.deltaTime;
         
         //Check if left/right triggers are being pressed and if cooldowns are finished
-        if (_punchTimer <= 0 && _joystick.GetAxis("L2") >= 0.5f)
+        if (_punchTimer <= 0 && _leftPunchTimer <= 0 && _joystick.GetAxis("L2") >= 0.5f)
         {
-            //reset cooldown
+            //reset cooldowns
             _punchTimer = _character.PunchCooldown;
+            _leftPunchTimer = _character.LeftPunchCooldown;
+
             Debug.Log("Left Punch");
             //Trigger punch animation
             _animator.SetTrigger("punchL");
@@ -83,9 +89,11 @@ public class GameState : UserState
             }
         }
         //same as above (gonna be mergerd later)
-        if (_punchTimer <= 0 && _joystick.GetAxis("R2") >= 0.5f)
+        if (_punchTimer <= 0 && _rightPunchTimer <= 0 && _joystick.GetAxis("R2") >= 0.5f)
         {
             _punchTimer = _character.PunchCooldown;
+            _rightPunchTimer = _character.RightPunchCooldown;
+
             Debug.Log("Right Punch");
             _animator.SetTrigger("punchR");
             RaycastHit hit;
