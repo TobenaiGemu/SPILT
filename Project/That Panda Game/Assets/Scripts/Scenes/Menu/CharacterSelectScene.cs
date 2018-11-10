@@ -66,13 +66,10 @@ public class CharacterSelectScene : Scene
             return false;
         }
         _lerper.Reset();
-        foreach (User user in SceneManager.Users)
+        foreach (string character in SceneManager.CharacterNames)
         {
-            if (user.AssignedCharacter != null)
-            {
-                _characterSelectPanel.transform.Find(user.AssignedCharacter.Name).GetComponent<CanvasGroup>().alpha = 0;
-                _characterSelectPanel.transform.Find(user.AssignedCharacter.Name).GetChild(0).GetComponent<Image>().fillAmount = 0;
-            }
+            _characterSelectPanel.transform.Find(character).GetComponent<CanvasGroup>().alpha = 0;
+            _characterSelectPanel.transform.Find(character).GetChild(0).GetComponent<Image>().fillAmount = 0;
         }
         _characterSelectPanel.SetActive(false);
         return true;

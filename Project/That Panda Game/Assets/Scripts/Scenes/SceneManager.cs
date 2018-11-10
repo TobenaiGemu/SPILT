@@ -6,6 +6,7 @@ public class SceneManager : MonoBehaviour
 {
     public static int MaxUsers { get; private set; }
     public static User[] Users { get; private set; }
+    public static string[] CharacterNames { get; private set; }
 
     private List<Scene> _scenes = new List<Scene>();
 
@@ -44,7 +45,13 @@ public class SceneManager : MonoBehaviour
         {
             Users[i] = new User(this, i + 1);
         }
-        
+
+        CharacterNames = new string[4];
+        CharacterNames[0] = "Pan";
+        CharacterNames[1] = "Liz";
+        CharacterNames[2] = "Eli";
+        CharacterNames[3] = "Ham";
+
         ChangeScene<MainMenuScene>();
         _paused = false;
         _initNextScene = true;
@@ -88,6 +95,11 @@ public class SceneManager : MonoBehaviour
         if (num > MaxUsers)
             return Users[MaxUsers - 1];
         return Users[num - 1];
+    }
+
+    public Character GetCharacter(CharacterType type)
+    {
+        return _characters[type];
     }
 
     public T GetScene<T>()

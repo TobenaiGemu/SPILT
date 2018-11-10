@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: LeftPunchMask
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Character_Rig_Eli_v30_0002:Body_CTRLOrient_GRP
+    m_Weight: 0
+  - m_Path: Character_Rig_Eli_v30_0002:Body_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:Body_CTRL
+    m_Weight: 0
+  - m_Path: Character_Rig_Eli_v30_0002:Body_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:Body_CTRL/Character_Rig_Eli_v30_0002:Hip_CTRLOrient_Grp
+    m_Weight: 0
+  - m_Path: Character_Rig_Eli_v30_0002:Body_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:Body_CTRL/Character_Rig_Eli_v30_0002:Hip_CTRLOrient_Grp/Character_Rig_Eli_v30_0002:Hip_CTRL
+    m_Weight: 0
+  - m_Path: Character_Rig_Eli_v30_0002:Body_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:Body_CTRL/Character_Rig_Eli_v30_0002:L_Leg_CTRLOrient_GRP
+    m_Weight: 0
+  - m_Path: Character_Rig_Eli_v30_0002:Body_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:Body_CTRL/Character_Rig_Eli_v30_0002:L_Leg_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:L_Leg_CTRL
+    m_Weight: 0
+  - m_Path: Character_Rig_Eli_v30_0002:Body_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:Body_CTRL/Character_Rig_Eli_v30_0002:L_Leg_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:L_Leg_CTRL/Character_Rig_Eli_v30_0002:L_Leg_IK
+    m_Weight: 0
+  - m_Path: Character_Rig_Eli_v30_0002:Body_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:Body_CTRL/Character_Rig_Eli_v30_0002:R_Leg_CTRLOrient_GRP
+    m_Weight: 0
+  - m_Path: Character_Rig_Eli_v30_0002:Body_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:Body_CTRL/Character_Rig_Eli_v30_0002:R_Leg_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:R_Leg_CTRL
+    m_Weight: 0
+  - m_Path: Character_Rig_Eli_v30_0002:Body_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:Body_CTRL/Character_Rig_Eli_v30_0002:R_Leg_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:R_Leg_CTRL/Character_Rig_Eli_v30_0002:R_Leg_IK
+    m_Weight: 0
+  - m_Path: Character_Rig_Eli_v30_0002:Body_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:Body_CTRL/Character_Rig_Eli_v30_0002:Spine_CTRLOrient_GRP
+    m_Weight: 1
+  - m_Path: Character_Rig_Eli_v30_0002:Body_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:Body_CTRL/Character_Rig_Eli_v30_0002:Spine_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:Spine_CTRL
+    m_Weight: 1
+  - m_Path: Character_Rig_Eli_v30_0002:Body_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:Body_CTRL/Character_Rig_Eli_v30_0002:Spine_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:Spine_CTRL/Character_Rig_Eli_v30_0002:NeckBase_CTRLOrient_GRP
+    m_Weight: 1
+  - m_Path: Character_Rig_Eli_v30_0002:Body_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:Body_CTRL/Character_Rig_Eli_v30_0002:Spine_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:Spine_CTRL/Character_Rig_Eli_v30_0002:NeckBase_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:NeckBase_CTRL
+    m_Weight: 1
+  - m_Path: Character_Rig_Eli_v30_0002:Body_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:Body_CTRL/Character_Rig_Eli_v30_0002:Spine_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:Spine_CTRL/Character_Rig_Eli_v30_0002:NeckBase_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:NeckBase_CTRL/Character_Rig_Eli_v30_0002:L_Shoulder_CTRLOrient_GRP
+    m_Weight: 1
+  - m_Path: Character_Rig_Eli_v30_0002:Body_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:Body_CTRL/Character_Rig_Eli_v30_0002:Spine_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:Spine_CTRL/Character_Rig_Eli_v30_0002:NeckBase_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:NeckBase_CTRL/Character_Rig_Eli_v30_0002:L_Shoulder_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:L_Shoulder_CTRL
+    m_Weight: 1
+  - m_Path: Character_Rig_Eli_v30_0002:Body_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:Body_CTRL/Character_Rig_Eli_v30_0002:Spine_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:Spine_CTRL/Character_Rig_Eli_v30_0002:NeckBase_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:NeckBase_CTRL/Character_Rig_Eli_v30_0002:L_Shoulder_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:L_Shoulder_CTRL/Character_Rig_Eli_v30_0002:L_Elbow_CTRLOrient_GRP
+    m_Weight: 1
+  - m_Path: Character_Rig_Eli_v30_0002:Body_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:Body_CTRL/Character_Rig_Eli_v30_0002:Spine_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:Spine_CTRL/Character_Rig_Eli_v30_0002:NeckBase_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:NeckBase_CTRL/Character_Rig_Eli_v30_0002:L_Shoulder_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:L_Shoulder_CTRL/Character_Rig_Eli_v30_0002:L_Elbow_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:L_Elbow_CTRL
+    m_Weight: 1
+  - m_Path: Character_Rig_Eli_v30_0002:Body_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:Body_CTRL/Character_Rig_Eli_v30_0002:Spine_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:Spine_CTRL/Character_Rig_Eli_v30_0002:NeckBase_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:NeckBase_CTRL/Character_Rig_Eli_v30_0002:Neck_CTRLOrient_GRP
+    m_Weight: 1
+  - m_Path: Character_Rig_Eli_v30_0002:Body_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:Body_CTRL/Character_Rig_Eli_v30_0002:Spine_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:Spine_CTRL/Character_Rig_Eli_v30_0002:NeckBase_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:NeckBase_CTRL/Character_Rig_Eli_v30_0002:Neck_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:Neck_CTRL
+    m_Weight: 1
+  - m_Path: Character_Rig_Eli_v30_0002:Body_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:Body_CTRL/Character_Rig_Eli_v30_0002:Spine_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:Spine_CTRL/Character_Rig_Eli_v30_0002:NeckBase_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:NeckBase_CTRL/Character_Rig_Eli_v30_0002:R_Shoulder_CTRLOrient_GRP
+    m_Weight: 0
+  - m_Path: Character_Rig_Eli_v30_0002:Body_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:Body_CTRL/Character_Rig_Eli_v30_0002:Spine_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:Spine_CTRL/Character_Rig_Eli_v30_0002:NeckBase_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:NeckBase_CTRL/Character_Rig_Eli_v30_0002:R_Shoulder_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:R_Shoulder_CTRL
+    m_Weight: 0
+  - m_Path: Character_Rig_Eli_v30_0002:Body_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:Body_CTRL/Character_Rig_Eli_v30_0002:Spine_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:Spine_CTRL/Character_Rig_Eli_v30_0002:NeckBase_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:NeckBase_CTRL/Character_Rig_Eli_v30_0002:R_Shoulder_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:R_Shoulder_CTRL/Character_Rig_Eli_v30_0002:R_Elbow_CTRLOrient_GRP
+    m_Weight: 0
+  - m_Path: Character_Rig_Eli_v30_0002:Body_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:Body_CTRL/Character_Rig_Eli_v30_0002:Spine_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:Spine_CTRL/Character_Rig_Eli_v30_0002:NeckBase_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:NeckBase_CTRL/Character_Rig_Eli_v30_0002:R_Shoulder_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:R_Shoulder_CTRL/Character_Rig_Eli_v30_0002:R_Elbow_CTRLOrient_GRP/Character_Rig_Eli_v30_0002:R_Elbow_CTRL
+    m_Weight: 0
+  - m_Path: Character_Rig_Eli_v30_0002:COG_JNT
+    m_Weight: 0
+  - m_Path: Character_Rig_Eli_v30_0002:COG_JNT/Character_Rig_Eli_v30_0002:Hip_JNT
+    m_Weight: 0
+  - m_Path: Character_Rig_Eli_v30_0002:COG_JNT/Character_Rig_Eli_v30_0002:Hip_JNT/Character_Rig_Eli_v30_0002:L_Leg_JNT
+    m_Weight: 0
+  - m_Path: Character_Rig_Eli_v30_0002:COG_JNT/Character_Rig_Eli_v30_0002:Hip_JNT/Character_Rig_Eli_v30_0002:R_Leg_JNT
+    m_Weight: 0
+  - m_Path: Character_Rig_Eli_v30_0002:COG_JNT/Character_Rig_Eli_v30_0002:Spine_JNT
+    m_Weight: 1
+  - m_Path: Character_Rig_Eli_v30_0002:COG_JNT/Character_Rig_Eli_v30_0002:Spine_JNT/Character_Rig_Eli_v30_0002:NeckBase_JNT
+    m_Weight: 1
+  - m_Path: Character_Rig_Eli_v30_0002:COG_JNT/Character_Rig_Eli_v30_0002:Spine_JNT/Character_Rig_Eli_v30_0002:NeckBase_JNT/Character_Rig_Eli_v30_0002:L_Shoulder_JNT
+    m_Weight: 1
+  - m_Path: Character_Rig_Eli_v30_0002:COG_JNT/Character_Rig_Eli_v30_0002:Spine_JNT/Character_Rig_Eli_v30_0002:NeckBase_JNT/Character_Rig_Eli_v30_0002:L_Shoulder_JNT/Character_Rig_Eli_v30_0002:L_Elbow_JNT
+    m_Weight: 1
+  - m_Path: Character_Rig_Eli_v30_0002:COG_JNT/Character_Rig_Eli_v30_0002:Spine_JNT/Character_Rig_Eli_v30_0002:NeckBase_JNT/Character_Rig_Eli_v30_0002:Neck_JNT
+    m_Weight: 1
+  - m_Path: Character_Rig_Eli_v30_0002:COG_JNT/Character_Rig_Eli_v30_0002:Spine_JNT/Character_Rig_Eli_v30_0002:NeckBase_JNT/Character_Rig_Eli_v30_0002:R_Shoulder_JNT
+    m_Weight: 0
+  - m_Path: Character_Rig_Eli_v30_0002:COG_JNT/Character_Rig_Eli_v30_0002:Spine_JNT/Character_Rig_Eli_v30_0002:NeckBase_JNT/Character_Rig_Eli_v30_0002:R_Shoulder_JNT/Character_Rig_Eli_v30_0002:R_Elbow_JNT
+    m_Weight: 0
+  - m_Path: Character_Rig_Eli_v30_0002:eli_eli
+    m_Weight: 0
+  - m_Path: Character_Rig_Eli_v30_0002:eli_eli/Character_Rig_Eli_v30_0002:eli_Eli
+    m_Weight: 0
+  - m_Path: Character_Rig_Eli_v30_0002:eli_eli/Character_Rig_Eli_v30_0002:eli_Eli/Character_Rig_Eli_v30_0002:eli_headLP3
+    m_Weight: 0
