@@ -91,7 +91,7 @@ public class GameState : UserState
         //same as above (gonna be mergerd later)
         if (_punchTimer <= 0 && _rightPunchTimer <= 0 && _joystick.GetAxis("R2") >= 0.5f)
         {
-            _punchTimer = _character.PunchCooldown;
+            _punchTimer = _character.PunchCooldown; 
             _rightPunchTimer = _character.RightPunchCooldown;
 
             Debug.Log("Right Punch");

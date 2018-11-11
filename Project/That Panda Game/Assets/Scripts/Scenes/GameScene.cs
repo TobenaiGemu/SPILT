@@ -35,6 +35,10 @@ public class GameScene : Scene
     private float _gameTime;
     private float _gameTimer;
 
+    private Text _startTimerText;
+    private int _startTimer;
+    private TimeLerper _startLerper;
+
     private GameObject _winnerText;
 
     public void Awake()
@@ -43,10 +47,12 @@ public class GameScene : Scene
 
         Planet = GameObject.Find("Planet");
         //For lerping the planet scale
-        _lerper = new TimeLerper();        
+        _lerper = new TimeLerper();
+        _startLerper = new TimeLerper();
 
         _gamePanel = GameObject.Find("Canvas").transform.Find("GamePanel").gameObject;
         _pausePanel = GameObject.Find("Canvas").transform.Find("GamePausePanel").gameObject;
+        _startTimerText = _gamePanel.transform.Find("StartTimer").GetComponent<Text>();
 
         _coinSpawner = GameObject.Find("CoinSpawner").GetComponent<Spawner>();
         _cookieSpawner = GameObject.Find("CookieSpawner").GetComponent<Spawner>();
@@ -62,6 +68,7 @@ public class GameScene : Scene
         _targetCameraPos = new Vector3(0, 0, -54);
         ResetMamaTimer();
         _lerper.Reset();
+        _startLerper.Reset();
         _winnerText.SetActive(false);
         foreach (User user in SceneManager.Users)
         {
@@ -69,6 +76,9 @@ public class GameScene : Scene
                 user.AssignedCharacter.ReInit();
         }
         _gameTimer = _gameTime;
+        _startTimer = 3;
+        _startTimerText.gameObject.SetActive(true);
+        _startTimerText.transform.localScale = Vector3.zero;
     }
 
     public override void Cleanup()
@@ -115,10 +125,32 @@ public class GameScene : Scene
         //Activate the game panel
         _gamePanel.gameObject.SetActive(true);
 
+        if (_startTimer != -1)
+        {
+            if (_startTimerText.text != _startTimer.ToString() || _startTimerText.text != "START!")
+            {
+                if (_startTimer == 0)
+                    _startTimerText.text = "START!";
+                else
+                    _startTimerText.text = _startTimer.ToString();
+            }
+            if (_startTimerText.transform.localScale != Vector3.one)
+            {
+                _startTimerText.transform.localScale = _startLerper.Lerp(Vector3.zero, Vector3.one, 1);
+                return false;
+            }
+
+            _startTimerText.transform.localScale = Vector3.zero;
+            _startLerper.Reset();
+            _startTimer -= 1;
+            return false;
+        }
+
         //Change user states to JoinState
         foreach (User user in SceneManager.Users)
             user.ChangeState("GameState");
         _lerper.Reset();
+        _startTimerText.gameObject.SetActive(false);
         return true;
     }
 
