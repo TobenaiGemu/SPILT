@@ -212,8 +212,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cd38e2a132bac54ea0b6d406772e649, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeToRoast: 2.5
-  _timeToUnroast: 5
+  _timeToRoast: 2
+  _timeToUnroast: 8
   _knockBackMultiplier: 1.25
   _knockJumpMultiplier: 1.5
   _coinDropModifier: 2
@@ -241,7 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2035126f42305f4438438f7248b62bc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coinDrop: 2
+  _coinDrop: 3
 --- !u!114 &114928330843702254
 MonoBehaviour:
   m_ObjectHideFlags: 1
