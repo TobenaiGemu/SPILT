@@ -37,6 +37,19 @@ public class MenuPage
         _lerperIntro = new TimeLerper();
     }
 
+    public void Initialize()
+    {
+        _prevSelected = null;
+        _curSelected = null;
+        _curRightCanvas = null;
+        _nextRightCanvas = null;
+
+        _lerperIntro.Reset();
+        _lerperOutro.Reset();
+        _hasChanged = false;
+        _forceNext = false;
+    }
+
     public void SetRightPanel(string name, int btnIndex)
     {
         _rightCanvases[btnIndex] = _canvas.transform.Find(name).GetComponent<CanvasGroup>();

@@ -38,6 +38,8 @@ public class InfoScene : Scene
         EventSystem.current.firstSelectedGameObject = _controlsButton;
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(_controlsButton);
+        _infoCanvas.alpha = 0;
+        _menuPage.Initialize();
         _lerper.Reset();
     }
 
@@ -65,9 +67,11 @@ public class InfoScene : Scene
         if (_infoAlpha > 0)
         {
             _infoAlpha = _lerper.Lerp(1, 0, 0.5f);
+            _menuPage.OutroCurrentPanel(0.5f);
             return false;
         }
         _lerper.Reset();
+        
         return true;
     }
 

@@ -36,7 +36,7 @@ public class MarshShadow : MonoBehaviour
         transform.LookAt(_planet.transform);
         transform.Rotate(-90, 0, 0);
         _initScale = new Vector3(0.1f, 1, 0.1f);
-        _targetScale = new Vector3(0.4f, 1, 0.4f);
+        _targetScale = new Vector3(1, 1, 1);
     }
 
     public void PauseShadow()

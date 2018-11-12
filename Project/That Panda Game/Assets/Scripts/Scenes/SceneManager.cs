@@ -109,6 +109,14 @@ public class SceneManager : MonoBehaviour
         return false;
     }
 
+    public bool CheckCurrentScene<T>()
+        where T : Scene
+    {
+        if (_currentScene.GetType() == typeof(T))
+            return true;
+        return false;
+    }
+
     public T GetScene<T>()
         where T : Scene
     {

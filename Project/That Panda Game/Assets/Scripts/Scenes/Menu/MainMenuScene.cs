@@ -34,6 +34,9 @@ public class MainMenuScene : Scene
         _rightMenuBox = GameObject.Find("Canvas").transform.Find("Right Menu Box").GetComponent<CanvasGroup>();
         _mainMenuCanvas = _mainMenuPanel.GetComponent<CanvasGroup>();
         _startButton = _mainMenuPanel.transform.Find("Start").gameObject;
+        _leftMenuBox.alpha = 0;
+        _rightMenuBox.alpha = 0;
+        _mainMenuCanvas.alpha = 0;
     }
 
     public override void Initialize()
@@ -41,6 +44,7 @@ public class MainMenuScene : Scene
         _initCameraPos = Camera.main.transform.position;
         _rightMenuBox.gameObject.SetActive(true);
         _leftMenuBox.gameObject.SetActive(true);
+        _mainMenuCanvas.alpha = 0;
         _lerper.Reset();
     }
 
