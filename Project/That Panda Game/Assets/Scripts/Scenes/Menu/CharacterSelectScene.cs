@@ -100,7 +100,6 @@ public class CharacterSelectScene : Scene
         }
         else
         {
-            Debug.Log(_userIndex + "Isn't playing");
             GetNextUser();
         }
     }

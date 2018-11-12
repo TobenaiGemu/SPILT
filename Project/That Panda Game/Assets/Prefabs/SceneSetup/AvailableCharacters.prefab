@@ -4819,6 +4819,7 @@ MonoBehaviour:
   _knockBack: 45
   _knockJump: 30
   _punchDropCoins: 2
+  _roastedPunchModifier: 2
   _punchCooldown: 0.45
   _rightPunchCooldown: 0.8
   _leftPunchCooldown: 0.8
@@ -4847,6 +4848,7 @@ MonoBehaviour:
   _knockBack: 45
   _knockJump: 30
   _punchDropCoins: 2
+  _roastedPunchModifier: 2
   _punchCooldown: 0.45
   _rightPunchCooldown: 0.8
   _leftPunchCooldown: 0.8
@@ -4875,6 +4877,7 @@ MonoBehaviour:
   _knockBack: 45
   _knockJump: 30
   _punchDropCoins: 2
+  _roastedPunchModifier: 2
   _punchCooldown: 0.45
   _rightPunchCooldown: 0.8
   _leftPunchCooldown: 0.8
@@ -4903,6 +4906,7 @@ MonoBehaviour:
   _knockBack: 45
   _knockJump: 30
   _punchDropCoins: 2
+  _roastedPunchModifier: 2
   _punchCooldown: 0.45
   _rightPunchCooldown: 0.8
   _leftPunchCooldown: 0.8

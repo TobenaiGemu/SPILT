@@ -85,7 +85,7 @@ public class GameState : UserState
             {
                 //If SphereCast hit a player, knock that player back and make them drop coins
                 hit.collider.GetComponent<Character>().ApplyKnockBack(_character.transform.forward, _character.KnockBack, _character.KnockJump);
-                hit.collider.GetComponent<Character>().DropCoins(_character.PunchDropCoins);
+                hit.collider.GetComponent<Character>().DropCoins(_character.PunchDropCoins + _character.RoastedPunchModifier);
             }
         }
         //same as above (gonna be mergerd later)
@@ -101,7 +101,7 @@ public class GameState : UserState
             {
                 Debug.Log(hit.collider.name);
                 hit.collider.GetComponent<Character>().ApplyKnockBack(_character.transform.forward, _character.KnockBack, _character.KnockJump);
-                hit.collider.GetComponent<Character>().DropCoins(_character.PunchDropCoins);
+                hit.collider.GetComponent<Character>().DropCoins(_character.PunchDropCoins + _character.RoastedPunchModifier);
             }
         }
 
@@ -140,10 +140,9 @@ public class GameState : UserState
         _velocity = Vector3.Lerp(_velocity * _character.BackwardSpeed, _velocity, Mathf.InverseLerp(-1, 1, Vector3.Dot(_velocity.normalized, _playerObj.transform.forward)));
 
         //If the character is outside the bounds of the play area, add a force towards the play area to get them back in
-        if (_playerObj.transform.position.z > -10)
+        if (_playerObj.transform.position.z > _character.BorderDistance * -1)
         {
             _playerObj.GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, -50), ForceMode.Impulse);
-            _playerObj.GetComponent<CapsuleCollider>().enabled = false;
             _outOfBounds = true;
         }
 

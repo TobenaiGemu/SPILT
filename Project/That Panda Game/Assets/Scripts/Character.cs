@@ -85,6 +85,19 @@ public class Character : MonoBehaviour
     }
 
     [SerializeField]
+    private int _roastedPunchModifier;
+    public int RoastedPunchModifier
+    {
+        get
+        {
+            if (!_marshmallowRoasted)
+                return 0;
+            return _roastedPunchModifier;
+        }
+    }
+
+
+    [SerializeField]
     private float _punchCooldown;
     public float PunchCooldown
     {
@@ -171,7 +184,6 @@ public class Character : MonoBehaviour
     private float _knockbackMultiplier;
     private float _knockjumpMultiplier;
     private float _speedMultiplierTimer;
-    private int _coinDropModifier;
 
     private float _timeToUnroast;
     private float _roastPercent;
@@ -242,12 +254,10 @@ public class Character : MonoBehaviour
 
     public void DropCoins(int ammount)
     {
-        ammount += _coinDropModifier;
-        Debug.Log(_coinDropModifier);
-        Debug.Log(ammount);
         if (ammount > _coins)
             ammount = _coins;
         _coins -= ammount;
+        Debug.Log("Droppped " + ammount);
         UpdateCoinPanel();
         for (int i = 0; i < ammount; i++)
         {
@@ -324,10 +334,10 @@ public class Character : MonoBehaviour
     {
         if (_marshmallowRoasted)
             return;
+        Debug.Log("Unroasted");
         _roastPercent = 0;
         _knockbackMultiplier = 1;
         _knockjumpMultiplier = 1;
-        _coinDropModifier = 0;
         _lerper.Reset();
         //TODO: Change texture back to normal;
     }
@@ -338,7 +348,8 @@ public class Character : MonoBehaviour
         _marshmallowRoasted = true;
         _knockbackMultiplier = knockbackMultiplier;
         _knockjumpMultiplier = knockjumpMultiplier;
-        _coinDropModifier = coinDrop;
+        Debug.Log("Roasted");
+
         StartCoroutine(UnroastMarshmallowCounter());
         //TODO: Change coin drop to that and add roasted timer
     }
