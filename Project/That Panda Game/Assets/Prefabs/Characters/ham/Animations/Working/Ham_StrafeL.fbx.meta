@@ -85,7 +85,7 @@ ModelImporter:
     2100002: Character_Rig_Eli_v30_0002_ham_hamHead
     4300000: Character_Rig_Eli_v30_0002:ham_Ham
     4300002: Character_Rig_Eli_v30_0002:ham_headLP4
-    7400000: Take 001
+    7400000: Strafe_L
     9500000: //RootNode
     13700000: Character_Rig_Eli_v30_0002:ham_Ham
     13700002: Character_Rig_Eli_v30_0002:ham_headLP4
@@ -118,7 +118,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Take 001
+      name: Strafe_L
       takeName: Take 001
       firstFrame: 1
       lastFrame: 20

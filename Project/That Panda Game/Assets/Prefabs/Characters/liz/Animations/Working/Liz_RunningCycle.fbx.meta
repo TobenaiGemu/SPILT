@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f3a1c4a0bde0038449c3ec9abf045858
+guid: eb542476affbea8428b5e03b86aa1f2c
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -19,15 +19,15 @@ ModelImporter:
     100026: Character_Rig_Eli_v30_0002:L_Shoulder_CTRL
     100028: Character_Rig_Eli_v30_0002:L_Shoulder_CTRLOrient_GRP
     100030: Character_Rig_Eli_v30_0002:L_Shoulder_JNT
-    100032: Character_Rig_Eli_v30_0002:Neck_CTRL
-    100034: Character_Rig_Eli_v30_0002:Neck_CTRLOrient_GRP
-    100036: Character_Rig_Eli_v30_0002:Neck_JNT
-    100038: Character_Rig_Eli_v30_0002:NeckBase_CTRL
-    100040: Character_Rig_Eli_v30_0002:NeckBase_CTRLOrient_GRP
-    100042: Character_Rig_Eli_v30_0002:NeckBase_JNT
-    100044: Character_Rig_Eli_v30_0002:pan_headLP
-    100046: Character_Rig_Eli_v30_0002:pan_Pan
-    100048: Character_Rig_Eli_v30_0002:pan_pan
+    100032: Character_Rig_Eli_v30_0002:liz_headLP2
+    100034: Character_Rig_Eli_v30_0002:liz_Liz
+    100036: Character_Rig_Eli_v30_0002:liz_liz
+    100038: Character_Rig_Eli_v30_0002:Neck_CTRL
+    100040: Character_Rig_Eli_v30_0002:Neck_CTRLOrient_GRP
+    100042: Character_Rig_Eli_v30_0002:Neck_JNT
+    100044: Character_Rig_Eli_v30_0002:NeckBase_CTRL
+    100046: Character_Rig_Eli_v30_0002:NeckBase_CTRLOrient_GRP
+    100048: Character_Rig_Eli_v30_0002:NeckBase_JNT
     100050: Character_Rig_Eli_v30_0002:R_Elbow_CTRL
     100052: Character_Rig_Eli_v30_0002:R_Elbow_CTRLOrient_GRP
     100054: Character_Rig_Eli_v30_0002:R_Elbow_JNT
@@ -58,15 +58,15 @@ ModelImporter:
     400026: Character_Rig_Eli_v30_0002:L_Shoulder_CTRL
     400028: Character_Rig_Eli_v30_0002:L_Shoulder_CTRLOrient_GRP
     400030: Character_Rig_Eli_v30_0002:L_Shoulder_JNT
-    400032: Character_Rig_Eli_v30_0002:Neck_CTRL
-    400034: Character_Rig_Eli_v30_0002:Neck_CTRLOrient_GRP
-    400036: Character_Rig_Eli_v30_0002:Neck_JNT
-    400038: Character_Rig_Eli_v30_0002:NeckBase_CTRL
-    400040: Character_Rig_Eli_v30_0002:NeckBase_CTRLOrient_GRP
-    400042: Character_Rig_Eli_v30_0002:NeckBase_JNT
-    400044: Character_Rig_Eli_v30_0002:pan_headLP
-    400046: Character_Rig_Eli_v30_0002:pan_Pan
-    400048: Character_Rig_Eli_v30_0002:pan_pan
+    400032: Character_Rig_Eli_v30_0002:liz_headLP2
+    400034: Character_Rig_Eli_v30_0002:liz_Liz
+    400036: Character_Rig_Eli_v30_0002:liz_liz
+    400038: Character_Rig_Eli_v30_0002:Neck_CTRL
+    400040: Character_Rig_Eli_v30_0002:Neck_CTRLOrient_GRP
+    400042: Character_Rig_Eli_v30_0002:Neck_JNT
+    400044: Character_Rig_Eli_v30_0002:NeckBase_CTRL
+    400046: Character_Rig_Eli_v30_0002:NeckBase_CTRLOrient_GRP
+    400048: Character_Rig_Eli_v30_0002:NeckBase_JNT
     400050: Character_Rig_Eli_v30_0002:R_Elbow_CTRL
     400052: Character_Rig_Eli_v30_0002:R_Elbow_CTRLOrient_GRP
     400054: Character_Rig_Eli_v30_0002:R_Elbow_JNT
@@ -81,14 +81,14 @@ ModelImporter:
     400072: Character_Rig_Eli_v30_0002:Spine_CTRLOrient_GRP
     400074: Character_Rig_Eli_v30_0002:Spine_JNT
     400076: //RootNode
-    2100000: Character_Rig_Eli_v30_0002_pan_panOnesie
-    2100002: Character_Rig_Eli_v30_0002_pan_PanHead
-    4300000: Character_Rig_Eli_v30_0002:pan_Pan
-    4300002: Character_Rig_Eli_v30_0002:pan_headLP
-    7400000: Punch_R
+    2100000: Character_Rig_Eli_v30_0002_liz_lizOnesie
+    2100002: Character_Rig_Eli_v30_0002_liz_LizHead
+    4300000: Character_Rig_Eli_v30_0002:liz_Liz
+    4300002: Character_Rig_Eli_v30_0002:liz_headLP2
+    7400000: Running
     9500000: //RootNode
-    13700000: Character_Rig_Eli_v30_0002:pan_headLP
-    13700002: Character_Rig_Eli_v30_0002:pan_Pan
+    13700000: Character_Rig_Eli_v30_0002:liz_headLP2
+    13700002: Character_Rig_Eli_v30_0002:liz_Liz
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -118,10 +118,10 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Punch_R
+      name: Running
       takeName: Take 001
       firstFrame: 1
-      lastFrame: 10
+      lastFrame: 20
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

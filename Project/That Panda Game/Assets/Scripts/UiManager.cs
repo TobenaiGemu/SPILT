@@ -58,11 +58,6 @@ public class UiManager : MonoBehaviour
         _sceneManager.ChangeScene<GameScene>();
     }
 
-    public void GotoGamemode()
-    {
-        _sceneManager.ChangeScene<GamemodeScene>();
-    }
-
     public void GotoMainMenu()
     {
         _sceneManager.ChangeScene<MainMenuScene>();

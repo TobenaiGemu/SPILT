@@ -30,7 +30,6 @@ public class SceneManager : MonoBehaviour
         MaxUsers = 4;
         _scenes.Add(_scenesPool.transform.Find("GameScene").GetComponent<GameScene>());
         _scenes.Add(_scenesPool.transform.Find("MainMenuScene").GetComponent<MainMenuScene>());
-        _scenes.Add(_scenesPool.transform.Find("GamemodeScene").GetComponent<GamemodeScene>());
         _scenes.Add(_scenesPool.transform.Find("InfoScene").GetComponent<InfoScene>());
         _scenes.Add(_scenesPool.transform.Find("OptionsScene").GetComponent<OptionsScene>());
         _scenes.Add(_scenesPool.transform.Find("CharacterSelectScene").GetComponent<CharacterSelectScene>());

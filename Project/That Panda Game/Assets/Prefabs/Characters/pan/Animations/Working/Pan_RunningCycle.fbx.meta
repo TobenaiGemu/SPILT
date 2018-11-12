@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f3a1c4a0bde0038449c3ec9abf045858
+guid: dc454a6105f26f0499fab440d398b0dd
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -85,7 +85,7 @@ ModelImporter:
     2100002: Character_Rig_Eli_v30_0002_pan_PanHead
     4300000: Character_Rig_Eli_v30_0002:pan_Pan
     4300002: Character_Rig_Eli_v30_0002:pan_headLP
-    7400000: Punch_R
+    7400000: Running
     9500000: //RootNode
     13700000: Character_Rig_Eli_v30_0002:pan_headLP
     13700002: Character_Rig_Eli_v30_0002:pan_Pan
@@ -118,10 +118,10 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Punch_R
+      name: Running
       takeName: Take 001
       firstFrame: 1
-      lastFrame: 10
+      lastFrame: 20
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

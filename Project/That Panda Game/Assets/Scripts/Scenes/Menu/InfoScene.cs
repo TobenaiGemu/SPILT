@@ -22,10 +22,12 @@ public class InfoScene : Scene
         _infoCanvas = _infoPanel.GetComponent<CanvasGroup>();
 
         _menuPage = new MenuPage(_infoPanel);
+        //Set all the corresponding right panels for each button based on index
         _menuPage.SetRightPanel("ControlsPanel", 0);
-        _menuPage.SetRightPanel("PowerupsPanel", 1);
-        _menuPage.SetRightPanel("EventsPanel", 2);
-        _menuPage.SetRightPanel("CreditsPanel", 3);
+        //_menuPage.SetRightPanel("ControlsPanel", 0);
+        //_menuPage.SetRightPanel("PowerupsPanel", 1);
+        //_menuPage.SetRightPanel("EventsPanel", 2);
+        //_menuPage.SetRightPanel("CreditsPanel", 3);
 
         _infoPanel.SetActive(false);
     }

@@ -19,16 +19,22 @@ public class OptionsScene : Scene
     public void Awake()
     {
         GameObject canvas = GameObject.Find("Canvas");
+
         _optionsPanel = canvas.transform.Find("OptionsPanel").gameObject;
-        _resolutionButton = _optionsPanel.transform.Find("Resolution").gameObject;
-        _resolutionPanel = canvas.transform.Find("ResolutionPanel").gameObject;
-        _volumePanel = canvas.transform.Find("VolumePanel").gameObject;
         _optionsCanvas = _optionsPanel.GetComponent<CanvasGroup>();
+
+        //Find right panels corresponding to buttons
+        //_resolutionButton = _optionsPanel.transform.Find("Resolution").gameObject;
+        //_resolutionPanel = canvas.transform.Find("ResolutionPanel").gameObject;
+        //_volumePanel = canvas.transform.Find("VolumePanel").gameObject;
+
         _lerper = new TimeLerper();
 
         _menuPage = new MenuPage(_optionsPanel);
-        _menuPage.SetRightPanel("ResolutionPanel", 0);
-        _menuPage.SetRightPanel("VolumePanel", 1);
+
+        //Set the right panel to the corresponding button index
+        //_menuPage.SetRightPanel("ResolutionPanel", 0);
+        //_menuPage.SetRightPanel("VolumePanel", 1);
 
         _optionsPanel.SetActive(false);
     }
