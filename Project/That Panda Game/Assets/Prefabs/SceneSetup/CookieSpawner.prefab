@@ -52,8 +52,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _object: {fileID: 1178701065419690, guid: bd537699a49b2c945be47272fd2e8d14, type: 2}
+  _materialsList: []
   _minSpawnRate: 2
   _maxSpawnRate: 10
   _spawnRadius: 15
   _maxObjects: 4
   _rotation: {x: -90, y: 0, z: 0}
+  _distanceFromApple: 0
+  _distanceFromCoin: 0
+  _distanceFromCookie: 0

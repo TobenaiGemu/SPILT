@@ -4818,10 +4818,10 @@ MonoBehaviour:
   _backwardSpeedMultiplier: 0.5
   _knockBack: 45
   _knockJump: 30
-  _punchDropCoins: 1
-  _punchCooldown: 0.2
-  _rightPunchCooldown: 0
-  _leftPunchCooldown: 0
+  _punchDropCoins: 2
+  _punchCooldown: 0.45
+  _rightPunchCooldown: 0.8
+  _leftPunchCooldown: 0.8
   _punchRadius: 1
   _punchDistance: 3
   _borderDistance: 17
@@ -4846,10 +4846,10 @@ MonoBehaviour:
   _backwardSpeedMultiplier: 0.5
   _knockBack: 45
   _knockJump: 30
-  _punchDropCoins: 1
-  _punchCooldown: 0.2
-  _rightPunchCooldown: 0
-  _leftPunchCooldown: 0
+  _punchDropCoins: 2
+  _punchCooldown: 0.45
+  _rightPunchCooldown: 0.8
+  _leftPunchCooldown: 0.8
   _punchRadius: 1
   _punchDistance: 3
   _borderDistance: 17
@@ -4874,10 +4874,10 @@ MonoBehaviour:
   _backwardSpeedMultiplier: 0.5
   _knockBack: 45
   _knockJump: 30
-  _punchDropCoins: 1
-  _punchCooldown: 0.2
-  _rightPunchCooldown: 0
-  _leftPunchCooldown: 0
+  _punchDropCoins: 2
+  _punchCooldown: 0.45
+  _rightPunchCooldown: 0.8
+  _leftPunchCooldown: 0.8
   _punchRadius: 1
   _punchDistance: 3
   _borderDistance: 17
@@ -4902,10 +4902,10 @@ MonoBehaviour:
   _backwardSpeedMultiplier: 0.5
   _knockBack: 45
   _knockJump: 30
-  _punchDropCoins: 1
-  _punchCooldown: 0.2
-  _rightPunchCooldown: 0
-  _leftPunchCooldown: 0
+  _punchDropCoins: 2
+  _punchCooldown: 0.45
+  _rightPunchCooldown: 0.8
+  _leftPunchCooldown: 0.8
   _punchRadius: 1
   _punchDistance: 3
   _borderDistance: 17
