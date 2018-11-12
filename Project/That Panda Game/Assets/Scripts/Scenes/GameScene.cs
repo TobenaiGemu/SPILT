@@ -60,6 +60,11 @@ public class GameScene : Scene
 
         _mamaMarshmallow = GameObject.Find("Events").transform.Find("MamaMarshmallow").GetComponent<MamaMarshmallow>();
         _winnerText = GameObject.Find("Canvas").transform.Find("GamePanel").Find("WINNER").gameObject;
+
+        for (int i = 0; i < 4; i++)
+        {
+            _gamePanel.transform.Find("p" + (i + 1) + "ScoreBox").gameObject.SetActive(false);
+        }
     }
 
     public override void Initialize()
@@ -75,6 +80,7 @@ public class GameScene : Scene
             if (user.IsPlaying)
                 user.AssignedCharacter.ReInit();
         }
+
         _gameTimer = _gameTime;
         _startTimer = 3;
         _startTimerText.gameObject.SetActive(true);

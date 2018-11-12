@@ -171,6 +171,8 @@ public class Character : MonoBehaviour
     private int _coinUpForceMin;
     [SerializeField]
     private int _coinUpForceMax;
+    [SerializeField]
+    private Sprite _scoreNameSprite;
 
     private GameObject _characterObj;
     private GameObject _characterPool;
@@ -194,7 +196,7 @@ public class Character : MonoBehaviour
 
     private Spawner _coinSpawner;
 
-    private GameObject _scoreText;
+    private GameObject _scoreBox;
     private float _winnerTime;
     private GameScene _gameScene;
 
@@ -208,7 +210,6 @@ public class Character : MonoBehaviour
 
     public Character Init(GameObject charObj)
     {
-        _scoreText = GameObject.Find("Canvas").transform.Find("GamePanel").Find(_name).gameObject;
         _characterPool = GameObject.Find("AvailableCharacters");
         _coinSpawner = GameObject.Find("CoinSpawner").GetComponent<Spawner>();
         _lerper = new TimeLerper();
@@ -216,7 +217,6 @@ public class Character : MonoBehaviour
         _winnerTime = 5;
         _sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
         _gameScene = GameObject.Find("Scenes").transform.Find("GameScene").GetComponent<GameScene>();
-
         _characterObj = charObj;
         ReInit();
         return this;
@@ -229,18 +229,11 @@ public class Character : MonoBehaviour
         _knockbackMultiplier = 1;
         _knockjumpMultiplier = 1;
         _speedMultiplierTimer = 1;
-        if (_assignedUser != null && _assignedUser.IsPlaying)
-        {
-            _scoreText.SetActive(true);
-            _scoreText.GetComponent<Text>().text = _name + ": 0";
-        }
-        else
-            _scoreText.SetActive(false);
     }
 
     public void Cleanup()
     {
-        _scoreText.SetActive(false);
+        _scoreBox.SetActive(false);
         Unassign();
     }
 
@@ -257,7 +250,6 @@ public class Character : MonoBehaviour
         if (ammount > _coins)
             ammount = _coins;
         _coins -= ammount;
-        Debug.Log("Droppped " + ammount);
         UpdateCoinPanel();
         for (int i = 0; i < ammount; i++)
         {
@@ -270,7 +262,7 @@ public class Character : MonoBehaviour
 
     private void UpdateCoinPanel()
     {
-        _scoreText.GetComponent<Text>().text = _name + ": " + _coins;
+        _scoreBox.transform.Find("Score").GetComponent<Text>().text = "P" + _assignedUser.UserId + ": " + _coins;
     }
 
     public void ApplyKnockBack(Vector3 direction, float backForce, float upForce)
@@ -312,6 +304,12 @@ public class Character : MonoBehaviour
             _characterObj.transform.SetParent(GameObject.Find("Players").transform.Find("Player" + _assignedUser.UserId), false);
             _characterObj.transform.localPosition = Vector3.zero;
             _characterObj.SetActive(true);
+            Debug.Log(_assignedUser.UserId);
+            _scoreBox = GameObject.Find("Canvas").transform.Find("GamePanel").Find("p" + _assignedUser.UserId + "ScoreBox").gameObject;
+            _scoreBox.transform.Find("Name").GetComponent<Image>().sprite = _scoreNameSprite;
+            _scoreBox.transform.Find("Score").GetComponent<Text>().text = _name + ": 0";
+            _scoreBox.SetActive(true);
+            UpdateCoinPanel();
             return true;
         }
         return false;

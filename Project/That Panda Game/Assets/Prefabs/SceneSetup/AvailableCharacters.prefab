@@ -4830,6 +4830,7 @@ MonoBehaviour:
   _coinFrwdForceMax: 60
   _coinUpForceMin: 30
   _coinUpForceMax: 60
+  _scoreNameSprite: {fileID: 21300000, guid: 383b432e05fd2b54e8e35007e85554ed, type: 3}
 --- !u!114 &114660127410265728
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4859,6 +4860,7 @@ MonoBehaviour:
   _coinFrwdForceMax: 60
   _coinUpForceMin: 30
   _coinUpForceMax: 60
+  _scoreNameSprite: {fileID: 21300000, guid: a51dd51a518b5234a821e0c174ab34eb, type: 3}
 --- !u!114 &114790361733223014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4888,6 +4890,7 @@ MonoBehaviour:
   _coinFrwdForceMax: 60
   _coinUpForceMin: 30
   _coinUpForceMax: 60
+  _scoreNameSprite: {fileID: 21300000, guid: 55b12d6d29e718241bf8b1e45e184773, type: 3}
 --- !u!114 &114809588152169778
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4917,6 +4920,7 @@ MonoBehaviour:
   _coinFrwdForceMax: 60
   _coinUpForceMin: 30
   _coinUpForceMax: 60
+  _scoreNameSprite: {fileID: 21300000, guid: 74017bae058e0254b82802bed3aa4b91, type: 3}
 --- !u!136 &136422021637429314
 CapsuleCollider:
   m_ObjectHideFlags: 1

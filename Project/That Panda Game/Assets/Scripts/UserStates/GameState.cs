@@ -76,7 +76,6 @@ public class GameState : UserState
             _punchTimer = _character.PunchCooldown;
             _leftPunchTimer = _character.LeftPunchCooldown;
 
-            Debug.Log("Left Punch");
             //Trigger punch animation
             _animator.SetTrigger("punchL");
             //SphereCast in front of player
@@ -94,12 +93,10 @@ public class GameState : UserState
             _punchTimer = _character.PunchCooldown; 
             _rightPunchTimer = _character.RightPunchCooldown;
 
-            Debug.Log("Right Punch");
             _animator.SetTrigger("punchR");
             RaycastHit hit;
             if (Physics.SphereCast(_playerObj.transform.position, _character.PunchRadius, _playerObj.transform.forward, out hit, _character.PunchDistance, 1<<8))
             {
-                Debug.Log(hit.collider.name);
                 hit.collider.GetComponent<Character>().ApplyKnockBack(_character.transform.forward, _character.KnockBack, _character.KnockJump);
                 hit.collider.GetComponent<Character>().DropCoins(_character.PunchDropCoins + _character.RoastedPunchModifier);
             }
