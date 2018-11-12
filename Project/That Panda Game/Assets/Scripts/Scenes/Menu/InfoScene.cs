@@ -48,6 +48,7 @@ public class InfoScene : Scene
 
     public override bool IntroTransition()
     {
+        _menuPage.Update();
         _infoCanvas.alpha = _infoAlpha;
         if (_infoAlpha < 1)
         {

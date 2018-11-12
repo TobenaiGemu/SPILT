@@ -22,6 +22,7 @@ public class MenuState : UserState
     {
         if (_joystick.WasButtonPressed("Button2"))
         {
+            if (!_sceneManager.CheckNextScene<MainMenuScene>())
             _sceneManager.ChangeScene<MainMenuScene>();
         }
     }

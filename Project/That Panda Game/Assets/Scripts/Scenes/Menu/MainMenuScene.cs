@@ -9,6 +9,9 @@ public class MainMenuScene : Scene
     private CanvasGroup _mainMenuCanvas;
     private GameObject _startButton;
 
+    private CanvasGroup _leftMenuBox;
+    private CanvasGroup _rightMenuBox;
+
     private GameObject _planet;
 
     private Vector3 _initCameraPos;
@@ -16,8 +19,6 @@ public class MainMenuScene : Scene
 
     private bool _finishedScale;
     private TimeLerper _lerper;
-
-    private float _alpha;
 
 
     public void Awake()
@@ -27,9 +28,10 @@ public class MainMenuScene : Scene
 
         _lerper = new TimeLerper();
         _planet = GameObject.Find("Planet");
-        _alpha = 0;
 
         _mainMenuPanel = GameObject.Find("Canvas").transform.Find("MainMenuPanel").gameObject;
+        _leftMenuBox = GameObject.Find("Canvas").transform.Find("Left Menu Box").GetComponent<CanvasGroup>();
+        _rightMenuBox = GameObject.Find("Canvas").transform.Find("Right Menu Box").GetComponent<CanvasGroup>();
         _mainMenuCanvas = _mainMenuPanel.GetComponent<CanvasGroup>();
         _startButton = _mainMenuPanel.transform.Find("Start").gameObject;
     }
@@ -37,6 +39,8 @@ public class MainMenuScene : Scene
     public override void Initialize()
     {
         _initCameraPos = Camera.main.transform.position;
+        _rightMenuBox.gameObject.SetActive(true);
+        _leftMenuBox.gameObject.SetActive(true);
         _lerper.Reset();
     }
 
@@ -56,10 +60,14 @@ public class MainMenuScene : Scene
             _lerper.Reset();
         }
 
-        _mainMenuCanvas.alpha = _alpha;
-        if (_alpha < 1)
+        if (_mainMenuCanvas.alpha < 1)
         {
-            _alpha = _lerper.Lerp(0, 1, 0.5f);
+            _mainMenuCanvas.alpha = _lerper.Lerp(0, 1, 0.5f);
+            if (_rightMenuBox.alpha < 1)
+            {
+                _leftMenuBox.alpha = _lerper.Lerp(0, 1, 0.5f);
+                _rightMenuBox.alpha = _lerper.Lerp(0, 1, 0.5f);
+            }
             return false;
         }
 
@@ -75,10 +83,14 @@ public class MainMenuScene : Scene
 
     public override bool OutroTransition()
     {
-        _mainMenuCanvas.alpha = _alpha;
-        if (_alpha > 0)
+        if (_mainMenuCanvas.alpha > 0)
         {
-            _alpha = _lerper.Lerp(1, 0, 0.5f);
+            _mainMenuCanvas.alpha = _lerper.Lerp(1, 0, 0.5f);
+            if (_sceneManager.CheckNextScene<JoinGameScene>())
+            {
+                _leftMenuBox.alpha = _lerper.Lerp(1, 0, 0.5f);
+                _rightMenuBox.alpha = _lerper.Lerp(1, 0, 0.5f);
+            }
             return false;
         }
         return true;

@@ -101,6 +101,14 @@ public class SceneManager : MonoBehaviour
         return _characters[type];
     }
 
+    public bool CheckNextScene<T>()
+        where T : Scene
+    {
+        if (_nextScene.GetType() == typeof(T))
+            return true;
+        return false;
+    }
+
     public T GetScene<T>()
         where T : Scene
     {

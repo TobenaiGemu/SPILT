@@ -9,11 +9,18 @@ public class JoinGameScene : Scene
     private CanvasGroup _joinGameCanvas;
     private TimeLerper _lerper;
 
+    private CanvasGroup _leftMenuBox;
+    private CanvasGroup _rightMenuBox;
+
     void Awake ()
     {
         _joinGamePanel = GameObject.Find("Canvas").transform.Find("JoinGamePanel").gameObject;
         _joinGameCanvas = _joinGamePanel.GetComponent<CanvasGroup>();
         _joinGameCanvas.alpha = 0;
+
+        _leftMenuBox = GameObject.Find("Canvas").transform.Find("Left Menu Box").GetComponent<CanvasGroup>();
+        _rightMenuBox = GameObject.Find("Canvas").transform.Find("Right Menu Box").GetComponent<CanvasGroup>();
+
         _lerper = new TimeLerper();
         _joinGamePanel.SetActive(false);
     }
@@ -30,10 +37,18 @@ public class JoinGameScene : Scene
 
     public override bool IntroTransition()
     {
+        if (_leftMenuBox.alpha > 1)
+        {
+            _leftMenuBox.alpha = _lerper.Lerp(1, 0, 0.5f);
+            _rightMenuBox.alpha = _lerper.Lerp(1, 0, 0.5f);
+            if (_leftMenuBox.alpha >= 1)
+                _lerper.Reset();
+            return false;
+        }
+
         if (_joinGameCanvas.alpha != 1)
         {
             _joinGameCanvas.alpha = _lerper.Lerp(0, 1, 0.5f);
-            
             return false;
         }
         foreach (User user in SceneManager.Users)

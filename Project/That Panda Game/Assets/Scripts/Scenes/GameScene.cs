@@ -156,7 +156,7 @@ public class GameScene : Scene
 
     public override bool OutroTransition()
     {
-
+        ResumeGame();
         return true;
     }
 
