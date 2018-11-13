@@ -35,6 +35,11 @@ public class CharacterSelectScene : Scene
         _characterSelectPanel.transform.Find("EliGrey").gameObject.SetActive(false);
         _characterSelectPanel.transform.Find("LizGrey").gameObject.SetActive(false);
 
+        _characterSelectPanel.transform.Find("Pan").gameObject.SetActive(true);
+        _characterSelectPanel.transform.Find("Ham").gameObject.SetActive(true);
+        _characterSelectPanel.transform.Find("Eli").gameObject.SetActive(true);
+        _characterSelectPanel.transform.Find("Liz").gameObject.SetActive(true);
+
         _userIndex = 1;
         for (int i = 1; i <= 4; i++)
         {
@@ -99,15 +104,19 @@ public class CharacterSelectScene : Scene
             {
                 case CharacterType.Elephant:
                     _characterSelectPanel.transform.Find("EliGrey").gameObject.SetActive(true);
+                    _characterSelectPanel.transform.Find("Eli").gameObject.SetActive(false);
                     break;
                 case CharacterType.Pig:
                     _characterSelectPanel.transform.Find("HamGrey").gameObject.SetActive(true);
+                    _characterSelectPanel.transform.Find("Ham").gameObject.SetActive(false);
                     break;
                 case CharacterType.Lizard:
                     _characterSelectPanel.transform.Find("LizGrey").gameObject.SetActive(true);
+                    _characterSelectPanel.transform.Find("Liz").gameObject.SetActive(false);
                     break;
                 case CharacterType.Panda:
                     _characterSelectPanel.transform.Find("PanGrey").gameObject.SetActive(true);
+                    _characterSelectPanel.transform.Find("Pan").gameObject.SetActive(false);
                     break;
             }
             GetNextUser();
