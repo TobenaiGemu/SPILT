@@ -9636,6 +9636,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 114834841661663734, guid: a9e6ad6324d48944e9c8d2c741dc4c82,
+        type: 2}
+      propertyPath: _distanceFromApple
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114834841661663734, guid: a9e6ad6324d48944e9c8d2c741dc4c82,
+        type: 2}
+      propertyPath: _distanceFromCoin
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114834841661663734, guid: a9e6ad6324d48944e9c8d2c741dc4c82,
+        type: 2}
+      propertyPath: _distanceFromCookie
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9e6ad6324d48944e9c8d2c741dc4c82, type: 2}
   m_IsPrefabAsset: 0
@@ -10074,12 +10089,17 @@ Prefab:
     - target: {fileID: 114541727701505128, guid: 6c997326e8f8ef54c9ed2d0011cc8179,
         type: 2}
       propertyPath: _distanceFromApple
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 114541727701505128, guid: 6c997326e8f8ef54c9ed2d0011cc8179,
         type: 2}
       propertyPath: _distanceFromCoin
-      value: 2
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114541727701505128, guid: 6c997326e8f8ef54c9ed2d0011cc8179,
+        type: 2}
+      propertyPath: _distanceFromCookie
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c997326e8f8ef54c9ed2d0011cc8179, type: 2}
@@ -14956,12 +14976,12 @@ Prefab:
     - target: {fileID: 224783136461079068, guid: 3bd0bea38d16fe14db791427e1123af9,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -675.00006
+      value: -675
       objectReference: {fileID: 0}
     - target: {fileID: 224080150696102264, guid: 3bd0bea38d16fe14db791427e1123af9,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -225.00006
+      value: -225
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bd0bea38d16fe14db791427e1123af9, type: 2}
@@ -15004,6 +15024,21 @@ Prefab:
     - target: {fileID: 4472790403502240, guid: 14eafff6bbef5034d9467bf4e9823d8a, type: 2}
       propertyPath: m_RootOrder
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114085669551197684, guid: 14eafff6bbef5034d9467bf4e9823d8a,
+        type: 2}
+      propertyPath: _distanceFromApple
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114085669551197684, guid: 14eafff6bbef5034d9467bf4e9823d8a,
+        type: 2}
+      propertyPath: _distanceFromCoin
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114085669551197684, guid: 14eafff6bbef5034d9467bf4e9823d8a,
+        type: 2}
+      propertyPath: _distanceFromCookie
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14eafff6bbef5034d9467bf4e9823d8a, type: 2}
