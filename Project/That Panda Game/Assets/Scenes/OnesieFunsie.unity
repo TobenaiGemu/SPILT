@@ -9494,6 +9494,22 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4753270938865064, guid: ba602fee0c950754090d7d5b2034a673, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -690.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 4809706158051314, guid: ba602fee0c950754090d7d5b2034a673, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -698.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4041156073345786, guid: ba602fee0c950754090d7d5b2034a673, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -686.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 4211371009236278, guid: ba602fee0c950754090d7d5b2034a673, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -694.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba602fee0c950754090d7d5b2034a673, type: 2}
   m_IsPrefabAsset: 0
@@ -10054,6 +10070,16 @@ Prefab:
     - target: {fileID: 4165638118004226, guid: 6c997326e8f8ef54c9ed2d0011cc8179, type: 2}
       propertyPath: m_RootOrder
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114541727701505128, guid: 6c997326e8f8ef54c9ed2d0011cc8179,
+        type: 2}
+      propertyPath: _distanceFromApple
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114541727701505128, guid: 6c997326e8f8ef54c9ed2d0011cc8179,
+        type: 2}
+      propertyPath: _distanceFromCoin
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c997326e8f8ef54c9ed2d0011cc8179, type: 2}
