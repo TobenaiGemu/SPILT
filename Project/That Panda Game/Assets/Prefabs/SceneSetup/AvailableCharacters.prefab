@@ -2600,7 +2600,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1120148974448898}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.96, y: 0, z: 0}
+  m_LocalPosition: {x: -686.17, y: 0, z: 0}
   m_LocalScale: {x: 30, y: 30, z: 30}
   m_Children:
   - {fileID: 4089031351979818}
@@ -2936,7 +2936,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1357529552034996}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.17, y: 0, z: 0}
+  m_LocalPosition: {x: -694.3, y: 0, z: 0}
   m_LocalScale: {x: 30, y: 30, z: 30}
   m_Children:
   - {fileID: 4001392083407376}
@@ -4089,7 +4089,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1149949463675728}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 300, z: 0}
+  m_LocalPosition: {x: -0.04449463, y: 0, z: -9.21784}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4041156073345786}
@@ -4234,7 +4234,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1075405662891106}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.87, y: 0, z: 0}
+  m_LocalPosition: {x: -690.26, y: 0, z: 0}
   m_LocalScale: {x: 30, y: 30, z: 30}
   m_Children:
   - {fileID: 4245620131438214}
@@ -4332,7 +4332,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1937421372439020}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.27, y: 0, z: 0}
+  m_LocalPosition: {x: -698.4, y: 0, z: 0}
   m_LocalScale: {x: 30, y: 30, z: 30}
   m_Children:
   - {fileID: 4235811859639014}
@@ -5269,6 +5269,9 @@ MonoBehaviour:
   _coinUpForceMin: 30
   _coinUpForceMax: 60
   _scoreNameSprite: {fileID: 21300000, guid: 383b432e05fd2b54e8e35007e85554ed, type: 3}
+  _rightMarshmallow: {fileID: 1931056425301480}
+  _leftMarshmallow: {fileID: 1076009196450578}
+  _burntMallowMat: {fileID: 2100000, guid: 827ceeeef0e885c498ed89f46609eebe, type: 2}
 --- !u!114 &114660127410265728
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5299,6 +5302,9 @@ MonoBehaviour:
   _coinUpForceMin: 30
   _coinUpForceMax: 60
   _scoreNameSprite: {fileID: 21300000, guid: a51dd51a518b5234a821e0c174ab34eb, type: 3}
+  _rightMarshmallow: {fileID: 1381555357358350}
+  _leftMarshmallow: {fileID: 1640853219246256}
+  _burntMallowMat: {fileID: 2100000, guid: fec1bfa2de4a8ec4baaa5d0500932986, type: 2}
 --- !u!114 &114790361733223014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5329,6 +5335,9 @@ MonoBehaviour:
   _coinUpForceMin: 30
   _coinUpForceMax: 60
   _scoreNameSprite: {fileID: 21300000, guid: 55b12d6d29e718241bf8b1e45e184773, type: 3}
+  _rightMarshmallow: {fileID: 1926487924412842}
+  _leftMarshmallow: {fileID: 1558209969994366}
+  _burntMallowMat: {fileID: 2100000, guid: 13919dd9473831742a5fe8748633544e, type: 2}
 --- !u!114 &114809588152169778
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5359,6 +5368,9 @@ MonoBehaviour:
   _coinUpForceMin: 30
   _coinUpForceMax: 60
   _scoreNameSprite: {fileID: 21300000, guid: 74017bae058e0254b82802bed3aa4b91, type: 3}
+  _rightMarshmallow: {fileID: 1738765517212680}
+  _leftMarshmallow: {fileID: 1013738529104286}
+  _burntMallowMat: {fileID: 2100000, guid: 236e7b26c208d7b4bb321dc899dfcf92, type: 2}
 --- !u!136 &136422021637429314
 CapsuleCollider:
   m_ObjectHideFlags: 1

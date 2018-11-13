@@ -173,6 +173,13 @@ public class Character : MonoBehaviour
     private int _coinUpForceMax;
     [SerializeField]
     private Sprite _scoreNameSprite;
+    [SerializeField]
+    private GameObject _rightMarshmallow;
+    [SerializeField]
+    private GameObject _leftMarshmallow;
+    [SerializeField]
+    private Material _burntMallowMat;
+    private Material _standardMallowMat;
 
     private GameObject _characterObj;
     private GameObject _characterPool;
@@ -194,6 +201,7 @@ public class Character : MonoBehaviour
     private float _knockjumpMultiplier;
     private float _speedMultiplierTimer;
 
+    private float _unroastTimer;
     private float _timeToUnroast;
     private float _roastPercent;
     private TimeLerper _lerper;
@@ -212,7 +220,7 @@ public class Character : MonoBehaviour
 
     public void Awake()
     {
-
+        _standardMallowMat = _leftMarshmallow.GetComponent<Renderer>().sharedMaterial;
     }
 
     public Character Init(GameObject charObj)
@@ -326,10 +334,14 @@ public class Character : MonoBehaviour
     {
         if (_marshmallowRoasted)
             return;
-        _roastPercent = _lerper.Lerp(0, 100, durationToRoast);
+        _roastPercent = _lerper.Lerp(0f, 1f, durationToRoast);
+        _leftMarshmallow.GetComponent<Renderer>().material.Lerp(_standardMallowMat, _burntMallowMat, _roastPercent);
+        _rightMarshmallow.GetComponent<Renderer>().material.Lerp(_standardMallowMat, _burntMallowMat, _roastPercent);
         //TODO: Change opacity of roast texture over time
-        if (_roastPercent >= 100)
+        if (_roastPercent >= 1)
         {
+            _lerper.Reset();
+            _unroastTimer = durationToUnroast;
             _timeToUnroast = durationToUnroast;
             CompleteRoast(knockbackMultiplier, knockjumpMultiplier, coinDrop);
         }
@@ -343,6 +355,8 @@ public class Character : MonoBehaviour
         _roastPercent = 0;
         _knockbackMultiplier = 1;
         _knockjumpMultiplier = 1;
+        _leftMarshmallow.GetComponent<Renderer>().material = _standardMallowMat;
+        _rightMarshmallow.GetComponent<Renderer>().material = _standardMallowMat;
         _lerper.Reset();
         //TODO: Change texture back to normal;
     }
@@ -361,9 +375,12 @@ public class Character : MonoBehaviour
 
     public IEnumerator UnroastMarshmallowCounter()
     {
-        while (_timeToUnroast > 0)
+        while (_unroastTimer > 0)
         {
-            _timeToUnroast -= 1;
+            float unroastPercent = _lerper.Lerp(0, 1, _timeToUnroast);
+            _leftMarshmallow.GetComponent<Renderer>().material.Lerp(_burntMallowMat, _standardMallowMat, unroastPercent);
+            _rightMarshmallow.GetComponent<Renderer>().material.Lerp(_burntMallowMat, _standardMallowMat, unroastPercent);
+            _unroastTimer -= 1;
             yield return new WaitForSeconds(1);
         }
         _marshmallowRoasted = false;
