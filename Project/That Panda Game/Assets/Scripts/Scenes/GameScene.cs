@@ -8,8 +8,10 @@ public enum CharacterType {Panda, Lizard, Elephant, Pig}
 
 public class GameScene : Scene
 {
-
+    //Get rid of this
     public GameObject Planet { get; private set; }
+
+    private List<Character> _activeCharacters;
 
     private GameObject _gamePanel;
     private GameObject _pausePanel;
@@ -40,6 +42,7 @@ public class GameScene : Scene
     private TimeLerper _startLerper;
 
     private GameObject _winnerText;
+    private bool _gameFinished;
 
     public void Awake()
     {
@@ -61,6 +64,8 @@ public class GameScene : Scene
         _mamaMarshmallow = GameObject.Find("Events").transform.Find("MamaMarshmallow").GetComponent<MamaMarshmallow>();
         _winnerText = GameObject.Find("Canvas").transform.Find("GamePanel").Find("WINNER").gameObject;
 
+        _activeCharacters = new List<Character>();
+
         for (int i = 0; i < 4; i++)
         {
             _gamePanel.transform.Find("p" + (i + 1) + "ScoreBox").gameObject.SetActive(false);
@@ -78,13 +83,17 @@ public class GameScene : Scene
         foreach (User user in SceneManager.Users)
         {
             if (user.IsPlaying)
+            {
+                _activeCharacters.Add(user.AssignedCharacter);
                 user.AssignedCharacter.ReInit();
+            }
         }
 
         _gameTimer = _gameTime;
         _startTimer = 3;
         _startTimerText.gameObject.SetActive(true);
         _startTimerText.transform.localScale = Vector3.zero;
+        _gameFinished = false;
     }
 
     public override void Cleanup()
@@ -103,8 +112,12 @@ public class GameScene : Scene
         _lerper.Reset();
     }
 
-    public void WinGame()
+    public void WinGame(Character winner)
     {
+        _winnerText.GetComponent<Text>().text = winner.name + " Wins!";
+        _gameFinished = true;
+        _winnerText.SetActive(true);
+        Debug.Log(winner.name);
         StartCoroutine(FinishGame());
     }
 
@@ -113,7 +126,6 @@ public class GameScene : Scene
         while (_winnerTime > 0)
         {
             _winnerTime -= Time.deltaTime;
-            Debug.Log(_winnerTime);
             yield return null;
         }
         _mamaMarshmallow.StopMarshmallow();
@@ -163,11 +175,14 @@ public class GameScene : Scene
     public override bool OutroTransition()
     {
         ResumeGame();
+        _winnerText.SetActive(false);
         return true;
     }
 
     public override void SceneUpdate()
     {
+        if (_gameFinished)
+            return;
         //Base updates the users
         _coinSpawner.Tick();
         _cookieSpawner.Tick();
@@ -187,7 +202,13 @@ public class GameScene : Scene
 
         if (_gameTimer <= 0)
         {
-            _sceneManager.ChangeScene<MainMenuScene>();
+            Character winner = _activeCharacters[0];
+            foreach (Character chr in _activeCharacters)
+            {
+                if (chr.Coins > winner.Coins)
+                    winner = chr;
+            }
+            WinGame(winner);
         }
 
         base.SceneUpdate();
@@ -195,7 +216,8 @@ public class GameScene : Scene
 
     public override void SceneFixedUpdate()
     {
-        //Planet.transform.Rotate(Vector3.up, 20 * Time.deltaTime);
+        if (_gameFinished)
+            return;
         base.SceneFixedUpdate();
     }
 
