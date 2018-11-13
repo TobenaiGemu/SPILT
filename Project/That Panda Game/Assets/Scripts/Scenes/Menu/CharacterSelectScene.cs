@@ -29,6 +29,11 @@ public class CharacterSelectScene : Scene
         _lerper.Reset();
         _characterSelectPanel.SetActive(true);
 
+        _characterSelectPanel.transform.Find("HamGrey").gameObject.SetActive(false);
+        _characterSelectPanel.transform.Find("PanGrey").gameObject.SetActive(false);
+        _characterSelectPanel.transform.Find("EliGrey").gameObject.SetActive(false);
+        _characterSelectPanel.transform.Find("LizGrey").gameObject.SetActive(false);
+
         _userIndex = 1;
         for (int i = 1; i <= 4; i++)
         {
@@ -75,10 +80,30 @@ public class CharacterSelectScene : Scene
         return true;
     }
 
-    public void SelectCharacter(CharacterType characterType)
+    public bool SelectCharacter(CharacterType characterType)
     {
         if (_sceneManager.AttemptCharacterAssign(characterType, _currentUser))
+        {
+            //NO NO NO NO NO GET RID OF THIS
+            switch (characterType)
+            {
+                case CharacterType.Elephant:
+                    _characterSelectPanel.transform.Find("EliGrey").gameObject.SetActive(true);
+                    break;
+                case CharacterType.Pig:
+                    _characterSelectPanel.transform.Find("HamGrey").gameObject.SetActive(true);
+                    break;
+                case CharacterType.Lizard:
+                    _characterSelectPanel.transform.Find("LizGrey").gameObject.SetActive(true);
+                    break;
+                case CharacterType.Panda:
+                    _characterSelectPanel.transform.Find("PanGrey").gameObject.SetActive(true);
+                    break;
+            }
             GetNextUser();
+            return true;
+        }
+        return false;
     }
 
     private void GetNextUser()
