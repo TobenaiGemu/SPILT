@@ -244,6 +244,7 @@ public class Character : MonoBehaviour
         _knockbackMultiplier = 1;
         _knockjumpMultiplier = 1;
         _speedMultiplierTimer = 1;
+        _lerper.Reset();
     }
 
     public void Cleanup()

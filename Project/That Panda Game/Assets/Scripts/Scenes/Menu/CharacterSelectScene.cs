@@ -14,6 +14,7 @@ public class CharacterSelectScene : Scene
     private int _userIndex;
     private User _currentUser;
 
+
     private void Awake()
     {
         _characterSelectPanel = GameObject.Find("Canvas").transform.Find("CharacterSelectPanel").gameObject;
@@ -41,9 +42,18 @@ public class CharacterSelectScene : Scene
             {
                 _currentUser = _sceneManager.GetUser(i);
                 _userIndex = i;
+                SetPlayerText("Player " + i);
                 break;
             }
         }
+    }
+
+    private void SetPlayerText(string text)
+    {
+        _characterSelectPanel.transform.Find("Pan").transform.Find("PlayerText").GetComponent<Text>().text = text;
+        _characterSelectPanel.transform.Find("Ham").transform.Find("PlayerText").GetComponent<Text>().text = text;
+        _characterSelectPanel.transform.Find("Eli").transform.Find("PlayerText").GetComponent<Text>().text = text;
+        _characterSelectPanel.transform.Find("Liz").transform.Find("PlayerText").GetComponent<Text>().text = text;
     }
 
     public override bool IntroTransition()
@@ -106,6 +116,11 @@ public class CharacterSelectScene : Scene
         return false;
     }
 
+    public override void SceneUpdate()
+    {
+        base.SceneUpdate();
+    }
+
     private void GetNextUser()
     {
         _userIndex++;
@@ -117,7 +132,7 @@ public class CharacterSelectScene : Scene
         {
             Debug.Log(_userIndex);
             _currentUser = _sceneManager.GetUser(_userIndex);
-            
+            SetPlayerText("Player " + _userIndex);
             _uiManager.ChangeEventSystem(_userIndex);
             EventSystem.current.firstSelectedGameObject = _firstSelectedCharacter;
             EventSystem.current.SetSelectedGameObject(null);
