@@ -180,7 +180,14 @@ public class Character : MonoBehaviour
     private bool _isAssigned;
 
     private int _coins;
-
+    public int Coins
+    {
+        get
+        {
+            return _coins;
+        }
+        private set { }
+    }
 
     private float _forwardSpeedMultiplier;
     private float _knockbackMultiplier;
@@ -241,8 +248,8 @@ public class Character : MonoBehaviour
     {
         _coins += ammount;
         UpdateCoinPanel();
-        if (_coins >= _coinsToWin)
-            WinGame();
+        //if (_coins >= _coinsToWin)
+        //    WinGame();
     }
 
     public void DropCoins(int ammount)
@@ -291,7 +298,7 @@ public class Character : MonoBehaviour
 
     private void WinGame()
     {
-        _gameScene.WinGame();
+        _gameScene.WinGame(this);
         _coins = 0;
     }
 
