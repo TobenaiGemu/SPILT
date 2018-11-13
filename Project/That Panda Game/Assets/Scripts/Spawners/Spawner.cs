@@ -29,6 +29,8 @@ public class Spawner : MonoBehaviour
     private float _distanceFromCoin;
     [SerializeField]
     private float _distanceFromCookie;
+    [SerializeField]
+    private float _distanceFromPlayer;
 
     private GameObject _planet;
 
@@ -45,13 +47,16 @@ public class Spawner : MonoBehaviour
     }
 
     private float _spawnTimer;
-	
+
+    private GameScene _gameScene;
+
     void Awake()
     {
         SetSpawnRate();
         _planet = GameObject.Find("Planet");
         _activeObjects = new List<GameObject>();
         _objectPool = new ObjectPool(_object, _maxObjects);
+        _gameScene = GameObject.Find("Scenes").transform.Find("GameScene").GetComponent<GameScene>();
     }
 
     public void Tick()
@@ -119,6 +124,12 @@ public class Spawner : MonoBehaviour
             }
 
             if (CheckDistanceFromList(_cookies, spawnPos, _distanceFromCookie))
+            {
+                fallback++;
+                continue;
+            }
+
+            if (CheckDistanceFromList(_gameScene.ActivePlayers, spawnPos, _distanceFromPlayer))
             {
                 fallback++;
                 continue;

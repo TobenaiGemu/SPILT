@@ -12,6 +12,15 @@ public class GameScene : Scene
     public GameObject Planet { get; private set; }
 
     private List<Character> _activeCharacters;
+    private List<GameObject> _activePlayers;
+    public List<GameObject> ActivePlayers
+    {
+        get
+        {
+            return _activePlayers;
+        }
+        private set { }
+    }
 
     private GameObject _gamePanel;
     private GameObject _pausePanel;
@@ -65,6 +74,7 @@ public class GameScene : Scene
         _winnerText = GameObject.Find("Canvas").transform.Find("GamePanel").Find("WINNER").gameObject;
 
         _activeCharacters = new List<Character>();
+        _activePlayers = new List<GameObject>();
 
         for (int i = 0; i < 4; i++)
         {
@@ -85,6 +95,7 @@ public class GameScene : Scene
             if (user.IsPlaying)
             {
                 _activeCharacters.Add(user.AssignedCharacter);
+                _activePlayers.Add(user.AssignedCharacter.transform.parent.gameObject);
                 user.AssignedCharacter.ReInit();
             }
         }
