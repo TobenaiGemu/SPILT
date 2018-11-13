@@ -352,12 +352,11 @@ public class Character : MonoBehaviour
         if (_marshmallowRoasted)
             return;
         Debug.Log("Unroasted");
-        _roastPercent = 0;
+
         _knockbackMultiplier = 1;
         _knockjumpMultiplier = 1;
-        _leftMarshmallow.GetComponent<Renderer>().material = _standardMallowMat;
-        _rightMarshmallow.GetComponent<Renderer>().material = _standardMallowMat;
         _lerper.Reset();
+        StartCoroutine(FadeAwayRoast());
         //TODO: Change texture back to normal;
     }
 
@@ -370,21 +369,32 @@ public class Character : MonoBehaviour
         Debug.Log("Roasted");
 
         StartCoroutine(UnroastMarshmallowCounter());
-        //TODO: Change coin drop to that and add roasted timer
     }
 
     public IEnumerator UnroastMarshmallowCounter()
     {
         while (_unroastTimer > 0)
         {
-            float unroastPercent = _lerper.Lerp(0, 1, _timeToUnroast);
-            _leftMarshmallow.GetComponent<Renderer>().material.Lerp(_burntMallowMat, _standardMallowMat, unroastPercent);
-            _rightMarshmallow.GetComponent<Renderer>().material.Lerp(_burntMallowMat, _standardMallowMat, unroastPercent);
             _unroastTimer -= 1;
             yield return new WaitForSeconds(1);
         }
         _marshmallowRoasted = false;
         StopRoastingMarshmallow();
+    }
+
+    public IEnumerator FadeAwayRoast()
+    {
+        float unroastPercent = _roastPercent;
+        while (unroastPercent > 0)
+        {
+            unroastPercent = _lerper.Lerp(_roastPercent, 0, 1);
+            Debug.Log(unroastPercent);
+            _leftMarshmallow.GetComponent<Renderer>().material.Lerp(_standardMallowMat, _burntMallowMat, unroastPercent);
+            _rightMarshmallow.GetComponent<Renderer>().material.Lerp(_standardMallowMat, _burntMallowMat, unroastPercent);
+            yield return null;
+        }
+        _roastPercent = 0;
+        _lerper.Reset();
     }
 
     private void Unassign()
