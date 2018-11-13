@@ -9,6 +9,8 @@ public class CharacterSelectScene : Scene
     private GameObject _characterSelectPanel;
     private CanvasGroup _characterSelectCanvas;
     private TimeLerper _lerper;
+
+    public List<GameObject> _buttons;
     private GameObject _firstSelectedCharacter;
 
     private int _userIndex;
@@ -22,7 +24,12 @@ public class CharacterSelectScene : Scene
         _lerper = new TimeLerper();
         _characterSelectPanel.SetActive(false);
         _characterSelectCanvas.alpha = 0;
-        _firstSelectedCharacter = GameObject.Find("Canvas").transform.Find("CharacterSelectPanel").transform.Find("Pan").gameObject;
+        _buttons = new List<GameObject>();
+        _buttons.Add(_characterSelectPanel.transform.Find("Pan").gameObject);
+        _buttons.Add(_characterSelectPanel.transform.Find("Ham").gameObject);
+        _buttons.Add(_characterSelectPanel.transform.Find("Eli").gameObject);
+        _buttons.Add(_characterSelectPanel.transform.Find("Liz").gameObject);
+        _firstSelectedCharacter = _buttons[0];
     }
 
     public override void Initialize()
@@ -50,6 +57,15 @@ public class CharacterSelectScene : Scene
                 SetPlayerText("Player " + i);
                 break;
             }
+        }
+    }
+
+    public override void Cleanup()
+    {
+        if (_sceneManager.CheckNextScene<JoinGameScene>())
+        {
+            foreach (User user in SceneManager.Users)
+                user.UnassignCharacter();
         }
     }
 
@@ -143,9 +159,17 @@ public class CharacterSelectScene : Scene
             _currentUser = _sceneManager.GetUser(_userIndex);
             SetPlayerText("Player " + _userIndex);
             _uiManager.ChangeEventSystem(_userIndex);
-            EventSystem.current.firstSelectedGameObject = _firstSelectedCharacter;
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(_firstSelectedCharacter);
+            foreach (GameObject button in _buttons)
+            {
+                if (button.activeSelf)
+                {
+                    EventSystem.current.firstSelectedGameObject = button;
+                    EventSystem.current.SetSelectedGameObject(null);
+                    EventSystem.current.SetSelectedGameObject(button);
+                    break;
+                }
+            }
+
         }
         else
         {
