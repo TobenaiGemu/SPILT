@@ -24,7 +24,7 @@ public class OptionsScene : Scene
         _optionsCanvas = _optionsPanel.GetComponent<CanvasGroup>();
 
         //Find right panels corresponding to buttons
-        //_resolutionButton = _optionsPanel.transform.Find("Resolution").gameObject;
+        _resolutionButton = _optionsPanel.transform.Find("Resolution").gameObject;
         //_resolutionPanel = canvas.transform.Find("ResolutionPanel").gameObject;
         //_volumePanel = canvas.transform.Find("VolumePanel").gameObject;
 

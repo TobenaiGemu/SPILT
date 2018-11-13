@@ -24,10 +24,10 @@ public class InfoScene : Scene
         _menuPage = new MenuPage(_infoPanel);
         //Set all the corresponding right panels for each button based on index
         _menuPage.SetRightPanel("ControlsPanel", 0);
-        //_menuPage.SetRightPanel("ControlsPanel", 0);
-        //_menuPage.SetRightPanel("PowerupsPanel", 1);
-        //_menuPage.SetRightPanel("EventsPanel", 2);
-        //_menuPage.SetRightPanel("CreditsPanel", 3);
+        _menuPage.SetRightPanel("PowerupsPanel", 1);
+        _menuPage.SetRightPanel("EventsPanel", 2);
+        _menuPage.SetRightPanel("CharactersPanel", 3);
+        _menuPage.SetRightPanel("CreditsPanel", 4);
 
         _infoPanel.SetActive(false);
     }
@@ -71,7 +71,10 @@ public class InfoScene : Scene
             return false;
         }
         _lerper.Reset();
-        
+
+        if (!_menuPage.OutroCurrentPanel(0.5f))
+            return false;
+
         return true;
     }
 
