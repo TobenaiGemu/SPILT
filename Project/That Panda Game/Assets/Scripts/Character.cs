@@ -184,6 +184,14 @@ public class Character : MonoBehaviour
     private GameObject _characterObj;
     private GameObject _characterPool;
     private User _assignedUser;
+    public User AssignedUser
+    {
+        get
+        {
+            return _assignedUser;
+        }
+        private set { }
+    }
     private bool _isAssigned;
 
     private int _coins;

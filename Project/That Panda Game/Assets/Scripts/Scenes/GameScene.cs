@@ -37,6 +37,7 @@ public class GameScene : Scene
     private int _maxRandomMama;
     [SerializeField]
     private float _winnerTime;
+    private float _winnerTimer;
     private float _mamaTimer;
     private bool _mamaFalling;
 
@@ -45,6 +46,7 @@ public class GameScene : Scene
     [SerializeField]
     private float _gameTime;
     private float _gameTimer;
+    private Text _timerText;
 
     private Text _startTimerText;
     private int _startTimer;
@@ -61,10 +63,11 @@ public class GameScene : Scene
         //For lerping the planet scale
         _lerper = new TimeLerper();
         _startLerper = new TimeLerper();
-
         _gamePanel = GameObject.Find("Canvas").transform.Find("GamePanel").gameObject;
         _pausePanel = GameObject.Find("Canvas").transform.Find("GamePausePanel").gameObject;
         _startTimerText = _gamePanel.transform.Find("StartTimer").GetComponent<Text>();
+
+        _timerText = _gamePanel.transform.Find("Timer").GetComponent<Text>();
 
         _coinSpawner = GameObject.Find("CoinSpawner").GetComponent<Spawner>();
         _cookieSpawner = GameObject.Find("CookieSpawner").GetComponent<Spawner>();
@@ -84,6 +87,8 @@ public class GameScene : Scene
 
     public override void Initialize()
     {
+        _timerText.text = "90";
+        _winnerTimer = _winnerTime;
         _initCameraPos = Camera.main.transform.position;
         _targetCameraPos = new Vector3(0, 0, -54);
         ResetMamaTimer();
@@ -125,18 +130,18 @@ public class GameScene : Scene
 
     public void WinGame(Character winner)
     {
-        _winnerText.GetComponent<Text>().text = winner.name + " Wins!";
+        _winnerText.GetComponent<Text>().text = "PLayer " + winner.AssignedUser.UserId + " Wins!";
         _gameFinished = true;
         _winnerText.SetActive(true);
-        Debug.Log(winner.name);
+        Debug.Log(winner.Name);
         StartCoroutine(FinishGame());
     }
 
     public IEnumerator FinishGame()
     {
-        while (_winnerTime > 0)
+        while (_winnerTimer > 0)
         {
-            _winnerTime -= Time.deltaTime;
+            _winnerTimer -= Time.deltaTime;
             yield return null;
         }
         _mamaMarshmallow.StopMarshmallow();
@@ -199,6 +204,7 @@ public class GameScene : Scene
         _cookieSpawner.Tick();
         _appleSpawner.Tick();
         _gameTimer -= Time.deltaTime;
+        _timerText.text = ((int)_gameTimer).ToString();
         _mamaTimer -= Time.deltaTime;
         if (_mamaTimer <= 0)
         {

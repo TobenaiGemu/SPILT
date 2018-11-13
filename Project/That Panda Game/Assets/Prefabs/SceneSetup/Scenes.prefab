@@ -265,7 +265,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _minRandomMama: 5
   _maxRandomMama: 10
-  _winnerTime: 0
+  _winnerTime: 5
   _gameTime: 90
 --- !u!114 &114540222999761608
 MonoBehaviour:
@@ -289,3 +289,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89681bc25064bc74c84f3aabb59a8f76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _buttons: []

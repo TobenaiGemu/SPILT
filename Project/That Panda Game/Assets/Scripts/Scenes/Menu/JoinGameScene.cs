@@ -32,6 +32,10 @@ public class JoinGameScene : Scene
         {
             _joinGamePanel.transform.GetChild(i).GetChild(0).GetComponent<Text>().text = "PRESS A TO JOIN!";
         }
+
+        foreach (User user in SceneManager.Users)
+            user.SetPlaying(false);
+
         _joinGamePanel.SetActive(true);
     }
 
