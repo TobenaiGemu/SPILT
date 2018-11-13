@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Apple : MonoBehaviour {
 
+    [SerializeField]
+    private float zToDespawn;
     private static AppleAction _appleAction;
     private static Spawner _appleSpawner;
 
@@ -20,7 +22,7 @@ public class Apple : MonoBehaviour {
 
     private void Update()
     {
-        if (transform.position.z > 0)
+        if (transform.position.z > zToDespawn * -1)
             _appleSpawner.ReturnObject(gameObject);
     }
 

@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cookie : MonoBehaviour {
-
+public class Cookie : MonoBehaviour
+{
+    [SerializeField]
+    private float zToDespawn;
     private static SpeedAction _cookieAction;
     private static Spawner _cookieSpawner;
 
@@ -15,7 +17,7 @@ public class Cookie : MonoBehaviour {
 
     private void Update()
     {
-        if (transform.position.z > 0)
+        if (transform.position.z > zToDespawn * -1)
             _cookieSpawner.ReturnObject(gameObject);
     }
 

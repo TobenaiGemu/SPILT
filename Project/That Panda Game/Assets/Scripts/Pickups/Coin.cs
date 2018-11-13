@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
+    [SerializeField]
+    private float zToDespawn;
     private static CoinAction _coinAction;
     private static Spawner _coinSpawner;
     private static GameObject _planet;
@@ -19,7 +21,7 @@ public class Coin : MonoBehaviour
 
     private void Update()
     {
-        if (transform.position.z > 0)
+        if (transform.position.z > zToDespawn * -1)
             _coinSpawner.ReturnObject(gameObject);
     }
 
