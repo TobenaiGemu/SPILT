@@ -120,6 +120,7 @@ public class GameState : UserState
         if (_character == null)
             return;
         //Rotate towards the centre of the planet
+        _playerObj.transform.rotation = Quaternion.identity;
         _playerObj.transform.LookAt(_planetObj.transform.position);
 
         //Set velocity based on joystick horizontal and vertical axis'
@@ -136,7 +137,6 @@ public class GameState : UserState
             _rotation = Mathf.Atan2(_lookDir.y, -_lookDir.x) * Mathf.Rad2Deg;
 
         _playerObj.transform.Rotate(0, _rotation - 90, 0, Space.Self);
-
         //Set movement animation based on local player movement direction
         _animator.SetFloat("velY", Vector3.Dot(_playerObj.transform.forward, _velocity.normalized));
         _animator.SetFloat("velX", Vector3.Dot(_playerObj.transform.right, _velocity.normalized));
