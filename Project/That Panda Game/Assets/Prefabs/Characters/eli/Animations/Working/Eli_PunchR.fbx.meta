@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 992c2e2a0cb93d14c9291f60fbbe1e0a
+guid: b1ea7c093a7c40848be04c0f0383d5e1
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -144,7 +144,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 1
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []

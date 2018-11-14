@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e3dfa367338131546be697e983e7dbd8
+guid: 8149ec4a6cd0a354f97a70615f9c0f0c
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -121,7 +121,7 @@ ModelImporter:
       name: Punch_L
       takeName: Take 001
       firstFrame: 1
-      lastFrame: 10
+      lastFrame: 9
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -144,7 +144,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 1
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
