@@ -241,7 +241,6 @@ public class Character : MonoBehaviour
         _sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
         _gameScene = GameObject.Find("Scenes").transform.Find("GameScene").GetComponent<GameScene>();
         _characterObj = charObj;
-        ReInit();
         return this;
     }
 
@@ -252,6 +251,7 @@ public class Character : MonoBehaviour
         _knockbackMultiplier = 1;
         _knockjumpMultiplier = 1;
         _speedMultiplierTimer = 1;
+        UpdateCoinPanel();
         _lerper.Reset();
     }
 
