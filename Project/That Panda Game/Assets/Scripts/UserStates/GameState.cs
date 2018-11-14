@@ -103,8 +103,16 @@ public class GameState : UserState
         }
 
         //Rotate the gameobject based on input
-        _lookDir.x = _joystick.GetAnalogue2Axis("Horizontal");
-        _lookDir.y = _joystick.GetAnalogue2Axis("Vertical");
+        _lookDir.x = _joystick.GetAnalogue1Axis("Horizontal");
+        _lookDir.y = _joystick.GetAnalogue1Axis("Vertical");
+
+        float x = _joystick.GetAnalogue2Axis("Horizontal");
+        float y = _joystick.GetAnalogue2Axis("Vertical");
+        if (x != 0 || y != 0)
+        {
+            _lookDir.x = x;
+            _lookDir.y = y;
+        }
     }
 
     public override void FixedUpdate()
