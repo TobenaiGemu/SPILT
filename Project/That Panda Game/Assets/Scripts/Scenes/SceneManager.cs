@@ -25,6 +25,8 @@ public class SceneManager : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
+        Cursor.visible = false;
+
         _scenesPool = GameObject.Find("Scenes");
 
         MaxUsers = 4;
