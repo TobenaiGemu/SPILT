@@ -338,7 +338,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1159256614214794
 GameObject:
   m_ObjectHideFlags: 1
@@ -371,7 +371,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1166642371028612
 GameObject:
   m_ObjectHideFlags: 1
@@ -2474,7 +2474,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: fa5fa2c91735f10469104aeeee672688, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0cd1475646747ab408d0b2eaaab84061, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3467,7 +3467,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: fa5fa2c91735f10469104aeeee672688, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0cd1475646747ab408d0b2eaaab84061, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4708,7 +4708,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: fa5fa2c91735f10469104aeeee672688, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0cd1475646747ab408d0b2eaaab84061, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5088,7 +5088,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: fa5fa2c91735f10469104aeeee672688, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0cd1475646747ab408d0b2eaaab84061, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5792,7 +5792,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Grosses the player out, causing them to drop some of their Gummy Bears!
+  m_Text: The player gets grossed out, causing them to drop some of their Gummy Bears!
 --- !u!114 &114898767847437196
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5965,7 +5965,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: fa5fa2c91735f10469104aeeee672688, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0cd1475646747ab408d0b2eaaab84061, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6019,7 +6019,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: fa5fa2c91735f10469104aeeee672688, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0cd1475646747ab408d0b2eaaab84061, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7309,7 +7309,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 779.89996, y: 0}
+  m_AnchoredPosition: {x: 782, y: 0}
   m_SizeDelta: {x: -1350, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224093900477034984
