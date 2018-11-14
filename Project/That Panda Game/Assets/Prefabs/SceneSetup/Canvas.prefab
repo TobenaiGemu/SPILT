@@ -401,7 +401,7 @@ GameObject:
   - component: {fileID: 222825304606771320}
   - component: {fileID: 114505833827554850}
   m_Layer: 5
-  m_Name: Timer
+  m_Name: TimerL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -971,7 +971,7 @@ GameObject:
   - component: {fileID: 222666298896084066}
   - component: {fileID: 114927517269898122}
   m_Layer: 5
-  m_Name: Timer
+  m_Name: TimerR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5528,7 +5528,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.23272228, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
