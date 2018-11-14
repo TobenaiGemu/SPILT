@@ -46,7 +46,8 @@ public class GameScene : Scene
     [SerializeField]
     private float _gameTime;
     private float _gameTimer;
-    private Text _timerText;
+    private Text _timerLText;
+    private Text _timerRText;
 
     private Text _startTimerText;
     private int _startTimer;
@@ -67,7 +68,8 @@ public class GameScene : Scene
         _pausePanel = GameObject.Find("Canvas").transform.Find("GamePausePanel").gameObject;
         _startTimerText = _gamePanel.transform.Find("StartTimer").GetComponent<Text>();
 
-        _timerText = _gamePanel.transform.Find("Timer").GetComponent<Text>();
+        _timerLText = _gamePanel.transform.Find("TimerL").GetComponent<Text>();
+        _timerRText = _gamePanel.transform.Find("TimerR").GetComponent<Text>();
 
         _coinSpawner = GameObject.Find("CoinSpawner").GetComponent<Spawner>();
         _cookieSpawner = GameObject.Find("CookieSpawner").GetComponent<Spawner>();
@@ -87,7 +89,8 @@ public class GameScene : Scene
 
     public override void Initialize()
     {
-        _timerText.text = "90";
+        _timerLText.text = "90";
+        _timerRText.text = "90";
         _winnerTimer = _winnerTime;
         _initCameraPos = Camera.main.transform.position;
         _targetCameraPos = new Vector3(0, 0, -54);
@@ -204,7 +207,8 @@ public class GameScene : Scene
         _cookieSpawner.Tick();
         _appleSpawner.Tick();
         _gameTimer -= Time.deltaTime;
-        _timerText.text = ((int)_gameTimer).ToString();
+        _timerLText.text = ((int)_gameTimer).ToString();
+        _timerRText.text = ((int)_gameTimer).ToString();
         _mamaTimer -= Time.deltaTime;
         if (_mamaTimer <= 0)
         {
