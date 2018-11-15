@@ -53,7 +53,7 @@ public class MamaMarshmallow : MonoBehaviour
         RaycastHit hit;
         Physics.Raycast(transform.position, (transform.position - _planet.transform.position).normalized, out hit, Mathf.Infinity, 1 << 9);
         _targetPos = hit.point;
-        transform.position = transform.up * 500;
+        transform.position = transform.up * 300;
         _initPos = transform.position;
         gameObject.SetActive(true);
         transform.Rotate(_rotation);
@@ -132,6 +132,6 @@ public class MamaMarshmallow : MonoBehaviour
         transform.up = -(_planet.transform.position - transform.position).normalized;
 
         //Lerp the marshmallows position towards the desired point on the planet
-        transform.position = _lerper.Lerp(_initPos, _targetPos, 10);
+        transform.position = _lerper.Lerp(_initPos, _targetPos, 5);
     }
 }

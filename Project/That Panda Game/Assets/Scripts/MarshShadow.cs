@@ -31,12 +31,13 @@ public class MarshShadow : MonoBehaviour
     {
         _followCharacter = null;
         _lerper.Reset();
-        gameObject.SetActive(true);
         transform.position = _marshmallow.transform.up * 25;
         transform.LookAt(_planet.transform);
         transform.Rotate(-90, 0, 0);
         _initScale = new Vector3(0.1f, 1, 0.1f);
         _targetScale = new Vector3(1, 1, 1);
+        transform.localScale = _initScale;
+        gameObject.SetActive(true);
     }
 
     public void PauseShadow()
@@ -77,6 +78,6 @@ public class MarshShadow : MonoBehaviour
             transform.Rotate(-90, 0, 0);
         }
         //Increase scale over time
-        transform.localScale = _lerper.Lerp(_initScale, _targetScale, 9.5f);
+        transform.localScale = _lerper.Lerp(_initScale, _targetScale, 5);
 	}
 }

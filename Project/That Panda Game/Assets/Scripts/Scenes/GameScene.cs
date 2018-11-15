@@ -133,7 +133,7 @@ public class GameScene : Scene
 
     public void WinGame(Character winner)
     {
-        _winnerText.GetComponent<Text>().text = "PLayer " + winner.AssignedUser.UserId + " Wins!";
+        _winnerText.GetComponent<Text>().text = "Player " + winner.AssignedUser.UserId + " Wins!";
         _gameFinished = true;
         _winnerText.SetActive(true);
         Debug.Log(winner.Name);
