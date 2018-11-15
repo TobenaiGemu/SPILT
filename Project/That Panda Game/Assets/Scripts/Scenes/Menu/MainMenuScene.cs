@@ -20,6 +20,7 @@ public class MainMenuScene : Scene
     private bool _finishedScale;
     private TimeLerper _lerper;
 
+    private MenuPage _menuPage;
 
     public void Awake()
     {
@@ -37,6 +38,11 @@ public class MainMenuScene : Scene
         _leftMenuBox.alpha = 0;
         _rightMenuBox.alpha = 0;
         _mainMenuCanvas.alpha = 0;
+        _menuPage = new MenuPage(_mainMenuPanel);
+        _menuPage.SetRightPanel("PlayRightPanel", 0);
+        _menuPage.SetRightPanel("InfoRightPanel", 1);
+        _menuPage.SetRightPanel("OptionsRightPanel", 2);
+        _menuPage.SetRightPanel("QuitRightPanel", 3);
     }
 
     public override void Initialize()
@@ -45,11 +51,13 @@ public class MainMenuScene : Scene
         _rightMenuBox.gameObject.SetActive(true);
         _leftMenuBox.gameObject.SetActive(true);
         _mainMenuCanvas.alpha = 0;
+        _menuPage.Initialize();
         _lerper.Reset();
     }
 
     public override bool IntroTransition()
     {
+        _menuPage.Update();
         if (Camera.main.transform.position != _targetCameraPos)
         {
             Camera.main.transform.position = _lerper.Lerp(_initCameraPos, _targetCameraPos, 2);
@@ -89,6 +97,7 @@ public class MainMenuScene : Scene
     {
         if (_mainMenuCanvas.alpha > 0)
         {
+            _menuPage.OutroCurrentPanel(0.5f);
             _mainMenuCanvas.alpha = _lerper.Lerp(1, 0, 0.5f);
             if (_sceneManager.CheckNextScene<JoinGameScene>())
             {
@@ -103,5 +112,10 @@ public class MainMenuScene : Scene
     public override void Cleanup()
     {
         _mainMenuPanel.SetActive(false);
+    }
+
+    public override void SceneUpdate()
+    {
+        _menuPage.Update();
     }
 }

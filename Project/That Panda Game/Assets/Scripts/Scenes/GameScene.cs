@@ -50,6 +50,7 @@ public class GameScene : Scene
     private Text _timerRText;
 
     private Text _startTimerText;
+    private Text _startTimerInsideText;
     private int _startTimer;
     private TimeLerper _startLerper;
 
@@ -67,6 +68,7 @@ public class GameScene : Scene
         _gamePanel = GameObject.Find("Canvas").transform.Find("GamePanel").gameObject;
         _pausePanel = GameObject.Find("Canvas").transform.Find("GamePausePanel").gameObject;
         _startTimerText = _gamePanel.transform.Find("StartTimer").GetComponent<Text>();
+        _startTimerInsideText = _startTimerText.transform.GetChild(0).GetComponent<Text>();
 
         _timerLText = _gamePanel.transform.Find("TimerL").GetComponent<Text>();
         _timerRText = _gamePanel.transform.Find("TimerR").GetComponent<Text>();
@@ -136,6 +138,15 @@ public class GameScene : Scene
         _winnerText.GetComponent<Text>().text = "Player " + winner.AssignedUser.UserId + " Wins!";
         _gameFinished = true;
         _winnerText.SetActive(true);
+        winner.WinGame();
+        foreach (User user in SceneManager.Users)
+        {
+            if (user.IsPlaying)
+            {
+                if (user.AssignedCharacter != winner)
+                    user.AssignedCharacter.LoseGame();
+            }
+        }
         Debug.Log(winner.Name);
         StartCoroutine(FinishGame());
     }
@@ -167,9 +178,15 @@ public class GameScene : Scene
             if (_startTimerText.text != _startTimer.ToString() || _startTimerText.text != "START!")
             {
                 if (_startTimer == 0)
+                {
                     _startTimerText.text = "START!";
+                    _startTimerInsideText.text = "START!";
+                }
                 else
+                {
                     _startTimerText.text = _startTimer.ToString();
+                    _startTimerInsideText.text = _startTimer.ToString();
+                }
             }
             if (_startTimerText.transform.localScale != Vector3.one)
             {

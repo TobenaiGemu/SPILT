@@ -223,6 +223,8 @@ public class Character : MonoBehaviour
     private float _winnerTime;
     private GameScene _gameScene;
 
+    private Animator _animator;
+
     //Get rid of this
     private SceneManager _sceneManager;
 
@@ -241,6 +243,7 @@ public class Character : MonoBehaviour
         _sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
         _gameScene = GameObject.Find("Scenes").transform.Find("GameScene").GetComponent<GameScene>();
         _characterObj = charObj;
+        _animator = GetComponent<Animator>();
         return this;
     }
 
@@ -313,10 +316,14 @@ public class Character : MonoBehaviour
         _forwardSpeedMultiplier = 1;
     }
 
-    private void WinGame()
+    public void WinGame()
     {
-        _gameScene.WinGame(this);
-        _coins = 0;
+        _animator.SetTrigger("Victory");
+    }
+
+    public void LoseGame()
+    {
+        _animator.SetTrigger("Lose");
     }
 
     public bool AttemptAssignToUser(User user)
