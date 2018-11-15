@@ -22,6 +22,7 @@ public class User
         _states.Add("MenuState", new MenuState(this, sceneManager));
         _states.Add("JoinGameState", new JoinGameState(this, sceneManager));
         _states.Add("CharacterSelectState", new CharacterSelectState(this, sceneManager));
+        _states.Add("OptionsState", new OptionsState(this, sceneManager));
     }
 
     public void Update()

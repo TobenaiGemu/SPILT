@@ -16,6 +16,9 @@ public class OptionsScene : Scene
 
     private MenuPage _menuPage;
 
+    private GameObject _res1;
+    private bool _updateMenuPage;
+
     public void Awake()
     {
         GameObject canvas = GameObject.Find("Canvas");
@@ -25,17 +28,17 @@ public class OptionsScene : Scene
 
         //Find right panels corresponding to buttons
         _resolutionButton = _optionsPanel.transform.Find("Resolution").gameObject;
-        //_resolutionPanel = canvas.transform.Find("ResolutionPanel").gameObject;
-        //_volumePanel = canvas.transform.Find("VolumePanel").gameObject;
+        _resolutionPanel = canvas.transform.Find("ResolutionPanel").gameObject;
+        _volumePanel = canvas.transform.Find("VolumePanel").gameObject;
 
         _lerper = new TimeLerper();
 
         _menuPage = new MenuPage(_optionsPanel);
 
         //Set the right panel to the corresponding button index
-        //_menuPage.SetRightPanel("ResolutionPanel", 0);
-        //_menuPage.SetRightPanel("VolumePanel", 1);
-
+        _menuPage.SetRightPanel("ResolutionPanel", 0);
+        _menuPage.SetRightPanel("VolumePanel", 1);
+        _res1 = GameObject.Find("Canvas").transform.Find("ResolutionPanel").transform.Find("Res1").gameObject;
         _optionsPanel.SetActive(false);
     }
 
@@ -45,8 +48,23 @@ public class OptionsScene : Scene
         EventSystem.current.firstSelectedGameObject = _resolutionButton;
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(_resolutionButton);
-
+        _updateMenuPage = true;
         _lerper.Reset();
+    }
+
+    public void GotoResolution()
+    {
+        EventSystem.current.firstSelectedGameObject = _res1;
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(_res1);
+        SceneManager.Users[0].ChangeState("OptionsState");
+        _updateMenuPage = false;
+    }
+
+    public void GotoLeftButtons()
+    {
+        SceneManager.Users[0].ChangeState("MenuState");
+        Initialize();
     }
 
     public override void Cleanup()
@@ -80,7 +98,8 @@ public class OptionsScene : Scene
 
     public override void SceneUpdate()
     {
-        _menuPage.Update();
+        if (_updateMenuPage)
+            _menuPage.Update();
         base.SceneUpdate();
     }
 }
