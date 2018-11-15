@@ -96,6 +96,30 @@ public class UiManager : MonoBehaviour
         _sceneManager.GetScene<OptionsScene>().GotoResolution();
     }
 
+    public void ChangeRes1()
+    {
+        Screen.SetResolution(1024,768,true);
+        _sceneManager.GetScene<OptionsScene>().GotoLeftButtons();
+    }
+
+    public void ChangeRes2()
+    {
+        Screen.SetResolution(1280, 720, true);
+        _sceneManager.GetScene<OptionsScene>().GotoLeftButtons();
+    }
+
+    public void ChangeRes3()
+    {
+        Screen.SetResolution(1600, 900, true);
+        _sceneManager.GetScene<OptionsScene>().GotoLeftButtons();
+    }
+
+    public void ChangeRes4()
+    {
+        Screen.SetResolution(1920, 1080, true);
+        _sceneManager.GetScene<OptionsScene>().GotoLeftButtons();
+    }
+
     public void QuitGame()
     {
         Application.Quit();

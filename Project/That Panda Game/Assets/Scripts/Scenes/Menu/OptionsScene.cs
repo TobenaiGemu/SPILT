@@ -49,11 +49,20 @@ public class OptionsScene : Scene
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(_resolutionButton);
         _updateMenuPage = true;
+        _menuPage.Initialize();
+        for (int i = 1; i <= 4; i++)
+        {
+            _resolutionPanel.transform.Find("Res" + i).gameObject.SetActive(false);
+        }
         _lerper.Reset();
     }
 
     public void GotoResolution()
     {
+        for (int i = 1; i <= 4; i++)
+        {
+            _resolutionPanel.transform.Find("Res" + i).gameObject.SetActive(true);
+        }
         EventSystem.current.firstSelectedGameObject = _res1;
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(_res1);
@@ -74,6 +83,7 @@ public class OptionsScene : Scene
 
     public override bool IntroTransition()
     {
+        _menuPage.Update();
         _optionsCanvas.alpha = _optionsAlpha;
         if (_optionsAlpha < 1)
         {
@@ -90,6 +100,7 @@ public class OptionsScene : Scene
         if (_optionsAlpha > 0)
         {
             _optionsAlpha = _lerper.Lerp(1, 0, 0.5f);
+            _menuPage.OutroCurrentPanel(0.5f);
             return false;
         }
         _lerper.Reset();
