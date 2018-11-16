@@ -102,6 +102,7 @@ public class MamaMarshmallow : MonoBehaviour
             _shadow.Cleanup();
             _crashed = true;
             gameObject.SetActive(false);
+            Camera.main.GetComponent<CameraShake>().Shake();
         }
     }
 

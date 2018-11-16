@@ -106,7 +106,7 @@ public class MainMenuScene : Scene
             }
             return false;
         }
-        return true;
+        return _menuPage.OutroCurrentPanel(0.5f);
     }
 
     public override void Cleanup()
