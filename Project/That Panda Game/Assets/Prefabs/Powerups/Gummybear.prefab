@@ -188,6 +188,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zToDespawn: 15
+  _particleSystemPrefab: {fileID: 1819663047573334, guid: b3e0af08d613848469a086481e6d79ab,
+    type: 2}
   _canPickup: 0
 --- !u!114 &114751367333994124
 MonoBehaviour:

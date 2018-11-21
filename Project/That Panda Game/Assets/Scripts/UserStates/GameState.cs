@@ -20,6 +20,9 @@ public class GameState : UserState
     private float _leftPunchTimer;
     private float _rightPunchTimer;
 
+    private bool _leftPunchHeld;
+    private bool _rightPunchHeld;
+
     private bool _outOfBounds;
 
     private TimeLerper _rotationLerper;
@@ -68,10 +71,11 @@ public class GameState : UserState
         _punchTimer -= Time.deltaTime;
         _leftPunchTimer -= Time.deltaTime;
         _rightPunchTimer -= Time.deltaTime;
-        
+
         //Check if left/right triggers are being pressed and if cooldowns are finished
-        if (_punchTimer <= 0 && _leftPunchTimer <= 0 && _joystick.GetAxis("L2") >= 0.5f)
+        if (_punchTimer <= 0 && _leftPunchTimer <= 0 && _joystick.GetAxis("L2") >= 0.5f && !_leftPunchHeld)
         {
+            _leftPunchHeld = true;
             //reset cooldowns
             _punchTimer = _character.PunchCooldown;
             _leftPunchTimer = _character.LeftPunchCooldown;
@@ -80,16 +84,22 @@ public class GameState : UserState
             _animator.SetTrigger("punchL");
             //SphereCast in front of player
             RaycastHit hit;
+            
             if (Physics.SphereCast(_playerObj.transform.position, _character.PunchRadius, _playerObj.transform.forward, out hit, _character.PunchDistance, 1 << 8))
             {
                 //If SphereCast hit a player, knock that player back and make them drop coins
                 hit.collider.GetComponent<Character>().ApplyKnockBack(_character.transform.forward, _character.KnockBack, _character.KnockJump);
                 hit.collider.GetComponent<Character>().DropCoins(_character.PunchDropCoins + _character.RoastedPunchModifier);
+                _character.transform.Find("HitEffect").GetComponent<PunchHit>().Hit();
             }
         }
+        else if (_joystick.GetAxis("L2") < 0.5f)
+            _leftPunchHeld = false;
+
         //same as above (gonna be mergerd later)
-        if (_punchTimer <= 0 && _rightPunchTimer <= 0 && _joystick.GetAxis("R2") >= 0.5f)
+        if (_punchTimer <= 0 && _rightPunchTimer <= 0 && _joystick.GetAxis("R2") >= 0.5f && !_rightPunchHeld)
         {
+            _rightPunchHeld = true;
             _punchTimer = _character.PunchCooldown; 
             _rightPunchTimer = _character.RightPunchCooldown;
 
@@ -99,8 +109,11 @@ public class GameState : UserState
             {
                 hit.collider.GetComponent<Character>().ApplyKnockBack(_character.transform.forward, _character.KnockBack, _character.KnockJump);
                 hit.collider.GetComponent<Character>().DropCoins(_character.PunchDropCoins + _character.RoastedPunchModifier);
+                _character.transform.Find("HitEffect").GetComponent<PunchHit>().Hit();
             }
         }
+        else if (_joystick.GetAxis("R2") < 0.5f)
+            _rightPunchHeld = false;
 
         //Rotate the gameobject based on input
         _lookDir.x = _joystick.GetAnalogue1Axis("Horizontal");

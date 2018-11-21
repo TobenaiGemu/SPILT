@@ -298,6 +298,10 @@ public class Character : MonoBehaviour
         transform.parent.GetComponent<Rigidbody>().AddForce((direction.normalized * backForce + gameObject.transform.up * upForce), ForceMode.Impulse);
     }
 
+    public void StartWhooshing()
+    {
+    }
+
     public void MultiplySpeed(float speedMultiplier, float duration)
     {
         _forwardSpeedMultiplier = speedMultiplier;
@@ -404,7 +408,6 @@ public class Character : MonoBehaviour
         while (unroastPercent > 0)
         {
             unroastPercent = _lerper.Lerp(_roastPercent, 0, 1);
-            Debug.Log(unroastPercent);
             _leftMarshmallow.GetComponent<Renderer>().material.Lerp(_standardMallowMat, _burntMallowMat, unroastPercent);
             _rightMarshmallow.GetComponent<Renderer>().material.Lerp(_standardMallowMat, _burntMallowMat, unroastPercent);
             yield return null;

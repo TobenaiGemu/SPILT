@@ -13,5 +13,6 @@ public class SpeedAction : MonoBehaviour
     public void MultiplyCharacterSpeed(Character character)
     {
         character.MultiplySpeed(_speedMultiplier, _speedDuration);
+        character.StartWhooshing();
     }
 }
