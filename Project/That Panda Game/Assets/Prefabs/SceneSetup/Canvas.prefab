@@ -1870,7 +1870,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1909410435376532
 GameObject:
   m_ObjectHideFlags: 0
@@ -6073,9 +6073,9 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300000, guid: ef6d3e25680ab164f9b076b4ec3bdaa5,
+    m_HighlightedSprite: {fileID: 21300000, guid: 5cd5c2b7474ea704baa9237779f52bb7,
       type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: ef6d3e25680ab164f9b076b4ec3bdaa5, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: 5cd5c2b7474ea704baa9237779f52bb7, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
