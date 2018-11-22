@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -217,11 +217,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2079d9a5647dea409ba0b4c387baa1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _follow: {fileID: 1655258328}
-  _material: {fileID: 2100000, guid: 51f6a1a176bf51941b808c334209481e, type: 2}
-  _maxSections: 1
-  _subSections: 50
   _player: {fileID: 1655258328}
+  _material: {fileID: 2100000, guid: 51f6a1a176bf51941b808c334209481e, type: 2}
+  _subSections: 100
   _test: {fileID: 1787863098684132, guid: dd4a3a66d86fe2740b911b075bef8585, type: 2}
 --- !u!4 &1270260077
 Transform:
