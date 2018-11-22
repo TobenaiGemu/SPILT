@@ -5,32 +5,27 @@ using UnityEngine;
 public class Whoosh : MonoBehaviour
 {
     [SerializeField]
-    private Transform _point1;
+    private GameObject _follow;
     [SerializeField]
-    private Transform _point2;
-
+    private Material _material;
     [SerializeField]
     private int _maxSections;
     [SerializeField]
     private int _subSections;
+    private int _subSectionCount;
 
     private int _sections;
 
     [SerializeField]
-    private GameObject _side1;
-    [SerializeField]
-    private GameObject _side2;
-
-    [SerializeField]
     private GameObject _player;
 
-    private Mesh _mesh1;
-    private Mesh _mesh2;
+    private Mesh _mesh;
 
     private List<Vector3> _verts;
-    private List<Vector3> _prevVerts;
-    private List<Vector3> _moves;
     private List<Vector2> _uvs;
+
+    private List<Vector3> _moves;
+    private List<Vector3> _vertPositions;
 
     private List<int> _tris1;
     private List<int> _tris2;
@@ -42,6 +37,8 @@ public class Whoosh : MonoBehaviour
     private Material _material1;
     private Material _material2;
     private Vector2 _offset;
+
+    private Vector3 _basePos;
 
     private bool _startWhooshing;
 
@@ -55,51 +52,64 @@ public class Whoosh : MonoBehaviour
     public void StartWoosh()
     {
         _verts = new List<Vector3>();
-        _prevVerts = new List<Vector3>();
-        _moves = new List<Vector3>();
 
         _uvs = new List<Vector2>();
 
         _tris1 = new List<int>();
         _tris2 = new List<int>();
 
-        _material1 = _side1.GetComponent<Renderer>().material;
-        _material2 = _side2.GetComponent<Renderer>().material;
+        _moves = new List<Vector3>();
+        _mesh = new Mesh();
+
+        _vertPositions = new List<Vector3>();
+
+        int fullVertCount = (_subSections * 4);
+
+        for (int i = 0; i < fullVertCount / 2; i++)
+        {
+            _moves.Add(new Vector3(1, 0, 0));
+        }
+
+        Vector3 pos = _follow.transform.position;
+        for (int i = 0; i < fullVertCount / 2; i++)
+        {
+            if (i > 0 && i % 2 == 0)
+                pos -= _moves[i] * (1f / _subSections);
+            pos += _moves[i] * (1f / _subSections);
+            _vertPositions.Add(pos);
+        }
+
+        _basePos = _player.transform.position;
+
+        gameObject.AddComponent<MeshRenderer>().material = _material;
+        gameObject.AddComponent<MeshFilter>();
         _sections = _maxSections;
-        MakeMesh();
+        _subSectionCount = 1;
+
+        StartCoroutine(GrowMesh());
         _startWhooshing = true;
     }
 
     void MakeMesh()
     {
-        _mesh1 = new Mesh();
-        _mesh2 = new Mesh();
+        _verts.Clear();
+        _uvs.Clear();
+        _tris1.Clear();
+        _tris2.Clear();
 
-        _vertsLength = _sections * 4 + ((_subSections - 1) * _sections * 2);
-        _uvLength = _sections * 4 + ((_subSections - 1) * _sections * 2);
-        _trisLength = _sections * _subSections * 6;
+        _vertsLength = _subSectionCount * 4;
+        _uvLength = _subSectionCount * 4;
+        _trisLength = _subSectionCount * 6;
 
-        Vector3 pos1 = _point1.position;
-        Vector3 pos2 = _point2.position;
-        for (int i = 0; i < _vertsLength; i++)
+
+        for (int i = 0; i < _vertsLength / 2; i++)
         {
-            if (i < _vertsLength / 2)
-            {
-                if (i > 0 && i % (_subSections + 1) == 0)
-                    pos1 -= -_player.transform.forward * (1f / _subSections);
-                _verts.Add(pos1);
-                _prevVerts.Add(pos1);
-                pos1 += -_player.transform.forward * (1f / _subSections);
-            }
-            else
-            {
-                if (i > _vertsLength / 2 && i % (_subSections + 1) == 0)
-                    pos2 -= -_player.transform.forward * (1f / _subSections);
-                _verts.Add(pos2);
-                _prevVerts.Add(pos2);
-                pos2 += -_player.transform.forward * (1f / _subSections);
-            }
-            //Instantiate(_test, _verts[i], Quaternion.identity);
+            _verts.Add(_vertPositions[i] + _moves[i]);
+        }
+
+        for (int i = _vertsLength / 2; i < _vertsLength; i++)
+        {
+            _verts.Add(_vertPositions[i - _vertsLength / 2] + Vector3.down + _moves[i - _vertsLength / 2]);
         }
 
         float x = 0;
@@ -107,15 +117,23 @@ public class Whoosh : MonoBehaviour
         {
             if (i < _uvLength / 2)
             {
-                if (i % 2 == 0)
+                if (i != 0 && i % 2 != 0 && i != _uvLength/2-1)
+                {
                     _uvs.Add(new Vector2(x, 0));
+                    _uvs.Add(new Vector2(x, 0));
+                    i++;
+                }
                 else
                     _uvs.Add(new Vector2(x, 0));
             }
             else
             {
-                if (i % 2 == 0)
+                if (i != _uvLength / 2 && i % 2 != 0 && i != _uvLength - 1)
+                {
                     _uvs.Add(new Vector2(x, 1));
+                    _uvs.Add(new Vector2(x, 1));
+                    i++;
+                }
                 else
                     _uvs.Add(new Vector2(x, 1));
             }
@@ -127,16 +145,14 @@ public class Whoosh : MonoBehaviour
 
         int triIndex = 0;
         int endCheck = 0;
-        for (int i = 0; i < _vertsLength; i++)
+        for (int i = 0; i < _vertsLength; i+=2)
         {
+            if (i >= _vertsLength)
+                break;
+
             if (triIndex >= _trisLength)
                 break;
 
-            if (endCheck == 4)
-            {
-                endCheck = 0;
-                i++;
-            }
             endCheck++;
             //Side 1
             _tris1.Add(i + _vertsLength / 2);
@@ -164,68 +180,44 @@ public class Whoosh : MonoBehaviour
             _tris2.Add(i + 1);
 
             _tris2.Add(i + _vertsLength / 2);
+
         }
         DrawMesh();
     }
 
     void DrawMesh()
     {
-        _mesh1.SetVertices(_verts);
-        _mesh1.SetUVs(0, _uvs);
-        _mesh1.SetTriangles(_tris1, 0);
+        _tris1.AddRange(_tris2);
 
-        _mesh1.RecalculateNormals();
-        _mesh1.RecalculateBounds();
-        _mesh1.RecalculateTangents();
+        _mesh.SetVertices(_verts);
+        _mesh.SetUVs(0, _uvs);
+        _mesh.SetTriangles(_tris1, 0);
 
-        _mesh2.SetVertices(_verts);
-        _mesh2.SetUVs(0, _uvs);
-        _mesh2.SetTriangles(_tris2, 0);
+        _mesh.RecalculateNormals();
+        _mesh.RecalculateBounds();
+        _mesh.RecalculateTangents();
 
-        _mesh2.RecalculateNormals();
-        _mesh2.RecalculateBounds();
-        _mesh2.RecalculateTangents();
-
-        _side1.GetComponent<MeshFilter>().sharedMesh = _mesh1;
-        _side2.GetComponent<MeshFilter>().sharedMesh = _mesh2;
+        gameObject.GetComponent<MeshFilter>().sharedMesh = _mesh;
     }
 
     IEnumerator GrowMesh()
     {
-        while (_sections < _maxSections)
+        while (_subSectionCount != _subSections)
         {
-            _sections++;
             MakeMesh();
-            yield return new WaitForSeconds(0.05f);
+            _subSectionCount++;
+            yield return new WaitForSeconds(0.01f);
         }
     }
 
-	void FixedUpdate ()
+	void Update ()
     {
-        if (!_startWhooshing)
-            return;
-        _material1.SetTextureOffset("_MainTex", _offset);
-        _material2.SetTextureOffset("_MainTex", _offset);
-        _offset.x += 0.05f;
-
-        Vector3 pos1 = _point1.position;
-        Vector3 pos2 = _point2.position;
-
-        _verts[0] = pos1;
-        _verts[_vertsLength / 2] = pos2;
-
-        float distance = (_verts[0] - _prevVerts[0]).magnitude;
-        Debug.Log(distance);
-
-        for (int i = 1; i < _vertsLength; i++)
+        if ((_basePos - _player.transform.position).magnitude > (1f / _subSections))
         {
-            if (i != _vertsLength / 2)
-            {
-                _verts[i] += (_prevVerts[i - 1] - _verts[i]).normalized * distance;
-            }
-
+            _moves.Insert(0, (_basePos - _player.transform.position).normalized);
+            _moves.RemoveAt(_moves.Count - 1);
+            _basePos = _player.transform.position;
+            MakeMesh();
         }
-        _prevVerts = new List<Vector3>(_verts);
-        DrawMesh();
     }
 }
