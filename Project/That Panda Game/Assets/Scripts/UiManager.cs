@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
@@ -11,9 +12,11 @@ public class UiManager : MonoBehaviour
     private Dictionary<int, GameObject> _eventSystems = new Dictionary<int, GameObject>();
     private GameObject _currentEventSystem;
     private GameObject _selectedGameObject;
+    private Slider _volumeSlider;
 
     private GameScene _gameScene;
 
+    private AudioSource _mainMenuMusic;
 
     public void Start()
     {
@@ -26,6 +29,9 @@ public class UiManager : MonoBehaviour
 
         _gameScene = GameObject.Find("Scenes").transform.Find("GameScene").GetComponent<GameScene>();
 
+        _mainMenuMusic = GameObject.Find("MainMenuMusic").GetComponent<AudioSource>();
+
+        _volumeSlider = GameObject.Find("Canvas").transform.Find("VolumePanel").transform.Find("Slider").GetComponent<Slider>();
 
         ChangeEventSystem(1);
 
@@ -91,9 +97,19 @@ public class UiManager : MonoBehaviour
         _sceneManager.ChangeScene<JoinGameScene>();
     }
 
+    public void GotoVolume()
+    {
+        _sceneManager.GetScene<OptionsScene>().GotoVolume();
+    }
+
     public void GotoResolution()
     {
         _sceneManager.GetScene<OptionsScene>().GotoResolution();
+    }
+
+    public void OnVolumeChange()
+    {
+        _mainMenuMusic.volume = _volumeSlider.value;
     }
 
     public void ChangeRes1()

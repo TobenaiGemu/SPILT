@@ -7,6 +7,7 @@ public class OptionsScene : Scene
 {
     private GameObject _optionsPanel;
     private GameObject _resolutionButton;
+    private GameObject _volumeButton;
     private CanvasGroup _optionsCanvas;
     private TimeLerper _lerper;
     private float _optionsAlpha;
@@ -17,6 +18,7 @@ public class OptionsScene : Scene
     private MenuPage _menuPage;
 
     private GameObject _res1;
+    public GameObject _volSlider;
     private bool _updateMenuPage;
 
     public void Awake()
@@ -28,6 +30,7 @@ public class OptionsScene : Scene
 
         //Find right panels corresponding to buttons
         _resolutionButton = _optionsPanel.transform.Find("Resolution").gameObject;
+        _volumeButton = _optionsPanel.transform.Find("Volume").gameObject;
         _resolutionPanel = canvas.transform.Find("ResolutionPanel").gameObject;
         _volumePanel = canvas.transform.Find("VolumePanel").gameObject;
 
@@ -39,15 +42,26 @@ public class OptionsScene : Scene
         _menuPage.SetRightPanel("ResolutionPanel", 0);
         _menuPage.SetRightPanel("VolumePanel", 1);
         _res1 = GameObject.Find("Canvas").transform.Find("ResolutionPanel").transform.Find("Res1").gameObject;
+        _volSlider = GameObject.Find("Canvas").transform.Find("VolumePanel").transform.Find("Slider").gameObject;
         _optionsPanel.SetActive(false);
     }
 
     public override void Initialize()
     {
         _optionsPanel.SetActive(true);
-        EventSystem.current.firstSelectedGameObject = _resolutionButton;
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(_resolutionButton);
+        if (EventSystem.current.currentSelectedGameObject == _volSlider)
+        {
+            EventSystem.current.firstSelectedGameObject = _volumeButton;
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(_volumeButton);
+        }
+        else
+        {
+            Debug.Log(EventSystem.current.currentSelectedGameObject);
+            EventSystem.current.firstSelectedGameObject = _resolutionButton;
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(_resolutionButton);
+        }
         _updateMenuPage = true;
         _menuPage.Initialize();
         for (int i = 1; i <= 4; i++)
@@ -66,6 +80,15 @@ public class OptionsScene : Scene
         EventSystem.current.firstSelectedGameObject = _res1;
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(_res1);
+        SceneManager.Users[0].ChangeState("OptionsState");
+        _updateMenuPage = false;
+    }
+
+    public void GotoVolume()
+    {
+        EventSystem.current.firstSelectedGameObject = _volSlider;
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(_volSlider);
         SceneManager.Users[0].ChangeState("OptionsState");
         _updateMenuPage = false;
     }

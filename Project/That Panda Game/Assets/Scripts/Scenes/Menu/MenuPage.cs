@@ -43,7 +43,6 @@ public class MenuPage
         _curSelected = null;
         _curRightCanvas = null;
         _nextRightCanvas = null;
-
         _lerperIntro.Reset();
         _lerperOutro.Reset();
         _hasChanged = false;
@@ -124,6 +123,10 @@ public class MenuPage
     {
         _prevSelected = _curSelected;
         _curSelected = EventSystem.current.currentSelectedGameObject;
+        if (_curSelected != null && _curSelected.name == "Quit")
+        {
+            Debug.Log("HMMM");
+        }
 
         if (_curSelected != _prevSelected)
         {
