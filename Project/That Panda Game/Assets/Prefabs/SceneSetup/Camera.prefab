@@ -39,7 +39,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4835585661304856}
   - component: {fileID: 20906698667905976}
-  - component: {fileID: 81208133959897116}
   m_Layer: 0
   m_Name: UiCamera
   m_TagString: Untagged
@@ -56,7 +55,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4994826234190548}
   - component: {fileID: 20056278241706988}
-  - component: {fileID: 81384434170203248}
   m_Layer: 0
   m_Name: ShadowCamera
   m_TagString: Untagged
@@ -110,7 +108,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4771614801949704}
   - component: {fileID: 20949517159296618}
-  - component: {fileID: 81164174778170698}
   m_Layer: 0
   m_Name: CharacterSelectCamera
   m_TagString: Untagged
@@ -471,27 +468,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!81 &81164174778170698
-AudioListener:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1933833414074942}
-  m_Enabled: 1
---- !u!81 &81208133959897116
-AudioListener:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1563324205495738}
-  m_Enabled: 1
---- !u!81 &81384434170203248
-AudioListener:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1631230733044524}
-  m_Enabled: 1
 --- !u!81 &81480031820424342
 AudioListener:
   m_ObjectHideFlags: 1

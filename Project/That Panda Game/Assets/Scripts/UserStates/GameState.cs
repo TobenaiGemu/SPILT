@@ -73,7 +73,7 @@ public class GameState : UserState
         _rightPunchTimer -= Time.deltaTime;
 
         //Check if left/right triggers are being pressed and if cooldowns are finished
-        if (_punchTimer <= 0 && _leftPunchTimer <= 0 && _joystick.GetAxis("L2") >= 0.5f && !_leftPunchHeld)
+        if (_punchTimer <= 0 && _leftPunchTimer <= 0 && (_joystick.GetAxis("L2") >= 0.5f || _joystick.WasButtonPressed("L1")) && !_leftPunchHeld)
         {
             _leftPunchHeld = true;
             //reset cooldowns
@@ -97,7 +97,7 @@ public class GameState : UserState
             _leftPunchHeld = false;
 
         //same as above (gonna be mergerd later)
-        if (_punchTimer <= 0 && _rightPunchTimer <= 0 && _joystick.GetAxis("R2") >= 0.5f && !_rightPunchHeld)
+        if (_punchTimer <= 0 && _rightPunchTimer <= 0 && (_joystick.GetAxis("R2") >= 0.5f || _joystick.WasButtonPressed("R1")) && !_rightPunchHeld)
         {
             _rightPunchHeld = true;
             _punchTimer = _character.PunchCooldown; 

@@ -78,6 +78,10 @@ public class Joystick
                 return Input.GetButtonDown(((_controllerName == "Wireless Controller") ? "" : "x") + "Joy" + _controllerId + "Button3");
             case "Button0":
                 return Input.GetButtonDown(((_controllerName == "Wireless Controller") ? "" : "x") + "Joy" + _controllerId + "Button0");
+            case "L1":
+                return Input.GetButtonDown(((_controllerName == "Wireless Controller") ? "" : "x") + "Joy" + _controllerId + "L1");
+            case "R1":
+                return Input.GetButtonDown(((_controllerName == "Wireless Controller") ? "" : "x") + "Joy" + _controllerId + "R1");
             case "Pause":
                 return Input.GetButtonDown(((_controllerName == "Wireless Controller") ? "" : "x") + "Joy" + _controllerId + "Pause");
         }

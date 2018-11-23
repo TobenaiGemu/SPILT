@@ -103,6 +103,8 @@ public class OptionsScene : Scene
             _menuPage.OutroCurrentPanel(0.5f);
             return false;
         }
+        if (!_menuPage.OutroCurrentPanel(0.5f))
+            return false;
         _lerper.Reset();
         return base.OutroTransition();
     }

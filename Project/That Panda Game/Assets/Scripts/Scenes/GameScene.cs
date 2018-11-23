@@ -269,10 +269,6 @@ public class GameScene : Scene
             if (!_mamaFalling)
                 _mamaMarshmallow.GetVewyAngewy();
             _mamaFalling = true;
-            if (_mamaMarshmallow.HasCrashed())
-            {
-                ResetMamaTimer();
-            }
         }
 
         if (_gameTimer <= 0)

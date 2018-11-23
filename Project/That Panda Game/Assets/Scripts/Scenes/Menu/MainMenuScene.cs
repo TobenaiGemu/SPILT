@@ -57,10 +57,9 @@ public class MainMenuScene : Scene
 
     public override bool IntroTransition()
     {
-        _menuPage.Update();
         if (Camera.main.transform.position != _targetCameraPos)
         {
-            Camera.main.transform.position = _lerper.Lerp(_initCameraPos, _targetCameraPos, 2);
+            Camera.main.transform.position = _lerper.Lerp(_initCameraPos, _targetCameraPos, (_sceneManager.CheckPrevScene<GameScene>())?1f:4.5f);
             return false;
         }
         else if (!_finishedScale)
@@ -71,6 +70,7 @@ public class MainMenuScene : Scene
             EventSystem.current.SetSelectedGameObject(_startButton);
             _lerper.Reset();
         }
+        _menuPage.Update();
 
         if (_mainMenuCanvas.alpha < 1)
         {

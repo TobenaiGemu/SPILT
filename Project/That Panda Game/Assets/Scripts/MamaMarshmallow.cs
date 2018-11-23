@@ -18,20 +18,29 @@ public class MamaMarshmallow : MonoBehaviour
     private bool _isAngewy;
     private GameObject _planet;
 
+    private Animator _animator;
+    private Material _mat;
+
     private bool _crashed;
     private TimeLerper _lerper;
+    private TimeLerper _alphaLerper;
     private MarshShadow _shadow;
     private Vector3 _initPos;
     private Vector3 _targetPos;
     private float _initDistance;
     private bool _paused;
+    private GameScene _gameScene;
 
     private void Awake()
     {
         _planet = GameObject.Find("Planet");
         gameObject.SetActive(false);
         _lerper = new TimeLerper();
+        _alphaLerper = new TimeLerper();
         _shadow = GameObject.Find("Shadow").GetComponent<MarshShadow>();
+        _animator = GetComponent<Animator>();
+        _mat = GetComponentInChildren<Renderer>().sharedMaterial;
+        _gameScene = GameObject.Find("Scenes").transform.Find("GameScene").GetComponent<GameScene>();
         _crashed = true;
     }
 
@@ -40,9 +49,14 @@ public class MamaMarshmallow : MonoBehaviour
     {
         if (_isAngewy)
             return;
+        _animator.SetTrigger("Idle");
         _lerper.Reset();
+        _alphaLerper.Reset();
+        Color colour = _mat.color;
+        colour.a = 1;
+        _mat.color = colour;
         _crashed = false;
-        transform.SetParent(GameObject.Find("Events").transform, true);
+        
         _isAngewy = true;
         //sets the x,y position of the mama marshmallow to a random point on a plane
         float x = Random.Range(-15, 15);
@@ -101,7 +115,7 @@ public class MamaMarshmallow : MonoBehaviour
             _isAngewy = false;
             _shadow.Cleanup();
             _crashed = true;
-            gameObject.SetActive(false);
+            _animator.SetTrigger("Squeeesh");
             Camera.main.GetComponent<CameraShake>().Shake();
         }
     }
@@ -121,7 +135,21 @@ public class MamaMarshmallow : MonoBehaviour
     void Update()
     {
         if (_crashed || _paused)
+        {
+            if (_mat.color.a != 0)
+            {
+                Color colour = _mat.color;
+                colour.a = _alphaLerper.Lerp(1,0,1);
+                _mat.color = colour;
+                if (colour.a == 0)
+                {
+                    gameObject.SetActive(false);
+                    transform.SetParent(GameObject.Find("Events").transform, true);
+                    _gameScene.ResetMamaTimer();
+                }
+            }
             return;
+        }
 
         //When the marshmallow gets to a certain distance from the planet, stop the shadow from following a character (if it is)
         if (transform.position.z > _positionStopsFollowing)

@@ -14,6 +14,7 @@ public class SceneManager : MonoBehaviour
 
     private Scene _nextScene;
     private Scene _currentScene;
+    private Scene _prevScene;
 
     private bool _paused;
     private bool _cleanedScene;
@@ -75,6 +76,7 @@ public class SceneManager : MonoBehaviour
 
     public void ChangeScene<T>()
     {
+        _prevScene = _currentScene;
         if (_nextScene != null)
             return;
         _paused = false;
@@ -130,6 +132,13 @@ public class SceneManager : MonoBehaviour
             }
         };
         throw new System.Exception("WTF YOU DOIN M8");
+    }
+
+    public bool CheckPrevScene<T>()
+    {
+        if (_prevScene == null)
+            return false;
+        return _prevScene.GetType() == typeof(T);
     }
 
     public void PauseScene()
