@@ -37,6 +37,8 @@ public class GameScene : Scene
     private int _maxRandomMama;
     [SerializeField]
     private float _winnerTime;
+    [SerializeField]
+    private List<Sprite> _numberSprites;
     private float _winnerTimer;
     private float _mamaTimer;
     private bool _mamaFalling;
@@ -46,21 +48,24 @@ public class GameScene : Scene
     [SerializeField]
     private float _gameTime;
     private float _gameTimer;
-    private Text _timerLText;
-    private Text _timerRText;
 
     private Text _startTimerText;
     private Text _startTimerInsideText;
     private int _startTimer;
+    private List<Sprite> _timerSprites;
+    private Image _timerLeft1;
+    private Image _timerLeft2;
+    private Image _timerRight1;
+    private Image _timerRight2;
     private TimeLerper _startLerper;
 
-    private GameObject _winnerText;
+    private Image _winnerImage;
     private bool _gameFinished;
 
     public void Awake()
     {
         GameObject chars = GameObject.Find("AvailableCharacters");
-
+        _timerSprites = new List<Sprite>();
         Planet = GameObject.Find("Planet");
         //For lerping the planet scale
         _lerper = new TimeLerper();
@@ -69,16 +74,16 @@ public class GameScene : Scene
         _pausePanel = GameObject.Find("Canvas").transform.Find("GamePausePanel").gameObject;
         _startTimerText = _gamePanel.transform.Find("StartTimer").GetComponent<Text>();
         _startTimerInsideText = _startTimerText.transform.GetChild(0).GetComponent<Text>();
-
-        _timerLText = _gamePanel.transform.Find("TimerL").GetComponent<Text>();
-        _timerRText = _gamePanel.transform.Find("TimerR").GetComponent<Text>();
-
+        _timerLeft1 = _gamePanel.transform.Find("TimerLeft1").GetComponent<Image>();
+        _timerLeft2 = _gamePanel.transform.Find("TimerLeft2").GetComponent<Image>();
+        _timerRight1 = _gamePanel.transform.Find("TimerRight1").GetComponent<Image>();
+        _timerRight2 = _gamePanel.transform.Find("TimerRight2").GetComponent<Image>();
         _coinSpawner = GameObject.Find("CoinSpawner").GetComponent<Spawner>();
         _cookieSpawner = GameObject.Find("CookieSpawner").GetComponent<Spawner>();
         _appleSpawner = GameObject.Find("AppleSpawner").GetComponent<Spawner>();
 
         _mamaMarshmallow = GameObject.Find("Events").transform.Find("MamaMarshmallow").GetComponent<MamaMarshmallow>();
-        _winnerText = GameObject.Find("Canvas").transform.Find("GamePanel").Find("WINNER").gameObject;
+        _winnerImage = _gamePanel.transform.Find("Player").GetComponent<Image>();
 
         _activeCharacters = new List<Character>();
         _activePlayers = new List<GameObject>();
@@ -89,17 +94,30 @@ public class GameScene : Scene
         }
     }
 
+    private void IntToSprite(int num, List<Sprite> _sprites)
+    {
+        _sprites.Clear();
+        if (num < 10)
+        {
+            _sprites.Add(_numberSprites[0]);
+            _sprites.Add(_numberSprites[num]);
+            return;
+        }
+        int tenner = (int)Mathf.Floor(num / 10);
+        int single = num % 10;
+        _sprites.Add(_numberSprites[tenner]);
+        _sprites.Add(_numberSprites[single]);
+    }
+
     public override void Initialize()
     {
-        _timerLText.text = "90";
-        _timerRText.text = "90";
         _winnerTimer = _winnerTime;
         _initCameraPos = Camera.main.transform.position;
         _targetCameraPos = new Vector3(0, 0, -54);
         ResetMamaTimer();
         _lerper.Reset();
         _startLerper.Reset();
-        _winnerText.SetActive(false);
+        _winnerImage.gameObject.SetActive(false);
         foreach (User user in SceneManager.Users)
         {
             if (user.IsPlaying)
@@ -109,7 +127,16 @@ public class GameScene : Scene
                 user.AssignedCharacter.ReInit();
             }
         }
+        IntToSprite(90, _timerSprites);
+        _timerLeft1.sprite = _timerSprites[0];
+        _timerLeft2.sprite = _timerSprites[1];
+        _timerLeft1.SetNativeSize();
+        _timerLeft2.SetNativeSize();
 
+        _timerRight1.sprite = _timerLeft1.sprite;
+        _timerRight2.sprite = _timerLeft2.sprite;
+        _timerRight1.SetNativeSize();
+        _timerRight2.SetNativeSize();
         _gameTimer = _gameTime;
         _startTimer = 3;
         _startTimerText.gameObject.SetActive(true);
@@ -135,9 +162,9 @@ public class GameScene : Scene
 
     public void WinGame(Character winner)
     {
-        _winnerText.GetComponent<Text>().text = "Player " + winner.AssignedUser.UserId + " Wins!";
         _gameFinished = true;
-        _winnerText.SetActive(true);
+        _winnerImage.gameObject.SetActive(true);
+        _winnerImage.transform.Find("Number").GetComponent<Image>().sprite = _numberSprites[winner.AssignedUser.UserId];
         winner.WinGame();
         foreach (User user in SceneManager.Users)
         {
@@ -211,7 +238,7 @@ public class GameScene : Scene
     public override bool OutroTransition()
     {
         ResumeGame();
-        _winnerText.SetActive(false);
+        _winnerImage.gameObject.SetActive(false);
         return true;
     }
 
@@ -224,9 +251,19 @@ public class GameScene : Scene
         _cookieSpawner.Tick();
         _appleSpawner.Tick();
         _gameTimer -= Time.deltaTime;
-        _timerLText.text = ((int)_gameTimer).ToString();
-        _timerRText.text = ((int)_gameTimer).ToString();
         _mamaTimer -= Time.deltaTime;
+
+        IntToSprite((int)_gameTimer, _timerSprites);
+        _timerLeft1.sprite = _timerSprites[0];
+        _timerLeft2.sprite = _timerSprites[1];
+        _timerLeft1.SetNativeSize();
+        _timerLeft2.SetNativeSize();
+
+        _timerRight1.sprite = _timerLeft1.sprite;
+        _timerRight2.sprite = _timerLeft2.sprite;
+        _timerRight1.SetNativeSize();
+        _timerRight2.SetNativeSize();
+
         if (_mamaTimer <= 0)
         {
             if (!_mamaFalling)
