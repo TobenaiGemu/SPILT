@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b73e3f915b0c6bf4d8bdc7e1541e86c2
+guid: b7912146efe87764985105e629d6d8fd
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -121,7 +121,7 @@ ModelImporter:
       name: Punch_R
       takeName: Take 001
       firstFrame: 1
-      lastFrame: 9
+      lastFrame: 10
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
