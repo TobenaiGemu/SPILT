@@ -266,6 +266,17 @@ MonoBehaviour:
   _minRandomMama: 5
   _maxRandomMama: 10
   _winnerTime: 5
+  _numberSprites:
+  - {fileID: 21300000, guid: 28f1085c6fea0e34eba048e0ecffbc69, type: 3}
+  - {fileID: 21300000, guid: dcec38f94c673314087eadd351ea131f, type: 3}
+  - {fileID: 21300000, guid: fa800adf6b977f3408ef1d44e1bc9763, type: 3}
+  - {fileID: 21300000, guid: e2793c6d33f3213498ca2e2e95f8efac, type: 3}
+  - {fileID: 21300000, guid: 81a67ad80080c38458341695a86066ed, type: 3}
+  - {fileID: 21300000, guid: 994dde9294a910747b221e348c940e49, type: 3}
+  - {fileID: 21300000, guid: dfaa1567ebd838940b0ce9e85a9d5bac, type: 3}
+  - {fileID: 21300000, guid: c64f301db2a23a44cb654a8dc788688e, type: 3}
+  - {fileID: 21300000, guid: 7707919188cf5894bb7e298409fb1493, type: 3}
+  - {fileID: 21300000, guid: 89d7728bc64e5a24e85baadda0774a77, type: 3}
   _gameTime: 90
 --- !u!114 &114540222999761608
 MonoBehaviour:
