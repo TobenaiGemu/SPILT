@@ -277,6 +277,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c64f301db2a23a44cb654a8dc788688e, type: 3}
   - {fileID: 21300000, guid: 7707919188cf5894bb7e298409fb1493, type: 3}
   - {fileID: 21300000, guid: 89d7728bc64e5a24e85baadda0774a77, type: 3}
+  _startSprite: {fileID: 21300000, guid: 8904c09484c8eed409910be3b4755641, type: 3}
   _gameTime: 90
 --- !u!114 &114540222999761608
 MonoBehaviour:

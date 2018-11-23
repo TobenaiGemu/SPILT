@@ -39,6 +39,8 @@ public class GameScene : Scene
     private float _winnerTime;
     [SerializeField]
     private List<Sprite> _numberSprites;
+    [SerializeField]
+    private Sprite _startSprite;
     private float _winnerTimer;
     private float _mamaTimer;
     private bool _mamaFalling;
@@ -49,8 +51,7 @@ public class GameScene : Scene
     private float _gameTime;
     private float _gameTimer;
 
-    private Text _startTimerText;
-    private Text _startTimerInsideText;
+    private Image _startTimerImage;
     private int _startTimer;
     private List<Sprite> _timerSprites;
     private Image _timerLeft1;
@@ -72,8 +73,7 @@ public class GameScene : Scene
         _startLerper = new TimeLerper();
         _gamePanel = GameObject.Find("Canvas").transform.Find("GamePanel").gameObject;
         _pausePanel = GameObject.Find("Canvas").transform.Find("GamePausePanel").gameObject;
-        _startTimerText = _gamePanel.transform.Find("StartTimer").GetComponent<Text>();
-        _startTimerInsideText = _startTimerText.transform.GetChild(0).GetComponent<Text>();
+        _startTimerImage = _gamePanel.transform.Find("StartTimer").GetComponent<Image>();
         _timerLeft1 = _gamePanel.transform.Find("TimerLeft1").GetComponent<Image>();
         _timerLeft2 = _gamePanel.transform.Find("TimerLeft2").GetComponent<Image>();
         _timerRight1 = _gamePanel.transform.Find("TimerRight1").GetComponent<Image>();
@@ -139,8 +139,8 @@ public class GameScene : Scene
         _timerRight2.SetNativeSize();
         _gameTimer = _gameTime;
         _startTimer = 3;
-        _startTimerText.gameObject.SetActive(true);
-        _startTimerText.transform.localScale = Vector3.zero;
+        _startTimerImage.gameObject.SetActive(true);
+        _startTimerImage.transform.localScale = Vector3.zero;
         _gameFinished = false;
     }
 
@@ -202,26 +202,26 @@ public class GameScene : Scene
 
         if (_startTimer != -1)
         {
-            if (_startTimerText.text != _startTimer.ToString() || _startTimerText.text != "START!")
+            if (_startTimerImage.sprite != _numberSprites[_startTimer] || _startTimerImage.sprite != _startSprite)
             {
                 if (_startTimer == 0)
                 {
-                    _startTimerText.text = "START!";
-                    _startTimerInsideText.text = "START!";
+                    _startTimerImage.sprite = _startSprite;
+                    _startTimerImage.SetNativeSize();
                 }
                 else
                 {
-                    _startTimerText.text = _startTimer.ToString();
-                    _startTimerInsideText.text = _startTimer.ToString();
+                    _startTimerImage.sprite = _numberSprites[_startTimer];
+                    _startTimerImage.SetNativeSize();
                 }
             }
-            if (_startTimerText.transform.localScale != Vector3.one)
+            if (_startTimerImage.transform.localScale != Vector3.one)
             {
-                _startTimerText.transform.localScale = _startLerper.Lerp(Vector3.zero, Vector3.one, 1);
+                _startTimerImage.transform.localScale = _startLerper.Lerp(Vector3.zero, Vector3.one, 1);
                 return false;
             }
 
-            _startTimerText.transform.localScale = Vector3.zero;
+            _startTimerImage.transform.localScale = Vector3.zero;
             _startLerper.Reset();
             _startTimer -= 1;
             return false;
@@ -231,7 +231,7 @@ public class GameScene : Scene
         foreach (User user in SceneManager.Users)
             user.ChangeState("GameState");
         _lerper.Reset();
-        _startTimerText.gameObject.SetActive(false);
+        _startTimerImage.gameObject.SetActive(false);
         return true;
     }
 
