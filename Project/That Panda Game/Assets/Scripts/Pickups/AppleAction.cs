@@ -10,5 +10,6 @@ public class AppleAction : MonoBehaviour
     public void DropCoinFromCharacter(Character character)
     {
         character.DropCoins(_coinDrop);
+        character.StartSickBubbles();
     }
 }

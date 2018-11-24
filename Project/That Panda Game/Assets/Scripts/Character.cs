@@ -223,6 +223,9 @@ public class Character : MonoBehaviour
     private float _winnerTime;
     private GameScene _gameScene;
 
+    private ParticleSystem _sickBubblesPs;
+    private GameObject _confusedSpiral;
+
     private Animator _animator;
 
     //Get rid of this
@@ -242,6 +245,10 @@ public class Character : MonoBehaviour
         _winnerTime = 5;
         _sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
         _gameScene = GameObject.Find("Scenes").transform.Find("GameScene").GetComponent<GameScene>();
+
+        _sickBubblesPs = transform.Find("AppleBubblesPS").GetComponent<ParticleSystem>();
+        _confusedSpiral = transform.Find("ConfusedSpiral").gameObject;
+
         _characterObj = charObj;
         _animator = GetComponent<Animator>();
         return this;
@@ -348,6 +355,23 @@ public class Character : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    public void StartSickBubbles()
+    {
+        _sickBubblesPs.Play();
+        _confusedSpiral.SetActive(true);
+    }
+
+    private IEnumerator ConfusedSpiralTimer()
+    {
+        float _timer = 2;
+        while (_timer > 0)
+        {
+            _timer -= Time.deltaTime;
+            yield return null;
+        }
+        _confusedSpiral.SetActive(false);
     }
 
     public void RoastMarshmallow(float durationToRoast, float durationToUnroast, float knockbackMultiplier, float knockjumpMultiplier, int coinDrop)

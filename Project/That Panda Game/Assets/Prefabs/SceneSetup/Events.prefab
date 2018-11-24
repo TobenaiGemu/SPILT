@@ -53,7 +53,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4271223442377948}
   - component: {fileID: 137175261627107584}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: MAMAmarshRig_0008:Mama_marshmallow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
