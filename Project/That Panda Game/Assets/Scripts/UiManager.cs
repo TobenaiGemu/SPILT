@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -12,6 +13,8 @@ public class UiManager : MonoBehaviour
     private Dictionary<int, GameObject> _eventSystems = new Dictionary<int, GameObject>();
     private GameObject _currentEventSystem;
     private GameObject _selectedGameObject;
+    [SerializeField]
+    private AudioMixer _mainMenuMixer;
     private Slider _volumeSlider;
 
     private GameScene _gameScene;
@@ -109,7 +112,7 @@ public class UiManager : MonoBehaviour
 
     public void OnVolumeChange()
     {
-        _mainMenuMusic.volume = _volumeSlider.value;
+        _mainMenuMixer.SetFloat("MainMenuVol", Mathf.Log10(_volumeSlider.value) * 20);
     }
 
     public void ChangeRes1()
