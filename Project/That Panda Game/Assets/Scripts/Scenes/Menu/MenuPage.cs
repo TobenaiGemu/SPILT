@@ -123,12 +123,8 @@ public class MenuPage
     {
         _prevSelected = _curSelected;
         _curSelected = EventSystem.current.currentSelectedGameObject;
-        if (_curSelected != null && _curSelected.name == "Quit")
-        {
-            Debug.Log("HMMM");
-        }
 
-        if (_curSelected != _prevSelected)
+        if (_curSelected != null && _curSelected != _prevSelected)
         {
             ButtonChange(_curSelected.name);
         }
