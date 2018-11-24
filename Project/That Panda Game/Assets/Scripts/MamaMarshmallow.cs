@@ -95,7 +95,7 @@ public class MamaMarshmallow : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //knock back any character that collides with the marshmallow
-        if (other.gameObject.tag == "Character")
+        if (!_crashed && other.gameObject.tag == "Character")
         {
             //Get the direction to knock back the character towards
             Vector3 knockDirection = (other.transform.position - _targetPos);
