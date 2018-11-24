@@ -41,6 +41,10 @@ public class GameScene : Scene
     private List<Sprite> _numberSprites;
     [SerializeField]
     private Sprite _startSprite;
+    [SerializeField]
+    private AudioSource _inGameMusic;
+    [SerializeField]
+    private AudioSource _mainMenuMusic;
     private float _winnerTimer;
     private float _mamaTimer;
     private bool _mamaFalling;
@@ -58,7 +62,9 @@ public class GameScene : Scene
     private Image _timerLeft2;
     private Image _timerRight1;
     private Image _timerRight2;
+
     private TimeLerper _startLerper;
+    private TimeLerper _musicLerper;
 
     private Image _winnerImage;
     private bool _gameFinished;
@@ -71,6 +77,7 @@ public class GameScene : Scene
         //For lerping the planet scale
         _lerper = new TimeLerper();
         _startLerper = new TimeLerper();
+        _musicLerper = new TimeLerper();
         _gamePanel = GameObject.Find("Canvas").transform.Find("GamePanel").gameObject;
         _pausePanel = GameObject.Find("Canvas").transform.Find("GamePausePanel").gameObject;
         _startTimerImage = _gamePanel.transform.Find("StartTimer").GetComponent<Image>();
@@ -117,6 +124,7 @@ public class GameScene : Scene
         ResetMamaTimer();
         _lerper.Reset();
         _startLerper.Reset();
+        _musicLerper.Reset();
         _winnerImage.gameObject.SetActive(false);
         foreach (User user in SceneManager.Users)
         {
@@ -202,6 +210,7 @@ public class GameScene : Scene
 
         if (_startTimer != -1)
         {
+            _mainMenuMusic.volume = _musicLerper.Lerp(1, 0, 4);
             if (_startTimerImage.sprite != _numberSprites[_startTimer] || _startTimerImage.sprite != _startSprite)
             {
                 if (_startTimer == 0)
@@ -231,6 +240,8 @@ public class GameScene : Scene
         foreach (User user in SceneManager.Users)
             user.ChangeState("GameState");
         _lerper.Reset();
+        _mainMenuMusic.Pause();
+        _inGameMusic.Play();
         _startTimerImage.gameObject.SetActive(false);
         return true;
     }

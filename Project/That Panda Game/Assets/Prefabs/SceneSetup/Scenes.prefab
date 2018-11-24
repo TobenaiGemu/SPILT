@@ -241,6 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 023f487d2627dfc44af6a4ff3fc9e4ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _volSlider: {fileID: 0}
 --- !u!114 &114044100275339548
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -252,6 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63c9e5038ab15004287c5cacf549bd1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mainMenuMusic: {fileID: 0}
 --- !u!114 &114374244096504246
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -278,6 +280,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 7707919188cf5894bb7e298409fb1493, type: 3}
   - {fileID: 21300000, guid: 89d7728bc64e5a24e85baadda0774a77, type: 3}
   _startSprite: {fileID: 21300000, guid: 8904c09484c8eed409910be3b4755641, type: 3}
+  _inGameMusic: {fileID: 0}
+  _mainMenuMusic: {fileID: 0}
   _gameTime: 90
 --- !u!114 &114540222999761608
 MonoBehaviour:

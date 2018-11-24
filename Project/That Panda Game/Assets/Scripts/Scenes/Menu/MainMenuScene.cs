@@ -5,6 +5,9 @@ using UnityEngine.EventSystems;
 
 public class MainMenuScene : Scene
 {
+    [SerializeField]
+    private AudioSource _mainMenuMusic;
+
     private GameObject _mainMenuPanel;
     private CanvasGroup _mainMenuCanvas;
     private GameObject _startButton;
@@ -19,6 +22,7 @@ public class MainMenuScene : Scene
 
     private bool _finishedScale;
     private TimeLerper _lerper;
+    private TimeLerper _musicLerper;
 
     private MenuPage _menuPage;
 
@@ -28,6 +32,7 @@ public class MainMenuScene : Scene
         _targetCameraPos = new Vector3(0, 0, -100);
 
         _lerper = new TimeLerper();
+        _musicLerper = new TimeLerper();
         _planet = GameObject.Find("Planet");
 
         _mainMenuPanel = GameObject.Find("Canvas").transform.Find("MainMenuPanel").gameObject;
@@ -53,6 +58,9 @@ public class MainMenuScene : Scene
         _mainMenuCanvas.alpha = 0;
         _menuPage.Initialize();
         _lerper.Reset();
+        _musicLerper.Reset();
+        _mainMenuMusic.volume = 0;
+        _mainMenuMusic.Play();
     }
 
     public override bool IntroTransition()
@@ -60,6 +68,7 @@ public class MainMenuScene : Scene
         if (Camera.main.transform.position != _targetCameraPos)
         {
             Camera.main.transform.position = _lerper.Lerp(_initCameraPos, _targetCameraPos, (_sceneManager.CheckPrevScene<GameScene>())?1f:4.5f);
+            _mainMenuMusic.volume = _musicLerper.Lerp(0, 1, (_sceneManager.CheckPrevScene<GameScene>()) ? 1f : 4.5f);
             return false;
         }
         else if (!_finishedScale)
