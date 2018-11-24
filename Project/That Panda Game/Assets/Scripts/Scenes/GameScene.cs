@@ -99,6 +99,11 @@ public class GameScene : Scene
         {
             _gamePanel.transform.Find("p" + (i + 1) + "ScoreBox").gameObject.SetActive(false);
         }
+
+        _timerLeft1.gameObject.SetActive(false);
+        _timerLeft2.gameObject.SetActive(false);
+        _timerRight1.gameObject.SetActive(false);
+        _timerRight2.gameObject.SetActive(false);
     }
 
     private void IntToSprite(int num, List<Sprite> _sprites)
@@ -135,21 +140,16 @@ public class GameScene : Scene
                 user.AssignedCharacter.ReInit();
             }
         }
-        IntToSprite(90, _timerSprites);
-        _timerLeft1.sprite = _timerSprites[0];
-        _timerLeft2.sprite = _timerSprites[1];
-        _timerLeft1.SetNativeSize();
-        _timerLeft2.SetNativeSize();
 
-        _timerRight1.sprite = _timerLeft1.sprite;
-        _timerRight2.sprite = _timerLeft2.sprite;
-        _timerRight1.SetNativeSize();
-        _timerRight2.SetNativeSize();
         _gameTimer = _gameTime;
         _startTimer = 3;
         _startTimerImage.gameObject.SetActive(true);
         _startTimerImage.transform.localScale = Vector3.zero;
         _gameFinished = false;
+        _timerLeft1.gameObject.SetActive(true);
+        _timerLeft2.gameObject.SetActive(true);
+        _timerRight1.gameObject.SetActive(true);
+        _timerRight2.gameObject.SetActive(true);
     }
 
     public override void Cleanup()
@@ -182,7 +182,11 @@ public class GameScene : Scene
                     user.AssignedCharacter.LoseGame();
             }
         }
-        Debug.Log(winner.Name);
+        _mamaMarshmallow.StopMarshmallow();
+        _timerLeft1.gameObject.SetActive(false);
+        _timerLeft2.gameObject.SetActive(false);
+        _timerRight1.gameObject.SetActive(false);
+        _timerRight2.gameObject.SetActive(false);
         StartCoroutine(FinishGame());
     }
 
@@ -243,6 +247,16 @@ public class GameScene : Scene
         _mainMenuMusic.Pause();
         _inGameMusic.Play();
         _startTimerImage.gameObject.SetActive(false);
+        IntToSprite(90, _timerSprites);
+        _timerLeft1.sprite = _timerSprites[0];
+        _timerLeft2.sprite = _timerSprites[1];
+        _timerLeft1.SetNativeSize();
+        _timerLeft2.SetNativeSize();
+
+        _timerRight1.sprite = _timerLeft1.sprite;
+        _timerRight2.sprite = _timerLeft2.sprite;
+        _timerRight1.SetNativeSize();
+        _timerRight2.SetNativeSize();
         return true;
     }
 
