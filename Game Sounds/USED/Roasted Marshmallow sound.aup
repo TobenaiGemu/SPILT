@@ -1,0 +1,32 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE project PUBLIC "-//audacityproject-1.3.0//DTD//EN" "http://audacity.sourceforge.net/xml/audacityproject-1.3.0.dtd" >
+<project xmlns="http://audacity.sourceforge.net/xml/" projname="Roasted Marshmallow sound_data" version="1.3.0" audacityversion="2.2.1" sel0="0.0000000000" sel1="0.8970521542" vpos="0" h="0.0000000000" zoom="457.0549242424" rate="44100.0" snapto="off" selectionformat="hh:mm:ss + milliseconds" frequencyformat="Hz" bandwidthformat="octaves">
+	<tags>
+		<tag name="GENRE" value="Sound Clip"/>
+		<tag name="TRACKNUMBER" value="292929"/>
+		<tag name="ALBUM" value="Onesie Funsie"/>
+		<tag name="YEAR" value="2018"/>
+		<tag name="TITLE" value="Roasted Marshmallows"/>
+		<tag name="ARTIST" value="Blake Kolodziej"/>
+	</tags>
+	<wavetrack name="ANIMATED FIRE TRANSITION WITH SOUND EFFECT" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.0" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="39560">
+				<waveblock start="0">
+					<simpleblockfile filename="e0000d1f.au" len="39560" min="-0.653919" max="0.679471" rms="0.105246"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="ANIMATED FIRE TRANSITION WITH SOUND EFFECT" channel="1" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.0" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="39560">
+				<waveblock start="0">
+					<simpleblockfile filename="e0000082.au" len="39560" min="-0.669721" max="0.666515" rms="0.098187"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+</project>
