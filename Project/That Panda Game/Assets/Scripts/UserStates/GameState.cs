@@ -29,6 +29,9 @@ public class GameState : UserState
 
     private Animator _animator;
 
+    private AudioSource _punchMissSound;
+    private AudioSource _punchHitSound;
+
     public GameState(User user, SceneManager sceneManager)
         :base(user)
     {
@@ -37,6 +40,10 @@ public class GameState : UserState
         _playerObj = GameObject.Find("Players").transform.Find("Player" + _joystick.GetId()).gameObject;
         _planetObj = GameObject.Find("Planet");
         _rotationLerper = new TimeLerper();
+
+        GameObject inGameSounds = GameObject.Find("InGameSounds");
+        _punchMissSound = inGameSounds.transform.Find("PunchMiss").GetComponent<AudioSource>();
+        _punchHitSound = inGameSounds.transform.Find("PunchHit").GetComponent<AudioSource>();
     }
 
     public override void Initialize()
@@ -88,10 +95,13 @@ public class GameState : UserState
             if (Physics.SphereCast(_playerObj.transform.position, _character.PunchRadius, _playerObj.transform.forward, out hit, _character.PunchDistance, 1 << 8))
             {
                 //If SphereCast hit a player, knock that player back and make them drop coins
+                _punchHitSound.Play();
                 hit.collider.GetComponent<Character>().ApplyKnockBack(_character.transform.forward, _character.KnockBack, _character.KnockJump);
                 hit.collider.GetComponent<Character>().DropCoins(_character.PunchDropCoins + _character.RoastedPunchModifier);
                 _character.transform.Find("HitEffect").GetComponent<PunchHit>().Hit();
             }
+            else
+                _punchMissSound.Play();
         }
         else if (_joystick.GetAxis("L2") < 0.5f)
             _leftPunchHeld = false;
@@ -105,12 +115,15 @@ public class GameState : UserState
 
             _animator.SetTrigger("punchR");
             RaycastHit hit;
-            if (Physics.SphereCast(_playerObj.transform.position, _character.PunchRadius, _playerObj.transform.forward, out hit, _character.PunchDistance, 1<<8))
+            if (Physics.SphereCast(_playerObj.transform.position, _character.PunchRadius, _playerObj.transform.forward, out hit, _character.PunchDistance, 1 << 8))
             {
+                _punchHitSound.Play();
                 hit.collider.GetComponent<Character>().ApplyKnockBack(_character.transform.forward, _character.KnockBack, _character.KnockJump);
                 hit.collider.GetComponent<Character>().DropCoins(_character.PunchDropCoins + _character.RoastedPunchModifier);
                 _character.transform.Find("HitEffect").GetComponent<PunchHit>().Hit();
             }
+            else
+                _punchMissSound.Play();
         }
         else if (_joystick.GetAxis("R2") < 0.5f)
             _rightPunchHeld = false;
