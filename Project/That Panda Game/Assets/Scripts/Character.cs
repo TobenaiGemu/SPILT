@@ -228,12 +228,15 @@ public class Character : MonoBehaviour
 
     private Animator _animator;
 
+    private AudioSource _roastedMallowSound;
+
     //Get rid of this
     private SceneManager _sceneManager;
 
     public void Awake()
     {
         _standardMallowMat = _leftMarshmallow.GetComponent<Renderer>().sharedMaterial;
+        _roastedMallowSound = GameObject.Find("InGameSounds").transform.Find("RoastedMarshmallows").GetComponent<AudioSource>();
     }
 
     public Character Init(GameObject charObj)
@@ -410,6 +413,7 @@ public class Character : MonoBehaviour
 
     private void CompleteRoast(float knockbackMultiplier, float knockjumpMultiplier, int coinDrop)
     {
+        _roastedMallowSound.Play();
         _mamaMarshmallow.GetVewyAngewy(this);
         _marshmallowRoasted = true;
         _knockbackMultiplier = knockbackMultiplier;
