@@ -160,9 +160,6 @@ public class GameScene : Scene
             CharacterUnassign(user);
             user.SetPlaying(false);
         }
-        _coinSpawner.Cleanup();
-        _cookieSpawner.Cleanup();
-        _appleSpawner.Cleanup();
         _gamePanel.SetActive(false);
         _pausePanel.SetActive(false);
         _lerper.Reset();
@@ -170,6 +167,9 @@ public class GameScene : Scene
 
     public void WinGame(Character winner)
     {
+        _coinSpawner.Cleanup();
+        _cookieSpawner.Cleanup();
+        _appleSpawner.Cleanup();
         _gameFinished = true;
         _winnerImage.gameObject.SetActive(true);
         _winnerImage.transform.Find("Number").GetComponent<Image>().sprite = _numberSprites[winner.AssignedUser.UserId];
@@ -340,6 +340,7 @@ public class GameScene : Scene
 
     public void ResumeGame()
     {
+        Time.timeScale = 1;
         _inGameMusic.Play();
         _mamaMarshmallow.Resume();
         _gamePanel.gameObject.SetActive(true);
@@ -349,6 +350,7 @@ public class GameScene : Scene
 
     public void PauseGame(User user)
     {
+        Time.timeScale = 0;
         _inGameMusic.Pause();
         Planet.GetComponent<Planet>().Pause();
         _mamaMarshmallow.Pause();

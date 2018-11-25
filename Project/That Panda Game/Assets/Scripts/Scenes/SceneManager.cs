@@ -156,6 +156,11 @@ public class SceneManager : MonoBehaviour
         _paused = false;
     }
 
+    public bool IsPaused()
+    {
+        return _paused;
+    }
+
     // Update is called once per frame
     void Update()
     {

@@ -320,6 +320,8 @@ public class Character : MonoBehaviour
 
     public IEnumerator SpeedMultiplierCountdown()
     {
+        if (_sceneManager.IsPaused())
+            yield return null;
         while (_speedMultiplierTimer > 0)
         {
             _speedMultiplierTimer -= Time.deltaTime;
@@ -419,6 +421,8 @@ public class Character : MonoBehaviour
 
     public IEnumerator UnroastMarshmallowCounter()
     {
+        if (_sceneManager.IsPaused())
+            yield return null;
         while (_unroastTimer > 0)
         {
             _unroastTimer -= 1;
@@ -430,6 +434,8 @@ public class Character : MonoBehaviour
 
     public IEnumerator FadeAwayRoast()
     {
+        if (_sceneManager.IsPaused())
+            yield return null;
         float unroastPercent = _roastPercent;
         while (unroastPercent > 0)
         {
