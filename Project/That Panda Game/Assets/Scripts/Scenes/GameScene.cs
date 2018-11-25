@@ -267,6 +267,7 @@ public class GameScene : Scene
     {
         ResumeGame();
         _winnerImage.gameObject.SetActive(false);
+        _inGameMusic.Stop();
         return true;
     }
 
@@ -333,6 +334,7 @@ public class GameScene : Scene
 
     public void ResumeGame()
     {
+        _inGameMusic.Play();
         _mamaMarshmallow.Resume();
         _gamePanel.gameObject.SetActive(true);
         _pausePanel.gameObject.SetActive(false);
@@ -341,6 +343,7 @@ public class GameScene : Scene
 
     public void PauseGame(User user)
     {
+        _inGameMusic.Pause();
         Planet.GetComponent<Planet>().Pause();
         _mamaMarshmallow.Pause();
         //Stop updating and show pause menu panel
