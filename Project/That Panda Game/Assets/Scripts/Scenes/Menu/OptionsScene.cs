@@ -48,6 +48,7 @@ public class OptionsScene : Scene
 
     public override void Initialize()
     {
+        _uiManager.DontPlayFirstHighlightSound();
         _optionsPanel.SetActive(true);
         if (EventSystem.current.currentSelectedGameObject == _volSlider)
         {

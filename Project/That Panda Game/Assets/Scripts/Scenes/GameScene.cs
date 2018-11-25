@@ -347,6 +347,7 @@ public class GameScene : Scene
         _gamePanel.gameObject.SetActive(false);
         _pausePanel.gameObject.SetActive(true);
         _uiManager.ChangeEventSystem(user.UserId);
+        _uiManager.DontPlayFirstHighlightSound();
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.firstSelectedGameObject = _pausePanel.transform.Find("Resume").gameObject;
         EventSystem.current.SetSelectedGameObject(EventSystem.current.firstSelectedGameObject);

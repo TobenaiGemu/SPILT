@@ -30,7 +30,6 @@ public class MainMenuScene : Scene
     {
         Camera.main.transform.position = new Vector3(0, 0, -1100);
         _targetCameraPos = new Vector3(0, 0, -100);
-
         _lerper = new TimeLerper();
         _musicLerper = new TimeLerper();
         _planet = GameObject.Find("Planet");
@@ -79,6 +78,7 @@ public class MainMenuScene : Scene
         {
             _finishedScale = true;
             _mainMenuPanel.SetActive(true);
+            _uiManager.DontPlayFirstHighlightSound();
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(_startButton);
             _lerper.Reset();

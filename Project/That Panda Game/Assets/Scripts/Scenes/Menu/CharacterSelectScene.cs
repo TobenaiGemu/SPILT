@@ -88,6 +88,7 @@ public class CharacterSelectScene : Scene
             user.ChangeState("CharacterSelectState");
         _lerper.Reset();
         _uiManager.ChangeEventSystem(_userIndex);
+        _uiManager.DontPlayFirstHighlightSound();
         EventSystem.current.firstSelectedGameObject = _firstSelectedCharacter;
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(_firstSelectedCharacter);
@@ -146,12 +147,23 @@ public class CharacterSelectScene : Scene
         base.SceneUpdate();
     }
 
+    private IEnumerator StartGame()
+    {
+        float startTimer = 2;
+        while (startTimer > 0)
+        {
+            startTimer -= Time.deltaTime;
+            yield return null;
+        }
+        _sceneManager.ChangeScene<GameScene>();
+    }
+
     private void GetNextUser()
     {
         _userIndex++;
         if (_userIndex > 4)
         {
-            _sceneManager.ChangeScene<GameScene>();
+            StartCoroutine(StartGame());
         }
         else if (_sceneManager.GetUser(_userIndex).IsPlaying)
         {
@@ -163,6 +175,7 @@ public class CharacterSelectScene : Scene
             {
                 if (button.activeSelf)
                 {
+                    _uiManager.DontPlayFirstHighlightSound();
                     EventSystem.current.firstSelectedGameObject = button;
                     EventSystem.current.SetSelectedGameObject(null);
                     EventSystem.current.SetSelectedGameObject(button);

@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
+    private GameObject _prevSelected;
+    private GameObject _curSelected;
+    private bool _dontPlayHighlightSound;
 
     private SceneManager _sceneManager;
 
@@ -21,6 +24,11 @@ public class UiManager : MonoBehaviour
 
     private AudioSource _mainMenuMusic;
 
+    private AudioSource _panSelectSound;
+    private AudioSource _hamSelectSound;
+    private AudioSource _highlightSound;
+    private AudioSource _selectSound;
+
     public void Start()
     {
         _sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
@@ -31,13 +39,21 @@ public class UiManager : MonoBehaviour
         _eventSystems.Add(4, GameObject.Find("EventSystem4"));
 
         _gameScene = GameObject.Find("Scenes").transform.Find("GameScene").GetComponent<GameScene>();
-
-        _mainMenuMusic = GameObject.Find("MainMenuMusic").GetComponent<AudioSource>();
-
         _volumeSlider = GameObject.Find("Canvas").transform.Find("VolumePanel").transform.Find("Slider").GetComponent<Slider>();
 
+        _mainMenuMusic = GameObject.Find("MainMenuMusic").GetComponent<AudioSource>();
+        GameObject menuSounds = GameObject.Find("MenuSounds");
+        _panSelectSound = menuSounds.transform.Find("PanSelect").GetComponent<AudioSource>();
+        _hamSelectSound = menuSounds.transform.Find("HamSelect").GetComponent<AudioSource>();
+        _highlightSound = menuSounds.transform.Find("HighlightButton").GetComponent<AudioSource>();
+        _selectSound = menuSounds.transform.Find("SelectButton").GetComponent<AudioSource>();
         ChangeEventSystem(1);
 
+    }
+
+    public void DontPlayFirstHighlightSound()
+    {
+        _dontPlayHighlightSound = true;
     }
 
     public void Update()
@@ -47,6 +63,17 @@ public class UiManager : MonoBehaviour
 
         if (EventSystem.current.currentSelectedGameObject == null)
             EventSystem.current.SetSelectedGameObject(_selectedGameObject);
+
+
+        _prevSelected = _curSelected;
+        _curSelected = EventSystem.current.currentSelectedGameObject;
+        if (_prevSelected != _curSelected && !_dontPlayHighlightSound)
+        {
+            Debug.Log("PREV: " + _prevSelected);
+            Debug.Log("CURR: " + _curSelected);
+            _highlightSound.Play();
+        }
+        _dontPlayHighlightSound = false;
     }
 
     public void ChangeEventSystem(int i)
@@ -76,6 +103,7 @@ public class UiManager : MonoBehaviour
 
     public void GotoInfo()
     {
+        _selectSound.Play();
         _sceneManager.ChangeScene<InfoScene>();
     }
 
@@ -146,11 +174,13 @@ public class UiManager : MonoBehaviour
 
     public void SelectPan()
     {
+        _panSelectSound.Play();
         _sceneManager.GetScene<CharacterSelectScene>().SelectCharacter(CharacterType.Panda);
     }
 
     public void SelectHam()
     {
+        _hamSelectSound.Play();
         _sceneManager.GetScene<CharacterSelectScene>().SelectCharacter(CharacterType.Pig);
     }
 

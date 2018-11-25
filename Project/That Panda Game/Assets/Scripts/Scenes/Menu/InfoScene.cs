@@ -35,6 +35,7 @@ public class InfoScene : Scene
     public override void Initialize()
     {
         _infoPanel.SetActive(true);
+        _uiManager.DontPlayFirstHighlightSound();
         EventSystem.current.firstSelectedGameObject = _controlsButton;
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(_controlsButton);
