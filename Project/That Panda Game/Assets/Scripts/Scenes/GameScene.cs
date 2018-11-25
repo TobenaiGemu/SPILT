@@ -101,11 +101,6 @@ public class GameScene : Scene
         {
             _gamePanel.transform.Find("p" + (i + 1) + "ScoreBox").gameObject.SetActive(false);
         }
-
-        _timerLeft1.gameObject.SetActive(false);
-        _timerLeft2.gameObject.SetActive(false);
-        _timerRight1.gameObject.SetActive(false);
-        _timerRight2.gameObject.SetActive(false);
     }
 
     private void IntToSprite(int num, List<Sprite> _sprites)
@@ -148,10 +143,10 @@ public class GameScene : Scene
         _startTimerImage.gameObject.SetActive(true);
         _startTimerImage.transform.localScale = Vector3.zero;
         _gameFinished = false;
-        _timerLeft1.gameObject.SetActive(true);
-        _timerLeft2.gameObject.SetActive(true);
-        _timerRight1.gameObject.SetActive(true);
-        _timerRight2.gameObject.SetActive(true);
+        _timerLeft1.gameObject.SetActive(false);
+        _timerLeft2.gameObject.SetActive(false);
+        _timerRight1.gameObject.SetActive(false);
+        _timerRight2.gameObject.SetActive(false);
     }
 
     public override void Cleanup()
@@ -236,7 +231,6 @@ public class GameScene : Scene
                 _startTimerImage.transform.localScale = _startLerper.Lerp(Vector3.zero, Vector3.one, 1);
                 return false;
             }
-
             _startTimerImage.transform.localScale = Vector3.zero;
             _startLerper.Reset();
             _startTimer -= 1;
@@ -250,6 +244,12 @@ public class GameScene : Scene
         _mainMenuMusic.Pause();
         _inGameMusic.Play();
         _startTimerImage.gameObject.SetActive(false);
+
+        _timerLeft1.gameObject.SetActive(true);
+        _timerLeft2.gameObject.SetActive(true);
+        _timerRight1.gameObject.SetActive(true);
+        _timerRight2.gameObject.SetActive(true);
+
         IntToSprite(90, _timerSprites);
         _timerLeft1.sprite = _timerSprites[0];
         _timerLeft2.sprite = _timerSprites[1];

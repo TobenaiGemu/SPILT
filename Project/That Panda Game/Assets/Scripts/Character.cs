@@ -313,6 +313,7 @@ public class Character : MonoBehaviour
     {
         _forwardSpeedMultiplier = speedMultiplier;
         _speedMultiplierTimer = duration;
+        _animator.SetFloat("SpeedMultiplier", speedMultiplier);
         StopCoroutine(SpeedMultiplierCountdown());
         StartCoroutine(SpeedMultiplierCountdown());
     }
@@ -324,6 +325,7 @@ public class Character : MonoBehaviour
             _speedMultiplierTimer -= Time.deltaTime;
             yield return null;
         }
+        _animator.SetFloat("SpeedMultiplier", 1);
         _forwardSpeedMultiplier = 1;
     }
 

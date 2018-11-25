@@ -11,4 +11,12 @@ public class MudPuddle : MonoBehaviour
             GameObject.Find("Collectables").transform.Find("MudPuddle").GetComponent<MudPuddleAction>().MultiplyCharacterSpeed(other.gameObject.GetComponent<Character>());
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Character")
+        {
+
+        }
+    }
 }
