@@ -47,6 +47,8 @@ public class GameScene : Scene
     private AudioSource _mainMenuMusic;
     [SerializeField]
     private AudioSource _victoryMusic;
+    [SerializeField]
+    private AudioSource _startTimerMusic;
     private float _winnerTimer;
     private float _mamaTimer;
     private bool _mamaFalling;
@@ -215,6 +217,8 @@ public class GameScene : Scene
             _mainMenuMusic.volume = _musicLerper.Lerp(1, 0, 4);
             if (_startTimerImage.sprite != _numberSprites[_startTimer] || _startTimerImage.sprite != _startSprite)
             {
+                if (!_startTimerMusic.isPlaying)
+                    _startTimerMusic.Play();
                 if (_startTimer == 0)
                 {
                     _startTimerImage.sprite = _startSprite;
