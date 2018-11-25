@@ -5,6 +5,7 @@ using UnityEngine;
 public class TimeLerper
 {
     private float _timer;
+    private float _newUpdateCheck;
 
     public void Reset()
     {
@@ -13,7 +14,9 @@ public class TimeLerper
 
     private float GetPercent(float timeToFinish)
     {
-        _timer += Time.deltaTime;
+        if (_newUpdateCheck != Time.time)
+            _timer += Time.deltaTime;
+        _newUpdateCheck = Time.time;
         return _timer / timeToFinish;
     }
 
