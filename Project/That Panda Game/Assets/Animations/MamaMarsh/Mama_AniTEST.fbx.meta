@@ -59,7 +59,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Squeeesh
       takeName: Take 001
-      firstFrame: 1
+      firstFrame: 3
       lastFrame: 13
       wrapMode: 0
       orientationOffsetY: 0

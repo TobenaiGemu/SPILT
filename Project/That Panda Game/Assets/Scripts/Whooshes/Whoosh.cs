@@ -31,7 +31,7 @@ public class Whoosh : MonoBehaviour
     private GameObject _test;
 	void Start ()
     {
-
+        StartWoosh();
     }
 
     public void StartWoosh()

@@ -45,6 +45,8 @@ public class GameScene : Scene
     private AudioSource _inGameMusic;
     [SerializeField]
     private AudioSource _mainMenuMusic;
+    [SerializeField]
+    private AudioSource _victoryMusic;
     private float _winnerTimer;
     private float _mamaTimer;
     private bool _mamaFalling;
@@ -182,6 +184,7 @@ public class GameScene : Scene
                     user.AssignedCharacter.LoseGame();
             }
         }
+        _victoryMusic.Play();
         _mamaMarshmallow.StopMarshmallow();
         _timerLeft1.gameObject.SetActive(false);
         _timerLeft2.gameObject.SetActive(false);

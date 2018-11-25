@@ -111,7 +111,6 @@ public class MamaMarshmallow : MonoBehaviour
         //Begin the cleanup phase when the marshmallow hits the planet
         if (other.gameObject.name == "Planet")
         {
-            transform.SetParent(_planet.transform, true);
             _isAngewy = false;
             _shadow.Cleanup();
             _crashed = true;
@@ -139,7 +138,7 @@ public class MamaMarshmallow : MonoBehaviour
             if (_mat.color.a != 0)
             {
                 Color colour = _mat.color;
-                colour.a = _alphaLerper.Lerp(1,0,1);
+                colour.a = _alphaLerper.Lerp(1,0,0.5f);
                 _mat.color = colour;
                 if (colour.a == 0)
                 {

@@ -59,8 +59,11 @@ public class MainMenuScene : Scene
         _menuPage.Initialize();
         _lerper.Reset();
         _musicLerper.Reset();
-        _mainMenuMusic.volume = 0;
-        _mainMenuMusic.Play();
+        if (!_mainMenuMusic.isPlaying)
+        {
+            _mainMenuMusic.volume = 0;
+            _mainMenuMusic.Play();
+        }
     }
 
     public override bool IntroTransition()
@@ -68,7 +71,8 @@ public class MainMenuScene : Scene
         if (Camera.main.transform.position != _targetCameraPos)
         {
             Camera.main.transform.position = _lerper.Lerp(_initCameraPos, _targetCameraPos, (_sceneManager.CheckPrevScene<GameScene>())?1f:4.5f);
-            _mainMenuMusic.volume = _musicLerper.Lerp(0, 1, (_sceneManager.CheckPrevScene<GameScene>()) ? 1f : 4.5f);
+            if (_mainMenuMusic.volume != 1)
+                _mainMenuMusic.volume = _musicLerper.Lerp(0, 1, (_sceneManager.CheckPrevScene<GameScene>()) ? 1f : 4.5f);
             return false;
         }
         else if (!_finishedScale)
