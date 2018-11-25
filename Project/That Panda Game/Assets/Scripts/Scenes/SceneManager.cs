@@ -74,6 +74,11 @@ public class SceneManager : MonoBehaviour
         _characters.Add(CharacterType.Pig, pig.GetComponent<Character>().Init(pig));
     }
 
+    public bool IsTransitioning()
+    {
+        return (_nextScene != null);
+    }
+
     public void ChangeScene<T>()
     {
         _prevScene = _currentScene;

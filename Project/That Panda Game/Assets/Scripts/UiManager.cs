@@ -91,106 +91,136 @@ public class UiManager : MonoBehaviour
         return (EventSystem.current.currentSelectedGameObject.name == btnName);
     }
 
-    public void StartGame()
+    public void PlayButton()
     {
-        _sceneManager.ChangeScene<GameScene>();
+        if (_sceneManager.IsTransitioning())
+            return;
+        _selectSound.Play();
+        _sceneManager.ChangeScene<JoinGameScene>();
     }
 
-    public void GotoMainMenu()
+    public void OptionsButton()
     {
-        _sceneManager.ChangeScene<MainMenuScene>();
+        if (_sceneManager.IsTransitioning())
+            return;
+        _selectSound.Play();
+        _sceneManager.ChangeScene<OptionsScene>();
     }
 
-    public void GotoInfo()
+    public void InfoButton()
     {
+        if (_sceneManager.IsTransitioning())
+            return;
         _selectSound.Play();
         _sceneManager.ChangeScene<InfoScene>();
     }
 
-    public void GotoOptions()
-    {
-        _sceneManager.ChangeScene<OptionsScene>();
-    }
-
     public void ResumeGame()
     {
+        if (_sceneManager.IsTransitioning())
+            return;
         _sceneManager.ResumeScene();
         _gameScene.ResumeGame();
     }
 
-    public void GotoCharacterSelect()
+    public void VolumeButton()
     {
-        _sceneManager.ChangeScene<CharacterSelectScene>();
-    }
-
-    public void GotoJoinGame()
-    {
-        _sceneManager.ChangeScene<JoinGameScene>();
-    }
-
-    public void GotoVolume()
-    {
+        if (_sceneManager.IsTransitioning())
+            return;
+        _selectSound.Play();
         _sceneManager.GetScene<OptionsScene>().GotoVolume();
     }
 
-    public void GotoResolution()
+    public void ResolutionButton()
     {
+        if (_sceneManager.IsTransitioning())
+            return;
+        _selectSound.Play();
         _sceneManager.GetScene<OptionsScene>().GotoResolution();
     }
 
     public void OnVolumeChange()
     {
+        if (_sceneManager.IsTransitioning())
+            return;
         _mainMenuMixer.SetFloat("MainMenuVol", Mathf.Log10(_volumeSlider.value) * 20);
     }
 
     public void ChangeRes1()
     {
+        if (_sceneManager.IsTransitioning())
+            return;
         Screen.SetResolution(1024,768,true);
         _sceneManager.GetScene<OptionsScene>().GotoLeftButtons();
     }
 
     public void ChangeRes2()
     {
+        if (_sceneManager.IsTransitioning())
+            return;
         Screen.SetResolution(1280, 720, true);
         _sceneManager.GetScene<OptionsScene>().GotoLeftButtons();
     }
 
     public void ChangeRes3()
     {
+        if (_sceneManager.IsTransitioning())
+            return;
         Screen.SetResolution(1600, 900, true);
         _sceneManager.GetScene<OptionsScene>().GotoLeftButtons();
     }
 
     public void ChangeRes4()
     {
+        if (_sceneManager.IsTransitioning())
+            return;
         Screen.SetResolution(1920, 1080, true);
         _sceneManager.GetScene<OptionsScene>().GotoLeftButtons();
     }
 
-    public void QuitGame()
+    public void PauseExitGameButton()
     {
+        if (_sceneManager.IsTransitioning())
+            return;
+        _selectSound.Play();
+        _sceneManager.ChangeScene<MainMenuScene>();
+    }
+
+    public void QuitGameButton()
+    {
+        if (_sceneManager.IsTransitioning())
+            return;
+        _selectSound.Play();
         Application.Quit();
     }
 
     public void SelectPan()
     {
+        if (_sceneManager.IsTransitioning())
+            return;
         _panSelectSound.Play();
         _sceneManager.GetScene<CharacterSelectScene>().SelectCharacter(CharacterType.Panda);
     }
 
     public void SelectHam()
     {
+        if (_sceneManager.IsTransitioning())
+            return;
         _hamSelectSound.Play();
         _sceneManager.GetScene<CharacterSelectScene>().SelectCharacter(CharacterType.Pig);
     }
 
     public void SelectEli()
     {
+        if (_sceneManager.IsTransitioning())
+            return;
         _sceneManager.GetScene<CharacterSelectScene>().SelectCharacter(CharacterType.Elephant);
     }
 
     public void SelectLiz()
     {
+        if (_sceneManager.IsTransitioning())
+            return;
         _sceneManager.GetScene<CharacterSelectScene>().SelectCharacter(CharacterType.Lizard);
     }
 }

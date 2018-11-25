@@ -108,6 +108,7 @@ public class MainMenuScene : Scene
 
     public override bool OutroTransition()
     {
+        _menuPage.OutroCurrentPanel(0.5f);
         if (_mainMenuCanvas.alpha > 0)
         {
             _menuPage.OutroCurrentPanel(0.5f);

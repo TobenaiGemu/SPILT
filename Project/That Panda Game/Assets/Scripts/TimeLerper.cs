@@ -4,24 +4,17 @@ using UnityEngine;
 
 public class TimeLerper
 {
-    private float _startTime;
-    private bool _startedLerp;
+    private float _timer;
 
     public void Reset()
     {
-        _startedLerp = false;
+        _timer = 0;
     }
 
     private float GetPercent(float timeToFinish)
     {
-        if (!_startedLerp)
-        {
-            _startedLerp = true;
-            _startTime = Time.time;
-        }
-
-        float lerpTime = Time.time - _startTime;
-        return lerpTime / timeToFinish;
+        _timer += Time.deltaTime;
+        return _timer / timeToFinish;
     }
 
     public Vector3 Lerp(Vector3 init, Vector3 end, float timeToFinish)

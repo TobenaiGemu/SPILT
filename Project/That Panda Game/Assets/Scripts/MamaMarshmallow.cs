@@ -133,7 +133,9 @@ public class MamaMarshmallow : MonoBehaviour
 
     void Update()
     {
-        if (_crashed || _paused)
+        if (_paused)
+            return;
+        if (_crashed)
         {
             if (_mat.color.a != 0)
             {

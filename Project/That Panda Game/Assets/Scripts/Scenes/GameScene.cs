@@ -196,7 +196,6 @@ public class GameScene : Scene
             _winnerTimer -= Time.deltaTime;
             yield return null;
         }
-        _mamaMarshmallow.StopMarshmallow();
         _sceneManager.ChangeScene<MainMenuScene>();
     }
 
@@ -269,6 +268,7 @@ public class GameScene : Scene
         ResumeGame();
         _winnerImage.gameObject.SetActive(false);
         _inGameMusic.Stop();
+        _mamaMarshmallow.StopMarshmallow();
         return true;
     }
 
