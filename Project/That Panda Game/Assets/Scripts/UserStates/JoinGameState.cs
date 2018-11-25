@@ -8,10 +8,13 @@ public class JoinGameState : UserState
     private bool _joined;
     private SceneManager _sceneManager;
 
+    private AudioSource _selectAudio;
+
     public JoinGameState(User user, SceneManager sceneManager)
         :base(user)
     {
         _sceneManager = sceneManager;
+        _selectAudio = GameObject.Find("MenuSounds").transform.Find("SelectButton").GetComponent<AudioSource>();
     }
 
     public override void Initialize()
@@ -30,6 +33,7 @@ public class JoinGameState : UserState
         {
             _user.SetPlaying(true);
             _joined = true;
+            _selectAudio.Play();
             GameObject.Find("Canvas").transform.Find("JoinGamePanel").transform.Find("Player" + _user.UserId + "Join").transform.Find("Join").gameObject.GetComponent<Text>().text = "Player " + _user.UserId + ": Joined";
         }
 
