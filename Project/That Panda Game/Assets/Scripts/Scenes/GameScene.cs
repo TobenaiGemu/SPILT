@@ -128,6 +128,7 @@ public class GameScene : Scene
         _startLerper.Reset();
         _musicLerper.Reset();
         _winnerImage.gameObject.SetActive(false);
+        _activeCharacters.Clear();
         foreach (User user in SceneManager.Users)
         {
             if (user.IsPlaying)
@@ -303,6 +304,7 @@ public class GameScene : Scene
         if (_gameTimer <= 0)
         {
             Character winner = _activeCharacters[0];
+            Debug.Log(_activeCharacters.Count);
             foreach (Character chr in _activeCharacters)
             {
                 if (chr.Coins > winner.Coins)
