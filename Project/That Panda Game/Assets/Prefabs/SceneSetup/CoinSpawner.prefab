@@ -58,11 +58,12 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 6e08a159889de8547920eeef48c9b9b4, type: 2}
   - {fileID: 2100000, guid: 07e83ebd2705b0d428404c1ca7eb0a80, type: 2}
   - {fileID: 2100000, guid: fc8b9c0d7b161384cab6b2c694e2df68, type: 2}
-  _minSpawnRate: 0.5
-  _maxSpawnRate: 1.5
+  _minSpawnRate: 0.25
+  _maxSpawnRate: 1
   _spawnRadius: 15
-  _maxObjects: 15
+  _maxObjects: 30
   _rotation: {x: -90, y: 0, z: 0}
-  _distanceFromApple: 0
-  _distanceFromCoin: 0
-  _distanceFromCookie: 0
+  _distanceFromApple: 1.5
+  _distanceFromCoin: 1.5
+  _distanceFromCookie: 1.5
+  _distanceFromPlayer: 1.5
