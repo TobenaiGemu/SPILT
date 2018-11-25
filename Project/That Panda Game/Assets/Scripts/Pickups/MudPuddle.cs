@@ -12,11 +12,19 @@ public class MudPuddle : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Character")
+        {
+            //other.transform.Find("MudSlowPS").GetComponent<ParticleSystem>().Play();
+        }
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Character")
         {
-
+            //other.transform.Find("MudSlowPS").GetComponent<ParticleSystem>().Stop();
         }
     }
 }

@@ -32,6 +32,8 @@ public class GameState : UserState
     private AudioSource _punchMissSound;
     private AudioSource _punchHitSound;
 
+    private float _whooshTimer;
+
     public GameState(User user, SceneManager sceneManager)
         :base(user)
     {
@@ -78,10 +80,13 @@ public class GameState : UserState
         _punchTimer -= Time.deltaTime;
         _leftPunchTimer -= Time.deltaTime;
         _rightPunchTimer -= Time.deltaTime;
-
+        _whooshTimer -= Time.deltaTime;
         //Check if left/right triggers are being pressed and if cooldowns are finished
         if (_punchTimer <= 0 && _leftPunchTimer <= 0 && (_joystick.GetAxis("L2") >= 0.5f || _joystick.WasButtonPressed("L1")) && !_leftPunchHeld)
         {
+            //_character.WhooshObj.SetActive(true);
+            _whooshTimer = 0.1f;
+
             _leftPunchHeld = true;
             //reset cooldowns
             _punchTimer = _character.PunchCooldown;
@@ -103,6 +108,7 @@ public class GameState : UserState
             else
                 _punchMissSound.Play();
         }
+
         else if (_joystick.GetAxis("L2") < 0.5f)
             _leftPunchHeld = false;
 
@@ -110,7 +116,7 @@ public class GameState : UserState
         if (_punchTimer <= 0 && _rightPunchTimer <= 0 && (_joystick.GetAxis("R2") >= 0.5f || _joystick.WasButtonPressed("R1")) && !_rightPunchHeld)
         {
             _rightPunchHeld = true;
-            _punchTimer = _character.PunchCooldown; 
+            _punchTimer = _character.PunchCooldown;
             _rightPunchTimer = _character.RightPunchCooldown;
 
             _animator.SetTrigger("punchR");

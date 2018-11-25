@@ -164,6 +164,13 @@ public class Character : MonoBehaviour
     }
 
     [SerializeField]
+    private ParticleSystem _speedParticles;
+    [SerializeField]
+    private ParticleSystem _fireParticlesLeft;
+    [SerializeField]
+    private ParticleSystem _fireParticlesRight;
+
+    [SerializeField]
     private int _coinFrwdForceMin;
     [SerializeField]
     private int _coinFrwdForceMax;
@@ -207,12 +214,16 @@ public class Character : MonoBehaviour
     private float _forwardSpeedMultiplier;
     private float _knockbackMultiplier;
     private float _knockjumpMultiplier;
-    private float _speedMultiplierTimer;
 
     private float _unroastTimer;
     private float _timeToUnroast;
     private float _roastPercent;
     private TimeLerper _lerper;
+
+    private bool _multiplySpeed;
+
+    private float _speedParticleTimer;
+    private float _speedMultiplierTimer;
 
     private bool _marshmallowRoasted;
     private MamaMarshmallow _mamaMarshmallow;
@@ -274,6 +285,22 @@ public class Character : MonoBehaviour
         Unassign();
     }
 
+    public void Update()
+    {
+        _speedParticleTimer -= Time.deltaTime;
+        _speedMultiplierTimer -= Time.deltaTime;
+
+        if (_speedParticles.isPlaying && _speedParticleTimer <= 0)
+            _speedParticles.Stop();
+
+        if (_multiplySpeed && _speedMultiplierTimer <= 0)
+        {
+            _animator.SetFloat("SpeedMultiplier", 1);
+            _forwardSpeedMultiplier = 1;
+            _multiplySpeed = false;
+        }
+    }
+
     public void AddCoins(int ammount)
     {
         _coins += ammount;
@@ -308,30 +335,18 @@ public class Character : MonoBehaviour
         transform.parent.GetComponent<Rigidbody>().AddForce((direction.normalized * backForce + gameObject.transform.up * upForce), ForceMode.Impulse);
     }
 
-    public void StartWhooshing()
+    public void StartSpeedParticles(float duration)
     {
+        _speedParticles.Play();
+        _speedParticleTimer = duration;
     }
 
     public void MultiplySpeed(float speedMultiplier, float duration)
     {
+        _multiplySpeed = true;
         _forwardSpeedMultiplier = speedMultiplier;
         _speedMultiplierTimer = duration;
         _animator.SetFloat("SpeedMultiplier", speedMultiplier);
-        StopCoroutine(SpeedMultiplierCountdown());
-        StartCoroutine(SpeedMultiplierCountdown());
-    }
-
-    public IEnumerator SpeedMultiplierCountdown()
-    {
-        if (_sceneManager.IsPaused())
-            yield return null;
-        while (_speedMultiplierTimer > 0)
-        {
-            _speedMultiplierTimer -= Time.deltaTime;
-            yield return null;
-        }
-        _animator.SetFloat("SpeedMultiplier", 1);
-        _forwardSpeedMultiplier = 1;
     }
 
     public void WinGame()
@@ -367,19 +382,8 @@ public class Character : MonoBehaviour
     public void StartSickBubbles()
     {
         _sickBubblesPs.Play();
-        //_confusedSpiral.SetActive(true);
     }
 
-    private IEnumerator ConfusedSpiralTimer()
-    {
-        float _timer = 2;
-        while (_timer > 0)
-        {
-            _timer -= Time.deltaTime;
-            yield return null;
-        }
-        //_confusedSpiral.SetActive(false);
-    }
 
     public void RoastMarshmallow(float durationToRoast, float durationToUnroast, float knockbackMultiplier, float knockjumpMultiplier, int coinDrop)
     {
@@ -403,7 +407,8 @@ public class Character : MonoBehaviour
         if (_marshmallowRoasted)
             return;
         Debug.Log("Unroasted");
-
+        _fireParticlesLeft.Stop();
+        _fireParticlesRight.Stop();
         _knockbackMultiplier = 1;
         _knockjumpMultiplier = 1;
         _lerper.Reset();
@@ -413,6 +418,8 @@ public class Character : MonoBehaviour
 
     private void CompleteRoast(float knockbackMultiplier, float knockjumpMultiplier, int coinDrop)
     {
+        _fireParticlesLeft.Play();
+        _fireParticlesRight.Play();
         _roastedMallowSound.Play();
         _mamaMarshmallow.GetVewyAngewy(this);
         _marshmallowRoasted = true;

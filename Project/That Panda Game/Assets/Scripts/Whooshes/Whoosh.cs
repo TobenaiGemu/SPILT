@@ -11,6 +11,10 @@ public class Whoosh : MonoBehaviour
     private Material _material;
     [SerializeField]
     private int _subSections;
+    [SerializeField]
+    private float _width;
+    [SerializeField]
+    private float _height;
     private int _subSectionCount;
 
     private Mesh _mesh;
@@ -31,7 +35,9 @@ public class Whoosh : MonoBehaviour
     private GameObject _test;
 	void Start ()
     {
-        StartWoosh();
+        _mesh = new Mesh();
+        gameObject.AddComponent<MeshRenderer>().material = _material;
+        gameObject.AddComponent<MeshFilter>();
     }
 
     public void StartWoosh()
@@ -42,16 +48,27 @@ public class Whoosh : MonoBehaviour
         _tris = new List<int>();
 
         _moves = new List<Vector3>();
-        _mesh = new Mesh();
-
+        _xUv = 0;
+        _basePos = Vector3.zero;
+        _aimPoint = Vector3.zero;
         _basePos = _player.transform.position;
         _aimPoint = _player.transform.position + -_player.transform.forward;
-        gameObject.AddComponent<MeshRenderer>().material = _material;
-        gameObject.AddComponent<MeshFilter>();
+
         _subSectionCount = 0;
-        _moves.Add(_player.transform.forward);
+        //_moves.Add(_player.transform.forward);
         MakeMesh();
-        StartCoroutine(GrowMesh());
+        int count = 0;
+        while (count < _subSections)
+        {
+            MakeMesh();
+            count++;
+        }
+    }
+
+    public void StopWoosh()
+    {
+        _whooshing = false;
+        //_mesh.Clear();
     }
 
     void MakeMesh()
@@ -63,11 +80,11 @@ public class Whoosh : MonoBehaviour
         if (_verts.Count == 0)
         {
             Vector3 pos1 = _player.transform.position;
-            Vector3 pos2 = pos1 + -_player.transform.up;
+            Vector3 pos2 = pos1 + -_player.transform.up * _height;
             _verts.Add(pos1);
             _verts.Add(pos2);
-            _verts.Add(pos1 + dir * (1f / _subSections));
-            _verts.Add(pos2 + dir * (1f / _subSections));
+            _verts.Add(pos1 + dir * (1f / _subSections) * _width);
+            _verts.Add(pos2 + dir * (1f / _subSections) * _width);
         }
         else
         {
@@ -76,8 +93,8 @@ public class Whoosh : MonoBehaviour
             dir = (pos1 - _verts[_verts.Count - 4]).normalized;
             _verts.Add(pos1);
             _verts.Add(pos2);
-            _verts.Add(pos1 + dir * (1f / _subSections));
-            _verts.Add(pos2 + dir * (1f / _subSections));
+            _verts.Add(pos1 + dir * (1f / _subSections) * _width);
+            _verts.Add(pos2 + dir * (1f / _subSections) * _width);
         }
 
         _uvs.Add(new Vector2(_xUv, 0));
@@ -110,17 +127,21 @@ public class Whoosh : MonoBehaviour
     private int _num;
     void MoveVerts()
     {
+        _verts[0] = _player.transform.position;
+        _verts[1] = _player.transform.position + -_player.transform.up * _height;
+
         foreach (Vector3 dir in _moves)
             Debug.Log(dir);
-        int vertIndex = 0;
-        for (int i = 0; i < _subSectionCount + 1; i++)
+
+        int vertIndex = 2;
+        for (int i = 0; i < _moves.Count; i++)
         {
-            _verts[vertIndex] += _moves[i] * (1f / _subSections);
-            _verts[vertIndex + 1] += _moves[i] * (1f / _subSections);
-            if (i != 0 && i != _subSectionCount)
+            _verts[vertIndex] = _verts[vertIndex - 2] - _moves[i] * (1f / _subSections) * _width;
+            _verts[vertIndex + 1] = _verts[vertIndex - 1] - _moves[i] * (1f / _subSections) * _width;
+            if (i != _moves.Count - 1)
             {
-                _verts[vertIndex + 2] += _moves[i] * (1f / _subSections);
-                _verts[vertIndex + 3] += _moves[i] * (1f / _subSections);
+                _verts[vertIndex + 2] = _verts[vertIndex];
+                _verts[vertIndex + 3] = _verts[vertIndex + 1];
                 vertIndex += 2;
             }
             vertIndex += 2;
@@ -142,27 +163,14 @@ public class Whoosh : MonoBehaviour
         gameObject.GetComponent<MeshFilter>().sharedMesh = _mesh;
     }
 
-    IEnumerator GrowMesh()
-    {
-        int count = 0;
-        while (count < _subSections)
-        {
-            MakeMesh();
-            count++;
-            yield return new WaitForSeconds(0.1f);
-        }
-    }
-
-	void Update ()
+    void Update()
     {
         if (!_whooshing)
             return;
-        if ((_basePos - _player.transform.position).magnitude > (1f / _subSections))
-        {
-            _moves.Insert(0, (_player.transform.position - _basePos).normalized);
-            _moves.RemoveAt(_moves.Count - 1);
-            _basePos = _player.transform.position;
-            MoveVerts();
-        }
+
+        _moves.Insert(0, (_player.transform.position - _basePos).normalized);
+        _moves.RemoveAt(_moves.Count - 1);
+        _basePos = _player.transform.position;
+        MoveVerts();
     }
 }

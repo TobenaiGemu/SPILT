@@ -31,6 +31,8 @@ public class MamaMarshmallow : MonoBehaviour
     private bool _paused;
     private GameScene _gameScene;
 
+    private ParticleSystem _dirtParticles;
+
     private void Awake()
     {
         _planet = GameObject.Find("Planet");
@@ -41,6 +43,8 @@ public class MamaMarshmallow : MonoBehaviour
         _animator = GetComponent<Animator>();
         _mat = GetComponentInChildren<Renderer>().sharedMaterial;
         _gameScene = GameObject.Find("Scenes").transform.Find("GameScene").GetComponent<GameScene>();
+
+        _dirtParticles = transform.Find("Dirt").GetComponent<ParticleSystem>();
         _crashed = true;
     }
 
@@ -49,7 +53,7 @@ public class MamaMarshmallow : MonoBehaviour
     {
         if (_isAngewy)
             return;
-        _animator.SetTrigger("Idle");
+        //_animator.SetTrigger("Idle");
         _lerper.Reset();
         _alphaLerper.Reset();
         Color colour = _mat.color;
@@ -111,6 +115,7 @@ public class MamaMarshmallow : MonoBehaviour
         //Begin the cleanup phase when the marshmallow hits the planet
         if (other.gameObject.name == "Planet")
         {
+            _dirtParticles.Play();
             _isAngewy = false;
             _shadow.Cleanup();
             _crashed = true;

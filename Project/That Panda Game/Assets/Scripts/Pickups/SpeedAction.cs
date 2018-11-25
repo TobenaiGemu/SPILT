@@ -21,6 +21,6 @@ public class SpeedAction : MonoBehaviour
     {
         _cookieSound.Play();
         character.MultiplySpeed(_speedMultiplier, _speedDuration);
-        character.StartWhooshing();
+        character.StartSpeedParticles(_speedDuration);
     }
 }
