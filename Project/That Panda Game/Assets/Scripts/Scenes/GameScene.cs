@@ -264,6 +264,7 @@ public class GameScene : Scene
         _timerRight2.sprite = _timerLeft2.sprite;
         _timerRight1.SetNativeSize();
         _timerRight2.SetNativeSize();
+        _startTimerMusic.Stop();
         return true;
     }
 
@@ -272,6 +273,10 @@ public class GameScene : Scene
         ResumeGame();
         _winnerImage.gameObject.SetActive(false);
         _inGameMusic.Stop();
+        _coinSpawner.Cleanup();
+        _cookieSpawner.Cleanup();
+        _appleSpawner.Cleanup();
+        _gameFinished = true;
         _mamaMarshmallow.StopMarshmallow();
         return true;
     }

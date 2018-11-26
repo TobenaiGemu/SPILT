@@ -84,6 +84,8 @@ public class GameState : UserState
         //Check if left/right triggers are being pressed and if cooldowns are finished
         if (_punchTimer <= 0 && _leftPunchTimer <= 0 && (_joystick.GetAxis("L2") >= 0.5f || _joystick.WasButtonPressed("L1")) && !_leftPunchHeld)
         {
+            //_character.Whoosh.emitting = true;
+            _whooshTimer = 0.2f;
             //_character.WhooshObj.SetActive(true);
             _whooshTimer = 0.1f;
 
@@ -111,6 +113,11 @@ public class GameState : UserState
 
         else if (_joystick.GetAxis("L2") < 0.5f)
             _leftPunchHeld = false;
+
+        if (_whooshTimer <= 0)
+        {
+            //_character.Whoosh.emitting = false;
+        }
 
         //same as above (gonna be mergerd later)
         if (_punchTimer <= 0 && _rightPunchTimer <= 0 && (_joystick.GetAxis("R2") >= 0.5f || _joystick.WasButtonPressed("R1")) && !_rightPunchHeld)

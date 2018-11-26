@@ -164,6 +164,17 @@ public class Character : MonoBehaviour
     }
 
     [SerializeField]
+    private TrailRenderer _whoosh;
+    public TrailRenderer Whoosh
+    {
+        get
+        {
+            return _whoosh;
+        }
+        private set { }
+    }
+
+    [SerializeField]
     private ParticleSystem _speedParticles;
     [SerializeField]
     private ParticleSystem _fireParticlesLeft;
@@ -246,6 +257,7 @@ public class Character : MonoBehaviour
 
     public void Awake()
     {
+        _whoosh.emitting = false;
         _standardMallowMat = _leftMarshmallow.GetComponent<Renderer>().sharedMaterial;
         _roastedMallowSound = GameObject.Find("InGameSounds").transform.Find("RoastedMarshmallows").GetComponent<AudioSource>();
     }
