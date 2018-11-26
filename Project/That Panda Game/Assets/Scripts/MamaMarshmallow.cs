@@ -44,7 +44,7 @@ public class MamaMarshmallow : MonoBehaviour
         _mat = GetComponentInChildren<Renderer>().sharedMaterial;
         _gameScene = GameObject.Find("Scenes").transform.Find("GameScene").GetComponent<GameScene>();
 
-        _dirtParticles = transform.Find("Dirt").GetComponent<ParticleSystem>();
+        //_dirtParticles = transform.Find("Dirt").GetComponent<ParticleSystem>();
         _crashed = true;
     }
 
@@ -115,7 +115,7 @@ public class MamaMarshmallow : MonoBehaviour
         //Begin the cleanup phase when the marshmallow hits the planet
         if (other.gameObject.name == "Planet")
         {
-            _dirtParticles.Play();
+            //_dirtParticles.Play();
             _isAngewy = false;
             _shadow.Cleanup();
             _crashed = true;
