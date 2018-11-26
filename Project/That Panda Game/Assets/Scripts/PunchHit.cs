@@ -21,6 +21,7 @@ public class PunchHit : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    //Reset values and rotate the object to face the camera
     public void Hit()
     {
         _lerper.Reset();
@@ -31,7 +32,7 @@ public class PunchHit : MonoBehaviour
         _delayTimer = _delay;
     }
 
-    // Update is called once per frame
+    //Scale the object up over time
     void Update ()
     {
         if (!_isActive)
@@ -40,6 +41,7 @@ public class PunchHit : MonoBehaviour
         if (_delayTimer > 0)
             return;
         transform.localScale = _lerper.Lerp(Vector3.zero, _targetScale, _speedToScale);
+        //After scaled, turn off the game object
         if (transform.localScale == _targetScale)
         {
             _isActive = false;

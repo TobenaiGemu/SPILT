@@ -64,15 +64,12 @@ public class UiManager : MonoBehaviour
         if (EventSystem.current.currentSelectedGameObject == null)
             EventSystem.current.SetSelectedGameObject(_selectedGameObject);
 
-
+        //If the selected button has changed, play the highlight sound
         _prevSelected = _curSelected;
         _curSelected = EventSystem.current.currentSelectedGameObject;
+        //Dont play highlight sound is true when the scene has just started and the first button is auto highlighted
         if (_prevSelected != _curSelected && !_dontPlayHighlightSound)
-        {
-            Debug.Log("PREV: " + _prevSelected);
-            Debug.Log("CURR: " + _curSelected);
             _highlightSound.Play();
-        }
         _dontPlayHighlightSound = false;
     }
 
@@ -91,6 +88,7 @@ public class UiManager : MonoBehaviour
         return (EventSystem.current.currentSelectedGameObject.name == btnName);
     }
 
+    //Every button in the game will call one of these functions
     public void PlayButton()
     {
         if (_sceneManager.IsTransitioning())

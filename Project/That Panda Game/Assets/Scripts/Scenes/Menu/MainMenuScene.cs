@@ -97,7 +97,7 @@ public class MainMenuScene : Scene
         }
 
         foreach (User user in SceneManager.Users)
-            user.ChangeState("MenuState");
+            user.ChangeState<MenuState>();
 
         _lerper.Reset();
         _finishedScale = false;

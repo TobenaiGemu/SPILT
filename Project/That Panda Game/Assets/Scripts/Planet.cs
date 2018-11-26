@@ -20,6 +20,7 @@ public class Planet : MonoBehaviour {
 
     private void FixedUpdate()
     {
+        //Rotate the planet over time :)
         if (_paused)
             return;
         transform.Rotate(Vector3.down * _rotationSpeed * Time.deltaTime);

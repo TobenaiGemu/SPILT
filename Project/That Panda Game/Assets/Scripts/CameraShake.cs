@@ -22,6 +22,7 @@ public class CameraShake : MonoBehaviour
 
         if (_shakeCount < 5)
         {
+            //Choose a random point in a unit circle and lerp towards it
             if (Camera.main.transform.position != _nextPos)
             {
                 Camera.main.transform.position = _lerper.Lerp(_initPos, _nextPos, 0.01f);
@@ -34,6 +35,7 @@ public class CameraShake : MonoBehaviour
                 _shakeCount++;
             }
         }
+        //Reset to default position when camera has shaken 5 tiems
         else
         {
             _shake = false;

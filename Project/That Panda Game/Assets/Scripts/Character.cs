@@ -19,18 +19,6 @@ public class Character : MonoBehaviour
     }
 
     [SerializeField]
-    private int _coinsToWin;
-
-    public Vector3 Position
-    {
-        get
-        {
-            return _characterObj.transform.position;
-        }
-        private set { }
-    }
-
-    [SerializeField]
     private float _forwardSpeed;
     public float ForwardSpeed
     {
@@ -164,17 +152,6 @@ public class Character : MonoBehaviour
     }
 
     [SerializeField]
-    private TrailRenderer _whoosh;
-    public TrailRenderer Whoosh
-    {
-        get
-        {
-            return _whoosh;
-        }
-        private set { }
-    }
-
-    [SerializeField]
     private ParticleSystem _speedParticles;
     [SerializeField]
     private ParticleSystem _fireParticlesLeft;
@@ -229,7 +206,7 @@ public class Character : MonoBehaviour
     private float _unroastTimer;
     private float _timeToUnroast;
     private float _roastPercent;
-    private TimeLerper _lerper;
+    private TimeLerper _roastLerper;
 
     private bool _multiplySpeed;
 
@@ -246,49 +223,51 @@ public class Character : MonoBehaviour
     private GameScene _gameScene;
 
     private ParticleSystem _sickBubblesPs;
-    //private GameObject _confusedSpiral;
 
     private Animator _animator;
 
     private AudioSource _roastedMallowSound;
 
-    //Get rid of this
     private SceneManager _sceneManager;
 
     public void Awake()
     {
-        _whoosh.emitting = false;
-        _standardMallowMat = _leftMarshmallow.GetComponent<Renderer>().sharedMaterial;
-        _roastedMallowSound = GameObject.Find("InGameSounds").transform.Find("RoastedMarshmallows").GetComponent<AudioSource>();
+
     }
 
+    //Called once at the start of the game
     public Character Init(GameObject charObj)
     {
+        //Find all objects needed
+        _standardMallowMat = _leftMarshmallow.GetComponent<Renderer>().sharedMaterial;
+        _roastedMallowSound = GameObject.Find("InGameSounds").transform.Find("RoastedMarshmallows").GetComponent<AudioSource>();
+
         _characterPool = GameObject.Find("AvailableCharacters");
+
         _coinSpawner = GameObject.Find("CoinSpawner").GetComponent<Spawner>();
-        _lerper = new TimeLerper();
         _mamaMarshmallow = GameObject.Find("Events").transform.Find("MamaMarshmallow").GetComponent<MamaMarshmallow>();
         _winnerTime = 5;
         _sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
         _gameScene = GameObject.Find("Scenes").transform.Find("GameScene").GetComponent<GameScene>();
-
         _sickBubblesPs = transform.Find("AppleBubblesPS").GetComponent<ParticleSystem>();
-        //_confusedSpiral = transform.Find("ConfusedSpiral").gameObject;
-
-        _characterObj = charObj;
         _animator = GetComponent<Animator>();
+
+        _roastLerper = new TimeLerper();
+        _characterObj = charObj;
         return this;
     }
 
+    //Called before each match
     public void ReInit()
     {
+        //Reset all values
         _coins = 0;
         _forwardSpeedMultiplier = 1;
         _knockbackMultiplier = 1;
         _knockjumpMultiplier = 1;
         _speedMultiplierTimer = 1;
         UpdateCoinPanel();
-        _lerper.Reset();
+        _roastLerper.Reset();
     }
 
     public void Cleanup()
@@ -299,6 +278,7 @@ public class Character : MonoBehaviour
 
     public void Update()
     {
+        //Do all timer stuff
         _speedParticleTimer -= Time.deltaTime;
         _speedMultiplierTimer -= Time.deltaTime;
 
@@ -317,10 +297,9 @@ public class Character : MonoBehaviour
     {
         _coins += ammount;
         UpdateCoinPanel();
-        //if (_coins >= _coinsToWin)
-        //    WinGame();
     }
 
+    //Update the character score and spawn/chuck gummy bears away from the character in a random direction
     public void DropCoins(int ammount)
     {
         if (ammount > _coins)
@@ -341,6 +320,7 @@ public class Character : MonoBehaviour
         _scoreBox.transform.Find("Score").GetComponent<Text>().text = "P" + _assignedUser.UserId + ": " + _coins;
     }
 
+    //Adds a force to the character in a direction
     public void ApplyKnockBack(Vector3 direction, float backForce, float upForce)
     {
         transform.parent.GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -351,6 +331,11 @@ public class Character : MonoBehaviour
     {
         _speedParticles.Play();
         _speedParticleTimer = duration;
+    }
+
+    public void StartSickBubbles()
+    {
+        _sickBubblesPs.Play();
     }
 
     public void MultiplySpeed(float speedMultiplier, float duration)
@@ -371,16 +356,18 @@ public class Character : MonoBehaviour
         _animator.SetTrigger("Lose");
     }
 
+    //If this character is not already attached to a user, attach it to the user and initialize this character to be ready to be playable
     public bool AttemptAssignToUser(User user)
     {
         if (!_isAssigned)
         {
             _assignedUser = user;
             _isAssigned = true;
+            //Parent this character to the 'Player' object and reset its position
             _characterObj.transform.SetParent(GameObject.Find("Players").transform.Find("Player" + _assignedUser.UserId), false);
             _characterObj.transform.localPosition = Vector3.zero;
             _characterObj.SetActive(true);
-            Debug.Log(_assignedUser.UserId);
+            //Setup the score box for this character
             _scoreBox = GameObject.Find("Canvas").transform.Find("GamePanel").Find("p" + _assignedUser.UserId + "ScoreBox").gameObject;
             _scoreBox.transform.Find("Name").GetComponent<Image>().sprite = _scoreNameSprite;
             _scoreBox.transform.Find("Score").GetComponent<Text>().text = _name + ": 0";
@@ -391,43 +378,43 @@ public class Character : MonoBehaviour
         return false;
     }
 
-    public void StartSickBubbles()
-    {
-        _sickBubblesPs.Play();
-    }
-
-
+    //Called every frame that the marshmallow is roasting to roast over time
     public void RoastMarshmallow(float durationToRoast, float durationToUnroast, float knockbackMultiplier, float knockjumpMultiplier, int coinDrop)
     {
         if (_marshmallowRoasted)
             return;
-        _roastPercent = _lerper.Lerp(0f, 1f, durationToRoast);
+        //Lerp the material from the non roasted material to the roasted material
+        _roastPercent = _roastLerper.Lerp(0f, 1f, durationToRoast);
         _leftMarshmallow.GetComponent<Renderer>().material.Lerp(_standardMallowMat, _burntMallowMat, _roastPercent);
         _rightMarshmallow.GetComponent<Renderer>().material.Lerp(_standardMallowMat, _burntMallowMat, _roastPercent);
-        //TODO: Change opacity of roast texture over time
+
+        //If the marshmallow is fully roaster, reset the timers and complete the roast
         if (_roastPercent >= 1)
         {
-            _lerper.Reset();
+            _roastLerper.Reset();
             _unroastTimer = durationToUnroast;
             _timeToUnroast = durationToUnroast;
             CompleteRoast(knockbackMultiplier, knockjumpMultiplier, coinDrop);
         }
     }
 
+    //Called if the marshmallows stop roasting before they are fully roasted
     public void StopRoastingMarshmallow()
     {
         if (_marshmallowRoasted)
             return;
-        Debug.Log("Unroasted");
+
+        //Stop fire particles and reset multipliers
         _fireParticlesLeft.Stop();
         _fireParticlesRight.Stop();
         _knockbackMultiplier = 1;
         _knockjumpMultiplier = 1;
-        _lerper.Reset();
+        _roastLerper.Reset();
         StartCoroutine(FadeAwayRoast());
         //TODO: Change texture back to normal;
     }
 
+    //Start fire particles and increase knockback/knockjump multipliers and coin drop
     private void CompleteRoast(float knockbackMultiplier, float knockjumpMultiplier, int coinDrop)
     {
         _fireParticlesLeft.Play();
@@ -442,6 +429,7 @@ public class Character : MonoBehaviour
         StartCoroutine(UnroastMarshmallowCounter());
     }
 
+    //Unroast roasted marshmallows over time
     public IEnumerator UnroastMarshmallowCounter()
     {
         if (_sceneManager.IsPaused())
@@ -455,6 +443,7 @@ public class Character : MonoBehaviour
         StopRoastingMarshmallow();
     }
 
+    //While the marshmallows are unroasting, fade from the roasted material to the unroasted material
     public IEnumerator FadeAwayRoast()
     {
         if (_sceneManager.IsPaused())
@@ -462,15 +451,16 @@ public class Character : MonoBehaviour
         float unroastPercent = _roastPercent;
         while (unroastPercent > 0)
         {
-            unroastPercent = _lerper.Lerp(_roastPercent, 0, 1);
+            unroastPercent = _roastLerper.Lerp(_roastPercent, 0, 1);
             _leftMarshmallow.GetComponent<Renderer>().material.Lerp(_standardMallowMat, _burntMallowMat, unroastPercent);
             _rightMarshmallow.GetComponent<Renderer>().material.Lerp(_standardMallowMat, _burntMallowMat, unroastPercent);
             yield return null;
         }
         _roastPercent = 0;
-        _lerper.Reset();
+        _roastLerper.Reset();
     }
 
+    //If this character is assigned to a user, unassign it
     private void Unassign()
     {
         if (_isAssigned)

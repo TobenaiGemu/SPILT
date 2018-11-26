@@ -16,6 +16,7 @@ public class AppleAction : MonoBehaviour
 
     public void DropCoinFromCharacter(Character character)
     {
+        //Play the apple sounds, drop coins from character and start the sick bubbles animation
         _appleSound.Play();
         character.DropCoins(_coinDrop);
         character.StartSickBubbles();

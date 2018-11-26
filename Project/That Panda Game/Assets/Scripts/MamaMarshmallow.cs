@@ -53,7 +53,7 @@ public class MamaMarshmallow : MonoBehaviour
     {
         if (_isAngewy)
             return;
-        //_animator.SetTrigger("Idle");
+        //Reset values
         _lerper.Reset();
         _alphaLerper.Reset();
         Color colour = _mat.color;
@@ -104,7 +104,7 @@ public class MamaMarshmallow : MonoBehaviour
             //Get the direction to knock back the character towards
             Vector3 knockDirection = (other.transform.position - _targetPos);
 
-            //If the character is directly under the marshmallow, the x and y will be 0
+            //If the character is directly under the marshmallow, the x and y will be 0, so make the direction the players forward direction
             if ((int)knockDirection.x == 0 && (int)knockDirection.y == 0)
                 knockDirection = other.transform.forward;
             //Apply knockback and make character drop coins
@@ -112,18 +112,21 @@ public class MamaMarshmallow : MonoBehaviour
             other.transform.GetComponent<Character>().DropCoins(_coinsToDrop);
         }
 
-        //Begin the cleanup phase when the marshmallow hits the planet
+        
         if (other.gameObject.name == "Planet")
         {
-            //_dirtParticles.Play();
+            //Cleanup when the marshmallow hits the planet
             _isAngewy = false;
             _shadow.Cleanup();
             _crashed = true;
+
+            //Run the squeesh animation and shake the camera
             _animator.SetTrigger("Squeeesh");
             Camera.main.GetComponent<CameraShake>().Shake();
         }
     }
 
+    //Used when the game is paused and resumed
     public void Pause()
     {
         _paused = true;
@@ -142,6 +145,7 @@ public class MamaMarshmallow : MonoBehaviour
             return;
         if (_crashed)
         {
+            //Lerp the alpha of this object towards 0 when it has crashed
             if (_mat.color.a != 0)
             {
                 Color colour = _mat.color;

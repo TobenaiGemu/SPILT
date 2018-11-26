@@ -6,6 +6,7 @@ public class MudPuddle : MonoBehaviour
 {
     private void OnTriggerStay(Collider other)
     {
+        //Trigger the mud puddle action while the character stays in the mud
         if (other.gameObject.tag == "Character")
         {
             GameObject.Find("Collectables").transform.Find("MudPuddle").GetComponent<MudPuddleAction>().MultiplyCharacterSpeed(other.gameObject.GetComponent<Character>());

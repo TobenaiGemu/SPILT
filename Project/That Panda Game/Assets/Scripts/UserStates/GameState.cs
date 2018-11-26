@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameState : UserState
 {
-    GameScene _scene;
+    private GameScene _gameScene;
 
     private GameObject _playerObj;
     private GameObject _planetObj;
@@ -34,10 +34,10 @@ public class GameState : UserState
 
     private float _whooshTimer;
 
-    public GameState(User user, SceneManager sceneManager)
+    public GameState(User user)
         :base(user)
     {
-        _scene = sceneManager.GetScene<GameScene>();
+        _gameScene = _sceneManager.GetScene<GameScene>();
         
         _playerObj = GameObject.Find("Players").transform.Find("Player" + _joystick.GetId()).gameObject;
         _planetObj = GameObject.Find("Planet");
@@ -73,7 +73,7 @@ public class GameState : UserState
         //Pause when pause button is pressed :3 :3 <3 <3
         if (_joystick.WasButtonPressed("Pause"))
         {
-            _scene.PauseGame(_user);
+            _gameScene.PauseGame(_user);
             return;
         }
 

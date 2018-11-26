@@ -81,7 +81,7 @@ public class OptionsScene : Scene
         EventSystem.current.firstSelectedGameObject = _res1;
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(_res1);
-        SceneManager.Users[0].ChangeState("OptionsState");
+        SceneManager.Users[0].ChangeState<OptionsState>();
         _updateMenuPage = false;
     }
 
@@ -90,13 +90,13 @@ public class OptionsScene : Scene
         EventSystem.current.firstSelectedGameObject = _volSlider;
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(_volSlider);
-        SceneManager.Users[0].ChangeState("OptionsState");
+        SceneManager.Users[0].ChangeState<OptionsState>();
         _updateMenuPage = false;
     }
 
     public void GotoLeftButtons()
     {
-        SceneManager.Users[0].ChangeState("MenuState");
+        SceneManager.Users[0].ChangeState<MenuState>();
         Initialize();
     }
 

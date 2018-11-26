@@ -27,6 +27,7 @@ public class Coin : MonoBehaviour
 
     private void Update()
     {
+        //Return the object to the pool if it goes outside the border
         if (transform.position.z > zToDespawn * -1)
             _coinSpawner.ReturnObject(gameObject);
     }
@@ -38,6 +39,7 @@ public class Coin : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //If the gummy bear hits the planet, stop its movement and rotate it to align with the planet
         if (other.transform.name == "Planet")
         {
             _canPickup = true;
@@ -52,6 +54,7 @@ public class Coin : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        //If a character triggers is, add a coin to it and play the particle system
         if (_canPickup && other.transform.tag == "Character")
         {
             _coinAction.AddCoinToCharacter(other.gameObject.GetComponent<Character>());

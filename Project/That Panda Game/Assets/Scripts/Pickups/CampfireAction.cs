@@ -17,11 +17,13 @@ public class CampfireAction : MonoBehaviour
 
     public void StartRoasting(Character character)
     {
+        //Keep calling this function to roast the characters marshmallows over time
         character.RoastMarshmallow(_timeToRoast, _timeToUnroast, _knockBackMultiplier, _knockJumpMultiplier, _coinDropModifier);
     }
 
     public void StopRoasting(Character character)
     {
+        //Try to stop roasting when it exits (if its already fully roasted this wont do anything)
         character.StopRoastingMarshmallow();
     }
 }

@@ -33,6 +33,7 @@ public class GravitySim : MonoBehaviour
 
     void FixedUpdate ()
     {
+        //Add a force towards game objects tagged with "GravityForce" (Just the Planet)
         foreach (GameObject obj in _bodies)
         {
             Rigidbody rb = obj.GetComponent<Rigidbody>();

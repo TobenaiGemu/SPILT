@@ -267,7 +267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _minRandomMama: 5
   _maxRandomMama: 10
-  _winnerTime: 5
+  _winnerTime: 10
   _numberSprites:
   - {fileID: 21300000, guid: 28f1085c6fea0e34eba048e0ecffbc69, type: 3}
   - {fileID: 21300000, guid: dcec38f94c673314087eadd351ea131f, type: 3}
@@ -282,6 +282,8 @@ MonoBehaviour:
   _startSprite: {fileID: 21300000, guid: 8904c09484c8eed409910be3b4755641, type: 3}
   _inGameMusic: {fileID: 0}
   _mainMenuMusic: {fileID: 0}
+  _victoryMusic: {fileID: 0}
+  _startTimerMusic: {fileID: 0}
   _gameTime: 90
 --- !u!114 &114540222999761608
 MonoBehaviour:

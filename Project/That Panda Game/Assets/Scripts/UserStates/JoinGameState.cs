@@ -6,14 +6,11 @@ using UnityEngine.UI;
 public class JoinGameState : UserState
 {
     private bool _joined;
-    private SceneManager _sceneManager;
-
     private AudioSource _selectAudio;
 
-    public JoinGameState(User user, SceneManager sceneManager)
+    public JoinGameState(User user)
         :base(user)
     {
-        _sceneManager = sceneManager;
         _selectAudio = GameObject.Find("MenuSounds").transform.Find("SelectButton").GetComponent<AudioSource>();
     }
 

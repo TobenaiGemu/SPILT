@@ -30,6 +30,7 @@ public class SceneManager : MonoBehaviour
 
         _scenesPool = GameObject.Find("Scenes");
 
+        //Add all scene to list
         MaxUsers = 4;
         _scenes.Add(_scenesPool.transform.Find("GameScene").GetComponent<GameScene>());
         _scenes.Add(_scenesPool.transform.Find("MainMenuScene").GetComponent<MainMenuScene>());
@@ -38,6 +39,7 @@ public class SceneManager : MonoBehaviour
         _scenes.Add(_scenesPool.transform.Find("CharacterSelectScene").GetComponent<CharacterSelectScene>());
         _scenes.Add(_scenesPool.transform.Find("JoinGameScene").GetComponent<JoinGameScene>());
 
+        //setup each scene
         foreach (Scene scene in _scenes)
             scene.Setup();
 
@@ -110,6 +112,7 @@ public class SceneManager : MonoBehaviour
         return _characters[type];
     }
 
+    //If the next scene is T, return true
     public bool CheckNextScene<T>()
         where T : Scene
     {
@@ -118,6 +121,7 @@ public class SceneManager : MonoBehaviour
         return false;
     }
 
+    //If the current scene is of type T, return true
     public bool CheckCurrentScene<T>()
         where T : Scene
     {
@@ -139,6 +143,7 @@ public class SceneManager : MonoBehaviour
         throw new System.Exception("WTF YOU DOIN M8");
     }
 
+    //if the previous scene is of type T, return true
     public bool CheckPrevScene<T>()
     {
         if (_prevScene == null)

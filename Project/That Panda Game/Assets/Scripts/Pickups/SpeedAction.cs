@@ -17,6 +17,7 @@ public class SpeedAction : MonoBehaviour
         _cookieSound = GameObject.Find("InGameSounds").transform.Find("Cookie").GetComponent<AudioSource>();
     }
 
+    //Play cookie sound and speed up character
     public void MultiplyCharacterSpeed(Character character)
     {
         _cookieSound.Play();

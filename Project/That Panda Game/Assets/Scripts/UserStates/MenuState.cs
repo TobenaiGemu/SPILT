@@ -4,14 +4,9 @@ using UnityEngine;
 
 public class MenuState : UserState
 {
-    private MainMenuScene _scene;
-    private SceneManager _sceneManager;
-
-    public MenuState(User user, SceneManager sceneManager)
+    public MenuState(User user)
         :base(user)
     {
-        _scene = sceneManager.GetScene<MainMenuScene>();
-        _sceneManager = sceneManager;
     }
 
     public override void Initialize()

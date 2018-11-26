@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class CharacterSelectState : UserState
 {
-    private SceneManager _sceneManager;
-
-    public CharacterSelectState(User user, SceneManager sceneManager)
+    public CharacterSelectState(User user)
         :base(user)
     {
-        _sceneManager = sceneManager;
     }
 
     public override void Update()

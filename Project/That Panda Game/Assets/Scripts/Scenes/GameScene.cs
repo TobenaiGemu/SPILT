@@ -107,6 +107,7 @@ public class GameScene : Scene
 
     private void IntToSprite(int num, List<Sprite> _sprites)
     {
+        //If it's a single digit then just grab the sprite right away
         _sprites.Clear();
         if (num < 10)
         {
@@ -114,6 +115,7 @@ public class GameScene : Scene
             _sprites.Add(_numberSprites[num]);
             return;
         }
+        //Gets the two number sprites that correspond to the two digit number from num
         int tenner = (int)Mathf.Floor(num / 10);
         int single = num % 10;
         _sprites.Add(_numberSprites[tenner]);
@@ -122,6 +124,7 @@ public class GameScene : Scene
 
     public override void Initialize()
     {
+        //Reset all values
         _winnerTimer = _winnerTime;
         _initCameraPos = Camera.main.transform.position;
         _targetCameraPos = new Vector3(0, 0, -54);
@@ -160,6 +163,7 @@ public class GameScene : Scene
             CharacterUnassign(user);
             user.SetPlaying(false);
         }
+        //Deactivate game panels
         _gamePanel.SetActive(false);
         _pausePanel.SetActive(false);
         _lerper.Reset();
@@ -167,23 +171,28 @@ public class GameScene : Scene
 
     public void WinGame(Character winner)
     {
+        //Remove all items from world
         _coinSpawner.Cleanup();
         _cookieSpawner.Cleanup();
         _appleSpawner.Cleanup();
         _gameFinished = true;
+        //Set winner sprite to correct player number
         _winnerImage.gameObject.SetActive(true);
         _winnerImage.transform.Find("Number").GetComponent<Image>().sprite = _numberSprites[winner.AssignedUser.UserId];
         winner.WinGame();
+        //Set every other character to lose
         foreach (User user in SceneManager.Users)
         {
             if (user.IsPlaying)
             {
+                //LoseGame function runs the losing animation
                 if (user.AssignedCharacter != winner)
                     user.AssignedCharacter.LoseGame();
             }
         }
         _victoryMusic.Play();
         _mamaMarshmallow.StopMarshmallow();
+        //Disable the game timers
         _timerLeft1.gameObject.SetActive(false);
         _timerLeft2.gameObject.SetActive(false);
         _timerRight1.gameObject.SetActive(false);
@@ -191,6 +200,7 @@ public class GameScene : Scene
         StartCoroutine(FinishGame());
     }
 
+    //Go back to main menu a certain time after the winner is decided
     public IEnumerator FinishGame()
     {
         while (_winnerTimer > 0)
@@ -203,6 +213,7 @@ public class GameScene : Scene
 
     public override bool IntroTransition()
     { 
+        //Move camera closer to planet
         if (Camera.main.transform.position != _targetCameraPos)
         {
             Camera.main.transform.position = _lerper.Lerp(_initCameraPos, _targetCameraPos, 0.4f);
@@ -212,18 +223,23 @@ public class GameScene : Scene
         //Activate the game panel
         _gamePanel.gameObject.SetActive(true);
 
+        //3...2...1...START before the users change to the game state
         if (_startTimer != -1)
         {
+            //Decrease main menu volume to 0 over time
             _mainMenuMusic.volume = _musicLerper.Lerp(1, 0, 4);
             if (_startTimerImage.sprite != _numberSprites[_startTimer] || _startTimerImage.sprite != _startSprite)
             {
                 if (!_startTimerMusic.isPlaying)
                     _startTimerMusic.Play();
+                
+                //If the timer is 0, show the START sprite
                 if (_startTimer == 0)
                 {
                     _startTimerImage.sprite = _startSprite;
                     _startTimerImage.SetNativeSize();
                 }
+                //Get the sprite that corresponds to the start timers current time
                 else
                 {
                     _startTimerImage.sprite = _numberSprites[_startTimer];
@@ -241,14 +257,15 @@ public class GameScene : Scene
             return false;
         }
 
-        //Change user states to JoinState
+        //Change user states to GameState
         foreach (User user in SceneManager.Users)
-            user.ChangeState("GameState");
+            user.ChangeState<GameState>();
         _lerper.Reset();
         _mainMenuMusic.Pause();
         _inGameMusic.Play();
         _startTimerImage.gameObject.SetActive(false);
 
+        //Activate game timers
         _timerLeft1.gameObject.SetActive(true);
         _timerLeft2.gameObject.SetActive(true);
         _timerRight1.gameObject.SetActive(true);
@@ -270,6 +287,7 @@ public class GameScene : Scene
 
     public override bool OutroTransition()
     {
+        //Cleanup items and stop music
         ResumeGame();
         _winnerImage.gameObject.SetActive(false);
         _inGameMusic.Stop();
@@ -292,6 +310,7 @@ public class GameScene : Scene
         _gameTimer -= Time.deltaTime;
         _mamaTimer -= Time.deltaTime;
 
+        //Change game timer sprites to the numbers that correspond to the game timer int
         IntToSprite((int)_gameTimer, _timerSprites);
         _timerLeft1.sprite = _timerSprites[0];
         _timerLeft2.sprite = _timerSprites[1];
@@ -303,6 +322,7 @@ public class GameScene : Scene
         _timerRight1.SetNativeSize();
         _timerRight2.SetNativeSize();
 
+        //Start the mama marshmallow crash
         if (_mamaTimer <= 0)
         {
             if (!_mamaFalling)
@@ -310,6 +330,7 @@ public class GameScene : Scene
             _mamaFalling = true;
         }
 
+        //Get the winner after the game timer is up
         if (_gameTimer <= 0)
         {
             Character winner = _activeCharacters[0];
@@ -343,6 +364,7 @@ public class GameScene : Scene
         user.UnassignCharacter();
     }
 
+    //Resume the game after it has been paused
     public void ResumeGame()
     {
         Time.timeScale = 1;
@@ -353,6 +375,7 @@ public class GameScene : Scene
         Planet.GetComponent<Planet>().Resume();
     }
 
+    //Pause the game
     public void PauseGame(User user)
     {
         Time.timeScale = 0;

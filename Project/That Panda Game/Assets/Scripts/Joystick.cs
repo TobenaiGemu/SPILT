@@ -9,12 +9,14 @@ public class Joystick
     private int _controllerId;
     private string _controllerName;
 
+    //Assign this joystick with an id that is used to map input to a specific connected controller
     public Joystick(int id)
     {
         _controllerId = id;
         if (id <= Input.GetJoystickNames().Length)
             _controllerName = Input.GetJoystickNames()[id - 1];
 
+        //Get a different entry from the Unity input manager depending on the type of controller connected and map it to the InputModule for control of UI elements
         if (_controllerName != "Wireless Controller")
         {
             StandaloneInputModule module = GameObject.Find("EventSystem" + _controllerId).GetComponent<StandaloneInputModule>();
@@ -30,6 +32,9 @@ public class Joystick
         return _controllerId;
     }
 
+
+    //Wrap unity input manager for individual controllers with simple functions
+    //Gets a different entry from the input manager depending on the type of controller (x for xbox and non x for ps4 controller)
     public float GetAnalogue1Axis(string axis)
     {
         switch (axis)

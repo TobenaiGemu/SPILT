@@ -17,22 +17,20 @@ public class Apple : MonoBehaviour {
 
     private void OnEnable()
     {
+        //Since the same function spawns every type of item, some won't spawn in at the correct rotation (since the 'up' transform vector might not actually be up on the model), so it is done 'manually' here
         transform.Rotate(new Vector3(-90, 0, 0));
     }
 
     private void Update()
     {
+        //Despawn apple at border
         if (transform.position.z > zToDespawn * -1)
             _appleSpawner.ReturnObject(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.name == "Planet")
-        {
-            //GetComponent<Rigidbody>().velocity = Vector3.zero;
-        }
-
+        //Do the apple action if a character triggers this
         if (other.transform.tag == "Character")
         {
             _appleAction.DropCoinFromCharacter(other.gameObject.GetComponent<Character>());

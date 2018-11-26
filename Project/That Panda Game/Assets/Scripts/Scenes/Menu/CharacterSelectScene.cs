@@ -85,7 +85,7 @@ public class CharacterSelectScene : Scene
             return false;
         }
         foreach (User user in SceneManager.Users)
-            user.ChangeState("CharacterSelectState");
+            user.ChangeState<CharacterSelectState>();
         _lerper.Reset();
         _uiManager.ChangeEventSystem(_userIndex);
         _uiManager.DontPlayFirstHighlightSound();
@@ -182,7 +182,6 @@ public class CharacterSelectScene : Scene
                     break;
                 }
             }
-
         }
         else
         {

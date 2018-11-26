@@ -10,6 +10,7 @@ public class TitleSpin : MonoBehaviour
 
 	void Update ()
     {
+        //Rotate the title over time ;)
         transform.Rotate(0, 0, _speed * Time.deltaTime);
 	}
 }

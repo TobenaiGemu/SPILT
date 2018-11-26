@@ -16,6 +16,7 @@ public class CoinAction : MonoBehaviour{
 
     public void AddCoinToCharacter(Character character)
     {
+        //add a gummy bear to the player
         _gummyBearSound.Play();
         character.AddCoins(_coinAmmount);
     }

@@ -18,6 +18,7 @@ public class Campfire : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        //For every frame that the character is triggering the campfire, call the campfire action
         if (other.transform.tag == "Character")
         {
             _campfireAction.StartRoasting(other.GetComponent<Character>());
@@ -26,6 +27,7 @@ public class Campfire : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        //Try to stop roasting when the character exits
         if (other.transform.tag == "Character")
         {
             _campfireAction.StopRoasting(other.GetComponent<Character>());

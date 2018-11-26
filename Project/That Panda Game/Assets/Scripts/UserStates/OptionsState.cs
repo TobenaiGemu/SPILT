@@ -5,13 +5,11 @@ using UnityEngine.EventSystems;
 
 public class OptionsState : UserState
 {
-    private SceneManager _sceneManager;
     private bool _updateWait;
 
-	public OptionsState(User user, SceneManager sceneManager)
+	public OptionsState(User user)
         :base(user)
     {
-        _sceneManager = sceneManager;
     }
 
     public override void Initialize()

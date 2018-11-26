@@ -56,7 +56,7 @@ public class JoinGameScene : Scene
             return false;
         }
         foreach (User user in SceneManager.Users)
-            user.ChangeState("JoinGameState");
+            user.ChangeState<JoinGameState>();
         _lerper.Reset();
         return true;
     }

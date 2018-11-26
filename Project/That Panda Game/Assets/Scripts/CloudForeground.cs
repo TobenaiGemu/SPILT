@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CloudForeScript : MonoBehaviour
+public class CloudForeground : MonoBehaviour
 {
     [SerializeField]
     private float _speed;
@@ -18,6 +18,7 @@ public class CloudForeScript : MonoBehaviour
 
     private void Update ()
     {
+        //Offset the cloud material over time to give the illusion of movement
         _offset.x += _speed * Time.deltaTime;
         _mat.SetTextureOffset("_MainTex", _offset);
 	}
