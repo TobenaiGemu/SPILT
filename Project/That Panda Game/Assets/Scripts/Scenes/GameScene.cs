@@ -227,7 +227,7 @@ public class GameScene : Scene
         if (_startTimer != -1)
         {
             //Decrease main menu volume to 0 over time
-            _mainMenuMusic.volume = _musicLerper.Lerp(1, 0, 4);
+            _mainMenuMusic.volume = _musicLerper.Lerp(0.4f, 0, 4);
             if (_startTimerImage.sprite != _numberSprites[_startTimer] || _startTimerImage.sprite != _startSprite)
             {
                 if (!_startTimerMusic.isPlaying)
