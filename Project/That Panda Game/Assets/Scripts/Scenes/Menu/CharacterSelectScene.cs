@@ -16,6 +16,7 @@ public class CharacterSelectScene : Scene
     private int _userIndex;
     private User _currentUser;
 
+    private bool _stopCoroutines;
 
     private void Awake()
     {
@@ -34,6 +35,7 @@ public class CharacterSelectScene : Scene
 
     public override void Initialize()
     {
+        _stopCoroutines = true;
         _lerper.Reset();
         _characterSelectPanel.SetActive(true);
 
@@ -97,6 +99,11 @@ public class CharacterSelectScene : Scene
 
     public override bool OutroTransition()
     {
+        if (_stopCoroutines)
+        {
+            StopAllCoroutines();
+            _stopCoroutines = false;
+        }
         if (_characterSelectCanvas.alpha != 0)
         {
             _characterSelectCanvas.alpha = _lerper.Lerp(1, 0, 0.5f);
