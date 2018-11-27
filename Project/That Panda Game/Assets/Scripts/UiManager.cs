@@ -26,6 +26,8 @@ public class UiManager : MonoBehaviour
 
     private AudioSource _panSelectSound;
     private AudioSource _hamSelectSound;
+    private AudioSource _eliSelectSound;
+    private AudioSource _lizSelectSound;
     private AudioSource _highlightSound;
     private AudioSource _selectSound;
 
@@ -45,6 +47,8 @@ public class UiManager : MonoBehaviour
         GameObject menuSounds = GameObject.Find("MenuSounds");
         _panSelectSound = menuSounds.transform.Find("PanSelect").GetComponent<AudioSource>();
         _hamSelectSound = menuSounds.transform.Find("HamSelect").GetComponent<AudioSource>();
+        _eliSelectSound = menuSounds.transform.Find("EliSelect").GetComponent<AudioSource>();
+        _lizSelectSound = menuSounds.transform.Find("LizSelect").GetComponent<AudioSource>();
         _highlightSound = menuSounds.transform.Find("HighlightButton").GetComponent<AudioSource>();
         _selectSound = menuSounds.transform.Find("SelectButton").GetComponent<AudioSource>();
         ChangeEventSystem(1);
@@ -212,6 +216,7 @@ public class UiManager : MonoBehaviour
     {
         if (_sceneManager.IsTransitioning())
             return;
+        _eliSelectSound.Play();
         _sceneManager.GetScene<CharacterSelectScene>().SelectCharacter(CharacterType.Elephant);
     }
 
@@ -219,6 +224,7 @@ public class UiManager : MonoBehaviour
     {
         if (_sceneManager.IsTransitioning())
             return;
+        _lizSelectSound.Play();
         _sceneManager.GetScene<CharacterSelectScene>().SelectCharacter(CharacterType.Lizard);
     }
 }
