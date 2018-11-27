@@ -33,6 +33,8 @@ public class MamaMarshmallow : MonoBehaviour
 
     private ParticleSystem _dirtParticles;
 
+    private AudioSource _impactSound;
+
     private void Awake()
     {
         _planet = GameObject.Find("Planet");
@@ -43,7 +45,7 @@ public class MamaMarshmallow : MonoBehaviour
         _animator = GetComponent<Animator>();
         _mat = GetComponentInChildren<Renderer>().sharedMaterial;
         _gameScene = GameObject.Find("Scenes").transform.Find("GameScene").GetComponent<GameScene>();
-
+        _impactSound = GameObject.Find("InGameSounds").transform.Find("MamaImpact").GetComponent<AudioSource>();
         //_dirtParticles = transform.Find("Dirt").GetComponent<ParticleSystem>();
         _crashed = true;
     }
@@ -123,6 +125,7 @@ public class MamaMarshmallow : MonoBehaviour
             //Run the squeesh animation and shake the camera
             _animator.SetTrigger("Squeeesh");
             Camera.main.GetComponent<CameraShake>().Shake();
+            _impactSound.Play();
         }
     }
 
