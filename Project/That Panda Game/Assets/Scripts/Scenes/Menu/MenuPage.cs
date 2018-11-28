@@ -41,6 +41,7 @@ public class MenuPage
 
     public void Initialize()
     {
+        //Reset all values
         _prevSelected = null;
         _curSelected = null;
         _curRightCanvas = null;
@@ -53,12 +54,14 @@ public class MenuPage
 
     public void SetRightPanel(string name, int btnIndex)
     {
+        //Find an object in the canvas with the name and assign it to a button as btnIndex (from top to bottom)
         _rightCanvases[btnIndex] = _canvas.transform.Find(name).GetComponent<CanvasGroup>();
         _rightCanvases[btnIndex].alpha = 0;
     }
 
     private void ButtonChange(string name)
     {
+        //Check if there was a button change
         _hasChanged = true;
         _lerperIntro.Reset();
         _lerperOutro.Reset();
@@ -66,6 +69,7 @@ public class MenuPage
         if (_nextRightCanvas != null)
             _curRightCanvas = _nextRightCanvas;
 
+        //If there was a button change, set the next canvas to the changed button
         for (int i = 0; i < _leftButtons.Count; i++)
         {
             if (_leftButtons[i].name == name)
@@ -80,6 +84,7 @@ public class MenuPage
 
     private bool OutroRightPanel(CanvasGroup canvas)
     {
+        //Outro the full right panel
         if (canvas == null)
             return true;
         
@@ -95,6 +100,7 @@ public class MenuPage
 
     private bool IntroRightPanel(CanvasGroup canvas)
     {
+        //Intro the full right panel
         if (canvas == null)
             return true;
         if (canvas.alpha < 1)
@@ -108,6 +114,7 @@ public class MenuPage
 
     public bool OutroCurrentPanel(float timeToTransition)
     {
+        //Outro the current panel that is within the full panel
         if (_curRightCanvas == null)
             return true;
 
@@ -126,6 +133,7 @@ public class MenuPage
 
     public void Update()
     {
+        //Check for button changes
         _prevSelected = _curSelected;
         _curSelected = EventSystem.current.currentSelectedGameObject;
 

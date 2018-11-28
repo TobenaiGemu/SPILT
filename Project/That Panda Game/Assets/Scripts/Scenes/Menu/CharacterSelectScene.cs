@@ -35,6 +35,7 @@ public class CharacterSelectScene : Scene
 
     public override void Initialize()
     {
+        //Initialize buttons
         _stopCoroutines = true;
         _lerper.Reset();
         _characterSelectPanel.SetActive(true);
@@ -81,6 +82,7 @@ public class CharacterSelectScene : Scene
 
     public override bool IntroTransition()
     {
+        //Fade in UI
         if (_characterSelectCanvas.alpha != 1)
         {
             _characterSelectCanvas.alpha = _lerper.Lerp(0, 1, 0.5f);
@@ -99,6 +101,7 @@ public class CharacterSelectScene : Scene
 
     public override bool OutroTransition()
     {
+        //Fade out UI
         if (_stopCoroutines)
         {
             StopAllCoroutines();
@@ -123,7 +126,7 @@ public class CharacterSelectScene : Scene
     {
         if (_sceneManager.AttemptCharacterAssign(characterType, _currentUser))
         {
-            //NO NO NO NO NO GET RID OF THIS
+            //Find character that was selected and change its button to grey
             switch (characterType)
             {
                 case CharacterType.Elephant:
@@ -167,6 +170,7 @@ public class CharacterSelectScene : Scene
 
     private void GetNextUser()
     {
+        //Get the next user that has joined the game and give them control of the UI
         _userIndex++;
         if (_userIndex > 4)
         {
@@ -176,6 +180,7 @@ public class CharacterSelectScene : Scene
         {
             Debug.Log(_userIndex);
             _currentUser = _sceneManager.GetUser(_userIndex);
+            //Set text on top of chocolate to the current player choosing
             SetPlayerText("Player " + _userIndex);
             _uiManager.ChangeEventSystem(_userIndex);
             foreach (GameObject button in _buttons)

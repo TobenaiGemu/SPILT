@@ -27,6 +27,7 @@ public class JoinGameScene : Scene
 
     public override void Initialize()
     {
+         //Reset all text
         _lerper.Reset();
         for (int i = 0; i < SceneManager.MaxUsers; i++)
         {
@@ -41,6 +42,7 @@ public class JoinGameScene : Scene
 
     public override bool IntroTransition()
     {
+        //Fade in panels
         if (_leftMenuBox.alpha > 1)
         {
             _leftMenuBox.alpha = _lerper.Lerp(1, 0, 0.5f);
@@ -63,6 +65,7 @@ public class JoinGameScene : Scene
 
     public override bool OutroTransition()
     {
+        //Fade out panels
         if (_joinGameCanvas.alpha != 0)
         {
             _joinGameCanvas.alpha = _lerper.Lerp(1, 0, 0.5f);

@@ -99,7 +99,7 @@ public class GameState : UserState
             //SphereCast in front of player
             RaycastHit hit;
             
-            if (Physics.SphereCast(_playerObj.transform.position, _character.PunchRadius, _playerObj.transform.forward, out hit, _character.PunchDistance, 1 << 8))
+            if (Physics.SphereCast(_playerObj.transform.position - _playerObj.transform.forward, _character.PunchRadius, _playerObj.transform.forward, out hit, _character.PunchDistance, 1 << 8))
             {
                 //If SphereCast hit a player, knock that player back and make them drop coins
                 _punchHitSound.Play();
@@ -128,7 +128,7 @@ public class GameState : UserState
 
             _animator.SetTrigger("punchR");
             RaycastHit hit;
-            if (Physics.SphereCast(_playerObj.transform.position, _character.PunchRadius, _playerObj.transform.forward, out hit, _character.PunchDistance, 1 << 8))
+            if (Physics.SphereCast(_playerObj.transform.position - _playerObj.transform.forward, _character.PunchRadius, _playerObj.transform.forward, out hit, _character.PunchDistance, 1 << 8))
             {
                 _punchHitSound.Play();
                 hit.collider.GetComponent<Character>().ApplyKnockBack(_character.transform.forward, _character.KnockBack, _character.KnockJump);
