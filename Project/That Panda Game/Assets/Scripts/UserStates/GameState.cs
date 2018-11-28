@@ -120,7 +120,7 @@ public class GameState : UserState
         }
 
         //same as above (gonna be mergerd later)
-        if (_punchTimer <= 0 && _rightPunchTimer <= 0 && (_joystick.GetAxis("R2") >= 0.5f || _joystick.WasButtonPressed("R1")) && !_rightPunchHeld)
+        if (_punchTimer <= 0 && _rightPunchTimer <= 0 && (_joystick.GetAxis("R2") <= -0.5f || _joystick.WasButtonPressed("R1")) && !_rightPunchHeld)
         {
             _rightPunchHeld = true;
             _punchTimer = _character.PunchCooldown;
@@ -138,7 +138,7 @@ public class GameState : UserState
             else
                 _punchMissSound.Play();
         }
-        else if (_joystick.GetAxis("R2") < 0.5f)
+        else if (_joystick.GetAxis("R2") > -0.5f)
             _rightPunchHeld = false;
 
         //Rotate the gameobject based on input

@@ -78,6 +78,7 @@ public class OptionsScene : Scene
         {
             _resolutionPanel.transform.Find("Res" + i).gameObject.SetActive(true);
         }
+        _volumePanel.GetComponent<CanvasGroup>().alpha = 0;
         EventSystem.current.firstSelectedGameObject = _res1;
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(_res1);
@@ -87,6 +88,7 @@ public class OptionsScene : Scene
 
     public void GotoVolume()
     {
+        _resolutionPanel.GetComponent<CanvasGroup>().alpha = 0;
         EventSystem.current.firstSelectedGameObject = _volSlider;
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(_volSlider);

@@ -75,7 +75,6 @@ public class InfoScene : Scene
 
         if (!_menuPage.OutroCurrentPanel(0.5f))
             return false;
-
         return true;
     }
 

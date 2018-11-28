@@ -176,6 +176,7 @@ public class Character : MonoBehaviour
     private Material _burntMallowMat;
     private Material _standardMallowMat;
 
+    private GameObject _crown;
     private GameObject _characterObj;
     private GameObject _characterPool;
     private User _assignedUser;
@@ -252,6 +253,8 @@ public class Character : MonoBehaviour
         _sickBubblesPs = transform.Find("AppleBubblesPS").GetComponent<ParticleSystem>();
         _animator = GetComponent<Animator>();
 
+        _crown = transform.Find("Crown").gameObject;
+        _crown.SetActive(false);
         _roastLerper = new TimeLerper();
         _characterObj = charObj;
         return this;
@@ -261,6 +264,7 @@ public class Character : MonoBehaviour
     public void ReInit()
     {
         //Reset all values
+        _crown.SetActive(false);
         _coins = 0;
         _forwardSpeedMultiplier = 1;
         _knockbackMultiplier = 1;
@@ -296,7 +300,33 @@ public class Character : MonoBehaviour
     public void AddCoins(int ammount)
     {
         _coins += ammount;
+
+        Character first = this;
+        foreach (User user in SceneManager.Users)
+        {
+            if (user.IsPlaying)
+            {
+                _crown.SetActive(false);
+                if (user.AssignedCharacter.Coins > first.Coins)
+                    first = user.AssignedCharacter;
+                else
+                    user.AssignedCharacter.DisableCrown();
+            }
+        }
+
+        first.EnableCrown();
+
         UpdateCoinPanel();
+    }
+
+    public void EnableCrown()
+    {
+        _crown.SetActive(true);
+    }
+
+    public void DisableCrown()
+    {
+        _crown.SetActive(false);
     }
 
     //Update the character score and spawn/chuck gummy bears away from the character in a random direction

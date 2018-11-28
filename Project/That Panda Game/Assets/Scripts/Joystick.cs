@@ -64,6 +64,8 @@ public class Joystick
         switch (axis)
         {
             case "L2":
+                Debug.Log(Input.GetAxis(((_controllerName == "Wireless Controller") ? "" : "x") + "Joy" + _controllerId + "L2"));
+                Debug.Log(Input.GetAxis(((_controllerName == "Wireless Controller") ? "" : "x") + "Joy" + _controllerId + "R2"));
                 return Input.GetAxis(((_controllerName == "Wireless Controller") ? "" : "x") + "Joy" + _controllerId + "L2");
             case "R2":
                 return Input.GetAxis(((_controllerName == "Wireless Controller") ? "" : "x") + "Joy" + _controllerId + "R2");

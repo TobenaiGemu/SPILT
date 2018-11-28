@@ -11,6 +11,7 @@ public class MenuPage
     private GameObject _canvas;
     private TimeLerper _lerperOutro;
     private TimeLerper _lerperIntro;
+    private TimeLerper _lerperCurrentOutro;
 
     private CanvasGroup _nextRightCanvas;
     private CanvasGroup _curRightCanvas;
@@ -35,6 +36,7 @@ public class MenuPage
 
         _lerperOutro = new TimeLerper();
         _lerperIntro = new TimeLerper();
+        _lerperCurrentOutro = new TimeLerper();
     }
 
     public void Initialize()
@@ -111,11 +113,14 @@ public class MenuPage
 
         if (_curRightCanvas.alpha > 0)
         {
-            _curRightCanvas.alpha = _lerperOutro.Lerp(1, 0, timeToTransition);
+            _curRightCanvas.alpha = _lerperCurrentOutro.Lerp(1, 0, timeToTransition);
             return false;
         }
+        _curRightCanvas.alpha = 0;
         _curRightCanvas.gameObject.SetActive(false);
-        _lerperOutro.Reset();
+        _lerperCurrentOutro.Reset();
+        if (_nextRightCanvas != null)
+            _nextRightCanvas.GetComponent<CanvasGroup>().alpha = 0;
         return true;
     }
 

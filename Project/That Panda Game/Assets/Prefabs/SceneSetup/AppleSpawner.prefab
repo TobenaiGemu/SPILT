@@ -58,6 +58,7 @@ MonoBehaviour:
   _spawnRadius: 15
   _maxObjects: 8
   _rotation: {x: 0, y: 0, z: 0}
-  _distanceFromApple: 0
-  _distanceFromCoin: 0
-  _distanceFromCookie: 0
+  _distanceFromApple: 8
+  _distanceFromCoin: 1.5
+  _distanceFromCookie: 1.5
+  _distanceFromPlayer: 2

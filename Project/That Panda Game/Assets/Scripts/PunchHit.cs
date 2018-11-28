@@ -15,7 +15,7 @@ public class PunchHit : MonoBehaviour
     private float _delay;
     private float _delayTimer;
 
-    private void Awake()
+    private void Start()
     {
         _lerper = new TimeLerper();
         gameObject.SetActive(false);
@@ -24,6 +24,8 @@ public class PunchHit : MonoBehaviour
     //Reset values and rotate the object to face the camera
     public void Hit()
     {
+        if (_lerper == null)
+            _lerper = new TimeLerper();
         _lerper.Reset();
         transform.localScale = Vector3.zero;
         transform.up = Camera.main.transform.position - transform.position;
