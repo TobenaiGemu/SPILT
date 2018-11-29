@@ -301,6 +301,7 @@ public class Character : MonoBehaviour
     {
         _coins += ammount;
 
+        //Gets the character that now has the highest ammount of coins
         Character first = this;
         foreach (User user in SceneManager.Users)
         {
@@ -314,6 +315,7 @@ public class Character : MonoBehaviour
             }
         }
 
+        //Set the crown of the first player to active
         first.EnableCrown();
 
         UpdateCoinPanel();
@@ -357,22 +359,26 @@ public class Character : MonoBehaviour
         transform.parent.GetComponent<Rigidbody>().AddForce((direction.normalized * backForce + gameObject.transform.up * upForce), ForceMode.Impulse);
     }
 
+    //Start speed particles
     public void StartSpeedParticles(float duration)
     {
         _speedParticles.Play();
         _speedParticleTimer = duration;
     }
 
+    //Start bubble particles
     public void StartSickBubbles()
     {
         _sickBubblesPs.Play();
     }
 
+    //Change the movement speed
     public void MultiplySpeed(float speedMultiplier, float duration)
     {
         _multiplySpeed = true;
         _forwardSpeedMultiplier = speedMultiplier;
         _speedMultiplierTimer = duration;
+        //Change the speed of the running animation
         _animator.SetFloat("SpeedMultiplier", speedMultiplier);
     }
 

@@ -19,6 +19,7 @@ public class OptionsState : UserState
 
     public override void Update()
     {
+        //Do this to not update the first frame due to an issue with buttons being activated below from the previous state
         if (_updateWait)
         {
             _updateWait = false;

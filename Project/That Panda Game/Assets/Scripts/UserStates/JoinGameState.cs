@@ -19,6 +19,7 @@ public class JoinGameState : UserState
         _joined = false;
     }
 
+    //Check for button presses and do the appropriate action
     public override void Update()
     {
         if (_joystick.WasButtonPressed("Button2"))
@@ -31,6 +32,7 @@ public class JoinGameState : UserState
             _user.SetPlaying(true);
             _joined = true;
             _selectAudio.Play();
+            //Set join game panel test of the player to say the player has joined
             GameObject.Find("Canvas").transform.Find("JoinGamePanel").transform.Find("Player" + _user.UserId + "Join").transform.Find("Join").gameObject.GetComponent<Text>().text = "Player " + _user.UserId + ": Joined";
         }
 

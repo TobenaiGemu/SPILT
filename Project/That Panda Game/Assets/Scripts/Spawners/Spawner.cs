@@ -61,6 +61,7 @@ public class Spawner : MonoBehaviour
 
     public void Tick()
     {
+        //Timer to spawn new objects
         _spawnTimer += Time.deltaTime;
         if (_activeObjects.Count < _maxObjects && _spawnTimer > _spawnRate)
         {
@@ -71,6 +72,7 @@ public class Spawner : MonoBehaviour
 
     public GameObject SpawnObject(Vector3 pos)
     {
+        //Gets an object from the object pool and initializes it
         GameObject obj = _objectPool.GetObject();
         _activeObjects.Add(obj);
         obj.transform.position = pos;
@@ -82,6 +84,7 @@ public class Spawner : MonoBehaviour
 
     public void RotateGameObject(GameObject obj)
     {
+        //Rotate the gameobject to align with the planet
         obj.transform.rotation = Quaternion.identity;
         obj.transform.LookAt(_planet.transform);
         obj.transform.Rotate(_rotation);
@@ -168,6 +171,7 @@ public class Spawner : MonoBehaviour
         obj.GetComponent<Renderer>().sharedMaterial = _materialsList[matIndex];
     }
 
+    //Checks the distance from every item in the list and the pos and returns the closest object
     private bool CheckDistanceFromList(List<GameObject> objects, Vector3 pos, float distance)
     {
         bool closeObj = false;
@@ -205,7 +209,7 @@ public class Spawner : MonoBehaviour
         _spawnRate = Random.Range(_minSpawnRate, _maxSpawnRate);
     }
 
-
+    //Return all objects to the object pool
     public void Cleanup()
     {
         foreach (GameObject obj in _activeObjects)
@@ -213,15 +217,10 @@ public class Spawner : MonoBehaviour
         _activeObjects.Clear();
     }
 
+    //Returns the gameobject 'obj' to the object pool
     public void ReturnObject(GameObject obj)
     {
         _objectPool.ReturnObject(obj);
         _activeObjects.Remove(obj);
     }
-
-    // Update is called once per frame
-    void Update ()
-    {
-		
-	}
 }

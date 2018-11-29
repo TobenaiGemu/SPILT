@@ -74,6 +74,7 @@ public class CharacterSelectScene : Scene
 
     private void SetPlayerText(string text)
     {
+        //Set all the current player number text in the character select canvas
         _characterSelectPanel.transform.Find("Pan").transform.Find("PlayerText").GetComponent<Text>().text = text;
         _characterSelectPanel.transform.Find("Ham").transform.Find("PlayerText").GetComponent<Text>().text = text;
         _characterSelectPanel.transform.Find("Eli").transform.Find("PlayerText").GetComponent<Text>().text = text;
@@ -101,12 +102,12 @@ public class CharacterSelectScene : Scene
 
     public override bool OutroTransition()
     {
-        //Fade out UI
         if (_stopCoroutines)
         {
             StopAllCoroutines();
             _stopCoroutines = false;
         }
+        //Fade out UI
         if (_characterSelectCanvas.alpha != 0)
         {
             _characterSelectCanvas.alpha = _lerper.Lerp(1, 0, 0.5f);

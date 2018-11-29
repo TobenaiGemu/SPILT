@@ -190,12 +190,6 @@ public class GameState : UserState
             _outOfBounds = true;
         }
 
-        //if (_outOfBounds && _playerObj.transform.position.z < -15)
-        //{
-        //    _outOfBounds = false;
-        //    _playerObj.GetComponent<CapsuleCollider>().enabled = true;
-        //}
-
         //Stop the character from moving if it is outside the bounds of the play area
         if ((_playerObj.transform.position + _velocity * Time.deltaTime).z > _character.BorderDistance * -1)
         {

@@ -95,6 +95,7 @@ public class UiManager : MonoBehaviour
     //Every button in the game will call one of these functions
     public void PlayButton()
     {
+        //This checks if the scene is already being transitioned, to avoid being able to spam the button while the scene is transitioning
         if (_sceneManager.IsTransitioning())
             return;
         _selectSound.Play();
@@ -196,6 +197,7 @@ public class UiManager : MonoBehaviour
         Application.Quit();
     }
 
+    //Select the character that was pressed by the current user controlling the UI
     public void SelectPan()
     {
         if (_sceneManager.IsTransitioning())

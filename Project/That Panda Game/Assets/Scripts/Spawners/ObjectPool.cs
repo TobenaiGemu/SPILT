@@ -20,6 +20,7 @@ public class ObjectPool
         }
     }
 
+    //Gets an object from the pool
     public GameObject GetObject()
     {
         if (_objectPool.Count == 0)
@@ -29,6 +30,7 @@ public class ObjectPool
         return obj;
     }
 
+    //Creates an object in the pool
     private GameObject AddObject()
     {
         GameObject clone = GameObject.Instantiate(_originalObj);
@@ -38,6 +40,7 @@ public class ObjectPool
         return clone;
     }
 
+    //Returns an object to the pool
     public void ReturnObject(GameObject obj)
     {
         obj.SetActive(false);

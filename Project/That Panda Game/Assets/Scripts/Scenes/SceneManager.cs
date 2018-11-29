@@ -43,6 +43,7 @@ public class SceneManager : MonoBehaviour
         foreach (Scene scene in _scenes)
             scene.Setup();
 
+        //Create users
         Users = new User[MaxUsers];
 
         for (int i = 0; i < MaxUsers; i++)
@@ -62,7 +63,7 @@ public class SceneManager : MonoBehaviour
 
         GameObject chars = GameObject.Find("AvailableCharacters");
 
-        //Add characters to dictionary
+        //Add characters to dictionary and initialze them
         GameObject panda = chars.transform.Find("Pan").gameObject;
         _characters.Add(CharacterType.Panda, panda.GetComponent<Character>().Init(panda));
 
@@ -81,7 +82,9 @@ public class SceneManager : MonoBehaviour
         return (_nextScene != null);
     }
 
+    //Change the scene to T
     public void ChangeScene<T>()
+        where T : Scene
     {
         _prevScene = _currentScene;
         if (_nextScene != null)
@@ -98,6 +101,7 @@ public class SceneManager : MonoBehaviour
         };
     }
 
+    //Get the user of num
     public User GetUser(int num)
     {
         if (num < 1)
@@ -178,12 +182,15 @@ public class SceneManager : MonoBehaviour
         //Completes the outro transition of the current scene before cleaning it and the intro transition of the next scene after initializing it
         if (_nextScene != null)
         {
+            //Outro current scene
             if (_currentScene == null || _currentScene.OutroTransition())
             {
                 if ((!_cleanedScene && _currentScene != null) || _currentScene == null)
                 {
+                    //Cleanup current scene
                     if (_currentScene != null)
                         _currentScene.Cleanup();
+                    //Initialize next scene
                     if (_initNextScene)
                     {
                         _nextScene.Initialize();
@@ -193,6 +200,7 @@ public class SceneManager : MonoBehaviour
                     _cleanedScene = true;
                     _currentScene = null;
                 }
+                //Intro next scene
                 if (_nextScene.IntroTransition())
                 {
                     _currentScene = _nextScene;

@@ -45,6 +45,7 @@ public class CameraShake : MonoBehaviour
 
     public void Shake()
     {
+        //Reset values
         _shake = true;
         _shakeCount = 0;
         _nextPos = new Vector3(0, 0, -54);

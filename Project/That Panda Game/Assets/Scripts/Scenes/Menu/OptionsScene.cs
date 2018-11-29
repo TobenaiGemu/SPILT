@@ -50,6 +50,7 @@ public class OptionsScene : Scene
     {
         _uiManager.DontPlayFirstHighlightSound();
         _optionsPanel.SetActive(true);
+        //Check which option was previously selected then go back to that button if we go back to this scene
         if (EventSystem.current.currentSelectedGameObject == _volSlider)
         {
             EventSystem.current.firstSelectedGameObject = _volumeButton;
@@ -65,6 +66,7 @@ public class OptionsScene : Scene
         }
         _updateMenuPage = true;
         _menuPage.Initialize();
+        //Activate the Resolution buttons
         for (int i = 1; i <= 4; i++)
         {
             _resolutionPanel.transform.Find("Res" + i).gameObject.SetActive(false);
@@ -74,6 +76,7 @@ public class OptionsScene : Scene
 
     public void GotoResolution()
     {
+        //activate all the resolution buttons and set the active button to the first resolution button
         for (int i = 1; i <= 4; i++)
         {
             _resolutionPanel.transform.Find("Res" + i).gameObject.SetActive(true);
@@ -88,6 +91,7 @@ public class OptionsScene : Scene
 
     public void GotoVolume()
     {
+        //Set the active game object to the volume slider
         _resolutionPanel.GetComponent<CanvasGroup>().alpha = 0;
         EventSystem.current.firstSelectedGameObject = _volSlider;
         EventSystem.current.SetSelectedGameObject(null);
@@ -109,6 +113,7 @@ public class OptionsScene : Scene
 
     public override bool IntroTransition()
     {
+        //Fade in UI
         _menuPage.Update();
         _optionsCanvas.alpha = _optionsAlpha;
         if (_optionsAlpha < 1)
@@ -122,6 +127,7 @@ public class OptionsScene : Scene
 
     public override bool OutroTransition()
     {
+        //Fade out UI
         _optionsCanvas.alpha = _optionsAlpha;
         if (_optionsAlpha > 0)
         {

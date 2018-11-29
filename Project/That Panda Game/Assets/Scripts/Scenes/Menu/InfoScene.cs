@@ -36,6 +36,7 @@ public class InfoScene : Scene
     {
         _infoPanel.SetActive(true);
         _uiManager.DontPlayFirstHighlightSound();
+        //Set the first selected button to the controls button
         EventSystem.current.firstSelectedGameObject = _controlsButton;
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(_controlsButton);
@@ -52,6 +53,7 @@ public class InfoScene : Scene
     public override bool IntroTransition()
     {
         _menuPage.Update();
+        //Fade in UI
         _infoCanvas.alpha = _infoAlpha;
         if (_infoAlpha < 1)
         {
@@ -64,6 +66,7 @@ public class InfoScene : Scene
 
     public override bool OutroTransition()
     {
+        //Fade out UI
         _infoCanvas.alpha = _infoAlpha;
         if (_infoAlpha > 0)
         {

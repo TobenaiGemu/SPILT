@@ -51,10 +51,15 @@ public class MainMenuScene : Scene
 
     public override void Initialize()
     {
+        //Set the initial camera pos that it will lerp from
         _initCameraPos = Camera.main.transform.position;
+
+        //Activate the left and right menu boxes
         _rightMenuBox.gameObject.SetActive(true);
         _leftMenuBox.gameObject.SetActive(true);
         _mainMenuCanvas.alpha = 0;
+
+        //Reset everything
         _menuPage.Initialize();
         _lerper.Reset();
         _musicLerper.Reset();
@@ -67,6 +72,7 @@ public class MainMenuScene : Scene
 
     public override bool IntroTransition()
     {
+        //Move camera towards the target position from the position it was at
         if (Camera.main.transform.position != _targetCameraPos)
         {
             Camera.main.transform.position = _lerper.Lerp(_initCameraPos, _targetCameraPos, (_sceneManager.CheckPrevScene<GameScene>())?1f:4.5f);
@@ -74,6 +80,7 @@ public class MainMenuScene : Scene
                 _mainMenuMusic.volume = _musicLerper.Lerp(0, 0.4f, (_sceneManager.CheckPrevScene<GameScene>()) ? 1f : 4.5f);
             return false;
         }
+        //Activate the buttons
         else if (!_finishedScale)
         {
             _finishedScale = true;
@@ -85,6 +92,7 @@ public class MainMenuScene : Scene
         }
         _menuPage.Update();
 
+        //Fade in UI
         if (_mainMenuCanvas.alpha < 1)
         {
             _mainMenuCanvas.alpha = _lerper.Lerp(0, 1, 0.5f);
@@ -96,11 +104,13 @@ public class MainMenuScene : Scene
             return false;
         }
 
+        //Change the user states
         foreach (User user in SceneManager.Users)
             user.ChangeState<MenuState>();
 
         _lerper.Reset();
         _finishedScale = false;
+        //Set the first selected button to the start button
         EventSystem.current.firstSelectedGameObject = _startButton;
         _uiManager.ChangeEventSystem(1);
         return true;
@@ -108,6 +118,7 @@ public class MainMenuScene : Scene
 
     public override bool OutroTransition()
     {
+        //Fade out UI
         if (_mainMenuCanvas.alpha > 0)
         {
             _menuPage.OutroCurrentPanel(0.5f);
